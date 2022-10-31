@@ -1,0 +1,26 @@
+/**index.wxss**/
+.container{
+  width: 100%;
+  height: 807px;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 100px;
+  position: relative;
+}
+image{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(10rpx);
+  z-index: -1;
+}
+.btn-area{
+  margin-top: 100rpx;
+}
+button{
+    margin-bottom: 100rpx;
+}
+.hello{
+    margin-top: 100rpx;
+    margin-bottom: 0rpx;
+  }
