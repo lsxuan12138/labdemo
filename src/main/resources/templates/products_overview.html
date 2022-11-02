@@ -2,20 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <title>Bootstrap 4, from LayoutIt!</title>
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+    <meta content="Source code generated using layoutit.com" name="description">
+    <meta content="LayoutIt!" name="author">
     <!-- CSS -->
-    <link rel="stylesheet" href="/static/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <link href="/static/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="/static/js/jquery-3.5.1.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="/static/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
+    <style type="text/css">
+        /* 弹窗 (background) */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed; /* 固定定位 */
+            z-index: 1; /* 设置在顶层 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* 弹窗内容 */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 20%;
+            height: 45%;
+        }
+
+        /* 关闭按钮 */
+        .close {
+            color: #aaa;
+            float: top;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -24,97 +64,363 @@
             <h3 class="text-center text-info">
                 通用批发零售业务管理系统v1.0
             </h3>
-            <p class="text-info">
-                <strong>您现在访问的是：商品资料维护</strong>
-            </p>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link " href="/">返回主菜单</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/getClients">顾客资料维护</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active disabled" href="/getProducts">商品资料维护</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/getStore">库存管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/getSellNotes">销售业务管理</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <p class="text-info">
+                        <strong>您现在访问的是：商品资料维护</strong>
+                    </p>
+                </div>
+            </div>
+            <form class="form-inline mb-2">
+                <label for="name">商品名称：</label>
+                <input class="form-control mr-sm-2" id="name" type="text">
+                <button class="btn btn-primary mr-sm-2" type="submit">查找</button>
+
+
+            </form>
+            <div class="row">
+                <div class="span3">
+                    <div>
+
+                        <input class="form-control" id="mingcheng" placeholder="请输入商品名称" type="text">
+                        </label>
+                    </div>
+
+
+                </div>
+                <div class="span3">
+
+                    <input class="form-control" id="chengben" placeholder="请输入成本价格"
+                           type="text">
+
+                </div>
+                <div class="span3">
+
+                    <input class="form-control" id="shoujia" placeholder="请输入售价"
+                           type="text">
+
+                </div>
+                <div class="span3">
+                    <button class="btn btn-large btn-info" type="button">添加商品</button>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                商品ID
+                            </th>
+                            <th>
+                                商品名称
+                            </th>
+                            <th>
+                                成本价格
+                            </th>
+                            <th>
+                                售价
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button class="btn btn-info mr-sm-2" type="button">删除</button>
+                                <button class="btn btn-info mr-sm-2" id="myBtn1" type="button">修改</button>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td>
+                                2
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button class="btn btn-info mr-sm-2" type="button">删除</button>
+                                <button class="btn btn-info mr-sm-2" id="myBtn2" type="button">修改</button>
+                            </td>
+                        </tr>
+                        <tr class="error">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button class="btn btn-info mr-sm-2" type="button">删除</button>
+                                <button class="btn btn-info mr-sm-2" id="myBtn3" type="button">修改</button>
+                            </td>
+                        </tr>
+                        <tr class="warning">
+                            <td>
+                                4
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button class="btn btn-info mr-sm-2" type="button">删除</button>
+                                <button class="btn btn-info mr-sm-2" id="myBtn4" type="button">修改</button>
+                            </td>
+                        </tr>
+                        <tr class="info">
+                            <td>
+                                5
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button class="btn btn-info mr-sm-2" type="button">删除</button>
+                                <button class="btn btn-info mr-sm-2" id="myBtn5" type="button">修改</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="span3">
+                    <!-- 弹窗 -->
+                    <div class="modal" id="myModal1">
+                        <!-- 弹窗内容 -->
+                        <div class="modal-content">
+                            <div class="modal-body"><!--绑定span-->
+                                <span class="close" id="close1">&times;</span>
+                                <p>商品名称：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>成本价格：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>售价：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            </div>
+                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
+                                    type="button">确定
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span3">
+                    <!-- 弹窗 -->
+                    <div class="modal" id="myModal2">
+                        <!-- 弹窗内容 -->
+                        <div class="modal-content">
+                            <div class="modal-body"><!--绑定span-->
+                                <span class="close" id="close2">&times;</span>
+                                <p>商品名称：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>成本价格：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>售价：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            </div>
+                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
+                                    type="button">确定
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span3">
+                    <!-- 弹窗 -->
+                    <div class="modal" id="myModal3">
+                        <!-- 弹窗内容 -->
+                        <div class="modal-content">
+                            <div class="modal-body"><!--绑定span-->
+                                <span class="close" id="close3">&times;</span>
+                                <p>商品名称：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>成本价格：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>售价：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            </div>
+                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
+                                    type="button">确定
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span3">
+                    <!-- 弹窗 -->
+                    <div class="modal" id="myModal4">
+                        <!-- 弹窗内容 -->
+                        <div class="modal-content">
+                            <div class="modal-body"><!--绑定span-->
+                                <span class="close" id="close4">&times;</span>
+                                <p>商品名称：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>成本价格：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>售价：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            </div>
+                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
+                                    type="button">确定
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="span3">
+                    <!-- 弹窗 -->
+                    <div class="modal" id="myModal5">
+                        <!-- 弹窗内容 -->
+                        <div class="modal-content">
+                            <div class="modal-body"><!--绑定span-->
+                                <span class="close" id="close5">&times;</span>
+                                <p>商品名称：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>成本价格：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <p>售价：</p>
+                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            </div>
+                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
+                                    type="button">确定
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <form class="form-inline mb-2">
-        <label for="name">商品名称：</label>
-        <input type="text" class="form-control mr-sm-2" id="name">
-        <button type="submit" class="btn btn-primary mr-sm-2">查找</button>
-        <button class="btn btn-info mr-sm-2 " type="button">添加商品</button>
-        <button class="btn btn-info mr-sm-2 " type="button">删除商品</button>
-    </form>
-    <div class="row-fluid">
-        <div class="span12">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>
-                        商品ID
-                    </th>
-                    <th>
-                        商品名称
-                    </th>
-                    <th>
-                        成本价格
-                    </th>
-                    <th>
-                        售价
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr class="success">
-                    <td>
-                        2
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr class="error">
-                    <td>
-                        3
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr class="warning">
-                    <td>
-                        4
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr class="info">
-                    <td>
-                        5
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <script type="text/javascript">
+        // 获取弹窗
+        var modal1 = document.getElementById('myModal1');
+
+        // 打开弹窗的按钮对象
+        var btn1 = document.getElementById("myBtn1");
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span1 = document.getElementById("close1");
+
+        // 点击按钮打开弹窗
+        btn1.onclick = function () {
+            modal1.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span1.onclick = function () {
+            modal1.style.display = "none";
+        }
+        // 获取弹窗
+        var modal2 = document.getElementById('myModal2');
+
+        // 打开弹窗的按钮对象
+        var btn2 = document.getElementById("myBtn2");
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span2 = document.getElementById("close2");
+
+        // 点击按钮打开弹窗
+        btn2.onclick = function () {
+            modal2.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span2.onclick = function () {
+            modal2.style.display = "none";
+        }
+        // 获取弹窗
+        var modal3 = document.getElementById('myModal3');
+
+        // 打开弹窗的按钮对象
+        var btn3 = document.getElementById("myBtn3");
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span3 = document.getElementById("close3");
+
+        // 点击按钮打开弹窗
+        btn3.onclick = function () {
+            modal3.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span3.onclick = function () {
+            modal3.style.display = "none";
+        }
+        // 获取弹窗
+        var modal4 = document.getElementById('myModal4');
+
+        // 打开弹窗的按钮对象
+        var btn4 = document.getElementById("myBtn4");
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span4 = document.getElementById("close4");
+
+        // 点击按钮打开弹窗
+        btn4.onclick = function () {
+            modal4.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span4.onclick = function () {
+            modal4.style.display = "none";
+        }
+        // 获取弹窗
+        var modal5 = document.getElementById('myModal5');
+
+        // 打开弹窗的按钮对象
+        var btn5 = document.getElementById("myBtn5");
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span5 = document.getElementById("close5");
+
+        // 点击按钮打开弹窗
+        btn5.onclick = function () {
+            modal5.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span5.onclick = function () {
+            modal5.style.display = "none";
+        }
+
+    </script>
 </div>
 </body>
 </html>
