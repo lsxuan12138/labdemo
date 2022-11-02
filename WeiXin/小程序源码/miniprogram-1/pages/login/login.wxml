@@ -1,0 +1,6 @@
+<!--pages/login/login.wxml-->
+
+<input bindinput="getUserName" placeholder="用户名/手机号/邮箱" placeholder-style="color:black" class="userName"></input>
+<input bindinput="getPassword" type="password" placeholder="请输入密码" placeholder-style="color:black" class="userName"></input>
+<text>pages/login/login.wxml</text>
+<button bindtap='doLogin'>点击登录</button>
