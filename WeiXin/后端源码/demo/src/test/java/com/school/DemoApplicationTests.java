@@ -20,9 +20,9 @@ class DemoApplicationTests {
 
 
     @Test
-    void insertArea() {
+    void insertrea() {
         Area area=new Area();
-        area.setAreaName("上海");
+        area.setAreaName("南京");
         area.setLastEditTime(new Date());
         area.setPriority(1);
         int result =areaDao.insertArea(area);

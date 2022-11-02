@@ -1,2 +1,35 @@
 <!--pages/items/items.wxml-->
-<text>商品列表界面</text>
+<view class="container">
+
+  <rich-text nodes="<h2 style='color: black'>当前商品列表</h2>"> </rich-text>
+
+  <view class="widget">
+    <text class="column">序号</text>
+    <text class="column">名称</text>
+    <text class="column">库存数量</text>
+    <text class="column">售价</text>
+
+  </view>
+
+  <scroll-view scroll-y="true">
+    <view>
+      <block wx:for="{{list}}">
+        
+        <view class="widget">
+           <text class="column">{{item.id}}</text>
+           <text class="column">{{item.name}}</text>
+           <text class="column">{{item.quantity}}</text>
+           <text class="column">{{item.sellPrice}}</text>
+        </view>
+
+      </block>
+    </view>
+  </scroll-view>
+  
+</view>
+
+<view class="row">
+      <input type="number" name="idid" placeholder="请输入想查询的名称" value="{{newname}}" />
+      <button bindtap="findbyname" plain="false" data-name="{{idid}}">查询</button>
+</view>
+

@@ -1,2 +1,26 @@
 <!--pages/oders/oders.wxml-->
-<text>订单列表界面</text>
+<view class="container">
+    <rich-text nodes="<h2 style='color: black'>当前订单列表</h2>"> </rich-text>
+<view class="widget">
+<text class="column">ID</text>
+<text class="column">客户</text>
+<text class="column">时间</text>
+<text class="column">总金额</text>
+<text class="column">状态</text>
+</view>
+<scroll-view scroll-y="true">
+<view>
+<block wx:for="{{list}}">
+  <view class="widget">
+    <text class="column">{{item.id}}</text>
+    <text class="column">{{item.clientId}}</text>
+    <text class="column">{{item.createTime}}</text>
+    <text class="column">{{item.totalPrice}}</text>
+    <text class="column">{{item.stage}}</text>
+  </view>
+</block>
+
+</view>
+</scroll-view>
+
+</view>

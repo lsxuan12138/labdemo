@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
@@ -12,18 +11,3 @@
 
 </configuration>
 
-=======
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-<settings>
-	<setting name="useGeneratedKeys" value="true"/>
-	<setting name="useGeneratedKeys" value="true"/>
-	<setting name="mapUnderscoreToCamelCase" value="true"/>
-</settings>
-
-</configuration>
-
->>>>>>> a23d072 (add WinXin)

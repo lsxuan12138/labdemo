@@ -1,1 +1,99 @@
 /* pages/items/items.wxss */
+.widget {
+
+    position: relative;
+    
+    margin-top: 5rpx;
+    
+    margin-bottom: 0rpx;
+
+    margin-left: 50rpx;
+
+    margin-right: 10rpx;
+    
+    padding-top: 20rpx;
+    
+    padding-bottom: 20rpx;
+    
+    padding-left: 40rpx;
+    
+    padding-right: 40rpx;
+    
+    border: rgb(49, 52, 224) 2px solid;
+    
+    }
+    
+    .container {
+    
+    height: 90%;
+    
+    display: table;
+    
+    align-items: center;
+    
+    justify-content: space-between;
+    
+    box-sizing: border-box;
+    
+    padding-top: 10rpx;
+    
+    padding-bottom: 10rpx;
+    
+    text-align: center;
+    
+    }
+    
+    
+    
+    .column {
+    
+    width: 4rem;
+    
+    display: table-cell;
+
+    padding-left: 10rpx;
+    
+    padding-right: 10rpx;
+    
+    }
+
+.row button{
+    position: relative;
+    top: 500px;
+    
+}
+ .row text{
+    
+    flex-grow: 1;
+    
+    text-align: right;
+    
+    }
+    
+    .row input{
+    
+    position: relative;
+    top: 500px;
+    left: 20rpx;
+    width: 690rpx;
+    font-size: 0.9rem;
+    
+    flex-grow: 3;
+    
+    border: 1px solid #404be2;
+    
+    display: inline-block;
+    
+    border-radius: 0.3rem;
+    
+    box-shadow: 0 0 0.30rem #404be2;
+    
+    padding: 0.3rem;
+    
+    }
+    
+    
+    
+    
+  
+    

@@ -5,14 +5,14 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+  list:[]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        
     },
 
     /**
@@ -25,11 +25,30 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow() {
-
-    },
-
-    /**
+    onShow: function () {
+        var that=this;
+        wx.request({
+          url: 'http://localhost:8081/demo/product/listproduct',
+          method:'GET',
+          data:{},
+          success:function(res){
+            var list=res.data.productList;
+            if(list==null){
+              var toastText='获取数据失败'+res.data.error;
+              wx.showToast({
+                title: toastText,
+                icon:'',
+                duration:2000
+              });
+            }else{
+              that.setData({
+                list:list
+              });
+            }
+          }
+        })
+},
+   /**
      * 生命周期函数--监听页面隐藏
      */
     onHide() {
@@ -62,5 +81,35 @@ Page({
      */
     onShareAppMessage() {
 
-    }
+    },
+
+     /**
+   * 根据名称查询
+   */
+  formSubmit: function (e){
+    var that=this;
+    var formData = e.detail.value;
+    wx.request({
+      url: 'http://localhost:8081/demo/product/findByName',
+      method:'GET',
+      data:{name:FormData.name},
+      success:function(res){
+        var list=res.data.productList;
+        if(list==null){
+          var toastText='未查到该商品'+res.data.error;
+          wx.showToast({
+            title: toastText,
+            icon:'',
+            duration:2000
+          });
+       
+        }else{
+          that.setData({
+            list:list
+          });
+        }
+      }
+    })
+  
+   }
 })

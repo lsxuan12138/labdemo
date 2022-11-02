@@ -26,3 +26,6 @@
         delete  from tb_area where area_id=#{areaId}
     </delete>
 </mapper>
+
+
+
