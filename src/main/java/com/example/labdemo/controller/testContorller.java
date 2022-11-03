@@ -53,6 +53,6 @@ public class testContorller
     }
     @GetMapping("/getSellNotes")
     public ModelAndView getSellNotes(){
-        return new ModelAndView("销售业务管理");
+        return new ModelAndView("sale_note_manage");
     }
 }

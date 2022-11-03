@@ -3,15 +3,15 @@
 
  Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 80030 (8.0.30)
+ Source Server Version : 80031 (8.0.31)
  Source Host           : localhost:3306
- Source Schema         : storage
+ Source Schema         : test
 
  Target Server Type    : MySQL
- Target Server Version : 80030 (8.0.30)
+ Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 29/10/2022 15:57:28
+ Date: 03/11/2022 18:28:58
 */
 
 SET NAMES utf8mb4;
@@ -23,13 +23,18 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `t_client`;
 CREATE TABLE `t_client`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名字',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '名字',
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '客户类型',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `NAME`(`name` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_client
 -- ----------------------------
+INSERT INTO `t_client` VALUES (9, '测试数据1', '零售客户');
+INSERT INTO `t_client` VALUES (11, '测试数据2', '固定客户');
+INSERT INTO `t_client` VALUES (13, '测试数据3', '固定客户');
 
 -- ----------------------------
 -- Table structure for t_product
@@ -43,11 +48,13 @@ CREATE TABLE `t_product`  (
   `sell_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '售价',
   `create_time` datetime NULL DEFAULT NULL COMMENT '货品创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_product
 -- ----------------------------
+INSERT INTO `t_product` VALUES (1, '测试数据1', 180, 200.00, 234.00, '2022-11-02 16:52:55');
+INSERT INTO `t_product` VALUES (2, '测试数据2', 95, 30.00, 37.00, '2022-11-02 16:53:26');
 
 -- ----------------------------
 -- Table structure for t_purchase_order
@@ -59,7 +66,7 @@ CREATE TABLE `t_purchase_order`  (
   `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建者',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_purchase_order
@@ -75,7 +82,7 @@ CREATE TABLE `t_purchase_order_item`  (
   `product_id` bigint NULL DEFAULT NULL COMMENT '产品id',
   `quantity` bigint UNSIGNED NULL DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_purchase_order_item
@@ -93,7 +100,7 @@ CREATE TABLE `t_sale_note`  (
   `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建者',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_sale_note
@@ -109,7 +116,7 @@ CREATE TABLE `t_sale_note_item`  (
   `product_id` bigint NULL DEFAULT NULL COMMENT '产品id',
   `quantity` bigint NULL DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_sale_note_item
