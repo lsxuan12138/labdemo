@@ -93,44 +93,45 @@
                             </p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <form class="form-search  form-inline" th:action="@{/client/find}" th:method="post" th:object="${searchInfo}">
+                                <label for="info"><strong>客户信息：</strong></label>
+                                <input class="form-control mr-sm-2" id="info" th:placeholder="${keyword}" type="text" th:field="*{key}">
+                                <button class="btn btn-primary mr-sm-2" type="submit">查找</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6 ">
+                            <form class="form-inline mb-2 ">
+                                <div class="row">
 
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <!--<label for="firstname" class="col-sm-2 control-label">客户姓名:</label>-->
+                                            <div class="col-sm-2">
+                                                <input class="form-control" id="name" placeholder="请输入需添加的客户姓名"
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <!--<label for="lastname" class="col-sm-2 control-label">客户类型:</label>-->
+                                            <select id ="type" class="combobox mr-sm-2" style="width: 100%;height: 100%">
+                                                <option value="0">固定客户</option>
+                                                <option value="1">零售客户</option>
+                                            </select>
+                                        </div>
 
-                    <form class="form-inline mb-2 ">
-                        <label for="info"><strong>客户信息：</strong></label>
-                        <input class="form-control mr-sm-2" id="info" placeholder="请输入需查询的客户姓名" type="text">
-                        <button class="btn btn-primary mr-sm-2" type="submit">查找</button>
-
-                        <!--<button class="btn btn-info mr-sm-2" type="button">添加客户信息</button>-->
-                        <div class="row">
-
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <!--<label for="firstname" class="col-sm-2 control-label">客户姓名:</label>-->
-                                    <div class="col-sm-2">
-                                        <input class="form-control" id="firstname" placeholder="请输入需添加的客户姓名"
-                                               type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <!--<label for="lastname" class="col-sm-2 control-label">客户类型:</label>-->
-                                    <div class="col-sm-2">
-                                        <input class="form-control" id="lastname" placeholder="客户类型 1批发 2零售"
-                                               type="text">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <button class="btn btn-info mr-sm-2" type="button">添加客户信息</button>
+                                        <div class="form-group">
+                                            <button class="btn btn-info mr-sm-2" onclick="add()" type="button">添加客户信息</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </form>
                         </div>
-
-
-                    </form>
+                    </div>
                 </div>
 
-
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="tb">
                     <thead>
                     <tr>
                         <th>
@@ -148,76 +149,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr th:each="client:${clientList}">
+                        <td th:text="${client.id}">1</td>
+                        <td th:text="${client.name}">孙莹</td>
+                        <td th:text="${client.type}"></td>
                         <td>
-                            1
-                        </td>
-                        <td>
-                            孙莹
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <button class="btn btn-info mr-sm-2" type="button">删除</button>
-                            <button class="btn btn-info mr-sm-2" id="myBtn1" type="button">修改</button>
+                            <button class="btn btn-info mr-sm-2 " onclick=del(this) type="button">删除</button>
+                            <button class="btn btn-info mr-sm-2"  onclick=edit(this) type="button">修改</button>
                         </td>
                     </tr>
-                    <tr class="success">
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            李世轩
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <button class="btn btn-info mr-sm-2" type="button">删除</button>
-                            <button class="btn btn-info mr-sm-2" id="myBtn2" type="button">修改</button>
-                        </td>
-                    </tr>
-                    <tr class="error">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            周烜平
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <button class="btn btn-info mr-sm-2" type="button">删除</button>
-                            <button class="btn btn-info mr-sm-2" id="myBtn3" type="button">修改</button>
-                        </td>
-                    </tr>
-                    <tr class="warning">
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            高瑞
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <button class="btn btn-info mr-sm-2" type="button">删除</button>
-                            <button class="btn btn-info mr-sm-2" id="myBtn4" type="button">修改</button>
-                        </td>
-                    </tr>
-                    <tr class="info">
-                        <td>
-                            5
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <button class="btn btn-info mr-sm-2" type="button">删除</button>
-                            <button class="btn btn-info mr-sm-2" id="myBtn5" type="button">修改</button>
-                        </td>
-                    </tr>
-                    </tbody>
+
                 </table>
 
             </div>
@@ -229,93 +170,21 @@
                         <div class="modal-body"><!--绑定span-->
                             <span class="close" id="close1">&times;</span>
                             <p>姓名：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            <input id="popName" class="input-medium search-query" style="width: 100%" type="text"/>
                             <p>客户类型：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
+                            <select id ="popType" class="combobox mr-sm-2" style="width: 100%;height: auto">
+                                <option value="0">固定客户</option>
+                                <option value="1">零售客户</option>
+                            </select>
                         </div>
-                        <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
+                        <button class="btn btn-info btn-large" onclick=change(this) style="display:block;margin:0 auto;width:50%"
                                 type="button">确定
                         </button>
                     </div>
 
                 </div>
             </div>
-            <div class="span3">
-                <!-- 弹窗 -->
-                <div class="modal" id="myModal2">
-                    <!-- 弹窗内容 -->
-                    <div class="modal-content">
-                        <div class="modal-body"><!--绑定span-->
-                            <span class="close" id="close2">&times;</span>
-                            <p>姓名：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            <p>客户类型：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                        </div>
-                        <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                type="button">确定
-                        </button>
-                    </div>
 
-                </div>
-            </div>
-            <div class="span3">
-                <!-- 弹窗 -->
-                <div class="modal" id="myModal3">
-                    <!-- 弹窗内容 -->
-                    <div class="modal-content">
-                        <div class="modal-body"><!--绑定span-->
-                            <span class="close" id="close3">&times;</span>
-                            <p>姓名：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            <p>客户类型：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                        </div>
-                        <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                type="button">确定
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="span3">
-                <!-- 弹窗 -->
-                <div class="modal" id="myModal4">
-                    <!-- 弹窗内容 -->
-                    <div class="modal-content">
-                        <div class="modal-body"><!--绑定span-->
-                            <span class="close" id="close4">&times;</span>
-                            <p>姓名：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            <p>客户类型：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                        </div>
-                        <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                type="button">确定
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="span3">
-                <!-- 弹窗 -->
-                <div class="modal" id="myModal5">
-                    <!-- 弹窗内容 -->
-                    <div class="modal-content">
-                        <div class="modal-body"><!--绑定span-->
-                            <span class="close" id="close5">&times;</span>
-                            <p>姓名：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            <p>客户类型：</p>
-                            <input class="input-medium search-query" style="width: 100%" type="text"/>
-                        </div>
-                        <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                type="button">确定
-                        </button>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -323,89 +192,115 @@
     // 获取弹窗
     var modal1 = document.getElementById('myModal1');
 
-    // 打开弹窗的按钮对象
-    var btn1 = document.getElementById("myBtn1");
-
     // 获取 <span> 元素，用于关闭弹窗
     var span1 = document.getElementById("close1");
 
-    // 点击按钮打开弹窗
-    btn1.onclick = function () {
-        modal1.style.display = "block";
-    }
     // 点击 <span> (x), 关闭弹窗
     span1.onclick = function () {
+
         modal1.style.display = "none";
     }
-    // 获取弹窗
-    var modal2 = document.getElementById('myModal2');
+    let popId;
+    let popName;
+    let popType;
+    function edit(obj){
+        modal1.style.display="block";
+        var value = $(obj).parent().parent().find("td");
+        let id = Number(value.eq(0).text());
+        let name = value.eq(1).text();
+        let type = value.eq(2).text();
+        popId =id;
+        popName = name;
+        switch (type) {
+            case "固定客户":
+                popType = "0";
+                break;
+            case "零售客户":
+                popType = "1";
+                break;
+            default:
+                popType = "0";
+                break;
+        }
+        $("#popName").val(name);
+        $("#popType").val(popType);
 
-    // 打开弹窗的按钮对象
-    var btn2 = document.getElementById("myBtn2");
-
-    // 获取 <span> 元素，用于关闭弹窗
-    var span2 = document.getElementById("close2");
-
-    // 点击按钮打开弹窗
-    btn2.onclick = function () {
-        modal2.style.display = "block";
     }
-    // 点击 <span> (x), 关闭弹窗
-    span2.onclick = function () {
-        modal2.style.display = "none";
+    function change(obj){
+        let id = popId;
+        let name = $("#popName").val();
+        let type = $("#popType").val();
+        console.log(id+"------"+name+"--------"+type)
+        if(!isNaN(id)) {
+            $.ajax({
+                url: "/client/update",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"id": id,"name":name,"type":type},  /*提交的数据（json格式），从输入框中获取*/
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    console.log(result)
+                    if (result.code === 200) {
+                        console.log("请求成功")
+                        window.location.reload();
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
     }
-    // 获取弹窗
-    var modal3 = document.getElementById('myModal3');
+    function add() {
+        let name = $("#name").val();
+        let type = $("#type").val();
+        // console.log(name)
+        // console.log(type)
+        $.ajax({
+            url: "/client/add",
+            type: "POST",  /*采用POST方法提交*/
+            data: {"name": name,"type":type},  /*提交的数据（json格式），从输入框中获取*/
+            dataType: 'JSON',
+            cache: false,
+            success: function (result) {
+                //alert(result)
+                if(result.code===200){
+                    console.log("请求成功")
+                    window.location.reload();
+                }else {
+                    alert(result.msg)
+                }
+            }
 
-    // 打开弹窗的按钮对象
-    var btn3 = document.getElementById("myBtn3");
+        })
 
-    // 获取 <span> 元素，用于关闭弹窗
-    var span3 = document.getElementById("close3");
-
-    // 点击按钮打开弹窗
-    btn3.onclick = function () {
-        modal3.style.display = "block";
     }
-    // 点击 <span> (x), 关闭弹窗
-    span3.onclick = function () {
-        modal3.style.display = "none";
+    function del(obj) {
+        var tr = obj.parentNode.parentNode //取到了tr对象
+        var value = $(obj).parent().parent().find("td");
+        let id = Number(value.eq(0).text());
+        console.log(id)
+        if(!isNaN(id)) {
+            $.ajax({
+                url: "/client/delete",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    console.log(result)
+                    if (result.code === 200) {
+                        console.log("请求成功")
+                        tr.parentNode.removeChild(tr) //返回上一层的table删除 他的子节点
+                        //window.location.reload();
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
     }
-    // 获取弹窗
-    var modal4 = document.getElementById('myModal4');
-
-    // 打开弹窗的按钮对象
-    var btn4 = document.getElementById("myBtn4");
-
-    // 获取 <span> 元素，用于关闭弹窗
-    var span4 = document.getElementById("close4");
-
-    // 点击按钮打开弹窗
-    btn4.onclick = function () {
-        modal4.style.display = "block";
-    }
-    // 点击 <span> (x), 关闭弹窗
-    span4.onclick = function () {
-        modal4.style.display = "none";
-    }
-    // 获取弹窗
-    var modal5 = document.getElementById('myModal5');
-
-    // 打开弹窗的按钮对象
-    var btn5 = document.getElementById("myBtn5");
-
-    // 获取 <span> 元素，用于关闭弹窗
-    var span5 = document.getElementById("close5");
-
-    // 点击按钮打开弹窗
-    btn5.onclick = function () {
-        modal5.style.display = "block";
-    }
-    // 点击 <span> (x), 关闭弹窗
-    span5.onclick = function () {
-        modal5.style.display = "none";
-    }
-
 </script>
 </div>
 </body>

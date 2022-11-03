@@ -4,13 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.labdemo.domain.Product;
 import com.example.labdemo.mapper.ProductDao;
 import com.example.labdemo.service.ProductService;
-import com.example.labdemo.util.Result;
-import com.example.labdemo.util.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import javax.management.QueryExp;
 import java.util.List;
 
 
@@ -19,18 +15,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductDao productDao;
+
     @Override
     public int purchaseProduct(Long id, Long quantity) {
         int ret;
         try {
             Product product = productDao.selectById(id);
-            product.setQuantity(product.getQuantity()+quantity);
+            product.setQuantity(product.getQuantity() + quantity);
             ret = productDao.updateById(product);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();
         }
-        if(ret!=1)throw new RuntimeException();
+        if (ret != 1) throw new RuntimeException();
         return ret;
     }
 
@@ -40,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             products = productDao.selectList(null);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException();
         }
         return products;
@@ -52,10 +49,10 @@ public class ProductServiceImpl implements ProductService {
         try {
             QueryWrapper<Product> wrapper = new QueryWrapper<>();
             wrapper.clear();
-            wrapper.like("name",key);
+            wrapper.like("name", key);
             products = productDao.selectList(wrapper);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException();
         }
         return products;

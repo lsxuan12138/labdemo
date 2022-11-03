@@ -104,7 +104,7 @@
 		</div>
 		<div class="span3">
 			<form class="form-search" th:action="@{/product/find}" th:method="post" th:object="${searchInfo}">
-				<input class="input-medium search-query" type="text" id="findInput" th:field="*{key}"></input>
+				<input class="input-medium search-query" type="text" id="findInput" th:placeholder="${keyword}" th:field="*{key}"></input>
 				<button type="submit" class="btn btn-primary mr-sm-2">查找</button>
 
 			</form>
@@ -129,7 +129,7 @@
 					</th>
 				</tr>
 				</thead>
-				<tbody th:fragment="table" class="info">
+				<tbody  class="info">
 				<tr th:each="product:${products}" >
 					<td th:text="${product.id}">1</td>
 					<td th:text="${product.name}">华为手机</td>
@@ -181,12 +181,14 @@
 		// 点击 <span> (x), 关闭弹窗
 		span1.onclick = function() {
 			modal1.style.display = "none";
+			$('#popInput').val("");
 		}
 
 		// 在用户点击其他地方时，关闭弹窗
 		window.onclick = function(event) {
 			if (event.target === modal1) {
 				modal1.style.display = "none";
+				$('#popInput').val("");
 			}
 		}
 

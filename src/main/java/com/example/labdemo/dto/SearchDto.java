@@ -1,7 +1,14 @@
 package com.example.labdemo.dto;
 
-public class SearchProductDto {
+public class SearchDto {
     String key;
+
+    public SearchDto() {
+    }
+
+    public SearchDto(String key) {
+        this.key = key;
+    }
 
     public String getKey() {
         return key;

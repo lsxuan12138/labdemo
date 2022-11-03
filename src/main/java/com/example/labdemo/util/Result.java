@@ -16,6 +16,10 @@ public class Result {
         this.msg = resultEnum.getMsg();
         this.data = data;
     }
+    public Result(BaseException e){
+        this.code=e.getCode();
+        this.msg=e.getMessage();
+    }
     public Result(ResultEnum resultEnum) {
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();

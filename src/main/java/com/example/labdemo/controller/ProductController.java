@@ -2,7 +2,7 @@ package com.example.labdemo.controller;
 
 
 import com.example.labdemo.domain.Product;
-import com.example.labdemo.dto.SearchProductDto;
+import com.example.labdemo.dto.SearchDto;
 import com.example.labdemo.service.ProductService;
 import com.example.labdemo.util.Result;
 import com.example.labdemo.util.ResultEnum;
@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/all")
     public ModelAndView getStore() {
         ModelAndView modelAndView = new ModelAndView("store_manage");
 
@@ -32,9 +32,10 @@ public class ProductController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        SearchProductDto searchInfo = new SearchProductDto();
+        SearchDto searchInfo = new SearchDto("");
         modelMap.addAttribute("searchInfo",searchInfo);
         modelMap.addAttribute("products", products);
+        modelAndView.getModelMap().addAttribute("keyword","商品信息");
         return modelAndView;
     }
 
@@ -56,17 +57,18 @@ public class ProductController {
     }
 
     @PostMapping("/find")
-    public ModelAndView find(@ModelAttribute("searchInfo")  SearchProductDto searchProductDto) {
+    public ModelAndView find(@ModelAttribute("searchInfo") SearchDto searchDto) {
         ModelAndView modelAndView = new ModelAndView("store_manage");
         List<Product> products = null;
         try {
-            products = productService.find(searchProductDto.getKey());
+            products = productService.find(searchDto.getKey());
         } catch (Exception e) {
             e.printStackTrace();
         }
         ModelMap modelMap = modelAndView.getModelMap();
-        modelMap.addAttribute("searchInfo",new SearchProductDto());
+        modelMap.addAttribute("searchInfo",new SearchDto(""));
         modelMap.addAttribute("products", products);
+        modelAndView.getModelMap().addAttribute("keyword",searchDto.getKey());
         return modelAndView;
     }
 }
