@@ -9,6 +9,10 @@ public enum ResultEnum {
     CLIENT_NAME_IS_REPEATED(14001,"client name is repeated"),
     CLIENT_INSERT_ERROR(14002,"client insert error"),
 
+    PRODUCT_INSERT_ERROR(14003,"product insert error"),
+
+    PRODUCT_DELETE_ERROR(14004,"product delete error"),
+
     ;
     private final Integer code;
 

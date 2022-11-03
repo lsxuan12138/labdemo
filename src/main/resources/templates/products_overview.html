@@ -91,34 +91,23 @@
                     </p>
                 </div>
             </div>
-            <form class="form-inline mb-2">
-                <label for="name">商品名称：</label>
-                <input class="form-control mr-sm-2" id="name" type="text">
+            <form class="form-inline mb-2 " th:action="@{/product/find}" th:method="post" th:object="${searchInfo}">
+                <label for="findInput">商品名称：</label>
+                <input class="form-control mr-sm-2 search-query" id="findInput" type="text"  th:placeholder="${keyword}" th:field="*{key}">
                 <button class="btn btn-primary mr-sm-2" type="submit">查找</button>
             </form>
-            <div class="row">
+            <div class="row ">
                 <div class="span3">
-                    <div>
-
-                        <input class="form-control" id="product" placeholder="请输入商品名称" type="text">
-                        </label>
-                    </div>
-
-
+                    <input class="form-control" id="product" placeholder="请输入商品名称" type="text">
                 </div>
                 <div class="span3">
-
-                    <input class="form-control" id="cost" placeholder="请输入成本价格" type="text">
-
+                    <input class="form-control mr-sm-2" id="cost" placeholder="请输入成本价格" type="text">
                 </div>
                 <div class="span3">
-
-                    <input class="form-control" id="price" placeholder="请输入售价"
-                           type="text">
-
+                    <input class="form-control mr-sm-2" id="price" placeholder="请输入售价" type="text">
                 </div>
                 <div class="span3">
-                    <button class="btn btn-large btn-info" onclick="add()" type="button">添加商品</button>
+                    <button class="btn btn-large btn-info mr-sm-2" onclick="add()" type="button">添加商品</button>
                 </div>
             </div>
             <div class="row-fluid">
@@ -126,99 +115,25 @@
                     <table class="table table-bordered table-hover" id="tb">
                         <thead>
                         <tr>
-                            <th>
-                                商品ID
-                            </th>
-                            <th>
-                                商品名称
-                            </th>
-                            <th>
-                                成本价格
-                            </th>
-                            <th>
-                                售价
-                            </th>
-                            <th>
-                                操作
-                            </th>
+                            <th>商品ID</th>
+                            <th>商品名称</th>
+                            <th>成本价格</th>
+                            <th>售价</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
+                        <tr th:each="product:${products}">
+                            <td th:text="${product.id}">1</td>
+                            <td th:text="${product.name}">华为手机</td>
+                            <td th:text="${product.purchasePrice}">4500.0</td>
+                            <td th:text="${product.sellPrice}">5000.0</td>
                             <td>
                                 <button class="btn btn-info mr-sm-2" onclick=del(this) type="button">删除</button>
-                                <button class="btn btn-info mr-sm-2" id="myBtn1" type="button">修改</button>
+                                <button class="btn btn-info mr-sm-2" onclick=edit(this) type="button">修改</button>
                             </td>
                         </tr>
-                        <tr class="success">
-                            <td>
-                                2
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <button class="btn btn-info mr-sm-2" onclick=del(this) type="button">删除</button>
-                                <button class="btn btn-info mr-sm-2" id="myBtn2" type="button">修改</button>
-                            </td>
-                        </tr>
-                        <tr class="error">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <button class="btn btn-info mr-sm-2" onclick=del(this) type="button">删除</button>
-                                <button class="btn btn-info mr-sm-2" id="myBtn3" type="button">修改</button>
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <button class="btn btn-info mr-sm-2" onclick=del(this) type="button">删除</button>
-                                <button class="btn btn-info mr-sm-2" id="myBtn4" type="button">修改</button>
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                5
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <button class="btn btn-info mr-sm-2" onclick=del(this) type="button">删除</button>
-                                <button class="btn btn-info mr-sm-2" id="myBtn5" type="button">修改</button>
-                            </td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -230,103 +145,19 @@
                             <div class="modal-body"><!--绑定span-->
                                 <span class="close" id="close1">&times;</span>
                                 <p>商品名称：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <input class="input-medium search-query" id="popName" style="width: 100%" type="text"/>
                                 <p>成本价格：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <input class="input-medium search-query" id="popCost" style="width: 100%" type="text"/>
                                 <p>售价：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
+                                <input class="input-medium search-query" id="popPrice" style="width: 100%" type="text"/>
                             </div>
-                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                    type="button">确定
+                            <button class="btn btn-info btn-large" onclick=change(this) style="display:block;margin:0 auto;width:50%" type="button">确定
                             </button>
                         </div>
 
                     </div>
                 </div>
-                <div class="span3">
-                    <!-- 弹窗 -->
-                    <div class="modal" id="myModal2">
-                        <!-- 弹窗内容 -->
-                        <div class="modal-content">
-                            <div class="modal-body"><!--绑定span-->
-                                <span class="close" id="close2">&times;</span>
-                                <p>商品名称：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>成本价格：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>售价：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            </div>
-                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                    type="button">确定
-                            </button>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="span3">
-                    <!-- 弹窗 -->
-                    <div class="modal" id="myModal3">
-                        <!-- 弹窗内容 -->
-                        <div class="modal-content">
-                            <div class="modal-body"><!--绑定span-->
-                                <span class="close" id="close3">&times;</span>
-                                <p>商品名称：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>成本价格：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>售价：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            </div>
-                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                    type="button">确定
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="span3">
-                    <!-- 弹窗 -->
-                    <div class="modal" id="myModal4">
-                        <!-- 弹窗内容 -->
-                        <div class="modal-content">
-                            <div class="modal-body"><!--绑定span-->
-                                <span class="close" id="close4">&times;</span>
-                                <p>商品名称：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>成本价格：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>售价：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            </div>
-                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                    type="button">确定
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="span3">
-                    <!-- 弹窗 -->
-                    <div class="modal" id="myModal5">
-                        <!-- 弹窗内容 -->
-                        <div class="modal-content">
-                            <div class="modal-body"><!--绑定span-->
-                                <span class="close" id="close5">&times;</span>
-                                <p>商品名称：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>成本价格：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                                <p>售价：</p>
-                                <input class="input-medium search-query" style="width: 100%" type="text"/>
-                            </div>
-                            <button class="btn btn-info btn-large" style="display:block;margin:0 auto;width:50%"
-                                    type="button">确定
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -334,103 +165,149 @@
         // 获取弹窗
         var modal1 = document.getElementById('myModal1');
 
-        // 打开弹窗的按钮对象
-        var btn1 = document.getElementById("myBtn1");
 
         // 获取 <span> 元素，用于关闭弹窗
         var span1 = document.getElementById("close1");
 
-        // 点击按钮打开弹窗
-        btn1.onclick = function () {
-            modal1.style.display = "block";
-        }
+
         // 点击 <span> (x), 关闭弹窗
         span1.onclick = function () {
             modal1.style.display = "none";
         }
-        // 获取弹窗
-        var modal2 = document.getElementById('myModal2');
-
-        // 打开弹窗的按钮对象
-        var btn2 = document.getElementById("myBtn2");
-
-        // 获取 <span> 元素，用于关闭弹窗
-        var span2 = document.getElementById("close2");
-
-        // 点击按钮打开弹窗
-        btn2.onclick = function () {
-            modal2.style.display = "block";
+        // function add() {
+        //     var product = document.getElementById("product").value
+        //     var cost = document.getElementById("cost").value
+        //     var price = document.getElementById("price").value
+        //     var trObj = document.createElement("tr");
+        //     trObj.id = new Date().getTime();
+        //     trObj.innerHTML = "<td></td>" + "<td>" + product + "</td>" + "<td>" + cost + "</td>"+ "<td>" + price+ "</td>"+"<td>                            <button class=\"btn btn-info mr-sm-2 \" onclick=del(this) type=\"button\">删除</button>\n" +
+        //         "<button class=\"btn btn-info mr-sm-2\" type=\"button\">修改</button></td>";
+        //     document.getElementById("tb").appendChild(trObj);
+        // }
+        //
+        // function del(obj) {
+        //     var tr = obj.parentNode.parentNode //取到了tr对象
+        //     tr.parentNode.removeChild(tr) //返回上一层的table删除 他的子节点
+        // }
+        let popId;
+        let popName;
+        let popPrice;
+        let popCost;
+        function edit(obj){
+            var value = $(obj).parent().parent().find("td");
+            let id = Number(value.eq(0).text());
+            let name = value.eq(1).text();
+            let cost = Number.parseFloat(value.eq(2).text());
+            let price = Number.parseFloat(value.eq(3).text());
+            popId =id;
+            popName = name;
+            popPrice = price;
+            popCost = cost;
+            $("#popName").val(name);
+            $("#popPrice").val(popPrice);
+            $("#popCost").val(popCost)
+            modal1.style.display="block";
         }
-        // 点击 <span> (x), 关闭弹窗
-        span2.onclick = function () {
-            modal2.style.display = "none";
+        function change(obj){
+            let id = popId;
+            let name = $("#popName").val();
+            let price = $("#popPrice").val();
+            let cost = $("#popCost").val()
+            console.log(id+"-"+name+"-"+price+"-"+cost);
+            if(isNaN(Number.parseFloat(cost))) {
+                alert("数字格式错误");
+                return;
+            }
+            if(isNaN(Number.parseFloat(price))) {
+                alert("数字格式错误");
+                return;
+            }
+            if(Number.parseFloat(cost)>Number.parseFloat(price)) {
+                alert("成本应低于售价");
+                return;
+            }
+                $.ajax({
+                    url: "/product/update",
+                    type: "POST",  /*采用POST方法提交*/
+                    data: {"id": id,"name":name,"price":price,"cost":cost},  /*提交的数据（json格式），从输入框中获取*/
+                    dataType: 'JSON',
+                    cache: false,
+                    success: function (result) {
+                        console.log(result)
+                        if (result.code === 200) {
+                            console.log("请求成功")
+                            window.location.reload();
+                        } else {
+                            console.log("请求失败")
+                        }
+                    }
+
+                })
+
         }
-        // 获取弹窗
-        var modal3 = document.getElementById('myModal3');
-
-        // 打开弹窗的按钮对象
-        var btn3 = document.getElementById("myBtn3");
-
-        // 获取 <span> 元素，用于关闭弹窗
-        var span3 = document.getElementById("close3");
-
-        // 点击按钮打开弹窗
-        btn3.onclick = function () {
-            modal3.style.display = "block";
-        }
-        // 点击 <span> (x), 关闭弹窗
-        span3.onclick = function () {
-            modal3.style.display = "none";
-        }
-        // 获取弹窗
-        var modal4 = document.getElementById('myModal4');
-
-        // 打开弹窗的按钮对象
-        var btn4 = document.getElementById("myBtn4");
-
-        // 获取 <span> 元素，用于关闭弹窗
-        var span4 = document.getElementById("close4");
-
-        // 点击按钮打开弹窗
-        btn4.onclick = function () {
-            modal4.style.display = "block";
-        }
-        // 点击 <span> (x), 关闭弹窗
-        span4.onclick = function () {
-            modal4.style.display = "none";
-        }
-        // 获取弹窗
-        var modal5 = document.getElementById('myModal5');
-
-        // 打开弹窗的按钮对象
-        var btn5 = document.getElementById("myBtn5");
-
-        // 获取 <span> 元素，用于关闭弹窗
-        var span5 = document.getElementById("close5");
-
-        // 点击按钮打开弹窗
-        btn5.onclick = function () {
-            modal5.style.display = "block";
-        }
-        // 点击 <span> (x), 关闭弹窗
-        span5.onclick = function () {
-            modal5.style.display = "none";
-        }
-
         function add() {
-            var product = document.getElementById("product").value
-            var cost = document.getElementById("cost").value
-            var price = document.getElementById("price").value
-            var trObj = document.createElement("tr");
-            trObj.id = new Date().getTime();
-            trObj.innerHTML = "<td></td>" + "<td>" + product + "</td>" + "<td>" + cost + "</td>"+ "<td>" + price+ "</td>"+"<td>                            <button class=\"btn btn-info mr-sm-2 \" onclick=del(this) type=\"button\">删除</button>\n" +
-                "<button class=\"btn btn-info mr-sm-2\" type=\"button\">修改</button></td>";
-            document.getElementById("tb").appendChild(trObj);
-        }
+            let productName = $("#product").val();
+            let cost = $("#cost").val();
+            let price = $("#price").val();
+            alert(productName+"-"+cost+"-"+price)
+            if(isNaN(Number.parseFloat(cost))) {
+                alert("数字格式错误");
+                return;
+            }
+            if(isNaN(Number.parseFloat(price))) {
+                alert("数字格式错误");
+                return;
+            }
+            if(Number.parseFloat(cost)>Number.parseFloat(price)) {
+                alert("成本应低于售价");
+                return;
+            }
+            // console.log(name)
+            // console.log(type)
+            $.ajax({
+                url: "/product/add",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"name": productName,"cost":cost,"price":price},  /*提交的数据（json格式），从输入框中获取*/
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    //alert(result)
+                    if(result.code===200){
+                        console.log("请求成功")
+                        window.location.reload();
+                    }else {
+                        alert(result.msg)
+                    }
+                }
 
+            })
+
+        }
         function del(obj) {
             var tr = obj.parentNode.parentNode //取到了tr对象
-            tr.parentNode.removeChild(tr) //返回上一层的table删除 他的子节点
+            var value = $(obj).parent().parent().find("td");
+            let id = Number.parseFloat(value.eq(0).text());
+            console.log(id)
+            if(!isNaN(id)) {
+                $.ajax({
+                    url: "/product/delete",
+                    type: "POST",  /*采用POST方法提交*/
+                    data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
+                    dataType: 'JSON',
+                    cache: false,
+                    success: function (result) {
+                        console.log(result)
+                        if (result.code === 200) {
+                            console.log("请求成功")
+                            tr.parentNode.removeChild(tr) //返回上一层的table删除 他的子节点
+                            //window.location.reload();
+                        } else {
+                            console.log("请求失败")
+                        }
+                    }
+
+                })
+            }
         }
     </script>
 </div>

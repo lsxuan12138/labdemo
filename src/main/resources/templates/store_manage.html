@@ -103,7 +103,7 @@
 			</p>
 		</div>
 		<div class="span3">
-			<form class="form-search" th:action="@{/product/find}" th:method="post" th:object="${searchInfo}">
+			<form class="form-search" th:action="@{/product/findInStore}" th:method="post" th:object="${searchInfo}">
 				<input class="input-medium search-query" type="text" id="findInput" th:placeholder="${keyword}" th:field="*{key}"></input>
 				<button type="submit" class="btn btn-primary mr-sm-2">查找</button>
 
@@ -115,18 +115,10 @@
 			<table class="table table-bordered table-hover" id="tab" >
 				<thead>
 				<tr>
-					<th>
-						商品ID
-					</th>
-					<th>
-						商品名称
-					</th>
-					<th>
-						商品数量
-					</th>
-					<th>
-						操作
-					</th>
+					<th>商品ID</th>
+					<th>商品名称</th>
+					<th>商品数量</th>
+					<th>操作</th>
 				</tr>
 				</thead>
 				<tbody  class="info">
