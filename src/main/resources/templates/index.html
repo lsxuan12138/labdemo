@@ -47,10 +47,10 @@
 
 	<div class="row"  >
 		<div class="col-md-6 offset-md-3" style="text-align: center">
-			<button class="btn btn-info btn-large btn-block" type="button"><a href="/getProducts">货品资料</a></button>
-			<button class="btn btn-info btn-large btn-block" type="button"><a href="/getClients">客户资料</a></button>
-			<button class="btn btn-info btn-large btn-block" type="button"><a href="/getSellNotes">销售业务</a></button>
-			<button class="btn btn-info btn-large btn-block" type="button"><a href="/getStore">库存管理</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/product/all}">货品资料</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/client/all}">客户资料</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/saleNote/all}">销售业务</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/product/store}">库存管理</a></button>
 		</div>
 	</div>
 </div>

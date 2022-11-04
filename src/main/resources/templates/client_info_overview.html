@@ -71,19 +71,19 @@
                             <div class="col-md-12">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/">返回主菜单</a>
+                                        <a class="nav-link " th:href="@{/}">返回主菜单</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active disabled" href="/getClients">顾客资料维护</a>
+                                        <a class="nav-link active disabled" th:href="@{/client/all}">顾客资料维护</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/getProducts">商品资料维护</a>
+                                        <a class="nav-link " th:href="@{/product/all}">商品资料维护</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/getStore">库存管理</a>
+                                        <a class="nav-link " th:href="@{/product/store}">库存管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/getSellNotes">销售业务管理</a>
+                                        <a class="nav-link " th:href="@{/saleNote/all}">销售业务管理</a>
                                     </li>
 
                                 </ul>
@@ -294,6 +294,6 @@
         }
     }
 </script>
-</div>
+
 </body>
 </html>

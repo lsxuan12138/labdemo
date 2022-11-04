@@ -78,21 +78,20 @@
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link " href="/">返回主菜单</a>
+                            <a class="nav-link " th:href="@{/}">返回主菜单</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/getClients">顾客资料维护</a>
+                            <a class="nav-link" th:href="@{/client/all}">顾客资料维护</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="/getProducts">商品资料维护</a>
+                            <a class="nav-link " th:href="@{/product/all}">商品资料维护</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="/getStore">库存管理</a>
+                            <a class="nav-link " th:href="@{/product/store}">库存管理</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active disabled" href="/getSellNotes">销售业务管理</a>
+                            <a class="nav-link  active disabled" th:href="@{/saleNote/all}">销售业务管理</a>
                         </li>
-
                     </ul>
                 </div>
                 <p class="text-info">
@@ -107,7 +106,7 @@
     <form class="form-inline mb-2">
         <input class="form-control mr-sm-2" id="search" placeholder="输入要查询的单号或客户名" style="width:30%"
                type="text">
-        <button class="btn btn-primary mr-sm-2" type="submit">查找</button>
+        <button class="btn btn-primary mr-sm-2" type="button" onclick=find()>查找</button>
     </form>
     <div class="row-fluid">
         <div class="span12">
@@ -120,55 +119,16 @@
                     <th>操作</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>zxp</td>
-                    <td>已审核</td>
+                <tbody id="saleNotes">
+                <tr th:each="saleNote:${saleNotes}">
+                    <td th:text="${saleNote.id}">1</td>
+                    <td th:text="${saleNote.clientName}">zxp</td>
+                    <td th:text="${saleNote.stage}">已审核</td>
                     <td>
-                        <button class="btn btn-info btn-large " id="myBtn1" type="button">编辑</button>
-                        <button class="btn btn-info btn-large" type="button">审核</button>
-                        <button class="btn btn-info btn-large" type="button">收款</button>
-                        <button class="btn btn-info btn-large" type="button">退货(整单）</button>
+                        <button class="btn btn-info btn-large " onclick=edit(this) type="button">编辑</button>
                     </td>
-
                 </tr>
-                <tr class="success">
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        zxpp
-                    </td>
-                    <td>
-                        已审核
-                    </td>
-                    <td>
-                        <button class="btn btn-info btn-large " id="myBtn2" type="button">编辑</button>
-                        <button class="btn btn-info btn-large" type="button">审核</button>
-                        <button class="btn btn-info btn-large" type="button">收款</button>
-                        <button class="btn btn-info btn-large" type="button">退货(整单）</button>
-                    </td>
 
-                </tr>
-                <tr class="error">
-                    <td>
-                        3
-                    </td>
-                    <td>
-                        zxppp
-                    </td>
-                    <td>
-                        未审核
-                    </td>
-                    <td>
-                        <button class="btn btn-info btn-large " id="myBtn3" type="button">编辑</button>
-                        <button class="btn btn-info btn-large" type="button">审核</button>
-                        <button class="btn btn-info btn-large" type="button">收款</button>
-                        <button class="btn btn-info btn-large" type="button">退货(整单）</button>
-                    </td>
-
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -183,7 +143,11 @@
 <!--                    <p>单号：</p>
                     <input class="input-medium search-query" id="number" style="width: 100%" type="text"/>-->
                     <p>客户名：</p>
-                    <input class="input-medium search-query" id="name" style="width: 100%" type="text"/>
+<!--                    <input class="input-medium search-query" id="name" style="width: 100%" type="text"/>-->
+                    <select  id ="popClientName" class="combobox mr-sm-2" style="width: 100%;height: auto">
+
+                        <option th:each="client:${clients}" th:value="${client.id}" th:text="${client.name}">固定客户</option>
+                    </select>
                 </div>
                 <button class="btn btn-info btn-large" id="sure"
                         onclick="add()" style="display:block;margin:0 auto;width:50%" type="button">确定
@@ -192,550 +156,111 @@
 
         </div>
     </div>
-    <div class="span3">
-        <!-- 弹窗 -->
-        <div class="modal" id="myModal1">
-            <!-- 弹窗内容 -->
-            <div class="modal-content">
-                <div class="div-left">
-                    <span class="close" id="close1">&times;</span>
-                    <h2>订单详情</h2>
-                </div>
-                <div class="modal-body">
-                    <p>订单编号：</p>
-                    <p>下单顾客：</p>
-                    <p>订单内容：</p>
-                    <div class="span12">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>
-                                    序号
-                                </th>
-                                <th>
-                                    客户名
-                                </th>
-                                <th>
-                                    商品名
-                                </th>
-                                <th>
-                                    商品数量
-                                </th>
-                                <th>
-                                    售价
-                                </th>
-                                <th>
-                                    成本
-                                </th>
-                                <th>
-                                    状态（可改名）
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    华为手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            <tr class="success">
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    华为手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            <tr class="error">
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    三星手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            <tr class="error">
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    三星手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            <tr class="error">
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    三星手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            <tr class="error">
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    三星手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            <tr class="error">
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    zxp
-                                </td>
-                                <td>
-                                    三星手机
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    5000
-                                </td>
-                                <td>
-                                    50
-                                </td>
-                                <td>
-                                    审核中/未审核
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="btn-group" style="float: right">
-                        <button class="btn btn-info btn-large" type="button">保存</button>
-                        <button class="btn btn-info btn-large" type="button">修改</button>
-                        <button class="btn btn-info btn-large" type="button">删除</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <script type="text/javascript">
+        // 获取弹窗
+        var modal = document.getElementById('myModal');
 
+        // 打开弹窗的按钮对象
+        var btn = document.getElementById("create");
 
-        <div class="span3">
-            <!-- 弹窗 -->
-            <div class="modal" id="myModal2">
-                <!-- 弹窗内容 -->
-                <div class="modal-content">
-                    <div class="div-left">
-                        <span class="close" id="close2">&times;</span>
-                        <h2>订单详情</h2>
-                    </div>
-                    <div class="modal-body">
-                        <p>订单编号：</p>
-                        <p>下单顾客：</p>
-                        <p>订单内容：</p>
-                        <div class="span12">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        序号
-                                    </th>
-                                    <th>
-                                        客户名
-                                    </th>
-                                    <th>
-                                        商品名
-                                    </th>
-                                    <th>
-                                        商品数量
-                                    </th>
-                                    <th>
-                                        售价
-                                    </th>
-                                    <th>
-                                        成本
-                                    </th>
-                                    <th>
-                                        状态（可改名）
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        zxp
-                                    </td>
-                                    <td>
-                                        华为手机
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        5000000000000000000000
-                                    </td>
-                                    <td>
-                                        500000000
-                                    </td>
-                                    <td>
-                                        审核中/未审核
-                                    </td>
-                                </tr>
-                                <tr class="success">
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        zxp
-                                    </td>
-                                    <td>
-                                        华为手机
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        5000
-                                    </td>
-                                    <td>
-                                        50
-                                    </td>
-                                    <td>
-                                        审核中/未审核
-                                    </td>
-                                </tr>
-                                <tr class="error">
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        zxp
-                                    </td>
-                                    <td>
-                                        苹果手机
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        5000
-                                    </td>
-                                    <td>
-                                        50
-                                    </td>
-                                    <td>
-                                        审核中/未审核
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-group" style="float: right">
-                                <button class="btn btn-info btn-large" type="button">保存</button>
-                                <button class="btn btn-info btn-large" type="button">修改</button>
-                                <button class="btn btn-info btn-large" type="button">删除</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        // 获取 <span> 元素，用于关闭弹窗
+        var span = document.getElementById("close");
 
-            <div class="span3">
-                <!-- 弹窗 -->
-                <div class="modal" id="myModal3">
-                    <!-- 弹窗内容 -->
-                    <div class="modal-content">
-                        <div class="div-left">
-                            <span class="close" id="close3">&times;</span>
-                            <h2>订单详情</h2>
-                        </div>
-                        <div class="modal-body">
-                            <p>订单编号：</p>
-                            <p>下单顾客：</p>
-                            <p>订单内容：</p>
-                            <div class="span12">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            序号
-                                        </th>
-                                        <th>
-                                            客户名
-                                        </th>
-                                        <th>
-                                            商品名
-                                        </th>
-                                        <th>
-                                            商品数量
-                                        </th>
-                                        <th>
-                                            售价
-                                        </th>
-                                        <th>
-                                            成本
-                                        </th>
-                                        <th>
-                                            状态（可改名）
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            zxp
-                                        </td>
-                                        <td>
-                                            华为手机
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            5000
-                                        </td>
-                                        <td>
-                                            50
-                                        </td>
-                                        <td>
-                                            审核中/未审核
-                                        </td>
-                                    </tr>
-                                    <tr class="success">
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            zxp
-                                        </td>
-                                        <td>
-                                            华为手机
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            5000
-                                        </td>
-                                        <td>
-                                            50
-                                        </td>
-                                        <td>
-                                            审核中/未审核
-                                        </td>
-                                    </tr>
-                                    <tr class="error">
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            zxp
-                                        </td>
-                                        <td>
-                                            vivo手机
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            5000
-                                        </td>
-                                        <td>
-                                            50
-                                        </td>
-                                        <td>
-                                            审核中/未审核
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="btn-group" style="float: right">
-                                <button class="btn btn-info btn-large" type="button">保存</button>
-                                <button class="btn btn-info btn-large" type="button">修改</button>
-                                <button class="btn btn-info btn-large" type="button">删除</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    // 获取弹窗
-                    var modal = document.getElementById('myModal');
-
-                    // 打开弹窗的按钮对象
-                    var btn = document.getElementById("create");
-
-                    // 获取 <span> 元素，用于关闭弹窗
-                    var span = document.getElementById("close");
-
-                    // 点击按钮打开弹窗
-                    btn.onclick = function () {
-                        modal.style.display = "block";
-                    }
-                    // 点击 <span> (x), 关闭弹窗
-                    span.onclick = function () {
-                        modal.style.display = "none";
-                    }
-                    // 获取弹窗
-                    var modal1 = document.getElementById('myModal1');
-
-                    // 打开弹窗的按钮对象
-                    var btn1 = document.getElementById("myBtn1");
-
-                    // 获取 <span> 元素，用于关闭弹窗
-                    var span1 = document.getElementById("close1");
-
-                    // 点击按钮打开弹窗
-                    btn1.onclick = function () {
-                        modal1.style.display = "block";
-                    }
-                    // 点击 <span> (x), 关闭弹窗
-                    span1.onclick = function () {
-                        modal1.style.display = "none";
-                    }
-                    // 获取弹窗
-                    var modal2 = document.getElementById('myModal2');
-
-                    // 打开弹窗的按钮对象
-                    var btn2 = document.getElementById("myBtn2");
-
-                    // 获取 <span> 元素，用于关闭弹窗
-                    var span2 = document.getElementById("close2");
-
-                    // 点击按钮打开弹窗
-                    btn2.onclick = function () {
-                        modal2.style.display = "block";
-                    }
-
-                    // 点击 <span> (x), 关闭弹窗
-                    span2.onclick = function () {
-                        modal2.style.display = "none";
-                    }
-                    // 获取弹窗
-                    var modal3 = document.getElementById('myModal3');
-
-                    // 打开弹窗的按钮对象
-                    var btn3 = document.getElementById("myBtn3");
-
-                    // 获取 <span> 元素，用于关闭弹窗
-                    var span3 = document.getElementById("close3");
-
-                    // 点击按钮打开弹窗
-                    btn3.onclick = function () {
-                        modal3.style.display = "block";
-                    }
-
-                    // 点击 <span> (x), 关闭弹窗
-                    span3.onclick = function () {
-                        modal3.style.display = "none";
-                    }
-
-                    function add() {
-/*                        var number = document.getElementById("number").value*/
-                        var name = document.getElementById("name").value
+        // 点击按钮打开弹窗
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        function add() {
+            /*                        var number = document.getElementById("number").value*/
+            //var name = document.getElementById("name").value
+            let clientId = $("#popClientName").val();
+            $.ajax({
+                url: "/saleNote/add",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"clientId": clientId},
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === 200) {
+                        console.log("success")
                         var trObj = document.createElement("tr");
+                        let id=result.data.id;
+                        let name = result.data.clientName;
+                        let stage = result.data.stage;
                         trObj.id = new Date().getTime();
-                        trObj.innerHTML = "<td></td>" + "<td>" + name + "</td>" + "<td>未审核</td><td><button class=\"btn btn-info btn-large \" id=\"myBtn1\" type=\"button\">编辑</button>\n" +
-                            "<button class=\"btn btn-info btn-large\" type=\"button\">审核</button>\n" +
-                            "<button class=\"btn btn-info btn-large\" type=\"button\">收款</button>\n" +
-                            "<button class=\"btn btn-info btn-large\" type=\"button\">退货(整单）</button></td>";
+                        trObj.innerHTML = "<td>"+id+"</td>" + "<td>" + name + "</td>" + "<td>"+stage+"</td><td>" +
+                            "<button class=\"btn btn-info btn-large \" type=\"button\">编辑</button></td>";
                         modal.style.display = "none";
                         document.getElementById("tb").appendChild(trObj);
-                    }
-                </script>
 
-            </div>
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+
+
+        }
+
+        function find(){
+            let keyword = $("#search").val();
+            //alert(keyword);
+            $.ajax({
+                url: "/saleNote/find",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"keyword": keyword},
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    let body = document.getElementById("saleNotes");
+                    let str="";
+                    //<button class=\"btn btn-info mr-sm-2 \" onclick=del(this) type=\"button\">删除</button>\n" +
+                    //         "<button class=\"btn btn-info mr-sm-2\" type=\"button\">修改</button></td>";
+                    //     document.getElementById("tb").appendChild(trObj);
+                    if (result.code === 200) {
+                        for(let cell of result.data){
+                            str+=`<tr>
+                            <td>${cell.id}</td>
+                            <td>${cell.clientName}</td>
+                            <td>${cell.stage}</td>
+                            <td>
+                                <button class=\"btn btn-info btn-large \" onclick=edit(this) type=\"button\">编辑</button>
+                            </td>
+                            </tr>`
+                        }
+                        body.innerHTML=str;
+                        console.log(str)
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
+
+        function edit(obj){
+            var value = $(obj).parent().parent().find("td");
+            let id = Number(value.eq(0).text());
+            // $.ajax({
+            //     url: "/saleNote/detail?id="+id,
+            //     type: "get",
+            //     cache: false,
+            // })
+            window.location.href="/saleNote/detail?id="+id;
+        }
+    </script>
+
+
+
+
+</div>
+
 </body>
 </html>

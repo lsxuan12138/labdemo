@@ -13,6 +13,10 @@ public enum ResultEnum {
 
     PRODUCT_DELETE_ERROR(14004,"product delete error"),
 
+    SALE_NOTE_STAGE_ERROR(14005,"sale note stage error"),
+
+    PRODUCT_IS_NOT_ENOUGH(14006,"some products is not enough"),
+
     ;
     private final Integer code;
 

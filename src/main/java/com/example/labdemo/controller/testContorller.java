@@ -55,4 +55,9 @@ public class testContorller
     public ModelAndView getSellNotes(){
         return new ModelAndView("sale_note_manage");
     }
+
+    @GetMapping("/getOrderDetail")
+    public ModelAndView getOrderDetail(){
+        return new ModelAndView("order_details");
+    }
 }

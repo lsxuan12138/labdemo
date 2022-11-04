@@ -8,6 +8,7 @@ package com.example.labdemo.domain;
  * @create: 2022-10-29 15:14
  */
 public class PurchaseOrderItem {
+
     private Long id;
     private Long purchaseOrderId;
     private Long productId;
