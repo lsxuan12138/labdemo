@@ -22,22 +22,24 @@ public class ProductController {
     private ProductService service;
     @RequestMapping(value = "/listproduct",method = RequestMethod.GET)
     public Map<String,Object> getProductList(){
-        System.out.println("打印........1");
         Map<String,Object> modelMap=new HashMap<>();
-        System.out.println("打印........2");
         List<Product> productList=service.queryProduct();
-        System.out.println("打印........3");
         modelMap.put("productList",productList);
-        System.out.println("打印!!!!!!!");
-        System.out.print(modelMap.keySet());
-        System.out.println("一下");
         return  modelMap;
     }
 
     @RequestMapping(value = "/findByName",method = RequestMethod.GET)
     public Map<String,Object>  findByName(String name){
         Map<String,Object> modelMap=new HashMap<>();
-        Product  product=service.findByName(name);
+        List<Product> productList = service.findByName(name);
+        modelMap.put("productList",productList);
+        return  modelMap;
+    }
+
+    @RequestMapping(value = "/findById",method = RequestMethod.GET)
+    public Map<String,Object>  findById(Integer id){
+        Map<String,Object> modelMap=new HashMap<>();
+        Product product = service.findById(id);
         modelMap.put("product",product);
         return  modelMap;
     }

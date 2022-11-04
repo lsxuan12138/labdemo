@@ -25,6 +25,10 @@ public class SaleNoteServiceImpl implements SaleNoteService {
     public SaleNote findById(int id) {
         return saleNoteDao.findById(id);
     }
+
+    @Override
+    public List<SaleNote> findByClientId(Integer clientId) {return saleNoteDao.findByClientId(clientId); }
+
     @Transactional
     @Override
     public int insertSaleNote(SaleNote saleNote) {

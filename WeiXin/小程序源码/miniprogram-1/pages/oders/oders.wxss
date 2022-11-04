@@ -146,5 +146,32 @@
     
     }
     
+.find button{
+    width: 600rpx;
+    height: 60rpx;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    padding-top: 10rpx;
+    background-color: #8bd2f3;
+}
+.find text{
+    flex-grow: 1;
+    text-align: right;
+ }
+    
+.find input{ 
+    position: relative;
+    margin-top: 30rpx;
+    margin-left: 40rpx;
+    width: 600rpx;
+    font-size: 0.9rem;
+    flex-grow: 3;
+    border: 1px solid #8bd2f3;
+    display: inline-block;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0.30rem #8bd2f3;
+    padding: 0.3rem;
+    
+    }
   
     

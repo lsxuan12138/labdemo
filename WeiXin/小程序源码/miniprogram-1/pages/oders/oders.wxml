@@ -1,6 +1,11 @@
 <!--pages/oders/oders.wxml-->
 <view class="container">
     <rich-text nodes="<h2 style='color: black'>当前订单列表</h2>"> </rich-text>
+    <view class="find">
+      <input bindinput="getClientId" type="number" placeholder="：输入下单客户序号查询" placeholder-style="color:black" ></input>
+      <button bindtap="findbyClientId" plain="false">查询</button>
+      <button bindtap="onShow" plain="false">全部订单</button>
+    </view>
 <view class="widget">
 <text class="column">ID</text>
 <text class="column">客户</text>

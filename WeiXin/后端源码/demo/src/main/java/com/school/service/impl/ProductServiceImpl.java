@@ -19,14 +19,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> queryProduct() {
-        System.out.println("打印出product来看看");
-        System.out.println(productDao.queryProduct().get(0).getId());
-        System.out.println("打印出product来看看");
-        return productDao.queryProduct(); }
+    public List<Product> queryProduct() { return productDao.queryProduct(); }
 
     @Override
-    public Product findByName(String name) {return productDao.findByName(name); }
+    public Product findById(Integer id) { return productDao.findById(id); }
+
+    @Override
+    public List<Product> findByName(String name) {return productDao.findByName(name); }
 
     @Transactional
     @Override

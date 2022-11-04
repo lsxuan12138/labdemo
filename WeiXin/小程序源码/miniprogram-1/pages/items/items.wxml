@@ -1,20 +1,23 @@
 <!--pages/items/items.wxml-->
 <view class="container">
 
-  <rich-text nodes="<h2 style='color: black'>当前商品列表</h2>"> </rich-text>
-
+  <rich-text nodes="<h2 style='color: black'>当前商品列表</h2>"> </rich-text>  
+  <view class="find">
+      <input bindinput="getProductName" type="string" placeholder="：输入名称查询" placeholder-style="color:black" ></input>
+      <button bindtap="findbyname" plain="false">查询</button>
+      <button bindtap="onShow" plain="false">全部商品</button>
+  </view>
+  
+  <view class = "form">
   <view class="widget">
     <text class="column">序号</text>
     <text class="column">名称</text>
     <text class="column">库存数量</text>
     <text class="column">售价</text>
-
   </view>
-
   <scroll-view scroll-y="true">
     <view>
       <block wx:for="{{list}}">
-        
         <view class="widget">
            <text class="column">{{item.id}}</text>
            <text class="column">{{item.name}}</text>
@@ -25,11 +28,7 @@
       </block>
     </view>
   </scroll-view>
-  
 </view>
 
-<view class="row">
-      <input type="number" name="idid" placeholder="请输入想查询的名称" value="{{newname}}" />
-      <button bindtap="findbyname" plain="false" data-name="{{idid}}">查询</button>
 </view>
 

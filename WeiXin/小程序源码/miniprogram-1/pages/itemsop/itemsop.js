@@ -1,11 +1,11 @@
-// pages/items/items.js
+// pages/itemsop/itemsop.js
 Page({
     getProductName: function(e) {
         var value = e.detail.value; //获取输入的内容
         this.setData({
-          productname:value,
+          productname:value,//改变page--data中username的值
         })
-        wx.setStorageSync('productname', value);
+        wx.setStorageSync('productname', value);//将获取到的username值存入本地缓存空间
     },
     /**
      * 页面的初始数据
@@ -110,15 +110,8 @@ Page({
             icon:'',
             duration:2000
           });
-        }else if(list.length==0){
-            var toastText='无此商品';
-          wx.showToast({
-            title: toastText,
-            icon:'',
-            duration:2000
-          });
         }else{
-          var toastText='查询商品成功';
+          var toastText='查询商品完毕';
           wx.showToast({
             title: toastText,
             icon:'',
@@ -130,5 +123,47 @@ Page({
         }
       }
     })
-   }
+   },
+   addProduct:function(){
+    wx.navigateTo({
+      url: '../changeitem/changeitem'
+    })
+  },
+  deleteProduct:function(e){
+    var that=this;
+    wx.showModal({
+      title:'提示',
+      content:'确定要删除吗['+e.target.dataset.name+']?',
+      success:function(sm){
+        if(sm.confirm){
+          wx.request({
+            url: 'http://localhost:8081/demo/product/deleteProduct',
+            data:{id:e.target.dataset.id},
+            method:'GET',
+            success:function(res){
+              var result=res.data.success;
+              var toastText="删除成功";
+              if(result!=1){
+                toastText="删除失败";
+              }else{
+                that.data.list.splice(e.target.dataset.index,1)
+                that.setData({
+                  list: that.data.list
+                });
+              }
+              wx.showToast({
+                title:toastText,
+                icon:'',
+                duration:2000
+              })
+             
+            }
+            
+          })
+        }
+      }
+     
+    });
+
+  }
 })

@@ -1,1 +1,21 @@
 /* pages/login/login.wxss */
+page{
+    
+    padding-bottom: 50rpx;
+    background-color: #6eafdb;
+}
+.in input {
+    display: flex;
+    height: 100rpx;
+    width: 500rpx;
+    margin: 20px;
+    border: 3rpx solid #080806;
+    border-radius: 10rpx;
+  }
+
+button{
+    margin-top: 50rpx;
+}
+image{
+    margin-top: 100rpx;
+}

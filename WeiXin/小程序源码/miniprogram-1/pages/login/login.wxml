@@ -1,6 +1,13 @@
 <!--pages/login/login.wxml-->
+<view class="container">
+    <rich-text nodes="<h2 style='color: #3333FF'>欢迎您登录：</h2"> </rich-text>
+<view class = "in">
+<input bindinput="getUserName" placeholder="：用户名" placeholder-style="color:black" class="userName"></input>
+<input bindinput="getPassword" type="password" placeholder="：请输入密码" placeholder-style="color:black" class="userName"></input>
+</view>
 
-<input bindinput="getUserName" placeholder="用户名/手机号/邮箱" placeholder-style="color:black" class="userName"></input>
-<input bindinput="getPassword" type="password" placeholder="请输入密码" placeholder-style="color:black" class="userName"></input>
-<text>pages/login/login.wxml</text>
 <button bindtap='doLogin'>点击登录</button>
+<image src='../UI_pics/hiticon.png'></image>
+<rich-text nodes="<h3 style='color: #111111'>项目开发人员：孙莹 李世轩 周煊平 高瑞</h3"> </rich-text>
+</view>
+

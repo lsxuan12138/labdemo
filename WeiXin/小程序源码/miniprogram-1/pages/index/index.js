@@ -19,7 +19,7 @@ Page({
   },
   itemViewTap() {
     wx.navigateTo({
-      url: '../items/items'
+      url: '../itemsop/itemsop'
     })
   },
   oderViewTap() {

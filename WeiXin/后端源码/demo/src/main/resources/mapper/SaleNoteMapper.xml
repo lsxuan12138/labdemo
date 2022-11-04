@@ -10,6 +10,11 @@
     <select id="findById" resultType="com.school.entity.SaleNote">
         select  * from t_sale_note where  id=#{id}
     </select>
+
+    <select id="findByClientId" resultType="com.school.entity.SaleNote">
+        select  * from t_sale_note where  client_id=#{clientId}
+    </select>
+
     <insert id="insertSaleNote" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.SaleNote">
         insert into t_sale_note (client_id,total_price,stage,create_by,creat_time)values(#{clientId},#{totalPrice},#{stage},#{createBy},#{createTime})
     </insert>

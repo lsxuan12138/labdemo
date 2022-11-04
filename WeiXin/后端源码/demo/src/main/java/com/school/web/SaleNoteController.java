@@ -36,6 +36,14 @@ public class SaleNoteController {
         return  modelMap;
     }
 
+    @RequestMapping(value = "/findByClientId",method = RequestMethod.GET)
+    public Map<String,Object>  findByClientId(Integer clientId){
+        Map<String,Object> modelMap=new HashMap<>();
+        List<SaleNote>  saleNoteList = service.findByClientId(clientId);
+        modelMap.put("saleNoteList",saleNoteList);
+        return  modelMap;
+    }
+
     @RequestMapping(value = "/addSaleNote",method = RequestMethod.POST)
     public Map<String,Object>  addSaleNote(@RequestBody SaleNote saleNote){
         Map<String,Object> modelMap=new HashMap<>();

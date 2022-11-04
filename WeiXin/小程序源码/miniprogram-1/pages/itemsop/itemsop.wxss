@@ -1,24 +1,15 @@
-/* pages/items/items.wxss */
+/* pages/itemsop/itemsop.wxss */
 .widget {
 
     position: relative;
-    
     margin-top: 5rpx;
-    
     margin-bottom: 0rpx;
-
-    margin-left: 50rpx;
-
+    margin-left: 0rpx;
     margin-right: 10rpx;
-    
     padding-top: 20rpx;
-    
     padding-bottom: 20rpx;
-    
-    padding-left: 40rpx;
-    
-    padding-right: 40rpx;
-    
+    padding-left: 0rpx;
+    padding-right: 10rpx;
     border: rgb(203, 203, 204) 2px solid;
     
     }
@@ -26,33 +17,21 @@
 .container {
     
     height: 90%;
-    
     display: table;
-    
     align-items: center;
-    
     justify-content: space-between;
-    
     box-sizing: border-box;
-    
     padding-top: 10rpx;
-    
     padding-bottom: 10rpx;
-    
     text-align: center;
-    
     }
     
 .column {
     
-    width: 4rem;
-    
+    width: 5rem;
     display: table-cell;
-
-    padding-left: 10rpx;
-    
-    padding-right: 10rpx;
-    
+    padding-left: 0rpx;  
+    padding-right: 0rpx;
     }
 
 .find button{
@@ -82,7 +61,16 @@
     padding: 0.3rem;
     
     }
-    
+    .link-column {
+        width: 6rem; 
+        display: table-cell;
+        
+        }
+        
+.link {        
+        color: blue; 
+        display: inline-table;
+        }
     
     
     

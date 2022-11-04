@@ -1,0 +1,40 @@
+<!--pages/itemsop/itemsop.wxml-->
+<view class="container">
+
+<rich-text nodes="<h2 style='color: black'>当前商品列表</h2>"> </rich-text>  
+<view class="find">
+    <input bindinput="getProductName" type="string" placeholder="：输入名称查询" placeholder-style="color:black" ></input>
+    <button bindtap="findbyname" plain="false">查询</button>
+    <button bindtap="addProduct" plain="false">新建</button>
+    <button bindtap="onShow" plain="false">全部商品</button>
+</view>
+
+<view class = "form">
+<view class="widget">
+  <text class="column">序号</text>
+  <text class="column">名称</text>
+  <text class="column">库存</text>
+  <text class="column">售价</text>
+  <text class="column">操作</text>
+</view>
+<scroll-view scroll-y="true">
+  <view>
+    <block wx:for="{{list}}">
+      <view class="widget">
+         <text class="column">{{item.id}}</text>
+         <text class="column">{{item.name}}</text>
+         <text class="column">{{item.quantity}}</text>
+         <text class="column">{{item.sellPrice}}</text>
+         <view class="link-column">
+            <navigator class="link" url="../changeitem/changeitem?id={{item.id}}">编辑</navigator>|
+            <text class="link" bindtap="deleteProduct" data-id="{{item.id}}" data-name="{{item.name}}" data-index="{{index}}">删除</text>
+          </view>
+      </view>
+
+    </block>
+  </view>
+</scroll-view>
+</view>
+
+</view>
+
