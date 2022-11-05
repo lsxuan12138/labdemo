@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Bootstrap 4, from LayoutIt!</title>
+
+    <meta content="Source code generated using layoutit.com" name="description">
+    <meta content="LayoutIt!" name="author">
+    <!-- CSS -->
+    <link href="/static/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="/static/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
+    <style type="text/css">
+        /* 弹窗 (background) */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed; /* 固定定位 */
+            z-index: 1; /* 设置在顶层 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* 弹窗内容 */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 20%;
+            height: 35%;
+        }
+
+        /* 关闭按钮 */
+        .close {
+            color: #aaa;
+            float: top;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="text-center text-info">
+                通用批发零售业务管理系统v1.0
+            </h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <strong>您现在访问的是：订单详情</strong>
+                    <div class="btn-group " style="float: right">
+                        <a class="btn btn-info btn-large" th:href="@{/saleNote/all}" type="button">返回</a>
+                        <button class="btn btn-info btn-large" type="button" onclick=audit()>审核</button>
+                        <button class="btn btn-info btn-large" type="button" onclick=collectMoney()>收款</button>
+                        <button class="btn btn-info btn-large" type="button" onclick=returnGoods()>退货</button>
+<!--                        <a class="btn btn-info btn-large" href="/getOrderDetails" type="button">保存</a>-->
+                        <button class="btn btn-info btn-large" type="button" onclick=save()>保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+            <p th:text="'订单编号：'+${detail.id}">订单编号：</p>
+            <p th:text="'下单顾客：'+${detail.clientName}">下单顾客：</p>
+            <p th:text="'订单状态：'+${detail.stage}">审核状态：</p>
+        <div style="float: left">
+            <p>订单内容：</p>
+        </div>
+            <form class="form-inline mb-2" style="float: right">
+                <label for="inputProducts">商品名称：</label>
+                <input id ="inputProduct" list="inputProducts" style="width:100px" size=10  autocomplete="off">
+                <datalist id="inputProducts" style="width:100px" size=10 >
+                    <option th:each="product:${productList}" th:value="${product.name}"/>
+                </datalist>
+                <input  style="width:50px" id="inputQuantity" placeholder="数量">
+                <button class="btn btn-primary mr-sm-2" type="button" onclick=add()>添加</button>
+            </form>
+
+        <div class="span12">
+            <table class="table table-bordered" id="tb">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>商品名</th>
+                    <th>商品数量</th>
+                    <th>售价</th>
+                    <th>成本</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${detail.getItems()}">
+                    <td th:text="${item.id}">1</td>
+                    <td th:text="${item.name}">华为手机</td>
+                    <td th:text="${item.quantity}">1</td>
+                    <td th:text="${item.price}">5000</td>
+                    <td th:text="${item.cost}">50</td>
+                    <td>
+                        <button class="btn btn-info btn-large" type="button" onclick=del(this)>删除</button>
+                        <button class="btn btn-info btn-large" type="button" onclick=changeQuantity(this)>修改</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="span3">
+        <!-- 弹窗 -->
+        <div class="modal" id="myModal1">
+            <!-- 弹窗内容 -->
+            <div class="modal-content">
+                <div class="modal-body"><!--绑定span-->
+                    <span class="close" id="close1">&times;</span>
+                    <p id = "changePopId">商品序号</p>
+                    <p id = "changePopName">商品名称</p>
+                    <input id="changePopQuantity" class="input-medium search-query" style="width: 100%" type="text"/>
+                </div>
+                <button class="btn btn-info btn-large" onclick=change(this) style="display:block;margin:0 auto;width:50%"
+                        type="button">确定
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script th:inline="javascript">
+        const  productList = [[${productList}]];
+        const detail = [[${detail}]]
+        let stageT = detail.stage;
+        function del(obj){
+            let tr = obj.parentNode.parentNode //取到了tr对象
+            tr.parentNode.removeChild(tr)
+        }
+        // 获取弹窗
+        var modal1 = document.getElementById('myModal1');
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span1 = document.getElementById("close1");
+
+        // 点击 <span> (x), 关闭弹窗
+        span1.onclick = function () {
+            modal1.style.display = "none";
+        }
+        let changeProductId;
+        let targetRow;
+        function changeQuantity(obj){
+            let stage = stageT;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("已保存，禁止编辑");
+                return;
+            }
+            let value = $(obj).parent().parent().find("td");
+            targetRow = value;
+            let id = Number(value.eq(0).text());
+            let name = value.eq(1).text();
+            let quantity = Number(value.eq(2).text());
+            changeProductId = id;
+            $("#changePopId").html("商品编号："+id);
+            $("#changePopName").html("商品名称："+name);
+            $("#changePopQuantity").val(quantity);
+            modal1.style.display="block";
+        }
+        function change(obj){
+            let stage = stageT;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("已保存，禁止编辑");
+                return;
+            }
+            let quantityStr = $("#changePopQuantity").val();
+            let quantity = Number(quantityStr)
+            if(!Number.isInteger(quantity)){
+                alert("请输入一个整数");
+                return;
+            }
+            for (const product of productList) {
+                if(product.id ===changeProductId){
+                    if(quantity>product.quantity){
+                        alert("库存只有"+product.quantity+"个");
+                        return;
+                    }
+                    break;
+                }
+            }
+            targetRow.eq(2).html(quantity);
+            stageT = "待审核"
+            modal1.style.display = "none";
+        }
+        function add(){
+            let stage = stageT;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("已保存，禁止编辑");
+                return;
+            }
+            let name = $("#inputProduct").val();
+            let quantity = Number($("#inputQuantity").val());
+            let data = getTableContent("tb");
+            if(isNaN(quantity)||quantity<0){
+                alert("请输入一个正整数");
+                return;
+            }
+            for(let i=1;i<data.length;i++){
+                if(data[i][1]==name){
+                    alert("该商品已在订单中");
+                    return;
+                }
+            }
+
+            for (const product of productList) {
+                if(product.name == name){
+                    if(quantity>product.quantity){
+                        alert("库存只有"+product.quantity+"个");
+                        return;
+                    }
+                    var trObj = document.createElement("tr");
+                    trObj.id = new Date().getTime();
+                    let price = Number.parseFloat(product.sellPrice);
+                    let cost = Number.parseFloat(product.purchasePrice);
+                    trObj.innerHTML =
+                    `<td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${quantity}</td>
+                    <td>${price}</td>
+                    <td>${cost}</td>
+                    <td>
+                        <button class=\"btn btn-info btn-large\" type=\"button\" onclick=del(this)>删除</button>
+                        <button class=\"btn btn-info btn-large\" type=\"button\" onclick=changeQuantity(this)>修改</button>
+                    </td>`;
+                    document.getElementById("tb").appendChild(trObj);
+                }
+            }
+            stageT = "待审核"
+        }
+        function save(){
+            let stage = detail.stage;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("已保存，禁止编辑");
+                return;
+            }
+            let data = getTableContent("tb");
+            // console.log(data);
+            // console.log(detail);
+            let str = "{";
+            str+="\"id\":"+detail.id+",";
+            str+="\"stage\":\""+detail.stage+"\",";
+            str+="\"items\":"+"[";
+            for (let i = 1; i < data.length; i++) {
+                str+="{"
+                str+="\"id\":"+data[i][0]+",";
+                str+="\"quantity\":"+data[i][2];
+                str+="}";
+                if(i!==data.length-1)str+=",";
+            }
+            str+="]}";
+            //console.log(str)
+            $.ajax({
+                url: "/saleNote/update",
+                type: "POST",  /*采用POST方法提交*/
+                data: str,
+                dataType:'json',
+                contentType:'application/json;charset=UTF-8',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === 200) {
+                        window.location.reload();
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
+        function audit(){
+            let id = detail.id;
+            let stage = detail.stage;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("请先保存订单");
+                return;
+            }else if(stage!=="待付款"){
+                alert("已审核，禁止再次审核");
+                return;
+            }
+            $.ajax({
+                url: "/saleNote/audit",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"id": id,"stage":"待付款"},
+                dataType:'json',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === 200) {
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
+        function collectMoney(){
+            let id = detail.id;
+            let stage = detail.stage;
+            if(stage!=="待付款"){
+                alert("请先审核订单");
+                return;
+            }else if(stage==="待审核"||stage==="未编辑"){
+                alert("请先保存订单");
+                return;
+            }
+            $.ajax({
+                url: "/saleNote/collectMoney",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"id": id,"stage":"已付款"},
+                dataType:'json',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === 200) {
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
+        function returnGoods(){
+            let id = detail.id;
+            let stage = detail.stage;
+            if(stage!=="已付款"){
+                alert("请先付款");
+                return;
+            }if(stage==="待审核"||stage==="未编辑"){
+                alert("请先保存订单");
+                return;
+            }
+            $.ajax({
+                url: "/saleNote/returnGoods",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"id": id,"stage":"已退款"},
+                dataType:'json',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === 200) {
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
+        function getTableContent(id){
+            var mytable = document.getElementById(id);
+            var data = [];
+            for(var i=0,rows=mytable.rows.length; i<rows; i++){
+                for(var j=0,cells=mytable.rows[i].cells.length; j<cells; j++){
+                    if(!data[i]){
+                        data[i] = new Array();
+                    }
+                    data[i][j] = mytable.rows[i].cells[j].innerHTML;
+                }
+            }
+            return data;
+        }
+    </script>
+    <script type="text/javascript">
+        function putValueToInput(){
+            var telUserName= document.getElementById("telUserName");
+            var perpage=telUserName.options[telUserName.selectedIndex].text;
+            var input=document.getElementById("input");
+            input.value=perpage;
+        }
+
+        function inputValue(){
+            var input=document.getElementById("input").value;
+            var telUserName= document.getElementById("telUserName");
+            var options=telUserName.getElementsByTagName("option");
+            var div=document.getElementById("DIV");
+            div.innerHTML="";
+            var a = 0;
+            for(var i=options.length-1;i>=1;i--){
+                var optionText=options[i].text;
+                if(optionText.indexOf(input) >= 0){
+                    div.style.display='block';
+                    div.innerHTML+="<span style='font-size: 12px;' onclick='getVlaue(this)'>"+optionText+"</span><br/>";
+                    a++;
+                }
+            }
+            if(a==0){
+                div.style.display='none';
+            }
+        }
+
+        function getVlaue(obj){
+            var telUserName= document.getElementById("telUserName");
+            var options=telUserName.getElementsByTagName("option");
+            var div=document.getElementById("DIV");
+            for(var i=options.length-1;i>=1;i--){
+                var optionText=options[i].text;
+                var optionValue=options[i].value;
+                if(obj.innerHTML==optionText){
+                    telUserName.value=optionValue;
+                    document.getElementById("input").value=optionText;
+                    div.style.display='none';
+                    div.innerHTML="";
+                }
+            }
+        }
+
+
+    </script>
+</div>
+</body>
+</html>

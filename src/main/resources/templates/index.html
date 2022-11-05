@@ -16,11 +16,27 @@
 
 	<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
 	<script src="/static/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
-
+	<style>
+		a:link {
+			color:red;
+			text‐decoration:underline;
+		}
+		a:visited {
+			color:white;
+			text‐decoration:none;
+		}
+		a:hover {
+			color:pink;
+			text‐decoration:none;
+		}
+		a:active {
+			color:green;
+			text‐decoration:none;
+		}
+	</style>
 </head>
 <body>
-
-<div class="container border-danger">
+<div class="container">
 	<div class="row">
 		<div class="col">
 			<h3 class="text-center text-info">
@@ -29,14 +45,14 @@
 		</div>
 	</div>
 
-		<div class="row"  >
-			<div class="col-md-6 offset-md-3" style="text-align: center">
-				<button class="btn btn-info btn-large btn-block" type="button">审核</button>
-				<button class="btn btn-info btn-large btn-block" type="button">退货(整单）</button>
-				<button class="btn btn-info btn-large btn-block" type="button">开销售单</button>
-				<button class="btn btn-info btn-large btn-block" type="button">收款</button>
-			</div>
+	<div class="row"  >
+		<div class="col-md-6 offset-md-3" style="text-align: center">
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/product/all}">货品资料</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/client/all}">客户资料</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/saleNote/all}">销售业务</a></button>
+			<button class="btn btn-info btn-large btn-block" type="button"><a th:href="@{/product/store}">库存管理</a></button>
 		</div>
+	</div>
 </div>
 </body>
 </html>

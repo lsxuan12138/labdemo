@@ -1,5 +1,9 @@
 package com.example.labdemo.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * SaleNoteItem
  *
@@ -7,7 +11,9 @@ package com.example.labdemo.domain;
  * @email: 1146887979@qq.com
  * @create: 2022-10-29 15:20
  */
+@TableName("t_sale_note_item")
 public class SaleNoteItem {
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long saleNoteId;
     private Long productId;

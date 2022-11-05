@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.SaleNoteDao">
+    <resultMap id="saleNoteVoMap" type="com.example.labdemo.vo.SaleNoteVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="clientName"/>
+        <result column="stage" jdbcType="VARCHAR" property="stage"/>
+    </resultMap>
+    <sql id="SaleNoteVo_List">
+        tsn.id,
+        tc.name,
+        tsn.stage
+    </sql>
+    <select id="selectAllSaleNoteVo" resultMap="saleNoteVoMap">
+        SELECT <include refid="SaleNoteVo_List"/>
+        FROM t_sale_note AS tsn
+        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id;
+    </select>
+    <select id="find" resultMap="saleNoteVoMap">
+        SELECT <include refid="SaleNoteVo_List"/>
+        FROM t_sale_note AS tsn
+        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id
+        where tc.name like concat('%', #{key}, '%')
+        or tsn.id like concat('%', #{key}, '%')
+    </select>
+    <select id="selectVoById" resultMap="saleNoteVoMap">
+        SELECT <include refid="SaleNoteVo_List"/>
+        FROM t_sale_note AS tsn
+        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id
+        where tsn.id = ${id,jdbcType=BIGINT}
+    </select>
+</mapper>

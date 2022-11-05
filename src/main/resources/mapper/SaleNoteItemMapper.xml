@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.SaleNoteItemDao">
+    <resultMap id="saleNoteItemVoMap" type="com.example.labdemo.vo.SaleNoteItemVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+        <result column="purchase_price" jdbcType="DECIMAL" property="price"/>
+        <result column="sell_price" jdbcType="DECIMAL" property="cost"/>
+    </resultMap>
+    <sql id="SaleNoteVo_List">
+        tp.id,
+        tp.`name`,
+        tsni.quantity,
+        tp.purchase_price,
+        tp.sell_price
+    </sql>
+    <select id="getItems" resultMap="saleNoteItemVoMap">
+        SELECT <include refid="SaleNoteVo_List"/>
+        FROM
+        t_sale_note_item AS tsni
+        LEFT JOIN t_product AS tp ON tsni.product_id = tp.id
+        WHERE
+        tsni.sale_note_id = ${id,jdbcType=BIGINT}
+        ORDER BY tp.id;
+    </select>
+</mapper>
