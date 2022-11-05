@@ -158,7 +158,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
             Product product = productDao.selectById(vo.getId());
             Long currentQuantity = product.getQuantity();
             product.setQuantity(currentQuantity+vo.getQuantity());
-
+            productDao.updateById(product);
         }
     }
 
