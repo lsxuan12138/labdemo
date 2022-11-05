@@ -127,7 +127,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
             }else {
                 product.setQuantity(currentQuantity-vo.getQuantity());
             }
-
+            productDao.updateById(product);
         }
 
     }

@@ -149,6 +149,7 @@
     <script th:inline="javascript">
         const  productList = [[${productList}]];
         const detail = [[${detail}]]
+        let stageT = detail.stage;
         function del(obj){
             let tr = obj.parentNode.parentNode //取到了tr对象
             tr.parentNode.removeChild(tr)
@@ -166,7 +167,7 @@
         let changeProductId;
         let targetRow;
         function changeQuantity(obj){
-            let stage = detail.stage;
+            let stage = stageT;
             if(stage!=="待审核"&&stage!=="未编辑"){
                 alert("已保存，禁止编辑");
                 return;
@@ -183,7 +184,7 @@
             modal1.style.display="block";
         }
         function change(obj){
-            let stage = detail.stage;
+            let stage = stageT;
             if(stage!=="待审核"&&stage!=="未编辑"){
                 alert("已保存，禁止编辑");
                 return;
@@ -204,9 +205,15 @@
                 }
             }
             targetRow.eq(2).html(quantity);
+            stageT = "待审核"
             modal1.style.display = "none";
         }
         function add(){
+            let stage = stageT;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("已保存，禁止编辑");
+                return;
+            }
             let name = $("#inputProduct").val();
             let quantity = Number($("#inputQuantity").val());
             let data = getTableContent("tb");
@@ -244,7 +251,7 @@
                     document.getElementById("tb").appendChild(trObj);
                 }
             }
-
+            stageT = "待审核"
         }
         function save(){
             let stage = detail.stage;
@@ -292,6 +299,9 @@
             if(stage!=="待审核"&&stage!=="未编辑"){
                 alert("请先保存订单");
                 return;
+            }else if(stage!=="待付款"){
+                alert("已审核，禁止再次审核");
+                return;
             }
             $.ajax({
                 url: "/saleNote/audit",
@@ -317,6 +327,9 @@
             if(stage!=="待付款"){
                 alert("请先审核订单");
                 return;
+            }else if(stage==="待审核"||stage==="未编辑"){
+                alert("请先保存订单");
+                return;
             }
             $.ajax({
                 url: "/saleNote/collectMoney",
@@ -341,6 +354,9 @@
             let stage = detail.stage;
             if(stage!=="已付款"){
                 alert("请先付款");
+                return;
+            }if(stage==="待审核"||stage==="未编辑"){
+                alert("请先保存订单");
                 return;
             }
             $.ajax({

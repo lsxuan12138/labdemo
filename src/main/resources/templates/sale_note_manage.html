@@ -194,7 +194,7 @@
                         let stage = result.data.stage;
                         trObj.id = new Date().getTime();
                         trObj.innerHTML = "<td>"+id+"</td>" + "<td>" + name + "</td>" + "<td>"+stage+"</td><td>" +
-                            "<button class=\"btn btn-info btn-large \" type=\"button\">编辑</button></td>";
+                            "<button class=\"btn btn-info btn-large \" onclick=edit(this) type=\"button\">编辑</button></td>";
                         modal.style.display = "none";
                         document.getElementById("tb").appendChild(trObj);
 
