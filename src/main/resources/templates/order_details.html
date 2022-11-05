@@ -151,6 +151,11 @@
         const detail = [[${detail}]]
         let stageT = detail.stage;
         function del(obj){
+            let stage = stageT;
+            if(stage!=="待审核"&&stage!=="未编辑"){
+                alert("已审核，禁止编辑");
+                return;
+            }
             let tr = obj.parentNode.parentNode //取到了tr对象
             tr.parentNode.removeChild(tr)
         }
@@ -169,7 +174,7 @@
         function changeQuantity(obj){
             let stage = stageT;
             if(stage!=="待审核"&&stage!=="未编辑"){
-                alert("已保存，禁止编辑");
+                alert("已审核，禁止编辑");
                 return;
             }
             let value = $(obj).parent().parent().find("td");
@@ -186,7 +191,7 @@
         function change(obj){
             let stage = stageT;
             if(stage!=="待审核"&&stage!=="未编辑"){
-                alert("已保存，禁止编辑");
+                alert("已审核，禁止编辑");
                 return;
             }
             let quantityStr = $("#changePopQuantity").val();
@@ -205,13 +210,12 @@
                 }
             }
             targetRow.eq(2).html(quantity);
-            stageT = "待审核"
             modal1.style.display = "none";
         }
         function add(){
-            let stage = stageT;
+            let stage=stageT;
             if(stage!=="待审核"&&stage!=="未编辑"){
-                alert("已保存，禁止编辑");
+                alert("已审核，禁止编辑");
                 return;
             }
             let name = $("#inputProduct").val();
@@ -255,8 +259,8 @@
         }
         function save(){
             let stage = detail.stage;
-            if(stage!=="待审核"&&stage!=="未编辑"){
-                alert("已保存，禁止编辑");
+            if(stage!=="未编辑"){
+                alert("已保存，禁止再次保存");
                 return;
             }
             let data = getTableContent("tb");
@@ -296,10 +300,10 @@
         function audit(){
             let id = detail.id;
             let stage = detail.stage;
-            if(stage!=="待审核"&&stage!=="未编辑"){
+            if(stage==="未编辑"){
                 alert("请先保存订单");
                 return;
-            }else if(stage!=="待付款"){
+            }else if(stage!=="待审核"){
                 alert("已审核，禁止再次审核");
                 return;
             }
@@ -324,11 +328,14 @@
         function collectMoney(){
             let id = detail.id;
             let stage = detail.stage;
-            if(stage!=="待付款"){
-                alert("请先审核订单");
-                return;
-            }else if(stage==="待审核"||stage==="未编辑"){
-                alert("请先保存订单");
+            if(stage==="未编辑"){
+                    alert("请先保存订单");
+                    return;
+            }else if(stage==="待审核"){
+                    alert("请先审核订单");
+                    return;
+            }else if(stage==="已付款"||stage==="已退款"){
+                alert("已付款，禁止再次付款")
                 return;
             }
             $.ajax({
@@ -352,11 +359,14 @@
         function returnGoods(){
             let id = detail.id;
             let stage = detail.stage;
-            if(stage!=="已付款"){
-                alert("请先付款");
-                return;
-            }if(stage==="待审核"||stage==="未编辑"){
+            if(stage==="未编辑"){
                 alert("请先保存订单");
+                return;
+            }else if(stage==="待审核"){
+                alert("请先审核订单");
+                return;
+            }else if(stage==="待付款") {
+                alert("未付款");
                 return;
             }
             $.ajax({
