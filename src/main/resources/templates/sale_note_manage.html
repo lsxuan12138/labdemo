@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Bootstrap 4, from LayoutIt!</title>
+
+    <meta content="Source code generated using layoutit.com" name="description">
+    <meta content="LayoutIt!" name="author">
+    <!-- CSS -->
+    <link href="/static/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="/static/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
+    <style type="text/css">
+        /* 弹窗 (background) */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed; /* 固定定位 */
+            z-index: 1; /* 设置在顶层 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* 弹窗内容 */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+            height: 100%;
+        }
+
+        /* 弹窗内容 */
+        .modal-content2 {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 20%;
+            height: 25%;
+        }
+
+        /* 关闭按钮 */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="text-center text-info">
+                通用批发零售业务管理系统v1.0
+            </h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link " th:href="@{/}">返回主菜单</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/client/all}">顾客资料维护</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " th:href="@{/product/all}">商品资料维护</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " th:href="@{/product/store}">库存管理</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  active disabled" th:href="@{/saleNote/all}">销售业务管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <p class="text-info">
+                    <strong>您现在访问的是：销售业务管理</strong>
+                </p>
+            </div>
+            <button class="btn btn-primary mr-sm-2" id="create" style="float:right;width: 20%"
+                    type="submit">开单
+            </button>
+        </div>
+    </div>
+    <form class="form-inline mb-2">
+        <input class="form-control mr-sm-2" id="search" placeholder="输入要查询的单号或客户名" style="width:30%"
+               type="text">
+        <button class="btn btn-primary mr-sm-2" type="button" onclick=find()>查找</button>
+    </form>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table table-bordered" id="tb">
+                <thead>
+                <tr>
+                    <th>单号</th>
+                    <th>客户名</th>
+                    <th>订单状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="saleNotes">
+                <tr th:each="saleNote:${saleNotes}">
+                    <td th:text="${saleNote.id}">1</td>
+                    <td th:text="${saleNote.clientName}">zxp</td>
+                    <td th:text="${saleNote.stage}">已审核</td>
+                    <td>
+                        <button class="btn btn-info btn-large " onclick=edit(this) type="button">编辑</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="span3">
+        <!-- 弹窗 -->
+        <div class="modal" id="myModal">
+            <!-- 弹窗内容 -->
+            <div class="modal-content2">
+                <div class="modal-body"><!--绑定span-->
+                    <span class="close" id="close">&times;</span>
+<!--                    <p>单号：</p>
+                    <input class="input-medium search-query" id="number" style="width: 100%" type="text"/>-->
+                    <p>客户名：</p>
+<!--                    <input class="input-medium search-query" id="name" style="width: 100%" type="text"/>-->
+                    <select  id ="popClientName" class="combobox mr-sm-2" style="width: 100%;height: auto">
+
+                        <option th:each="client:${clients}" th:value="${client.id}" th:text="${client.name}">固定客户</option>
+                    </select>
+                </div>
+                <button class="btn btn-info btn-large" id="sure"
+                        onclick="add()" style="display:block;margin:0 auto;width:50%" type="button">确定
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        // 获取弹窗
+        var modal = document.getElementById('myModal');
+
+        // 打开弹窗的按钮对象
+        var btn = document.getElementById("create");
+
+        // 获取 <span> 元素，用于关闭弹窗
+        var span = document.getElementById("close");
+
+        // 点击按钮打开弹窗
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        // 点击 <span> (x), 关闭弹窗
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        function add() {
+            /*                        var number = document.getElementById("number").value*/
+            //var name = document.getElementById("name").value
+            let clientId = $("#popClientName").val();
+            $.ajax({
+                url: "/saleNote/add",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"clientId": clientId},
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === 200) {
+                        console.log("success")
+                        var trObj = document.createElement("tr");
+                        let id=result.data.id;
+                        let name = result.data.clientName;
+                        let stage = result.data.stage;
+                        trObj.id = new Date().getTime();
+                        trObj.innerHTML = "<td>"+id+"</td>" + "<td>" + name + "</td>" + "<td>"+stage+"</td><td>" +
+                            "<button class=\"btn btn-info btn-large \" onclick=edit(this) type=\"button\">编辑</button></td>";
+                        modal.style.display = "none";
+                        document.getElementById("tb").appendChild(trObj);
+
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+
+
+        }
+
+        function find(){
+            let keyword = $("#search").val();
+            //alert(keyword);
+            $.ajax({
+                url: "/saleNote/find",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"keyword": keyword},
+                dataType: 'JSON',
+                cache: false,
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    let body = document.getElementById("saleNotes");
+                    let str="";
+                    //<button class=\"btn btn-info mr-sm-2 \" onclick=del(this) type=\"button\">删除</button>\n" +
+                    //         "<button class=\"btn btn-info mr-sm-2\" type=\"button\">修改</button></td>";
+                    //     document.getElementById("tb").appendChild(trObj);
+                    if (result.code === 200) {
+                        for(let cell of result.data){
+                            str+=`<tr>
+                            <td>${cell.id}</td>
+                            <td>${cell.clientName}</td>
+                            <td>${cell.stage}</td>
+                            <td>
+                                <button class=\"btn btn-info btn-large \" onclick=edit(this) type=\"button\">编辑</button>
+                            </td>
+                            </tr>`
+                        }
+                        body.innerHTML=str;
+                        console.log(str)
+                    } else {
+                        console.log("请求失败")
+                    }
+                }
+
+            })
+        }
+
+        function edit(obj){
+            var value = $(obj).parent().parent().find("td");
+            let id = Number(value.eq(0).text());
+            // $.ajax({
+            //     url: "/saleNote/detail?id="+id,
+            //     type: "get",
+            //     cache: false,
+            // })
+            window.location.href="/saleNote/detail?id="+id;
+        }
+    </script>
+
+
+
+
+</div>
+
+</body>
+</html>
