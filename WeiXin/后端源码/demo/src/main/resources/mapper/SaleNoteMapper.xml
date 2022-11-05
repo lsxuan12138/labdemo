@@ -7,6 +7,22 @@
         select  * from t_sale_note order by id desc
     </select>
 
+    <select id="waitList" resultType="com.school.entity.SaleNote">
+        select  * from t_sale_note where stage='待确认'
+    </select>
+
+    <select id="checkList" resultType="com.school.entity.SaleNote">
+        select  * from t_sale_note where stage='待审核'
+    </select>
+
+    <select id="chargeList" resultType="com.school.entity.SaleNote">
+        select  * from t_sale_note where stage='待付款'
+    </select>
+
+    <select id="refundList" resultType="com.school.entity.SaleNote">
+        select  * from t_sale_note where stage='已退货'
+    </select>
+
     <select id="findById" resultType="com.school.entity.SaleNote">
         select  * from t_sale_note where  id=#{id}
     </select>
@@ -18,6 +34,7 @@
     <insert id="insertSaleNote" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.SaleNote">
         insert into t_sale_note (client_id,total_price,stage,create_by,creat_time)values(#{clientId},#{totalPrice},#{stage},#{createBy},#{createTime})
     </insert>
+
     <update id="updateSaleNote" parameterType="com.school.entity.SaleNote">
         update t_sale_note
         <set>
@@ -29,6 +46,31 @@
         </set>
         where id=#{id}
     </update>
+
+    <update id="submitSaleNote" parameterType="com.school.entity.SaleNote">
+        update t_sale_note
+        <set> stage='待审核' </set>
+        where id=#{id}
+    </update>
+
+    <update id="checkSaleNote" parameterType="com.school.entity.SaleNote">
+        update t_sale_note
+        <set> stage='待付款' </set>
+        where id=#{id}
+    </update>
+
+    <update id="chargeSaleNote" parameterType="com.school.entity.SaleNote">
+        update t_sale_note
+        <set> stage='已完成' </set>
+        where id=#{id}
+    </update>
+
+    <update id="refundSaleNote" parameterType="com.school.entity.SaleNote">
+        update t_sale_note
+        <set> stage='已退货' </set>
+        where id=#{id}
+    </update>
+
     <delete id="deleteSaleNote">
         delete  from t_sale_note where id=#{id}
     </delete>

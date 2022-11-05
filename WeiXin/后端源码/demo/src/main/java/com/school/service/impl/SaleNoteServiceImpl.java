@@ -27,7 +27,49 @@ public class SaleNoteServiceImpl implements SaleNoteService {
     }
 
     @Override
-    public List<SaleNote> findByClientId(Integer clientId) {return saleNoteDao.findByClientId(clientId); }
+    public List<SaleNote> findByClientId(Integer clientId) {
+        return saleNoteDao.findByClientId(clientId);
+    }
+
+    @Override
+    public List<SaleNote> checkList() {
+        return saleNoteDao.checkList();
+    }
+
+    @Override
+    public List<SaleNote> chargeList() {
+        return saleNoteDao.chargeList();
+    }
+
+    @Override
+    public List<SaleNote> refundList() {
+        return saleNoteDao.refundList();
+    }
+
+    @Override
+    public List<SaleNote> waitList() {
+        return saleNoteDao.waitList();
+    }
+
+    @Override
+    public int submitSaleNote(SaleNote saleNote) {
+        return saleNoteDao.submitSaleNote(saleNote);
+    }
+
+    @Override
+    public int checkSaleNote(SaleNote saleNote) {
+        return saleNoteDao.checkSaleNote(saleNote);
+    }
+
+    @Override
+    public int chargeSaleNote(SaleNote saleNote) {
+        return saleNoteDao.chargeSaleNote(saleNote);
+    }
+
+    @Override
+    public int refundSaleNote(SaleNote saleNote) {
+        return saleNoteDao.refundSaleNote(saleNote);
+    }
 
     @Transactional
     @Override

@@ -1,0 +1,45 @@
+<!--pages/buy/buy.wxml-->
+<view class='buttonrow'>
+<button id="b1" bindtap="to1" size="mini">新建订单</button>
+<button id="b2" bindtap="to2" size="mini">待审核</button>
+<button id="b3" bindtap="to3" size="mini">待收款</button>
+<button id="b4" bindtap="to4" size="mini">已退货</button>
+</view>
+<view class="container">
+
+<view class="find">
+    <button bindtap="addSaleNote" plain="false">新建订单草稿</button>
+</view>
+
+<view class = "form">
+</view>
+<view class="container">
+    <rich-text nodes="<h2 style='color: black'>待确认订单列表</h2>"> </rich-text>
+<view class="widget">
+<text class="column">ID</text>
+<text class="column">客户</text>
+<text class="column">总金额</text>
+<text class="column">状态</text>
+<text class="column">操作</text>
+</view>
+<scroll-view scroll-y="true">
+<view>
+<block wx:for="{{list}}">
+  <view class="widget">
+    <text class="column">{{item.id}}</text>
+    <text class="column">{{item.clientId}}</text>
+    <text class="column">{{item.totalPrice}}</text>
+    <text class="column">{{item.stage}}</text>
+    <view class="link-column">
+            <navigator class="link" url="../changeoder/changeoder?id={{item.id}}">编辑</navigator>|
+            <navigator class="link" bindtap="submit" data-id="{{item.id}}">确认</navigator>|
+            <navigator class="link" bindtap="delete" data-id="{{item.id}}">删除</navigator>|
+          </view>
+      </view>
+
+    </block>
+  </view>
+</scroll-view>
+</view>
+
+</view>

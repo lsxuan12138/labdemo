@@ -131,44 +131,5 @@ Page({
         }
       }
     })
-   },
-
-
-    deleteArea:function(e){
-      var that=this;
-      wx.showModal({
-        title:'提示',
-        content:'确定要删除吗['+e.target.dataset.areaname+']?',
-        success:function(sm){
-          if(sm.confirm){
-            wx.request({
-              url: 'http://localhost:8081/demo/superadmin/deleteArea',
-              data:{areaId:e.target.dataset.areaid},
-              method:'GET',
-              success:function(res){
-                var result=res.data.success;
-                var toastText="删除成功";
-                if(result!=1){
-                  toastText="删除失败";
-                }else{
-                  that.data.list.splice(e.target.dataset.index,1)
-                  that.setData({
-                    list: that.data.list
-                  });
-                }
-                wx.showToast({
-                  title:toastText,
-                  icon:'',
-                  duration:2000
-                })
-               
-              }
-              
-            })
-          }
-        }
-       
-      });
-  
-    }
+   }
   })

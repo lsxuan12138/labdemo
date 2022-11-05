@@ -16,14 +16,14 @@ public class User {
         this.password = password;
     }
 
-    public Integer getIdentity() {
+    public String getIdentity() {
         return identity;
     }
-    public void setIdentity(Integer identity) {
+    public void setIdentity(String identity) {
         this.identity = identity;
     }
 
     private String username;
     private String password;
-    private Integer identity;
+    private String identity;
 }

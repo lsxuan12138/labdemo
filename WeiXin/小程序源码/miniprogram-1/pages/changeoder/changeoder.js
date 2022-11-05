@@ -1,4 +1,4 @@
-// pages/buy/buy.js
+// pages/changeoder/changeoder.js
 Page({
 
     /**

@@ -29,7 +29,7 @@ Page({
   },
   buyViewTap() {
     wx.navigateTo({
-      url: '../buy/buy'
+      url: '../buy1/buy1'
     })
   },
   onLoad() {
