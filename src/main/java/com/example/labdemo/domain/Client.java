@@ -16,7 +16,6 @@ public class Client {
     @TableId(type = IdType.AUTO)
     private Long id;
     private String name;
-
     private String type;
     public Client() {
     }

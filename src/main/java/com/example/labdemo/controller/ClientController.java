@@ -1,12 +1,8 @@
 package com.example.labdemo.controller;
 
 import com.example.labdemo.domain.Client;
-import com.example.labdemo.domain.Product;
 import com.example.labdemo.dto.SearchDto;
 import com.example.labdemo.service.ClientService;
-import com.example.labdemo.util.BaseException;
-import com.example.labdemo.util.Result;
-import com.example.labdemo.util.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

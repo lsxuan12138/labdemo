@@ -1,12 +1,13 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.labdemo.domain.Client;
 import com.example.labdemo.domain.Product;
+import com.example.labdemo.dto.ProductAddDto;
+import com.example.labdemo.dto.ProductUpdateDto;
 import com.example.labdemo.mapper.ProductDao;
+import com.example.labdemo.result.BaseException;
+import com.example.labdemo.result.BaseExceptionEnum;
 import com.example.labdemo.service.ProductService;
-import com.example.labdemo.util.BaseException;
-import com.example.labdemo.util.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
         int ret;
         try {
             Product product = productDao.selectById(id);
-            product.setQuantity(product.getQuantity() + quantity);
+//            product.setQuantity(product.getQuantity() + quantity);
             ret = productDao.updateById(product);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,39 +65,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void add(String name, BigDecimal cost, BigDecimal price) throws BaseException {
-        Product product = new Product();
-        product.setName(name);
-        product.setQuantity(0L);
-        product.setSellPrice(price);
-        product.setPurchasePrice(cost);
-        product.setCreateTime(new Date());
-
-        int ret = productDao.insert(product);
-
-        if(ret<=0)throw new BaseException(ResultEnum.PRODUCT_INSERT_ERROR);
+    public Product add(ProductAddDto productAddDto) throws BaseException {
+        Product product = productAddDto.toProduct();
+        if(productDao.insert(product)<=0)throw new BaseException(BaseExceptionEnum.PRODUCT_INSERT_ERROR);
+        return product;
     }
     @Override
     public int deleteById(Long id) throws BaseException {
         int ret = productDao.deleteById(id);
-        if (ret != 1) throw new BaseException(ResultEnum.PRODUCT_DELETE_ERROR);
+        if (ret != 1) throw new BaseException(BaseExceptionEnum.PRODUCT_DELETE_ERROR);
         return ret;
     }
 
     @Override
-    public void update(Long id, String name, BigDecimal cost, BigDecimal price) throws BaseException {
-        Product old = productDao.selectById(id);
-        Product product = new Product();
-        product.setId(id);
-        product.setName(name);
-        product.setQuantity(old.getQuantity());
-        product.setSellPrice(price);
-        product.setPurchasePrice(cost);
-        product.setCreateTime(old.getCreateTime());
-        try {
-            productDao.updateById(product);
-        }catch (Exception e) {
-            throw new BaseException(e.getMessage());
+    public void update(ProductUpdateDto productUpdateDto) throws BaseException {
+        if(productDao.updateById(productUpdateDto.toProduct())<=0){
+            throw new BaseException(BaseExceptionEnum.PRODUCT_UPDATE_ERROR);
         }
     }
 }

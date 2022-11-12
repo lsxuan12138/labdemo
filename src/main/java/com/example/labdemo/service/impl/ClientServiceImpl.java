@@ -2,11 +2,8 @@ package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.labdemo.domain.Client;
-import com.example.labdemo.domain.Product;
 import com.example.labdemo.mapper.ClientDao;
 import com.example.labdemo.service.ClientService;
-import com.example.labdemo.util.BaseException;
-import com.example.labdemo.util.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

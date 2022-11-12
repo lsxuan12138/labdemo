@@ -2,13 +2,10 @@ package com.example.labdemo.controller;
 
 import com.example.labdemo.domain.Client;
 import com.example.labdemo.domain.Product;
-import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.dto.SaleNoteDetailDto;
 import com.example.labdemo.service.ClientService;
 import com.example.labdemo.service.ProductService;
 import com.example.labdemo.service.SaleNoteService;
-import com.example.labdemo.util.BaseException;
-import com.example.labdemo.util.Result;
 import com.example.labdemo.vo.SaleNoteDetailVo;
 import com.example.labdemo.vo.SaleNoteVo;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,10 +2,8 @@ package com.example.labdemo.service;
 
 import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.dto.SaleNoteDetailDto;
-import com.example.labdemo.util.BaseException;
 import com.example.labdemo.vo.SaleNoteDetailVo;
 import com.example.labdemo.vo.SaleNoteVo;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

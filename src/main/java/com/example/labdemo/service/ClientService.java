@@ -1,7 +1,6 @@
 package com.example.labdemo.service;
 
 import com.example.labdemo.domain.Client;
-import com.example.labdemo.util.BaseException;
 
 import java.util.List;
 

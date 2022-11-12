@@ -2,22 +2,17 @@ package com.example.labdemo.domain;
 
 import java.util.Date;
 
-/**
- * PurchaseOrder
- *
- * @author: lsxuan
- * @email: 1146887979@qq.com
- * @create: 2022-10-29 15:12
- */
-public class PurchaseOrder {
+public class AdjustmentOrder {
     private Long id;
-
-    private Long storeId;
+    private String name;
     private String stage;
+    private Long srcStoreId;
+    private Long destStoreId;
     private Long createBy;
     private Date createTime;
 
-    public PurchaseOrder() {
+    public AdjustmentOrder() {
+        this.createTime = new Date();
     }
 
     public Long getId() {
@@ -28,6 +23,14 @@ public class PurchaseOrder {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getStage() {
         return stage;
     }
@@ -36,12 +39,20 @@ public class PurchaseOrder {
         this.stage = stage;
     }
 
-    public Long getStoreId() {
-        return storeId;
+    public Long getSrcStoreId() {
+        return srcStoreId;
     }
 
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
+    public void setSrcStoreId(Long srcStoreId) {
+        this.srcStoreId = srcStoreId;
+    }
+
+    public Long getDestStoreId() {
+        return destStoreId;
+    }
+
+    public void setDestStoreId(Long destStoreId) {
+        this.destStoreId = destStoreId;
     }
 
     public Long getCreateBy() {

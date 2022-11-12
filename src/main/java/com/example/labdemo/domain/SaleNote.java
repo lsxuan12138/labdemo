@@ -18,10 +18,14 @@ import java.util.Date;
 public class SaleNote {
     @TableId(type = IdType.AUTO)
     private Long id;
+    private Long storeId;
     private Long clientId;
-    private BigDecimal totalPrice;
     private String stage;
-    private String createBy;
+
+    private BigDecimal cost;
+    private BigDecimal price;
+    private BigDecimal receivedPayment;
+    private Long createBy;
     private Date createTime;
 
     public SaleNote() {
@@ -35,20 +39,20 @@ public class SaleNote {
         this.id = id;
     }
 
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
     public Long getClientId() {
         return clientId;
     }
 
     public void setClientId(Long clientId) {
         this.clientId = clientId;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getStage() {
@@ -59,11 +63,35 @@ public class SaleNote {
         this.stage = stage;
     }
 
-    public String getCreateBy() {
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getReceivedPayment() {
+        return receivedPayment;
+    }
+
+    public void setReceivedPayment(BigDecimal receivedPayment) {
+        this.receivedPayment = receivedPayment;
+    }
+
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 

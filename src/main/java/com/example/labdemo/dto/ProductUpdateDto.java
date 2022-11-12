@@ -1,31 +1,35 @@
-package com.example.labdemo.domain;
+package com.example.labdemo.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.labdemo.domain.Product;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- * Product
+ * TODO
  *
  * @author: lsxuan
  * @email: 1146887979@qq.com
- * @create: 2022-10-29 15:07
+ * @create: 2022-11-11 21:34
  */
-@TableName("t_product")
-public class Product {
-    @TableId(type = IdType.AUTO)
+public class ProductUpdateDto {
     private Long id;
     private String name;
     private String remark;
     private BigDecimal purchasePrice;
     private BigDecimal wholesalePrice;
     private BigDecimal retailPrice;
-    private Date createTime;
 
-    public Product() {
+    public Product toProduct(){
+        Product product = new Product();
+        product.setId(id);
+        product.setName(name);
+        product.setRemark(remark);
+        product.setPurchasePrice(purchasePrice);
+        product.setWholesalePrice(wholesalePrice);
+        product.setRetailPrice(retailPrice);
+        return product;
+    }
+    public ProductUpdateDto() {
     }
 
     public Long getId() {
@@ -35,7 +39,9 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
-
+    public void setId(String id) {
+        this.id = Long.parseLong(id);
+    }
     public String getName() {
         return name;
     }
@@ -59,13 +65,18 @@ public class Product {
     public void setPurchasePrice(BigDecimal purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
-
+    public void setPurchasePrice(String purchasePrice) {
+        this.purchasePrice = BigDecimal.valueOf(Double.parseDouble(purchasePrice));
+    }
     public BigDecimal getWholesalePrice() {
         return wholesalePrice;
     }
 
     public void setWholesalePrice(BigDecimal wholesalePrice) {
         this.wholesalePrice = wholesalePrice;
+    }
+    public void setWholesalePrice(String wholesalePrice) {
+        this.wholesalePrice = BigDecimal.valueOf(Double.parseDouble(wholesalePrice));
     }
 
     public BigDecimal getRetailPrice() {
@@ -76,11 +87,7 @@ public class Product {
         this.retailPrice = retailPrice;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setRetailPrice(String retailPrice) {
+        this.retailPrice = BigDecimal.valueOf(Double.parseDouble(retailPrice));
     }
 }

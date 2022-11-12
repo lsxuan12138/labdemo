@@ -11,9 +11,6 @@ import com.example.labdemo.mapper.ProductDao;
 import com.example.labdemo.mapper.SaleNoteDao;
 import com.example.labdemo.mapper.SaleNoteItemDao;
 import com.example.labdemo.service.SaleNoteService;
-import com.example.labdemo.util.BaseException;
-import com.example.labdemo.util.Result;
-import com.example.labdemo.util.ResultEnum;
 import com.example.labdemo.vo.SaleNoteDetailVo;
 import com.example.labdemo.vo.SaleNoteItemVo;
 import com.example.labdemo.vo.SaleNoteVo;
@@ -56,9 +53,9 @@ public class SaleNoteServiceImpl implements SaleNoteService {
     @Override
     public SaleNoteVo add(Long clientId) {
         SaleNote saleNoteTemp = new SaleNote();
-        saleNoteTemp.setTotalPrice(new BigDecimal(0.0));
-        saleNoteTemp.setClientId(clientId);
-        saleNoteTemp.setCreateBy("default");
+//        saleNoteTemp.setTotalPrice(new BigDecimal(0.0));
+//        saleNoteTemp.setClientId(clientId);
+//        saleNoteTemp.setCreateBy("default");
         Date createTime = new Date();
         saleNoteTemp.setCreateTime(createTime);
         saleNoteTemp.setStage("未编辑");
@@ -99,10 +96,10 @@ public class SaleNoteServiceImpl implements SaleNoteService {
             saleNoteItem.setSaleNoteId(id);
             saleNoteItem.setQuantity(item.getQuantity());
             saleNoteItem.setProductId(item.getId());
-            total.add(productDao.selectById(item.getId()).getSellPrice().multiply(new BigDecimal(item.getQuantity())));
+            //total.add(productDao.selectById(item.getId()).getSellPrice().multiply(new BigDecimal(item.getQuantity())));
             saleNoteItemDao.insert(saleNoteItem);
         }
-        saleNote.setTotalPrice(total);
+        //saleNote.setTotalPrice(total);
         saleNote.setStage("待审核");
         saleNoteDao.updateById(saleNote);
     }
@@ -121,12 +118,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         for (SaleNoteItemVo vo:
              saleNoteItemVos) {
             Product product = productDao.selectById(vo.getId());
-            Long currentQuantity = product.getQuantity();
-            if(currentQuantity<vo.getQuantity()){
-                throw new BaseException(ResultEnum.PRODUCT_IS_NOT_ENOUGH);
-            }else {
-                product.setQuantity(currentQuantity-vo.getQuantity());
-            }
+            //Long currentQuantity = product.getQuantity();
+//            if(currentQuantity<vo.getQuantity()){
+//                throw new BaseException(ResultEnum.PRODUCT_IS_NOT_ENOUGH);
+//            }else {
+//                product.setQuantity(currentQuantity-vo.getQuantity());
+//            }
             productDao.updateById(product);
         }
 
@@ -156,8 +153,8 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         for (SaleNoteItemVo vo:
                 saleNoteItemVos) {
             Product product = productDao.selectById(vo.getId());
-            Long currentQuantity = product.getQuantity();
-            product.setQuantity(currentQuantity+vo.getQuantity());
+//            Long currentQuantity = product.getQuantity();
+//            product.setQuantity(currentQuantity+vo.getQuantity());
             productDao.updateById(product);
         }
     }
