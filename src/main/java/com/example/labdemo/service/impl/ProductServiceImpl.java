@@ -22,47 +22,47 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductDao productDao;
 
-    @Override
-    public int purchaseProduct(Long id, Long quantity) {
-        int ret;
-        try {
-            Product product = productDao.selectById(id);
-//            product.setQuantity(product.getQuantity() + quantity);
-            ret = productDao.updateById(product);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-        if (ret != 1) throw new RuntimeException();
-        return ret;
-    }
-
-    @Override
-    public List<Product> getAllProduct() {
-        List<Product> products = null;
-        try {
-            products = productDao.selectList(null);
-
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return products;
-    }
-
-    @Override
-    public List<Product> find(String key) {
-        List<Product> products = null;
-        try {
-            QueryWrapper<Product> wrapper = new QueryWrapper<>();
-            wrapper.clear();
-            wrapper.like("name", key);
-            products = productDao.selectList(wrapper);
-
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-        return products;
-    }
+//    @Override
+//    public int purchaseProduct(Long id, Long quantity) {
+//        int ret;
+//        try {
+//            Product product = productDao.selectById(id);
+////            product.setQuantity(product.getQuantity() + quantity);
+//            ret = productDao.updateById(product);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new RuntimeException();
+//        }
+//        if (ret != 1) throw new RuntimeException();
+//        return ret;
+//    }
+//
+//    @Override
+//    public List<Product> getAllProduct() {
+//        List<Product> products = null;
+//        try {
+//            products = productDao.selectList(null);
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException();
+//        }
+//        return products;
+//    }
+//
+//    @Override
+//    public List<Product> find(String key) {
+//        List<Product> products = null;
+//        try {
+//            QueryWrapper<Product> wrapper = new QueryWrapper<>();
+//            wrapper.clear();
+//            wrapper.like("name", key);
+//            products = productDao.selectList(wrapper);
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException();
+//        }
+//        return products;
+//    }
 
     @Override
     public Product add(ProductAddDto productAddDto) throws BaseException {
@@ -70,12 +70,12 @@ public class ProductServiceImpl implements ProductService {
         if(productDao.insert(product)<=0)throw new BaseException(BaseExceptionEnum.PRODUCT_INSERT_ERROR);
         return product;
     }
-    @Override
-    public int deleteById(Long id) throws BaseException {
-        int ret = productDao.deleteById(id);
-        if (ret != 1) throw new BaseException(BaseExceptionEnum.PRODUCT_DELETE_ERROR);
-        return ret;
-    }
+//    @Override
+//    public int deleteById(Long id) throws BaseException {
+//        int ret = productDao.deleteById(id);
+//        if (ret != 1) throw new BaseException(BaseExceptionEnum.PRODUCT_DELETE_ERROR);
+//        return ret;
+//    }
 
     @Override
     public void update(ProductUpdateDto productUpdateDto) throws BaseException {

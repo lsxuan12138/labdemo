@@ -12,6 +12,7 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
     SUCCESS("200", "成功!"),
     BODY_NOT_MATCH("400","请求的数据格式不符!"),
     SIGNATURE_NOT_MATCH("401","请求的数字签名不匹配!"),
+    FORBIDDEN("403","请求的数字签名不匹配!"),
     NOT_FOUND("404", "未找到该资源!"),
     INTERNAL_SERVER_ERROR("500", "服务器内部错误!"),
     SERVER_BUSY("503","服务器正忙，请稍后再试!"),
@@ -29,6 +30,13 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
     PRODUCT_IS_NOT_ENOUGH("14006","some products is not enough"),
 
     PRODUCT_UPDATE_ERROR("14007","product insert error"),
+
+    LOGIN_ERROR("14008","登录失败"),
+
+    TOKEN_ERROR("14009","非法token"),
+
+    WITHOUT_LOGIN_ERROR("14010","用户未登录"),
+
     ;
 
     /**

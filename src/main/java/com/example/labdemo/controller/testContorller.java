@@ -22,46 +22,46 @@ import java.util.List;
 @RestController
 public class testContorller
 {
-    @PreAuthorize("hasAnyAuthority('user:read')")
+
     @PostMapping("/index")
     public ModelAndView start(){
         return new ModelAndView("index");
     }
 
-    @GetMapping("/getClients")
-    public ModelAndView getClients(){
-        return new ModelAndView("client_info_overview");
-    }
-    @GetMapping("/getProducts")
-    public ModelAndView getProducts(){
-        return new ModelAndView("products_overview");
-    }
-    @GetMapping("/getStore")
-    public ModelAndView getStore(){
-        ModelAndView modelAndView = new ModelAndView("store_manage");
-
-        ModelMap modelMap = modelAndView.getModelMap();
-
-        List<Product> products = new ArrayList<>();
-        Product product1 = new Product();
-        product1.setId(1L);
-        product1.setName("测试数据1");
-        products.add(product1);
-        Product product2 = new Product();
-        product2.setId(2L);
-        product2.setName("测试数据2");
-
-        products.add(product2);
-        modelMap.addAttribute("products",products);
-        return modelAndView;
-    }
-    @GetMapping("/getSellNotes")
-    public ModelAndView getSellNotes(){
-        return new ModelAndView("sale_note_manage");
-    }
-
-    @GetMapping("/getOrderDetail")
-    public ModelAndView getOrderDetail(){
-        return new ModelAndView("order_details");
-    }
+//    @GetMapping("/getClients")
+//    public ModelAndView getClients(){
+//        return new ModelAndView("client_info_overview");
+//    }
+//    @GetMapping("/getProducts")
+//    public ModelAndView getProducts(){
+//        return new ModelAndView("products_overview");
+//    }
+//    @GetMapping("/getStore")
+//    public ModelAndView getStore(){
+//        ModelAndView modelAndView = new ModelAndView("store_manage");
+//
+//        ModelMap modelMap = modelAndView.getModelMap();
+//
+//        List<Product> products = new ArrayList<>();
+//        Product product1 = new Product();
+//        product1.setId(1L);
+//        product1.setName("测试数据1");
+//        products.add(product1);
+//        Product product2 = new Product();
+//        product2.setId(2L);
+//        product2.setName("测试数据2");
+//
+//        products.add(product2);
+//        modelMap.addAttribute("products",products);
+//        return modelAndView;
+//    }
+//    @GetMapping("/getSellNotes")
+//    public ModelAndView getSellNotes(){
+//        return new ModelAndView("sale_note_manage");
+//    }
+//
+//    @GetMapping("/getOrderDetail")
+//    public ModelAndView getOrderDetail(){
+//        return new ModelAndView("order_details");
+//    }
 }

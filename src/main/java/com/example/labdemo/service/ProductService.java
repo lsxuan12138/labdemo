@@ -11,15 +11,15 @@ import java.util.List;
 
 public interface ProductService {
 
-    public int purchaseProduct(Long id, Long quantity);
-
-    public List<Product> getAllProduct();
-
-    public List<Product> find(String key);
+//    public int purchaseProduct(Long id, Long quantity);
+//
+//    public List<Product> getAllProduct();
+//
+//    public List<Product> find(String key);
 
     public Product add(ProductAddDto productAddDto) throws BaseException;
 
-    public int deleteById(Long id) throws BaseException;
+//    public int deleteById(Long id) throws BaseException;
 
     public void update(ProductUpdateDto productUpdateDto) throws BaseException;
 }

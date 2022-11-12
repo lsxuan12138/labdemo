@@ -28,15 +28,10 @@ public class SpringDataUserDetailsService implements UserDetailsService {
             //如果用户查不到，返回null，由provider来抛出异常
             return null;
         }
+
         //根据用户的id查询用户的权限
         List<String> permissions = userDao.findPermissionsByUserId(user.getId());
-        //将permissions转成数组
-        String[] permissionArray = new String[permissions.size()];
-        permissions.toArray(permissionArray);
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getAccount())
-                .password(user.getPassword())
-                .authorities(permissionArray)
-                .build();
+        LoginUser loginUser = new LoginUser(user,permissions);
+        return loginUser;
     }
 }

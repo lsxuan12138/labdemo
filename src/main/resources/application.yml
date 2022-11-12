@@ -1,0 +1,35 @@
+mybatis-plus:
+    mapper-locations: classpath:/mapper/**.xml
+server:
+    port: 8080
+spring:
+    application:
+        name: labdemo
+    redis:
+        host: 0.0.0.0     ## redis所在的服务器IP
+        port: 49153
+        ##密码，我这里没有设置，所以不填
+        password: redispw
+        ## 设置最大连接数，0为无限
+        pool:
+            max-active: 8
+            min-idle: 0
+            max-idle: 8
+            max-wait: -1
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        name: defaultDataSource
+        password: 123456
+        url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+        username: lsxuan
+    thymeleaf:
+        cache: false
+        check-template: true
+        check-template-location: true
+        content-type: text/html
+        enabled: true
+        encoding: UTF-8
+        excluded-view-names: ''
+        mode: HTML
+        prefix: classpath:/templates/
+        suffix: .html
