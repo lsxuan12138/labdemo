@@ -9,6 +9,6 @@ package com.example.labdemo.security;
  */
 public class SecurityConstants {
 
-    public static final String MESSAGE_LOGIN_FAILED="登录失败";
+    public static final String MESSAGE_LOGIN_FAILED = "登录失败";
 
 }

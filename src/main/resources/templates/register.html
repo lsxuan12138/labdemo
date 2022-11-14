@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bootstrap Material Admin</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="all,follow">
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="../static/style.default.css" id="theme-stylesheet">
+</head>
+<body>
+<div class="page login-page">
+  <div class="container d-flex align-items-center">
+    <div class="form-holder has-shadow">
+      <div class="row">
+        <!-- Logo & Information Panel-->
+        <div class="col-lg-6">
+          <div class="info d-flex align-items-center">
+            <div class="content">
+              <div class="logo">
+                <h1>欢迎注册</h1>
+              </div>
+              <p>通用销售管理系统v2.0</p>
+            </div>
+          </div>
+        </div>
+        <!-- Form Panel    -->
+        <div class="col-lg-6 bg-white">
+          <div class="form d-flex align-items-center">
+            <div class="content">
+              <div class="form-group">
+                <p>用户名</p>
+                <input id="register-Username" class="input-material" type="text" name="registerUsername" placeholder="用户名必须在2~10位之间" >
+                <div class="invalid-feedback">
+                  用户名必须在2~10位之间
+                </div>
+              </div>
+              <div class="form-group">
+                <br>
+                <p>注册身份</p>
+
+                <select  class="form-control" id="sel2">
+                  <option>管理员</option>
+                  <option>销售员</option>
+                  <option>采购员</option>
+                  <option>送货员</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <p>密码</p>
+                <input id="register-Password" class="input-material" type="password" name="registerPassword" placeholder="密码必须在6~10位之间"   >
+                <div class="invalid-feedback">
+                  密码必须在6~10位之间
+                </div>
+              </div>
+              <div class="form-group">
+                <p>确认密码</p>
+                <input id="register-Passwords" class="input-material" type="password" name="registerPasswords" placeholder="两次密码必须相同 且在6~10位之间"   >
+                <div class="invalid-feedback">
+                  两次密码必须相同 且在6~10位之间
+                </div>
+              </div>
+              <div class="form-group">
+                <button id="register-btn" type="button" name="registerSubmit" class="btn btn-primary">注册</button>
+              </div>
+              <small>已有账号?</small><a th:href="@{/getLogin}" class="signup">&nbsp;登录</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- JavaScript files-->
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/bootstrap.min.js"></script>
+<script src="../static/jquery/jquery-3.1.0.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+<script src="../static/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../static/uniform/js/jquery.uniform.standalone.js"></script>
+<script src="../static/switchery/switchery.min.js"></script>
+<script src="../static/datatables/js/jquery.datatables.js"></script>
+<script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../static/space.min.js"></script>
+<script>
+  $(function(){
+    /*错误class  form-control is-invalid
+    正确class  form-control is-valid*/
+    var flagName=false;
+    var flagPas=false;
+    var flagPass=false;
+    /*验证用户名*/
+    var name,passWord,passWords;
+    $("#register-Username").change(function(){
+      name=$("#register-Username").val();
+      if(name.length<2||name.length>10){
+        $("#register-Username").removeClass("form-control is-valid")
+        $("#register-Username").addClass("form-control is-invalid");
+        flagName=false;
+      }else{
+        $("#register-Username").removeClass("form-control is-invalid")
+        $("#register-Username").addClass("form-control is-valid");
+        flagName=true;
+      }
+    })
+    /*验证密码*/
+    $("#register-Password").change(function(){
+      passWord=$("#register-Password").val();
+      if(passWord.length<6||passWord.length>18){
+        $("#register-Password").removeClass("form-control is-valid")
+        $("#register-Password").addClass("form-control is-invalid");
+        flagPas=false;
+      }else{
+        $("#register-Password").removeClass("form-control is-invalid")
+        $("#register-Password").addClass("form-control is-valid");
+        flagPas=true;
+      }
+    })
+    /*验证确认密码*/
+    $("#register-Passwords").change(function(){
+      passWords=$("#register-Passwords").val();
+      if((passWord!=passWords)||(passWords.length<6||passWords.length>18)){
+        $("#register-Passwords").removeClass("form-control is-valid")
+        $("#register-Passwords").addClass("form-control is-invalid");
+        flagPass=false;
+      }else{
+        $("#register-Passwords").removeClass("form-control is-invalid")
+        $("#register-Passwords").addClass("form-control is-valid");
+        flagPass=true;
+      }
+    })
+
+
+    $("#register-btn").click(function(){
+      if(flagName&&flagPas&&flagPass){
+        localStorage.setItem("name",name);
+        localStorage.setItem("passWord",passWord);
+        location="/getLogin"
+      }else{
+        if(!flagName){
+          $("#register-Username").addClass("form-control is-invalid");
+        }
+        if(!flagPas){
+          $("#register-Password").addClass("form-control is-invalid");
+        }
+        if(!flagPass){
+          $("#register-Passwords").addClass("form-control is-invalid");
+        }
+      }
+    })
+    //提交后端部分
+    $(document).ready(function () {
+      $("#register-btn").on('click', function () {
+        if((flagName&&flagPas&&flagPass)===true) {
+          let register_Username = $("#register-Username").val();
+          let sel2 = $("sel2").val();
+          let register_Password = $("#register-Password").val();
+          let register_Passwords = $("#register-Passwords").val();
+
+          $.ajax({
+            url: "/getRegister/adduser", //这里不知道怎么写
+            type: "POST",  /*采用POST方法提交*/
+            data: {"register_Username": register_Username, "sel2": sel2, "register_Password": register_Password,"register_Passwords": register_Passwords},  /*提交的数据（json格式），从输入框中获取*/
+            dataType: 'JSON',
+            cache: false,
+            success: function (result) {
+              //alert(result)
+              if (result.code === 200) {
+                console.log("请求成功")
+                window.location.reload();
+              } else {
+                alert(result.msg)
+              }
+            }
+          })
+
+          return false;
+        }
+      });
+    });
+
+
+  })
+
+
+
+</script>
+
+</body>
+</html>

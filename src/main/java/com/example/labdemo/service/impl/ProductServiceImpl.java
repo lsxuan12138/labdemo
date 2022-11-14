@@ -37,17 +37,10 @@ public class ProductServiceImpl implements ProductService {
 //        return ret;
 //    }
 //
-//    @Override
-//    public List<Product> getAllProduct() {
-//        List<Product> products = null;
-//        try {
-//            products = productDao.selectList(null);
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException();
-//        }
-//        return products;
-//    }
+    @Override
+    public List<Product> getAllProduct() {
+        return productDao.selectList(null);
+    }
 //
 //    @Override
 //    public List<Product> find(String key) {
@@ -70,12 +63,10 @@ public class ProductServiceImpl implements ProductService {
         if(productDao.insert(product)<=0)throw new BaseException(BaseExceptionEnum.PRODUCT_INSERT_ERROR);
         return product;
     }
-//    @Override
-//    public int deleteById(Long id) throws BaseException {
-//        int ret = productDao.deleteById(id);
-//        if (ret != 1) throw new BaseException(BaseExceptionEnum.PRODUCT_DELETE_ERROR);
-//        return ret;
-//    }
+    @Override
+    public void deleteById(Long id) throws BaseException {
+        if(productDao.deleteById(id)<=0)throw new BaseException();
+    }
 
     @Override
     public void update(ProductUpdateDto productUpdateDto) throws BaseException {

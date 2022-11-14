@@ -37,6 +37,9 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
 
     WITHOUT_LOGIN_ERROR("14010","用户未登录"),
 
+    USER_NO_EXIST("14011","用户不存在"),
+
+    STAGE_ERROR("14012","stage error"),
     ;
 
     /**

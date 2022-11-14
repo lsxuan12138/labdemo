@@ -10,4 +10,5 @@ import java.util.List;
 public interface UserDao extends BaseMapper<User> {
 
     List<String>  findPermissionsByUserId(@Param("userId") Long id);
+
 }

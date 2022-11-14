@@ -3,6 +3,7 @@ package com.example.labdemo.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.labdemo.constants.SaleNoteConstants;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,6 +30,17 @@ public class SaleNote {
     private Date createTime;
 
     public SaleNote() {
+    }
+
+    public SaleNote(Long clientId,Long storeHouseId,Long createBy){
+        this.storeId = storeHouseId;
+        this.clientId = clientId;
+        this.stage = SaleNoteConstants.STAGE_TO_BE_EDITED;
+        this.cost = new BigDecimal(0);
+        this.price = new BigDecimal(0);
+        this.receivedPayment = new BigDecimal(0);
+        this.createBy =createBy;
+        this.createTime = new Date();
     }
 
     public Long getId() {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.AdjustmentOrderDao">
+    <resultMap id="adjustmentVo" type="com.example.labdemo.vo.AdjustmentVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="stage" jdbcType="VARCHAR" property="stage"/>
+        <result column="src_name" jdbcType="VARCHAR" property="srcStoreHouse"/>
+        <result column="dest_name" jdbcType="VARCHAR" property="destStoreHouse"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="getVo">
+        SELECT
+            tao.id,
+            tao.stage,
+            ts1.`name` AS src_name,
+            ts2.`name` AS dest_name,
+            tu.`name` AS creator,
+            tao.create_time
+        FROM
+            t_adjustment_order tao
+                LEFT JOIN t_store ts1 ON tao.src_store_id = ts1.id
+                LEFT JOIN t_store ts2 ON tao.dest_store_id = ts2.id
+                LEFT JOIN t_user tu ON tao.create_by = tu.id
+    </sql>
+    <select id="getAllVo" resultMap="adjustmentVo">
+        <include refid="getVo"/>
+    </select>
+    <select id="getVoById" resultMap="adjustmentVo">
+        <include refid="getVo"/>
+        WHERE tao.id = ${id,jdbcType=BIGINT}
+    </select>
+
+    <resultMap id="detailVo" type="com.example.labdemo.vo.AdjustmentDetailVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="stage" jdbcType="VARCHAR" property="stage"/>
+        <result column="src_store" jdbcType="VARCHAR" property="srcStoreHouse"/>
+        <result column="dest_store" jdbcType="VARCHAR" property="destStoreHouse"/>
+    </resultMap>
+    <select id="getDetailVo" resultMap="detailVo">
+        SELECT
+            tao.id,
+            tao.stage,
+            ts1.`name` AS src_store,
+            ts2.`name` AS dest_store
+        FROM
+            t_adjustment_order tao
+                LEFT JOIN t_store ts1 ON tao.src_store_id = ts1.id
+                LEFT JOIN t_store ts2 ON tao.dest_store_id = ts2.id
+        WHERE tao.id = ${id,jdbcType=BIGINT};
+    </select>
+    <resultMap id="itemVo" type="com.example.labdemo.vo.AdjustmentItemVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+        <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice"/>
+        <result column="wholesale_price" jdbcType="DECIMAL" property="wholesalePrice"/>
+        <result column="retail_price" jdbcType="DECIMAL" property="retailPrice"/>
+    </resultMap>
+    <select id="getItemsById" resultMap="itemVo">
+        SELECT
+            taoi.product_id as id,
+            tp.`name`,
+            taoi.quantity,
+            tp.purchase_price,
+            tp.wholesale_price,
+            tp.retail_price
+        FROM
+            t_adjustment_order_item taoi
+                LEFT JOIN t_product tp ON taoi.product_id=tp.id
+        WHERE taoi.order_id = ${id,jdbcType=BIGINT};
+    </select>
+
+</mapper>

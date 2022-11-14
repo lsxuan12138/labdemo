@@ -1,12 +1,19 @@
 package com.example.labdemo.dto;
 
+import com.example.labdemo.domain.SaleNoteItem;
+
 public class SaleNoteItemDto {
     private Long id;
     private Long quantity;
 
     public SaleNoteItemDto() {
     }
-
+    public SaleNoteItem toSaleNoteItem(){
+        SaleNoteItem temp = new SaleNoteItem();
+        temp.setProductId(id);
+        temp.setQuantity(quantity);
+        return temp;
+    }
     public Long getId() {
         return id;
     }

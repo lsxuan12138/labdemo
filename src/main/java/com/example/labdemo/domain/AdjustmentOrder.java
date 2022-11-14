@@ -1,8 +1,14 @@
 package com.example.labdemo.domain;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.labdemo.constants.AdjustmentOrderConstants;
 
+import java.util.Date;
+@TableName("t_adjustment_order")
 public class AdjustmentOrder {
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String stage;
     private Long srcStoreId;
@@ -11,6 +17,13 @@ public class AdjustmentOrder {
     private Date createTime;
 
     public AdjustmentOrder() {
+    }
+
+    public AdjustmentOrder(Long srcStoreId,Long destStoreId,Long createBy){
+        this.stage = AdjustmentOrderConstants.STAGE_TO_BE_EDITED;
+        this.srcStoreId = srcStoreId;
+        this.destStoreId = destStoreId;
+        this.createBy = createBy;
         this.createTime = new Date();
     }
 

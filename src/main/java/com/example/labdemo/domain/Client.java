@@ -24,6 +24,11 @@ public class Client {
         this.name = name;
         this.type = type;
     }
+    public Client(Long id, String name, String type){
+        this.id=id;
+        this.name=name;
+        this.type = type;
+    }
 
     public Long getId() {
         return id;

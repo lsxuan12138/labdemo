@@ -31,7 +31,6 @@ public class RedisCache {
      * @param value 缓存的值
      */
     public <T> void setCacheObject(final String key, final T value) {
-        System.out.println(key+"------"+value);
         redisTemplate.opsForValue().set(key, value);
     }
 
@@ -78,9 +77,7 @@ public class RedisCache {
      */
     public <T> T getCacheObject(final String key) {
         ValueOperations<String, T> operation = redisTemplate.opsForValue();
-        T obj = operation.get(key);
-        System.out.println(obj);
-        return obj;
+        return operation.get(key);
     }
 
     /**

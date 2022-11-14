@@ -1,5 +1,7 @@
 package com.example.labdemo.domain;
 
+import com.example.labdemo.constants.PurchaseOrderConstants;
+
 import java.util.Date;
 
 /**
@@ -19,7 +21,12 @@ public class PurchaseOrder {
 
     public PurchaseOrder() {
     }
-
+    public PurchaseOrder(Long storeId,Long createBy){
+        this.storeId = storeId;
+        this.stage = PurchaseOrderConstants.STAGE_TO_BE_EDITED;
+        this.createBy = createBy;
+        this.createTime = new Date();
+    }
     public Long getId() {
         return id;
     }

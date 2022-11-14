@@ -61,8 +61,9 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a th:href="@{/product/store}">全部库存</a></li>
-                            <li><a th:href="@{/product/store}">大库</a></li>
-                            <li><a th:href="@{/product/store}">门店库房</a></li>
+                            <li><a th:href="@{/product/storeHouse}">仓库</a></li>
+                            <li><a th:href="@{/product/purchase}">进货</a></li>
+                            <li><a th:href="@{/product/adjust}">调货</a></li>
                         </ul>
                     </li>
                     <li>
@@ -72,8 +73,8 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a th:href="@{/client/all}">全部客户</a></li>
-                            <li><a th:href="@{/client/all}">批发客户</a></li>
-                            <li><a th:href="@{/client/all}">零售客户</a></li>
+                            <li><a th:href="@{/client/wholesales}">批发客户</a></li>
+                            <li><a th:href="@{/client/retails}">零售客户</a></li>
                         </ul>
                     </li>
                     <li>
@@ -91,7 +92,7 @@
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a th:href="@{/product/all}" class="active">货品1</a></li>
+                            <li><a th:href="@{/product/all}" class="active">货品</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -217,8 +218,10 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>名称</th>
-                                            <th>成本</th>
-                                            <th>售价</th>
+                                            <th>备注</th>
+                                            <th>进货价</th>
+                                            <th>批发价</th>
+                                            <th>零售价</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -226,8 +229,10 @@
                                         <tr th:each="product:${products}">
                                             <td th:text="${product.id}">1</td>
                                             <td th:text="${product.name}">华为手机</td>
+                                            <td th:text="${product.remark}">无</td>
                                             <td th:text="${product.purchasePrice}">4500.0</td>
-                                            <td th:text="${product.sellPrice}">5000.0</td>
+                                            <td th:text="${product.wholesalePrice}">5000.0</td>
+                                            <td th:text="${product.retailPrice}">5000.0</td>
                                             <td>
                                                 <button class="btn btn-info mr-sm-2" onclick=del(this) type="button">
                                                     删除
@@ -273,6 +278,7 @@
                 type: "POST",  /*采用POST方法提交*/
                 data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
                 dataType: 'JSON',
+                contentType:'application/json;charset=UTF-8',
                 cache: false,
                 success: function (result) {
                     //alert(result)
@@ -332,6 +338,7 @@
                     data: {"id": id, "name": productName, "price": price, "cost": cost},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
+                    contentType:'application/json;charset=UTF-8',
                     success: function (result) {
                         console.log(result)
                         if (result.code === 200) {
@@ -354,7 +361,6 @@
         $.fn.isValid = function () {
             return this[0].checkValidity()
         }
-
         var t = $('#tab').DataTable();
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {

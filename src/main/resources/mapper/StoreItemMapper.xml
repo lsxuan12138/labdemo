@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.StoreItemDao">
+<resultMap id="voMap" type="com.example.labdemo.vo.StoreItemVo">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+</resultMap>
+    <select id="getAllStoreItem" resultMap="voMap">
+        SELECT
+            tsi.product_id AS id,
+            tp.`name`,
+            sum( tsi.quantity ) AS quantity
+        FROM
+            t_store_item AS tsi
+                LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
+        GROUP BY
+            tsi.product_id;
+    </select>
+    <select id="getStoreVoById" resultMap="voMap">
+        SELECT
+            tsi.product_id AS id,
+            tp.`name`,
+            tsi.quantity
+        FROM
+            t_store_item AS tsi
+                LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
+        WHERE
+            tsi.store_id = {id,jdbcType=BIGINT};
+    </select>
+
+</mapper>

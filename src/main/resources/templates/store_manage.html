@@ -60,9 +60,10 @@
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a th:href="@{/product/store}" class="active">全部库存</a></li>
-                            <li><a th:href="@{/product/store}">大库</a></li>
-                            <li><a th:href="@{/product/store}">门店库房</a></li>
+                            <li><a class="active" th:href="@{/product/store}">全部库存</a></li>
+                            <li><a th:href="@{/product/storeHouse}">仓库</a></li>
+                            <li><a th:href="@{/product/purchase}">进货</a></li>
+                            <li><a th:href="@{/product/adjust}">调货</a></li>
                         </ul>
                     </li>
                     <li>
@@ -72,8 +73,8 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a th:href="@{/client/all}">全部客户</a></li>
-                            <li><a th:href="@{/client/all}">批发客户</a></li>
-                            <li><a th:href="@{/client/all}">零售客户</a></li>
+                            <li><a th:href="@{/client/wholesales}">批发客户</a></li>
+                            <li><a th:href="@{/client/retails}">零售客户</a></li>
                         </ul>
                     </li>
                     <li>
@@ -91,7 +92,7 @@
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a th:href="@{/product/all}">货品1</a></li>
+                            <li><a th:href="@{/product/all}">货品</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -130,6 +131,7 @@
                                 <h4 class="panel-title">全部库存</h4>
                             </div>
                             <div class="panel-body">
+                                <a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" type="button">返回</a>
                                 <form action="javascript:void(0);" id="change-row-form">
                                     <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
                                          id="myModal_change"
@@ -165,9 +167,8 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>名称</th>
+                                            <th>商品名</th>
                                             <th>数量</th>
-                                            <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -175,13 +176,6 @@
                                             <td th:text="${product.id}">1</td>
                                             <td th:text="${product.name}">华为手机</td>
                                             <td th:text="${product.quantity}">50</td>
-                                            <td>
-                                                <button class="btn btn-info mr-sm-2" data-target="#myModal_change"
-                                                        data-toggle="modal"
-                                                        id="purchase" onclick=edit(this) type="button">
-                                                    商品进货
-                                                </button>
-                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -206,53 +200,7 @@
 <script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="../static/space.min.js"></script>
 <script>
-    let popId;
-    let popName;
-    let popQuantity;
-    function edit(obj) {
-        let value = $(obj).parent().parent().find("td");
-        let id = Number(value.eq(0).text());
-        let name = value.eq(1).text();
-        let quantity=Number(value.eq(2).text());
-        popId = id;
-        popName = name;
-        popQuantity=quantity;
-    }
-    $(document).ready(function () {
-        "use strict";
-        // Datatables
-        $.fn.isValid = function () {
-            return this[0].checkValidity()
-        }
         let t = $('#tab').DataTable();
-        $('#change-row').on('click', function () {
-            if ($("#change-row-form").isValid()) {
-                let id = popId;
-                let productName=popName;
-                let quantity=$("#quantity").val();
-                console.log(id + "-" + productName + "-" + quantity);
-                $.ajax({
-                    url: "/product/purchase",
-                    type: "POST",  /*采用POST方法提交*/
-                    data: {"id": id, "name": productName, "quantity":quantity},  /*提交的数据（json格式），从输入框中获取*/
-                    dataType: 'JSON',
-                    cache: false,
-                    success: function (result) {
-                        console.log(result)
-                        if (result.code === 200) {
-                            console.log("请求成功")
-                            window.location.reload();
-                        } else {
-                            console.log("请求失败")
-                        }
-                    }
-
-                })
-                $('.modal').modal('hide');
-                return false;
-            }
-        });
-    });
 </script>
 </body>
 

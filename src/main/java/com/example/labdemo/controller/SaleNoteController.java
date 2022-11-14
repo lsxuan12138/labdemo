@@ -1,43 +1,48 @@
-//package com.example.labdemo.controller;
-//
-//import com.example.labdemo.domain.Client;
-//import com.example.labdemo.domain.Product;
-//import com.example.labdemo.dto.SaleNoteDetailDto;
-//import com.example.labdemo.service.ClientService;
-//import com.example.labdemo.service.ProductService;
-//import com.example.labdemo.service.SaleNoteService;
-//import com.example.labdemo.vo.SaleNoteDetailVo;
-//import com.example.labdemo.vo.SaleNoteVo;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.servlet.ModelAndView;
-//
-//import java.util.List;
-//
-//@Controller
-//@RequestMapping("/saleNote")
-//public class SaleNoteController {
-//    @Autowired
-//    private SaleNoteService saleNoteService;
-//    @Autowired
-//    private ClientService clientService;
-//
-//    @Autowired
-//    private ProductService productService;
-//
-//    @GetMapping("/all")
-//    public ModelAndView getAll() {
-//        System.out.println("-----请求----");
-//        ModelAndView modelAndView = new ModelAndView("sale_note_manage");
-//
-//        List<SaleNoteVo> saleNotes = saleNoteService.getAllVo();
-//        List<Client> clients = clientService.getAll();
-//        System.out.println("-----获取数据----");
-//        modelAndView.getModelMap().addAttribute("clients", clients);
-//        modelAndView.getModelMap().addAttribute("saleNotes", saleNotes);
-//        return modelAndView;
-//    }
+package com.example.labdemo.controller;
+
+import com.example.labdemo.domain.Client;
+import com.example.labdemo.domain.Product;
+import com.example.labdemo.dto.SaleNoteDetailDto;
+import com.example.labdemo.result.ResultResponse;
+import com.example.labdemo.service.ClientService;
+import com.example.labdemo.service.ProductService;
+import com.example.labdemo.service.SaleNoteService;
+import com.example.labdemo.service.StoreService;
+import com.example.labdemo.vo.SaleNoteDetailVo;
+import com.example.labdemo.vo.SaleNoteVo;
+import com.example.labdemo.vo.StoreItemVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/saleNote")
+public class SaleNoteController {
+    @Autowired
+    private SaleNoteService saleNoteService;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private StoreService storeService;
+    @Autowired
+    private ProductService productService;
+
+    /**
+     * 获取所有销售单
+     * @return 销售单overview页面
+     */
+    @GetMapping("/all")
+    public ModelAndView getAll() {
+        ModelAndView modelAndView = new ModelAndView("sale_note_manage");
+        List<SaleNoteVo> saleNotes = saleNoteService.getAllVo();
+        List<Client> clients = clientService.getAll();
+        modelAndView.getModelMap().addAttribute("clients", clients);
+        modelAndView.getModelMap().addAttribute("saleNotes", saleNotes);
+        return modelAndView;
+    }
 //    @PostMapping("/find")
 //    @ResponseBody
 //    public Result find(@RequestParam("keyword") String keyword){
@@ -46,60 +51,80 @@
 //        System.out.println(saleNoteVos);
 //        return new Result(saleNoteVos);
 //    }
-//    @PostMapping("/add")
-//    @ResponseBody
-//    public Result add(@RequestParam("clientId")String clientIdStr){
-//        SaleNoteVo saleNoteVo = null;
-//        Long clientId  = Long.parseLong(clientIdStr);
-//        saleNoteVo = saleNoteService.add(clientId);
-//        return new Result(saleNoteVo);
-//    }
-//
-//    @GetMapping("/detail")
-//    public ModelAndView getDetail(@RequestParam("id")String idStr){
-//        Long id = Long.parseLong(idStr);
-//        List<Product> productList = productService.getAllProduct();
-//        SaleNoteDetailVo detail = saleNoteService.getDetail(id);
-//        ModelAndView modelAndView = new ModelAndView("order_details");
-//        modelAndView.getModelMap().addAttribute("productList",productList);
-//        modelAndView.getModelMap().addAttribute("detail",detail);
-//        return modelAndView;
-//    }
-//    @PostMapping("/update")
-//    @ResponseBody
-//    public Result update(@RequestBody SaleNoteDetailDto saleNoteDetailDto){
-//        saleNoteService.update(saleNoteDetailDto);
-//        return new Result();
-//    }
-//
-//    @PostMapping("/audit")
-//    @ResponseBody
-//    public Result audit(@RequestParam("id")Long id,@RequestParam("stage") String stage){
-//        try {
-//            saleNoteService.audio(id,stage);
-//        } catch (BaseException e) {
-//            return new Result(e);
-//        }
-//        return new Result();
-//    }
-//    @PostMapping("/collectMoney")
-//    @ResponseBody
-//    public Result collectMoney(@RequestParam("id")Long id,@RequestParam("stage") String stage){
-//        try {
-//            saleNoteService.collectMoney(id,stage);
-//        } catch (BaseException e) {
-//            return new Result(e);
-//        }
-//        return new Result();
-//    }
-//    @PostMapping("/returnGoods")
-//    @ResponseBody
-//    public Result returnGoods(@RequestParam("id")Long id,@RequestParam("stage") String stage){
-//        try {
-//            saleNoteService.returnGoods(id,stage);
-//        } catch (BaseException e) {
-//            return new Result(e);
-//        }
-//        return new Result();
-//    }
-//}
+
+    /**
+     * 增加销售单
+     * @param clientId 客户id
+     * @param storeHouseId 仓库id
+     * @return 增加的销售单
+     */
+    @PostMapping("/add")
+    @ResponseBody
+    public ResultResponse add(@RequestParam("clientId")Long clientId,@RequestParam("storeHouseId") Long storeHouseId){
+        return ResultResponse.success(saleNoteService.add(clientId,storeHouseId));
+    }
+
+    /**
+     * 销售单detail
+     * @param id 销售单id
+     * @return 销售单detail页面
+     */
+    @GetMapping("/detail")
+    public ModelAndView getDetail(@RequestParam("id")Long id){
+        List<StoreItemVo> storeItemVos = storeService.getAllStoreItem();
+        SaleNoteDetailVo detail = saleNoteService.getDetail(id);
+        ModelAndView modelAndView = new ModelAndView("order_details");
+        modelAndView.getModelMap().addAttribute("productList",storeItemVos);
+        modelAndView.getModelMap().addAttribute("detail",detail);
+        return modelAndView;
+    }
+
+    /**
+     * 更新销售单信息
+     * @param saleNoteDetailDto 封装请求
+     * @return
+     */
+    @PostMapping("/update")
+    @ResponseBody
+    public ResultResponse update(@RequestBody SaleNoteDetailDto saleNoteDetailDto){
+        saleNoteService.update(saleNoteDetailDto);
+        return ResultResponse.success();
+    }
+
+    /**
+     * 审核销售单
+     * @param id 销售单id
+     * @param stage 目标stage
+     * @return
+     */
+    @PostMapping("/audit")
+    @ResponseBody
+    public ResultResponse audit(@RequestParam("id")Long id,@RequestParam("stage") String stage){
+        saleNoteService.audio(id,stage);
+        return ResultResponse.success();
+    }
+    /**
+     * 销售单收款
+     * @param id 销售单id
+     * @param stage 目标stage
+     * @return
+     */
+    @PostMapping("/collectMoney")
+    @ResponseBody
+    public ResultResponse collectMoney(@RequestParam("id")Long id,@RequestParam("stage") String stage){
+        saleNoteService.collectMoney(id,stage);
+        return ResultResponse.success();
+    }
+    /**
+     * 整单退货
+     * @param id 销售单id
+     * @param stage 目标stage
+     * @return
+     */
+    @PostMapping("/returnGoods")
+    @ResponseBody
+    public ResultResponse returnGoods(@RequestParam("id")Long id,@RequestParam("stage") String stage){
+        saleNoteService.returnGoods(id,stage);
+        return ResultResponse.success();
+    }
+}

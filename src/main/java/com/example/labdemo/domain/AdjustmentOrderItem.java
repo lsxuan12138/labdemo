@@ -1,6 +1,12 @@
 package com.example.labdemo.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("t_adjustment_order_item")
 public class AdjustmentOrderItem {
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long orderId;
     private Long productId;

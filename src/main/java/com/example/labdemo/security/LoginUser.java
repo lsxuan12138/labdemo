@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
  * @create: 2022-11-12 13:37
  */
 
-public class LoginUser implements UserDetails , Serializable {
+public class LoginUser implements UserDetails, Serializable {
     private static final long serialVersionUID = 3349008659818669854L;
     private User user;
     private List<String> permissions;
@@ -60,7 +59,7 @@ public class LoginUser implements UserDetails , Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(authorities!=null){
+        if (authorities != null) {
             return authorities;
         }
         //把permissions中字符串类型的权限信息转换成GrantedAuthority对象存入authorities中

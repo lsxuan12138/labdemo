@@ -23,10 +23,10 @@ import java.util.List;
 public class testContorller
 {
 
-    @PostMapping("/index")
-    public ModelAndView start(){
-        return new ModelAndView("index");
-    }
+//    @PostMapping("/index")
+//    public ModelAndView start(){
+//        return new ModelAndView("index");
+//    }
 
 //    @GetMapping("/getClients")
 //    public ModelAndView getClients(){
