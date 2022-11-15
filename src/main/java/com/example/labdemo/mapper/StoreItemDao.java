@@ -2,6 +2,7 @@ package com.example.labdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.labdemo.domain.StoreItem;
+import com.example.labdemo.vo.StoreItemDetailVo;
 import com.example.labdemo.vo.StoreItemVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,6 @@ public interface StoreItemDao extends BaseMapper<StoreItem> {
     List<StoreItemVo> getAllStoreItem();
 
     List<StoreItemVo> getStoreVoById( Long id);
+
+    public List<StoreItemDetailVo> getAllStoreItemDetail(@Param("type") String type);
 }

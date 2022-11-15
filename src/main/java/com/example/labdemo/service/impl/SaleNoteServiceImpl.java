@@ -116,7 +116,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         Client client = clientDao.selectById(saleNote.getClientId());
         BigDecimal cost = new BigDecimal(0);
         BigDecimal price = new BigDecimal(0);
-        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id,client.getType());
+        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id,client==null? ClientConstants.TYPE_RETAILS:client.getType());
         for (SaleNoteItemVo vo:
              saleNoteItemVos) {
             QueryWrapper<StoreItem> itemQueryWrapper = new QueryWrapper<>();
@@ -165,7 +165,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
             throw new BaseException(BaseExceptionEnum.SALE_NOTE_STAGE_ERROR);
         }
         Client client = clientDao.selectById(saleNote.getClientId());
-        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id, client.getType());
+        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id, client==null? ClientConstants.TYPE_RETAILS:client.getType());
         for (SaleNoteItemVo vo:
                 saleNoteItemVos) {
             QueryWrapper<StoreItem> itemQueryWrapper = new QueryWrapper<>();

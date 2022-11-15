@@ -3,15 +3,13 @@ package com.example.labdemo.controller;
 import com.example.labdemo.domain.Client;
 import com.example.labdemo.domain.Product;
 import com.example.labdemo.dto.SaleNoteDetailDto;
+import com.example.labdemo.mapper.StoreItemDao;
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.ClientService;
 import com.example.labdemo.service.ProductService;
 import com.example.labdemo.service.SaleNoteService;
 import com.example.labdemo.service.StoreService;
-import com.example.labdemo.vo.SaleNoteDetailVo;
-import com.example.labdemo.vo.SaleNoteVo;
-import com.example.labdemo.vo.StoreItemVo;
-import com.example.labdemo.vo.StoreVo;
+import com.example.labdemo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -29,6 +27,7 @@ public class SaleNoteController {
     private ClientService clientService;
     @Autowired
     private StoreService storeService;
+
     @Autowired
     private ProductService productService;
 
@@ -78,10 +77,10 @@ public class SaleNoteController {
     @PreAuthorize("hasAuthority('saleNote:read')")
     @GetMapping("/detail")
     public ModelAndView getDetail(@RequestParam("id")Long id){
-        List<StoreItemVo> storeItemVos = storeService.getAllStoreItem();
+        List<StoreItemDetailVo>  products = storeService.getAllStoreItemDetail(id);
         SaleNoteDetailVo detail = saleNoteService.getDetail(id);
         ModelAndView modelAndView = new ModelAndView("order_details");
-        modelAndView.getModelMap().addAttribute("productList",storeItemVos);
+        modelAndView.getModelMap().addAttribute("productList",products);
         modelAndView.getModelMap().addAttribute("detail",detail);
         return modelAndView;
     }

@@ -2,6 +2,7 @@ package com.example.labdemo.service;
 
 import com.example.labdemo.domain.Store;
 import com.example.labdemo.vo.StoreHouseDetailVo;
+import com.example.labdemo.vo.StoreItemDetailVo;
 import com.example.labdemo.vo.StoreItemVo;
 import com.example.labdemo.vo.StoreVo;
 
@@ -33,6 +34,12 @@ public interface StoreService {
      * @return
      */
     public List<StoreItemVo> getAllStoreItem();
+    /**
+     * 获取全部库存详细信息（所有仓库库存总和）（用于销售单填写）
+     * @param id 销售单id
+     * @return
+     */
+    public List<StoreItemDetailVo> getAllStoreItemDetail(Long id);
 
     /**
      * 获取仓库库存

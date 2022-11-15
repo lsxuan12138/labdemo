@@ -1,17 +1,16 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.labdemo.constants.ClientConstants;
+import com.example.labdemo.domain.Client;
+import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.domain.Store;
 import com.example.labdemo.domain.User;
-import com.example.labdemo.mapper.StoreDao;
-import com.example.labdemo.mapper.StoreItemDao;
-import com.example.labdemo.mapper.UserDao;
+import com.example.labdemo.mapper.*;
 import com.example.labdemo.result.BaseException;
 import com.example.labdemo.result.BaseExceptionEnum;
 import com.example.labdemo.service.StoreService;
-import com.example.labdemo.vo.StoreHouseDetailVo;
-import com.example.labdemo.vo.StoreItemVo;
-import com.example.labdemo.vo.StoreVo;
+import com.example.labdemo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +33,10 @@ public class StoreServiceImpl implements StoreService {
     private StoreItemDao storeItemDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private SaleNoteDao saleNoteDao;
+    @Autowired
+    private ClientDao clientDao;
 
     @Override
     public List<StoreVo> selectAllVo(){
@@ -58,6 +61,13 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<StoreItemVo> getAllStoreItem(){
         return storeItemDao.getAllStoreItem();
+    }
+
+    @Override
+    public List<StoreItemDetailVo> getAllStoreItemDetail(Long id) {
+        SaleNote saleNote = saleNoteDao.selectById(id);
+        Client client = clientDao.selectById(saleNote.getClientId());
+        return storeItemDao.getAllStoreItemDetail( client==null? ClientConstants.TYPE_RETAILS:client.getType());
     }
 
     @Override

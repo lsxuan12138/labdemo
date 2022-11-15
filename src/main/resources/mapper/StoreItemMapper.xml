@@ -28,5 +28,38 @@
         WHERE
             tsi.store_id = ${id,jdbcType=BIGINT};
     </select>
+    <resultMap id="itemDetailVoMap" type="com.example.labdemo.vo.StoreItemDetailVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="cost" jdbcType="DECIMAL" property="cost"/>
+        <result column="profit" jdbcType="DECIMAL" property="profit"/>
+    </resultMap>
+    <select id="getAllStoreItemDetail" resultMap="itemDetailVoMap">
+        SELECT
+            tsi.product_id AS id,
+            tp.`name`,
+            sum( tsi.quantity ) AS quantity,
+        <choose>
+            <when test='type =="批发客户"'>
+                tp.wholesale_price AS price,
+                tp.purchase_price AS cost,
+                tp.wholesale_price - tp.purchase_price AS profit
+            </when>
+            <when test='type =="零售客户"'>
+                tp.retail_price AS price,
+                tp.purchase_price AS cost,
+                tp.retail_price - tp.purchase_price AS profit
+            </when>
+
+        </choose>
+        FROM
+            t_store_item AS tsi
+                LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
+        GROUP BY
+            tsi.product_id;
+
+    </select>
 
 </mapper>
