@@ -373,7 +373,7 @@
             cache: false,
             success: function (result) {
                 //alert(JSON.stringify(result.data))
-                if (result.code === 200) {
+                if (result.code === "200") {
                     window.location.reload();
                 } else {
                     console.log("请求失败")
@@ -402,7 +402,7 @@
             contentType:'application/json;charset=UTF-8',
             success: function (result) {
                 //alert(JSON.stringify(result.data))
-                if (result.code === 200) {
+                if (result.code === "200") {
                     window.location.reload();
                 } else {
                     alert(result.msg);
