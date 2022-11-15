@@ -268,7 +268,7 @@
                 data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
                 dataType: 'JSON',
                 cache: false,
-                contentType:'application/json;charset=UTF-8',
+                //contentType:'application/json;charset=UTF-8',
                 success: function (result) {
                     //alert(result)
                     if (result.code === "200") {
@@ -328,7 +328,7 @@
                     data: {"id": id, "name": name, "type": type},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
-                    contentType:'application/json;charset=UTF-8',
+                    //contentType:'application/json;charset=UTF-8',
                     success: function (result) {
                         console.log(result)
                         if (result.code === "200") {
@@ -356,14 +356,14 @@
             if ($("#add-row-form").isValid()) {
                 let name = $("#popName").val();
                 let type = $("#popType").val();
-                alert(name + "-" + type)
+                //alert(name + "-" + type)
                 $.ajax({
                     url: "/client/add",
                     type: "POST",  /*采用POST方法提交*/
                     data: {"name": name, "type": type},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
-                    contentType:'application/json;charset=UTF-8',
+                    //contentType:'application/json;charset=UTF-8',
                     success: function (result) {
                         //alert(result)
                         if (result.code === "200") {

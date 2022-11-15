@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
                 .antMatchers("/user/login","/user/loginPost","/index").permitAll()
+                .antMatchers("/static/**","/**/favicon.ico").permitAll()
                 .antMatchers("/user/adduser","/user/register").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
@@ -55,13 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.cors();
-    }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        //解决静态资源被拦截的问题
-        web.ignoring().antMatchers("/static/**");
-        web.ignoring().antMatchers("/img/**");
-        web.ignoring().antMatchers("/favicon.ico");
     }
     @Bean
     @Override

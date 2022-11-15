@@ -263,7 +263,7 @@
                 data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
                 dataType: 'JSON',
                 cache: false,
-                contentType:'application/json;charset=UTF-8',
+                //contentType:'application/json;charset=UTF-8',
                 success: function (result) {
                     //alert(result)
                     if (result.code === "200") {
@@ -316,13 +316,13 @@
                 let id = popId;
                 let name = $("#name_change").val();
                 let type = $("#popType_change").val();
-                console.log(id + "------" + name + "--------" + type);
+                //console.log(id + "------" + name + "--------" + type);
                 $.ajax({
                     url: "/client/update",
                     type: "POST",  /*采用POST方法提交*/
                     data: {"id": id, "name": name, "type": type},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
-                    contentType:'application/json;charset=UTF-8',
+                    //contentType:'application/json;charset=UTF-8',
                     cache: false,
                     success: function (result) {
                         console.log(result)
@@ -350,15 +350,15 @@
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {
                 let name = $("#popName").val();
-                let type = "零售客户";
-                alert(name + "-" + type)
+                let type = "1";
+                //alert(name + "-" + type)
                 $.ajax({
                     url: "/client/add",
                     type: "POST",  /*采用POST方法提交*/
                     data: {"name": name, "type": type},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
-                    contentType:'application/json;charset=UTF-8',
+                    //contentType:'application/json;charset=UTF-8',
                     success: function (result) {
                         //alert(result)
                         if (result.code === "200") {

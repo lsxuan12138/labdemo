@@ -33,6 +33,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client add(String name, String type) {
         type = changeType(type);
+        if (type==null)type=ClientConstants.TYPE_RETAILS;
         Client client = new Client(name,type);
         clientDao.insert(client);
         return client;

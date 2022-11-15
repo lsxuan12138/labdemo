@@ -188,17 +188,17 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>仓库1</td>
-                                            <td>大仓库</td>
-                                            <td>用户1</td>
-                                            <td>
-                                                <button class="btn btn-info mr-sm-2" data-toggle="modal"
-                                                        onclick=edit(this) type="button">详情
-                                                </button>
-                                            </td>
-                                        </tr>
+<!--                                        <tr>-->
+<!--                                            <td>1</td>-->
+<!--                                            <td>仓库1</td>-->
+<!--                                            <td>大仓库</td>-->
+<!--                                            <td>用户1</td>-->
+<!--                                            <td>-->
+<!--                                                <button class="btn btn-info mr-sm-2" data-toggle="modal"-->
+<!--                                                        onclick=edit(this) type="button">详情-->
+<!--                                                </button>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
                                         <tr th:each="storehouse:${storehouses}">
                                             <td th:text="${storehouse.id}"></td>
                                             <td th:text="${storehouse.name}"></td>
