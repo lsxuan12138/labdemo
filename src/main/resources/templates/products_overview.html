@@ -331,7 +331,7 @@
                 $.ajax({
                     url: "/product/update",
                     type: "POST",  /*采用POST方法提交*/
-                    data: {"id": id, "name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice},  /*提交的数据（json格式），从输入框中获取*/
+                    data: JSON.stringify({"id": id, "name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice}),  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
                     contentType:'application/json;charset=UTF-8',
@@ -364,7 +364,7 @@
                 let purchasePrice = $("#purchasePrice").val();
                 let wholesalePrice = $("#wholesalePrice").val();
                 let retailPrice=$("#retailPrice").val();
-                alert(productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
+                //alert(productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
                 if (Number.parseFloat(purchasePrice) > Number.parseFloat(retailPrice)) {
                     alert("成本应低于售价");
                     return;
@@ -372,7 +372,8 @@
                 $.ajax({
                     url: "/product/add",
                     type: "POST",  /*采用POST方法提交*/
-                    data: {"name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice},  /*提交的数据（json格式），从输入框中获取*/
+                    data: JSON.stringify({"name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice}),  /*提交的数据（json格式），从输入框中获取*/
+                    contentType:'application/json;charset=UTF-8',
                     dataType: 'JSON',
                     cache: false,
                     success: function (result) {

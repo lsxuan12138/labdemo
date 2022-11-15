@@ -149,7 +149,7 @@
                                     <input autocomplete="off" id="inputProduct" list="inputProducts" size=10
                                            style="width:100px">
                                     <datalist id="inputProducts" size=10 style="width:100px">
-                                        <option th:each="product:${productList}" th:value="${product.name}"/>
+                                        <option th:each="product:${productList}" th:value="${product.name}">临时数据</option>>
                                     </datalist>
                                     <input id="inputQuantity" placeholder="数量" style="width:50px">
                                     <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
