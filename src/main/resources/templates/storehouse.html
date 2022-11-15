@@ -148,11 +148,14 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <input class="form-control" id="name_add" placeholder="仓库名称"
+                                                        <label>仓库名称：</label>
+                                                        <input class="form-control" id="name_add"
                                                                required type="text">
-                                                        <input class="form-control" id="remark_add" placeholder="备注"
+                                                        <label>备注：</label>
+                                                        <input class="form-control" id="remark_add"
                                                                required type="text">
-                                                        <select class="form-control" id="owner_add" placeholder="店长"
+                                                        <label>店长：</label>
+                                                        <select class="form-control" id="owner_add"
                                                                 type="text">
                                                             <option th:each="user:${users}" th:text="${user.name}"
                                                                     th:value="${user.id}">

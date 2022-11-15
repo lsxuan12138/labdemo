@@ -146,14 +146,16 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
+                                                        <label>仓库：</label>
                                                         <select class="form-control" id="storeHouse_add" >
                                                             <option th:each="storeHouse:${storeHouses}" th:text="${storeHouse.name}"
                                                                     th:value="${storeHouse.id}">
                                                             </option>
                                                         </select>
+                                                        <label>客户：</label>
                                                         <select class="form-control" id="popClientName" >
                                                             <option th:each="client:${clients}" th:text="${client.name}"
-                                                                    th:value="${client.id}">固定客户
+                                                                    th:value="${client.id}">
                                                             </option>
                                                         </select>
                                                     </div>

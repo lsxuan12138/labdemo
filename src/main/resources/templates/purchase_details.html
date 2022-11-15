@@ -164,13 +164,10 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <select class="form-control" id="storeHouse"
-                                                                type="text">
-                                                            <option th:each="storeHouse:${storeHouses}"
-                                                                    th:text="${storeHouse.name}"
-                                                                    th:value="${storeHouse.id}">
-                                                            </option>
-                                                        </select>
+                                                        <p id="changePopId">商品序号：</p>
+                                                        <p id="changePopName">商品名称：</p>
+                                                        <label>商品数量：</label>
+                                                        <input class="form-control" id="changePopQuantity" type="text"/>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
