@@ -121,7 +121,7 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">库存</h3>
+                <h3 class="breadcrumb-header">库存<a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" style="float: right" type="button">返回</a></h3>
             </div>
             <div id="main-wrapper">
                 <div class="row">
@@ -135,7 +135,7 @@
                                 <p th:text="'店长：'+${storeHouseDetails.owner}">店长：</p>
                             </div>
                             <div class="panel-body">
-                                <a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" type="button">返回</a>
+
                                 <form action="javascript:void(0);" id="change-row-form">
                                     <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
                                          id="myModal_change"
