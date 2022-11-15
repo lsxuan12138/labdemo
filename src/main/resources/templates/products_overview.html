@@ -307,7 +307,6 @@
         $("#product_change").val(name);
         $("#cost_change").val(popCost)
         $("#price_change").val(popPrice);
-        modal1.style.display = "block";
     }
 
     $(document).ready(function () {
@@ -320,11 +319,12 @@
         $('#change-row').on('click', function () {
             if ($("#change-row-form").isValid()) {
                 let id = popId;
+                let productName = $("#product_change").val();
                 let purchasePrice = $("#purchasePrice_change").val();
                 let wholesalePrice = $("#wholesalePrice_change").val();
                 let retailPrice=$("#retailPrice_change").val();
                 console.log(id + "-" + productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
-                if (Number.parseFloat(cost) > Number.parseFloat(price)) {
+                if (Number.parseFloat(purchasePrice) > Number.parseFloat(retailPrice)) {
                     alert("成本应低于售价");
                     return;
                 }
@@ -365,7 +365,7 @@
                 let wholesalePrice = $("#wholesalePrice").val();
                 let retailPrice=$("#retailPrice").val();
                 alert(productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
-                if (Number.parseFloat(cost) > Number.parseFloat(price)) {
+                if (Number.parseFloat(purchasePrice) > Number.parseFloat(retailPrice)) {
                     alert("成本应低于售价");
                     return;
                 }
