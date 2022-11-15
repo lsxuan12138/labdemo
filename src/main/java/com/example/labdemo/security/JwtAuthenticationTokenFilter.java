@@ -35,11 +35,28 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取token
         String token = request.getHeader("token");
+        if(token==null){
+            String cookie = request.getHeader("Cookie");
+            if(cookie!=null){
+                String[] cookies = cookie.split("; ");
+                for (String str:
+                     cookies) {
+                    String[] kv = str.split("=");
+                    if(kv[0].equals("token")){
+                        token = kv[1];
+                        //System.out.println(token);
+                        break;
+                    }
+                }
+            }
+
+        }
         if (!StringUtils.hasText(token)) {
             //放行
             filterChain.doFilter(request, response);
             return;
         }
+
         //解析token
         String userid;
         try {

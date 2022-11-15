@@ -19,5 +19,5 @@ import java.util.List;
 public interface StoreItemDao extends BaseMapper<StoreItem> {
     List<StoreItemVo> getAllStoreItem();
 
-    List<StoreItemVo> getStoreVoById(@Param("id") Long id);
+    List<StoreItemVo> getStoreVoById( Long id);
 }

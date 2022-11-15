@@ -21,10 +21,10 @@ import java.util.List;
 public interface AdjustmentOrderDao extends BaseMapper<AdjustmentOrder> {
     List<AdjustmentVo> getAllVo();
 
-    AdjustmentVo getVoById(@Param("id") Long id);
+    AdjustmentVo getVoById( Long id);
 
-    AdjustmentDetailVo getDetailVo(@Param("id") Long id);
-    List<AdjustmentItemVo> getItemsById(@Param("id") Long id);
+    AdjustmentDetailVo getDetailVo(Long id);
+    List<AdjustmentItemVo> getItemsById(Long id);
 
 
 }

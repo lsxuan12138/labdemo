@@ -26,7 +26,7 @@
             t_store_item AS tsi
                 LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
         WHERE
-            tsi.store_id = {id,jdbcType=BIGINT};
+            tsi.store_id = ${id,jdbcType=BIGINT};
     </select>
 
 </mapper>

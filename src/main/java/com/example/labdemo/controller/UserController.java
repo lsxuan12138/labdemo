@@ -30,7 +30,7 @@ public class UserController {
      * 首页
      * @return 首页
      */
-    @PostMapping("/index")
+    @GetMapping("/index")
     public ModelAndView start(){
         return new ModelAndView("index");
     }

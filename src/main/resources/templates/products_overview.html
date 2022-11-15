@@ -278,11 +278,11 @@
                 type: "POST",  /*采用POST方法提交*/
                 data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
                 dataType: 'JSON',
-                contentType:'application/json;charset=UTF-8',
+                //contentType:'application/json;charset=UTF-8',
                 cache: false,
                 success: function (result) {
                     //alert(result)
-                    if (result.code === 200) {
+                    if (result.code === "200") {
                         console.log("请求成功")
                         window.location.reload();
                     } else {

@@ -13,7 +13,7 @@ public interface SaleNoteDao extends BaseMapper<SaleNote> {
 
     public List<SaleNoteVo> selectAllSaleNoteVo();
 
-    public List<SaleNoteVo> find(@Param("key")String key);
+//    public List<SaleNoteVo> find(@Param("key")String key);
 
     public SaleNoteVo selectVoById(Long id);
 }

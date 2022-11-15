@@ -44,6 +44,7 @@ public class ClientController {
      * 所有客户
      * @return 所有客户overview页面
      */
+    @PreAuthorize("hasAnyAuthority('client:select')")
     @GetMapping("/all")
     public ModelAndView getAll(){
         ModelAndView modelAndView = new ModelAndView("client_info_overview_all");
@@ -57,6 +58,7 @@ public class ClientController {
      * @param id 用户id
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('client:delete')")
     @PostMapping("/delete")
     @ResponseBody
     public ResultResponse delete(@RequestParam("id")Long id){
@@ -70,6 +72,7 @@ public class ClientController {
      * @param type 种类0/1
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('client:insert')")
     @PostMapping("/add")
     @ResponseBody
     public ResultResponse add(@RequestParam("name")String name,@RequestParam("type")String type){
@@ -98,6 +101,7 @@ public class ClientController {
      * @param type 种类
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('client:update')")
     @PostMapping("/update")
     @ResponseBody
     public ResultResponse update(@RequestParam("id")Long id,@RequestParam("name")String name,@RequestParam("type")String type){

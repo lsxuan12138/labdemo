@@ -9,6 +9,7 @@ import com.example.labdemo.vo.AdjustmentVo;
 import com.example.labdemo.vo.StoreItemVo;
 import com.example.labdemo.vo.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,7 @@ public class AdjustmentOrderController {
      *
      * @return 调货单overview页面
      */
+    @PreAuthorize("hasAuthority('adjustment:read')")
     @GetMapping("/product/adjust")
     public ModelAndView getAll() {
         ModelAndView modelAndView = new ModelAndView("adjustment");
@@ -56,6 +58,7 @@ public class AdjustmentOrderController {
      * @param destId 目的仓库
      * @return 添加成功的调货单
      */
+    @PreAuthorize("hasAuthority('adjustment:insert')")
     @PostMapping("/product/addAdjustment")
     public ResultResponse add(@RequestParam("srcStoreHouseId") Long srcId, @RequestParam("destStoreHouseId") Long destId) {
         return ResultResponse.success(adjustmentOrderService.add(srcId, destId));
@@ -67,6 +70,7 @@ public class AdjustmentOrderController {
      * @param id 调货单id
      * @return 调货单detail页面
      */
+    @PreAuthorize("hasAuthority('adjustment:read')")
     @GetMapping("/product/adjustmentDetails")
     public ModelAndView getDetails(@PathParam("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("adjustment_details");
@@ -83,6 +87,7 @@ public class AdjustmentOrderController {
      * @param adjustmentUpdateDto
      * @return
      */
+    @PreAuthorize("hasAuthority('adjustment:edit')")
     @PostMapping("/product/adjustmentUpdate")
     public ResultResponse update(@RequestBody AdjustmentUpdateDto adjustmentUpdateDto) {
         adjustmentOrderService.update(adjustmentUpdateDto);
@@ -95,6 +100,7 @@ public class AdjustmentOrderController {
      * @param stage 目标stage
      * @return
      */
+    @PreAuthorize("hasAuthority('adjustment:audit')")
     @PostMapping("/product/adjustmentAudit")
     public ResultResponse audit(@RequestParam("id") Long id, @RequestParam("stage") String stage) {
         adjustmentOrderService.audit(id, stage);

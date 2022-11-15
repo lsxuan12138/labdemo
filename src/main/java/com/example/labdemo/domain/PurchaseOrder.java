@@ -1,5 +1,8 @@
 package com.example.labdemo.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.labdemo.constants.PurchaseOrderConstants;
 
 import java.util.Date;
@@ -11,7 +14,9 @@ import java.util.Date;
  * @email: 1146887979@qq.com
  * @create: 2022-10-29 15:12
  */
+@TableName("t_purchase_order")
 public class PurchaseOrder {
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Long storeId;

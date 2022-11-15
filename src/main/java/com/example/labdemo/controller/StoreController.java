@@ -7,6 +7,7 @@ import com.example.labdemo.service.StoreService;
 import com.example.labdemo.service.UserService;
 import com.example.labdemo.vo.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class StoreController {
      *仓库overview页面
      * @return 仓库overview页面
      */
+    @PreAuthorize("hasAuthority('store:read')")
     @GetMapping("product/storeHouse")
     public ModelAndView getAll(){
         ModelAndView modelAndView = new ModelAndView("storehouse");
@@ -49,6 +51,7 @@ public class StoreController {
      * @param owner
      * @return
      */
+    @PreAuthorize("hasAuthority('store:insert')")
     @PostMapping("product/storeHouseAdd")
     public ResultResponse addStore(@RequestBody String owner){
         return ResultResponse.success(storeService.addStore(owner));
@@ -58,6 +61,7 @@ public class StoreController {
      * 全部库存界面（所有仓库总库存）
      * @return 全部库存界面
      */
+    @PreAuthorize("hasAuthority('store:read')")
     @GetMapping("/product/store")
     public ModelAndView getStore() {
         ModelAndView modelAndView = new ModelAndView("store_manage");
@@ -71,6 +75,7 @@ public class StoreController {
      * @param id 仓库id
      * @return
      */
+    @PreAuthorize("hasAuthority('store:read')")
     @GetMapping("/product/storeHouseDetails")
     public ModelAndView storeDetail(@PathParam("id") Long id){
         ModelAndView modelAndView = new ModelAndView("storehouse_details");

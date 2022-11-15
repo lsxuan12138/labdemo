@@ -77,7 +77,7 @@
 <script src="/static/space.min.js"></script>
 
 <!-- Main File-->
-<script src="../static/front.js"></script>
+<script src="/static/front.js"></script>
 <script>
     // $(function(){
     //
@@ -124,6 +124,7 @@
     // })
 
     function validate() {
+        clearAllCookie();
         var userName=$("#login-Username").val();
         var passWord=$("#login-Password").val();
         localStorage.setItem("userName",userName)
@@ -136,11 +137,14 @@
             dataType:"json",
             success: function (data) {
                 if(data.code==="200"){
-                    localStorage.setItem("token",data.result.token)
-                    alert(localStorage.getItem("token"))
+                    //localStorage.setItem("token",data.result.token)
+                    //alert(localStorage.getItem("token"))
+
+                    document.cookie = "token="+data.result.token +"; path=/";
+
                     $("#login-Username").empty();
                     $("#login-Password").empty();
-                    window.location.href="/"
+                    window.location.href="/index"
                 }
             },
             error: function () {
@@ -148,7 +152,13 @@
             }
         });
     }
-
+    function clearAllCookie() {
+        var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+        if(keys) {
+            for(var i = keys.length; i--;)
+                document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+        }
+    }
 </script>
 </body>
 </html>

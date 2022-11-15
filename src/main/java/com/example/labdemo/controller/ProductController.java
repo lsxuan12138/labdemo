@@ -24,7 +24,7 @@ public class ProductController {
     @Autowired
     StoreService storeService;
 
-
+    @PreAuthorize("hasAuthority('product:select')")
     @GetMapping("/product/all")
     public ModelAndView getAll() {
         ModelAndView modelAndView = new ModelAndView("products_overview");
@@ -86,7 +86,7 @@ public class ProductController {
      * @param productAddDto 封装请求
      * @return 添加的product
      */
-    @PreAuthorize("hasAnyAuthority('product:insert')")
+    @PreAuthorize("hasAuthority('product:insert')")
     @PostMapping("/product/add")
     @ResponseBody
     public ResultResponse add(@RequestBody ProductAddDto productAddDto){
@@ -98,6 +98,7 @@ public class ProductController {
      * @param id 货品id
      * @return
      */
+    @PreAuthorize("hasAuthority('product:delete')")
     @PostMapping("/product/delete")
     @ResponseBody
     public ResultResponse delete(@RequestParam("id")Long id){
@@ -111,7 +112,7 @@ public class ProductController {
      * @return 更新后的信息
      * @throws BaseException
      */
-    @PreAuthorize("hasAnyAuthority('product:update')")
+    @PreAuthorize("hasAuthority('product:update')")
     @PostMapping("/product/update")
     @ResponseBody
     public ResultResponse update(@RequestBody ProductUpdateDto productUpdateDto) throws BaseException {

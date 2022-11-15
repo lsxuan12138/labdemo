@@ -15,22 +15,23 @@
             tp.`name`,
             tsni.quantity,
         <choose>
-            <when test="type =='零售客户'">
-                tp.retail_price AS price,
-                tp.purchase_price AS cost,
-                tp.retail_price - tp.purchase_price AS profit,
-            </when>
-            <when test="type =='批发用户'">
+            <when test='type =="批发客户"'>
                 tp.wholesale_price AS price,
                 tp.purchase_price AS cost,
                 tp.wholesale_price - tp.purchase_price AS profit
             </when>
+            <when test='type =="零售客户"'>
+                tp.retail_price AS price,
+                tp.purchase_price AS cost,
+                tp.retail_price - tp.purchase_price AS profit
+            </when>
+
         </choose>
         FROM
             t_sale_note_item tsni
                 LEFT JOIN t_product tp ON tsni.product_id = tp.id
         WHERE
-            tsni.sale_note_id = ${id,jdbcType=BIGINT}
+            tsni.sale_note_id = ${id}
         ORDER BY
             tp.id;
     </select>

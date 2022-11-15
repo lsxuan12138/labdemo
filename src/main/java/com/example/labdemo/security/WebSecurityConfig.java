@@ -41,10 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 //不通过Session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .formLogin()
+//                .loginPage("/user/login")
                 .and()
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
-                .antMatchers("/user/login","/user/loginPost").permitAll()
+                .antMatchers("/user/login","/user/loginPost","/index").permitAll()
                 .antMatchers("/user/adduser","/user/register").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
@@ -58,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //解决静态资源被拦截的问题
         web.ignoring().antMatchers("/static/**");
         web.ignoring().antMatchers("/img/**");
+        web.ignoring().antMatchers("/favicon.ico");
     }
     @Bean
     @Override

@@ -48,6 +48,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long createBy = loginUser.getUser().getId();
         PurchaseOrder order = new PurchaseOrder(storeId,createBy);
+        purchaseOrderDao.insert(order);
         return purchaseOrderDao.getVoById(order.getId());
     }
     @Override

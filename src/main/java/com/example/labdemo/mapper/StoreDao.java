@@ -19,5 +19,5 @@ import java.util.List;
 @Mapper
 public interface StoreDao extends BaseMapper<Store> {
     public List<StoreVo> selectAllVo();
-    public StoreHouseDetailVo selectDetailVo(@Param("id") Long id);
+    public StoreHouseDetailVo selectDetailVo( Long id);
 }

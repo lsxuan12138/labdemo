@@ -1,6 +1,7 @@
 package com.example.labdemo.vo;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SaleNoteVo {
@@ -29,6 +30,8 @@ public class SaleNoteVo {
     public String getStoreName() {
         return storeName;
     }
+
+    public String getStoreHouseName(){return storeName;}
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
@@ -90,8 +93,13 @@ public class SaleNoteVo {
         this.creator = creator;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+//    //public Date getCreateTime() {
+//        return createTime;
+//    }
+
+    public String getCreateTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(createTime);
     }
 
     public void setCreateTime(Date createTime) {

@@ -1,12 +1,10 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.labdemo.constants.ClientConstants;
 import com.example.labdemo.constants.PurchaseOrderConstants;
 import com.example.labdemo.constants.SaleNoteConstants;
-import com.example.labdemo.domain.Product;
-import com.example.labdemo.domain.SaleNote;
-import com.example.labdemo.domain.SaleNoteItem;
-import com.example.labdemo.domain.StoreItem;
+import com.example.labdemo.domain.*;
 import com.example.labdemo.dto.SaleNoteDetailDto;
 import com.example.labdemo.dto.SaleNoteItemDto;
 import com.example.labdemo.mapper.*;
@@ -70,7 +68,9 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         SaleNoteDetailVo detailVo = new SaleNoteDetailVo();
 
         SaleNoteVo saleNoteVo = saleNoteDao.selectVoById(id);
-        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id);
+        SaleNote saleNote = saleNoteDao.selectById(id);
+        Client client = clientDao.selectById(saleNote.getClientId());
+        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id, client==null? ClientConstants.TYPE_RETAILS:client.getType());
 
         detailVo.setId(id);
         detailVo.setClientName(saleNoteVo.getClientName());
@@ -113,9 +113,10 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         }else {
             throw new BaseException(BaseExceptionEnum.STAGE_ERROR);
         }
+        Client client = clientDao.selectById(saleNote.getClientId());
         BigDecimal cost = new BigDecimal(0);
         BigDecimal price = new BigDecimal(0);
-        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id);
+        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id,client.getType());
         for (SaleNoteItemVo vo:
              saleNoteItemVos) {
             QueryWrapper<StoreItem> itemQueryWrapper = new QueryWrapper<>();
@@ -163,7 +164,8 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         }else {
             throw new BaseException(BaseExceptionEnum.SALE_NOTE_STAGE_ERROR);
         }
-        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id);
+        Client client = clientDao.selectById(saleNote.getClientId());
+        List<SaleNoteItemVo> saleNoteItemVos = saleNoteItemDao.getItems(id, client.getType());
         for (SaleNoteItemVo vo:
                 saleNoteItemVos) {
             QueryWrapper<StoreItem> itemQueryWrapper = new QueryWrapper<>();

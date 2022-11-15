@@ -11,7 +11,9 @@ import com.example.labdemo.service.StoreService;
 import com.example.labdemo.vo.SaleNoteDetailVo;
 import com.example.labdemo.vo.SaleNoteVo;
 import com.example.labdemo.vo.StoreItemVo;
+import com.example.labdemo.vo.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,11 +36,14 @@ public class SaleNoteController {
      * 获取所有销售单
      * @return 销售单overview页面
      */
+    @PreAuthorize("hasAuthority('saleNote:read')")
     @GetMapping("/all")
     public ModelAndView getAll() {
         ModelAndView modelAndView = new ModelAndView("sale_note_manage");
         List<SaleNoteVo> saleNotes = saleNoteService.getAllVo();
         List<Client> clients = clientService.getAll();
+        List<StoreVo> storeVos = storeService.selectAllVo();
+        modelAndView.getModelMap().addAttribute("storeHouses", storeVos);
         modelAndView.getModelMap().addAttribute("clients", clients);
         modelAndView.getModelMap().addAttribute("saleNotes", saleNotes);
         return modelAndView;
@@ -58,6 +63,7 @@ public class SaleNoteController {
      * @param storeHouseId 仓库id
      * @return 增加的销售单
      */
+    @PreAuthorize("hasAuthority('saleNote:insert')")
     @PostMapping("/add")
     @ResponseBody
     public ResultResponse add(@RequestParam("clientId")Long clientId,@RequestParam("storeHouseId") Long storeHouseId){
@@ -69,6 +75,7 @@ public class SaleNoteController {
      * @param id 销售单id
      * @return 销售单detail页面
      */
+    @PreAuthorize("hasAuthority('saleNote:read')")
     @GetMapping("/detail")
     public ModelAndView getDetail(@RequestParam("id")Long id){
         List<StoreItemVo> storeItemVos = storeService.getAllStoreItem();
@@ -84,6 +91,7 @@ public class SaleNoteController {
      * @param saleNoteDetailDto 封装请求
      * @return
      */
+    @PreAuthorize("hasAuthority('saleNote:edit')")
     @PostMapping("/update")
     @ResponseBody
     public ResultResponse update(@RequestBody SaleNoteDetailDto saleNoteDetailDto){
@@ -97,6 +105,7 @@ public class SaleNoteController {
      * @param stage 目标stage
      * @return
      */
+    @PreAuthorize("hasAuthority('saleNote:read')")
     @PostMapping("/audit")
     @ResponseBody
     public ResultResponse audit(@RequestParam("id")Long id,@RequestParam("stage") String stage){
@@ -109,6 +118,7 @@ public class SaleNoteController {
      * @param stage 目标stage
      * @return
      */
+    @PreAuthorize("hasAuthority('saleNote:collect')")
     @PostMapping("/collectMoney")
     @ResponseBody
     public ResultResponse collectMoney(@RequestParam("id")Long id,@RequestParam("stage") String stage){
@@ -121,6 +131,7 @@ public class SaleNoteController {
      * @param stage 目标stage
      * @return
      */
+    @PreAuthorize("hasAuthority('saleNote:return')")
     @PostMapping("/returnGoods")
     @ResponseBody
     public ResultResponse returnGoods(@RequestParam("id")Long id,@RequestParam("stage") String stage){

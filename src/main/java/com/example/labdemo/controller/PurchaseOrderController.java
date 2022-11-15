@@ -8,6 +8,7 @@ import com.example.labdemo.vo.PurchaseDetailVo;
 import com.example.labdemo.vo.PurchaseVo;
 import com.example.labdemo.vo.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,11 +35,12 @@ public class PurchaseOrderController {
      *
      * @return 进货单overview页面
      */
+    @PreAuthorize("hasAuthority('purchase:read')")
     @GetMapping("/product/purchase")
     public ModelAndView getAll() {
         ModelAndView modelAndView = new ModelAndView("purchase");
         List<StoreVo> storeVos = storeService.selectAllVo();
-        modelAndView.getModelMap().addAttribute("storehouses", storeVos);
+        modelAndView.getModelMap().addAttribute("storeHouses", storeVos);
         List<PurchaseVo> purchaseVos = purchaseOrderService.getAllVo();
         modelAndView.getModelMap().addAttribute("purchaseOrders", purchaseVos);
         return modelAndView;
@@ -50,6 +52,7 @@ public class PurchaseOrderController {
      * @param storeId 所属仓库id
      * @return
      */
+    @PreAuthorize("hasAuthority('purchase:insert')")
     @PostMapping("/product/addPurchase")
     @ResponseBody
     public ResultResponse add(@RequestParam("storeHouse") Long storeId) {
@@ -62,6 +65,7 @@ public class PurchaseOrderController {
      * @param id 进货单id
      * @return
      */
+    @PreAuthorize("hasAuthority('purchase:read')")
     @GetMapping("/product/purchaseDetails")
     public ModelAndView getDetail(@PathParam("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("purchase_details");
@@ -78,6 +82,7 @@ public class PurchaseOrderController {
      * @param purchaseUpdateDto 封装请求
      * @return
      */
+    @PreAuthorize("hasAuthority('purchase:edit')")
     @PostMapping("/product/purchaseUpdate")
     public ResultResponse update(@RequestBody PurchaseUpdateDto purchaseUpdateDto) {
         purchaseOrderService.update(purchaseUpdateDto);
@@ -91,6 +96,7 @@ public class PurchaseOrderController {
      * @param stage 目标stage
      * @return
      */
+    @PreAuthorize("hasAuthority('purchase:audit')")
     @PostMapping("/product/purchaseAudit")
     public ResultResponse audit(@RequestParam("id") Long id, @RequestParam("stage") String stage) {
         purchaseOrderService.audit(id, stage);

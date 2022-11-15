@@ -29,7 +29,7 @@
     </select>
     <resultMap id="detailVo" type="com.example.labdemo.vo.PurchaseDetailVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="store_name" jdbcType="VARCHAR" property="storeName"/>
+        <result column="store_name" jdbcType="VARCHAR" property="storeHouseName"/>
         <result column="stage" jdbcType="VARCHAR" property="stage"/>
     </resultMap>
 

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PurchaseDetailVo {
     private Long id;
-    private String storeName;
+    private String storeHouseName;
     private String stage;
     private List<PurchaseItemVo> items;
 
@@ -26,12 +26,12 @@ public class PurchaseDetailVo {
         this.id = id;
     }
 
-    public String getStoreName() {
-        return storeName;
+    public String getStoreHouseName() {
+        return storeHouseName;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void setStoreHouseName(String storeHouseName) {
+        this.storeHouseName = storeHouseName;
     }
 
     public String getStage() {
