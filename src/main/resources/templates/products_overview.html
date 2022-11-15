@@ -151,13 +151,11 @@
                                                     <div class="form-group">
                                                         <input class="form-control" id="product" placeholder="名称"
                                                                required type="text">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="cost" placeholder="成本"
+                                                        <input class="form-control" id="purchasePrice" placeholder="进货价"
                                                                required step="0.01" type="number">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="price" placeholder="售价"
+                                                        <input class="form-control" id="wholesalePrice" placeholder="批发价"
+                                                               required step="0.01" type="number">
+                                                        <input class="form-control" id="retailPrice" placeholder="零售价"
                                                                required step="0.01" type="number">
                                                     </div>
                                                 </div>
@@ -190,13 +188,11 @@
                                                         <input class="form-control" id="product_change"
                                                                placeholder="名称"
                                                                required type="text">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="cost_change" placeholder="成本"
+                                                        <input class="form-control" id="purchasePrice_change" placeholder="进货价"
                                                                required step="0.01" type="number">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="price_change" placeholder="售价"
+                                                        <input class="form-control" id="wholesalePrice_change" placeholder="批发价"
+                                                               required step="0.01" type="number">
+                                                        <input class="form-control" id="retailPrice_change" placeholder="零售价"
                                                                required step="0.01" type="number">
                                                     </div>
                                                 </div>
@@ -324,10 +320,10 @@
         $('#change-row').on('click', function () {
             if ($("#change-row-form").isValid()) {
                 let id = popId;
-                let productName = $("#product_change").val();
-                let cost = $("#cost_change").val();
-                let price = $("#price_change").val();
-                console.log(id + "-" + productName + "-" + price + "-" + cost);
+                let purchasePrice = $("#purchasePrice_change").val();
+                let wholesalePrice = $("#wholesalePrice_change").val();
+                let retailPrice=$("#retailPrice_change").val();
+                console.log(id + "-" + productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
                 if (Number.parseFloat(cost) > Number.parseFloat(price)) {
                     alert("成本应低于售价");
                     return;
@@ -335,7 +331,7 @@
                 $.ajax({
                     url: "/product/update",
                     type: "POST",  /*采用POST方法提交*/
-                    data: {"id": id, "name": productName, "price": price, "cost": cost},  /*提交的数据（json格式），从输入框中获取*/
+                    data: {"id": id, "name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
                     contentType:'application/json;charset=UTF-8',
@@ -365,9 +361,10 @@
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {
                 let productName = $("#product").val();
-                let cost = $("#cost").val();
-                let price = $("#price").val();
-                alert(productName + "-" + cost + "-" + price)
+                let purchasePrice = $("#purchasePrice").val();
+                let wholesalePrice = $("#wholesalePrice").val();
+                let retailPrice=$("#retailPrice").val();
+                alert(productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
                 if (Number.parseFloat(cost) > Number.parseFloat(price)) {
                     alert("成本应低于售价");
                     return;
@@ -375,7 +372,7 @@
                 $.ajax({
                     url: "/product/add",
                     type: "POST",  /*采用POST方法提交*/
-                    data: {"name": productName, "cost": cost, "price": price},  /*提交的数据（json格式），从输入框中获取*/
+                    data: {"name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice},  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
                     success: function (result) {
