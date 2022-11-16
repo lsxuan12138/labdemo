@@ -167,6 +167,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>商品名</th>
+                                            <th>备注</th>
                                             <th>数量</th>
                                         </tr>
                                         </thead>
@@ -174,6 +175,7 @@
                                         <tr th:each="product:${products}">
                                             <td th:text="${product.id}">1</td>
                                             <td th:text="${product.name}">华为手机</td>
+                                            <td th:text="${product.remark}">华为手机</td>
                                             <td th:text="${product.quantity}">50</td>
                                         </tr>
                                         </tbody>

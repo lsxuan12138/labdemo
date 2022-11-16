@@ -176,7 +176,7 @@
                                                         <p  id="changePopId">商品序号：</p>
                                                         <p  id="changePopName">商品名称：</p>
                                                         <label>商品数量：</label>
-                                                        <input class="form-control" id="changePopQuantity" type="text"/>
+                                                        <input class="form-control" id="changePopQuantity" type="number"/>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -288,8 +288,7 @@
             alert("已审核，禁止编辑");
             return;
         }
-        let quantityStr = $("#changePopQuantity").val();
-        let quantity = Number(quantityStr)
+        let quantity = $("#changePopQuantity").val();
         if (!Number.isInteger(quantity)) {
             alert("请输入一个整数");
             return;
@@ -421,7 +420,6 @@
                 if (result.code === "200") {
                     window.location.reload();
                 } else {
-                    alert(result.msg);
                     console.log("请求失败")
                 }
             }
@@ -454,7 +452,6 @@
                 if (result.code === "200") {
                     window.location.reload();
                 } else {
-                    alert(result.msg);
                     console.log("请求失败")
                 }
             }
@@ -487,7 +484,6 @@
                 if (result.code === "200") {
                     window.location.reload();
                 } else {
-                    alert(result.msg);
                     console.log("请求失败")
                 }
             }

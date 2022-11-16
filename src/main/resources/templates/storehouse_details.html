@@ -172,6 +172,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>商品名</th>
+                                            <th>备注</th>
                                             <th>数量</th>
                                         </tr>
                                         </thead>
@@ -179,6 +180,7 @@
                                         <tr th:each="item:${storeHouseDetails.getItems()}">
                                             <td th:text="${item.id}">1</td>
                                             <td th:text="${item.name}">华为手机</td>
+                                            <td th:text="${item.remark}">华为手机</td>
                                             <td th:text="${item.quantity}">1</td>
                                         </tr>
                                         </tbody>
