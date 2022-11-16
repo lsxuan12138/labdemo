@@ -149,16 +149,14 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>源仓库：</label>
-                                                        <select class="form-control" id="src_store"
-                                                                type="text">
+                                                        <select class="form-control" id="src_store">
                                                             <option th:each="storeHouse:${storeHouses}"
                                                                     th:text="${storeHouse.name}"
                                                                     th:value="${storeHouse.id}">
                                                             </option>
                                                         </select>
                                                         <label>目的仓库：</label>
-                                                        <select class="form-control" id="dest_store"
-                                                                type="text">
+                                                        <select class="form-control" id="dest_store">
                                                             <option th:each="storeHouse:${storeHouses}"
                                                                     th:text="${storeHouse.name}"
                                                                     th:value="${storeHouse.id}">

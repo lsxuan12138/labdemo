@@ -151,6 +151,8 @@
                                                     <div class="form-group">
                                                         <input class="form-control" id="product" placeholder="名称"
                                                                required type="text">
+                                                        <input class="form-control" id="remark" placeholder="备注"
+                                                               required type="text">
                                                         <input class="form-control" id="purchasePrice" placeholder="进货价"
                                                                required step="0.01" type="number">
                                                         <input class="form-control" id="wholesalePrice" placeholder="批发价"
@@ -187,6 +189,9 @@
                                                     <div class="form-group">
                                                         <input class="form-control" id="product_change"
                                                                placeholder="名称"
+                                                               required type="text">
+                                                        <input class="form-control" id="remark_change"
+                                                               placeholder="备注"
                                                                required type="text">
                                                         <input class="form-control" id="purchasePrice_change" placeholder="进货价"
                                                                required step="0.01" type="number">
@@ -320,10 +325,11 @@
             if ($("#change-row-form").isValid()) {
                 let id = popId;
                 let productName = $("#product_change").val();
+                let remark =$("#remark_change").val();
                 let purchasePrice = $("#purchasePrice_change").val();
                 let wholesalePrice = $("#wholesalePrice_change").val();
                 let retailPrice=$("#retailPrice_change").val();
-                console.log(id + "-" + productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
+                console.log(id + "-" + productName + "-" + remark + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
                 if (Number.parseFloat(purchasePrice) > Number.parseFloat(retailPrice)) {
                     alert("成本应低于售价");
                     return;
@@ -331,7 +337,7 @@
                 $.ajax({
                     url: "/product/update",
                     type: "POST",  /*采用POST方法提交*/
-                    data: JSON.stringify({"id": id, "name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice}),  /*提交的数据（json格式），从输入框中获取*/
+                    data: JSON.stringify({"id": id,"name": productName,"remark": remark, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice}),  /*提交的数据（json格式），从输入框中获取*/
                     dataType: 'JSON',
                     cache: false,
                     contentType:'application/json;charset=UTF-8',
@@ -361,6 +367,7 @@
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {
                 let productName = $("#product").val();
+                let remark = $("#remark").val();
                 let purchasePrice = $("#purchasePrice").val();
                 let wholesalePrice = $("#wholesalePrice").val();
                 let retailPrice=$("#retailPrice").val();
@@ -372,7 +379,7 @@
                 $.ajax({
                     url: "/product/add",
                     type: "POST",  /*采用POST方法提交*/
-                    data: JSON.stringify({"name": productName, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice}),  /*提交的数据（json格式），从输入框中获取*/
+                    data: JSON.stringify({"name": productName,"remark": remark, "purchasePrice": purchasePrice, "wholesalePrice": wholesalePrice, "retailPrice": retailPrice}),  /*提交的数据（json格式），从输入框中获取*/
                     contentType:'application/json;charset=UTF-8',
                     dataType: 'JSON',
                     cache: false,

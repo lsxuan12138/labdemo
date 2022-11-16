@@ -144,7 +144,7 @@
                                                     <button aria-label="Close" class="close" data-dismiss="modal"
                                                             type="button"><span
                                                             aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel">开单</h4>
+                                                    <h4 class="modal-title" id="myModalLabel">添加仓库</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
@@ -248,11 +248,13 @@
         var t = $('#tab').DataTable();
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {
+                let name = $("#name_add").val();
+                let remark =$("#remark_add").val();
                 let owner = $("#owner_add").val();
                 $.ajax({
                     url: "/product/storeHouseAdd",
                     type: "POST",  /*采用POST方法提交*/
-                    data: {"owner": owner},
+                    data: {"name": name,"remark": remark,"owner": owner},
                     dataType: 'JSON',
                     cache: false,
                     success: function (result) {
