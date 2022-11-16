@@ -1,7 +1,9 @@
 package com.example.labdemo.controller;
 
+import com.example.labdemo.domain.Product;
 import com.example.labdemo.dto.PurchaseUpdateDto;
 import com.example.labdemo.result.ResultResponse;
+import com.example.labdemo.service.ProductService;
 import com.example.labdemo.service.PurchaseOrderService;
 import com.example.labdemo.service.StoreService;
 import com.example.labdemo.vo.PurchaseDetailVo;
@@ -29,6 +31,8 @@ public class PurchaseOrderController {
     private StoreService storeService;
     @Autowired
     private PurchaseOrderService purchaseOrderService;
+    @Autowired
+    private ProductService productService;
 
     /**
      * 进货单管理页面
@@ -69,8 +73,8 @@ public class PurchaseOrderController {
     @GetMapping("/product/purchaseDetails")
     public ModelAndView getDetail(@PathParam("id") Long id) {
         ModelAndView modelAndView = new ModelAndView("purchase_details");
-        List<StoreVo> storeVos = storeService.selectAllVo();
-        modelAndView.getModelMap().addAttribute("storehouses", storeVos);
+        List<Product> products = productService.getAllProduct();
+        modelAndView.getModelMap().addAttribute("productList", products);
         PurchaseDetailVo detailVo = purchaseOrderService.getDetail(id);
         modelAndView.getModelMap().addAttribute("purchaseDetails", detailVo);
         return modelAndView;

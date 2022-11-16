@@ -46,7 +46,7 @@ public class AdjustmentOrderController {
         ModelAndView modelAndView = new ModelAndView("adjustment");
         List<StoreVo> storeVos = storeService.selectAllVo();
         List<AdjustmentVo> adjustments = adjustmentOrderService.getAllVo();
-        modelAndView.getModelMap().addAttribute("storehouses", storeVos);
+        modelAndView.getModelMap().addAttribute("storeHouses", storeVos);
         modelAndView.getModelMap().addAttribute("adjustments", adjustments);
         return modelAndView;
     }

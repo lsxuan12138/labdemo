@@ -1,5 +1,6 @@
 package com.example.labdemo.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -51,8 +52,12 @@ public class PurchaseVo {
         this.creator = creator;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+//    public Date getCreateTime() {
+//        return createTime;
+//    }
+    public String getCreateTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(createTime);
     }
 
     public void setCreateTime(Date createTime) {

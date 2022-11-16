@@ -3,6 +3,7 @@ package com.example.labdemo.dto;
 import com.example.labdemo.domain.Product;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * TODO
@@ -25,6 +26,7 @@ public class ProductAddDto {
         product.setPurchasePrice(purchasePrice);
         product.setWholesalePrice(wholesalePrice);
         product.setRetailPrice(retailPrice);
+        product.setCreateTime(new Date());
         return product;
     }
     public ProductAddDto() {

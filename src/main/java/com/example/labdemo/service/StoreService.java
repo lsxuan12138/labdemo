@@ -1,6 +1,7 @@
 package com.example.labdemo.service;
 
 import com.example.labdemo.domain.Store;
+import com.example.labdemo.dto.StoreAddDto;
 import com.example.labdemo.vo.StoreHouseDetailVo;
 import com.example.labdemo.vo.StoreItemDetailVo;
 import com.example.labdemo.vo.StoreItemVo;
@@ -24,10 +25,10 @@ public interface StoreService {
 
     /**
      * 新建仓库
-     * @param owner
+     * @param storeAddDto
      * @return
      */
-    public StoreVo addStore(String owner);
+    public StoreVo addStore(StoreAddDto storeAddDto);
 
     /**
      * 获取全部库存（所有仓库库存总和）

@@ -75,6 +75,10 @@ public class SaleNoteServiceImpl implements SaleNoteService {
         detailVo.setId(id);
         detailVo.setClientName(saleNoteVo.getClientName());
         detailVo.setStage(saleNoteVo.getStage());
+        detailVo.setCost(saleNote.getCost());
+        detailVo.setPrice(saleNote.getPrice());
+        detailVo.setProfit(saleNote.getPrice().subtract(saleNote.getCost()));
+        detailVo.setReceivedPayment(saleNote.getReceivedPayment());
         detailVo.setItems(saleNoteItemVos);
 
         return detailVo;
@@ -123,7 +127,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
             itemQueryWrapper.eq("store_id",storeId);
             itemQueryWrapper.eq("product_id",vo.getId());
             StoreItem storeItem = storeItemDao.selectOne(itemQueryWrapper);
-            if(storeItem.getQuantity()<vo.getQuantity()){
+            if(storeItem==null||storeItem.getQuantity()<vo.getQuantity()){
                 throw new BaseException(BaseExceptionEnum.PRODUCT_IS_NOT_ENOUGH);
             }
             storeItem.setQuantity(storeItem.getQuantity()- vo.getQuantity());

@@ -374,7 +374,7 @@
         for (let i = 1; i < data.length; i++) {
             str += "{"
             str += "\"id\":" + data[i][0] + ",";
-            str += "\"quantity\":" + data[i][2];
+            str += "\"quantity\":" + data[i][3];
             str += "}";
             if (i !== data.length - 1) str += ",";
         }
@@ -415,7 +415,7 @@
             data: {"id": id, "stage": "待付款"},
             dataType: 'json',
             cache: false,
-            contentType:'application/json;charset=UTF-8',
+            //contentType:'application/json;charset=UTF-8',
             success: function (result) {
                 //alert(JSON.stringify(result.data))
                 if (result.code === "200") {
@@ -448,7 +448,7 @@
             data: {"id": id, "stage": "已付款"},
             dataType: 'json',
             cache: false,
-            contentType:'application/json;charset=UTF-8',
+            //contentType:'application/json;charset=UTF-8',
             success: function (result) {
                 //alert(JSON.stringify(result.data))
                 if (result.code === "200") {
@@ -481,7 +481,7 @@
             data: {"id": id, "stage": "已退款"},
             dataType: 'json',
             cache: false,
-            contentType:'application/json;charset=UTF-8',
+            //contentType:'application/json;charset=UTF-8',
             success: function (result) {
                 //alert(JSON.stringify(result.data))
                 if (result.code === "200") {

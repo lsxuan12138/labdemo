@@ -6,6 +6,7 @@ import com.example.labdemo.domain.Client;
 import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.domain.Store;
 import com.example.labdemo.domain.User;
+import com.example.labdemo.dto.StoreAddDto;
 import com.example.labdemo.mapper.*;
 import com.example.labdemo.result.BaseException;
 import com.example.labdemo.result.BaseExceptionEnum;
@@ -43,19 +44,15 @@ public class StoreServiceImpl implements StoreService {
         return storeDao.selectAllVo();
     }
     @Override
-    public StoreVo addStore(String owner) {
+    public StoreVo addStore(StoreAddDto storeAddDto) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",owner);
+        queryWrapper.eq("name",storeAddDto.getOwner());
         User user = userDao.selectOne(queryWrapper);
         if(user==null)throw new BaseException(BaseExceptionEnum.USER_NO_EXIST);
-        Store store = new Store();
-        store.setName("未命名");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        store.setRemark("创建于"+format.format(new Date()));
-        store.setOwnerId(user.getId());
+        Store store = storeAddDto.toStore(user.getId());
         storeDao.insert(store);
         StoreVo vo = new StoreVo(store);
-        vo.setOwner(owner);
+        vo.setOwner(storeAddDto.getOwner());
         return vo;
     }
     @Override

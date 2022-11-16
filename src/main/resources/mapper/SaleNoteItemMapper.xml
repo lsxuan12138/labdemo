@@ -4,6 +4,7 @@
     <resultMap id="saleNoteItemVoMap" type="com.example.labdemo.vo.SaleNoteItemVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="quantity" jdbcType="BIGINT" property="quantity"/>
         <result column="price" jdbcType="DECIMAL" property="price"/>
         <result column="cost" jdbcType="DECIMAL" property="cost"/>
@@ -11,9 +12,10 @@
     </resultMap>
     <select id="getItems" resultMap="saleNoteItemVoMap">
         SELECT
-            tsni.id,
+            tp.id,
             tp.`name`,
             tsni.quantity,
+            tp.remark,
         <choose>
             <when test='type =="批发客户"'>
                 tp.wholesale_price AS price,

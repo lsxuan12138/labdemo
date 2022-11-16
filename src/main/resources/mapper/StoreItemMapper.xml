@@ -31,6 +31,7 @@
     <resultMap id="itemDetailVoMap" type="com.example.labdemo.vo.StoreItemDetailVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="quantity" jdbcType="BIGINT" property="quantity"/>
         <result column="price" jdbcType="DECIMAL" property="price"/>
         <result column="cost" jdbcType="DECIMAL" property="cost"/>
@@ -41,6 +42,7 @@
             tsi.product_id AS id,
             tp.`name`,
             sum( tsi.quantity ) AS quantity,
+            tp.remark,
         <choose>
             <when test='type =="批发客户"'>
                 tp.wholesale_price AS price,

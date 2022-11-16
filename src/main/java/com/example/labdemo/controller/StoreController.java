@@ -2,6 +2,7 @@ package com.example.labdemo.controller;
 
 import com.example.labdemo.constants.UserContants;
 import com.example.labdemo.domain.User;
+import com.example.labdemo.dto.StoreAddDto;
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.StoreService;
 import com.example.labdemo.service.UserService;
@@ -53,8 +54,8 @@ public class StoreController {
      */
     @PreAuthorize("hasAuthority('store:insert')")
     @PostMapping("product/storeHouseAdd")
-    public ResultResponse addStore(@RequestBody String owner){
-        return ResultResponse.success(storeService.addStore(owner));
+    public ResultResponse addStore(@RequestBody StoreAddDto storeAddDto){
+        return ResultResponse.success(storeService.addStore(storeAddDto));
     }
 
     /**

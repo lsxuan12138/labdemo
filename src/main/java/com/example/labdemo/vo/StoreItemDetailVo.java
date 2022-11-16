@@ -13,6 +13,8 @@ public class StoreItemDetailVo {
     private Long id;
     private String name;
     private Long quantity;
+
+    private String remark;
     private BigDecimal price;
     private BigDecimal cost;
     private BigDecimal profit;
@@ -34,6 +36,14 @@ public class StoreItemDetailVo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Long getQuantity() {
