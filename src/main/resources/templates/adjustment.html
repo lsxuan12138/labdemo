@@ -239,7 +239,8 @@
 <script src="../static/datatables/js/jquery.datatables.js"></script>
 <script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="../static/space.min.js"></script>
-<script>
+<script th:inline="javascript">
+    const storeList = [[${storeHouses}]];
     function edit(obj) {
         var value = $(obj).parent().parent().find("td");
         let id = Number(value.eq(0).text());
@@ -255,10 +256,22 @@
         var t = $('#tab').DataTable();
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {
-                let srcStoreHouseId = $("#src_store").val();
-                let destStoreHouseId = $("#dest_store").val();
-                if(srcStoreHouseId == destStoreHouseId){
+                let srcStoreHouse = $("#src_store").val();
+                let destStoreHouse = $("#dest_store").val();
+                let srcStoreHouseId =-1;
+                let destStoreHouseId =-1;
+                for (const storeHouse in storeList) {
+                    if(srcStoreHouse===storeHouse.name){
+                        srcStoreHouseId=storeHouse.id;
+                    }
+                    if(destStoreHouse === storeHouse.name){
+                        destStoreHouseId=storeHouse.id;
+                    }
+                    if(destStoreHouseId!==-1&&srcStoreHouseId!==-1)break;
+                }
+                if(srcStoreHouseId === destStoreHouseId){
                     alert("源仓库和目的仓库不能相同");
+                    return ;
                 }
                 $.ajax({
                     url: "/product/addAdjustment",
@@ -266,7 +279,7 @@
                     data: {"srcStoreHouseId": srcStoreHouseId, "destStoreHouseId": destStoreHouseId},
                     dataType: 'JSON',
                     cache: false,
-                    contentType: 'application/json;charset=UTF-8',
+                    //contentType: 'application/json;charset=UTF-8',
                     success: function (result) {
                         //alert(JSON.stringify(result.data))
                         if (result.code === "200") {

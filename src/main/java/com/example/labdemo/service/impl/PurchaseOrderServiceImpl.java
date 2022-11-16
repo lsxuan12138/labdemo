@@ -64,9 +64,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         if(!PurchaseOrderConstants.STAGE_TO_BE_AUDITED.equals(stage)&&!PurchaseOrderConstants.STAGE_TO_BE_EDITED.equals(stage)){
             throw new BaseException(BaseExceptionEnum.STAGE_ERROR);
         }
-        QueryWrapper<PurchaseOrder> deleteWrapper = new QueryWrapper<>();
+        QueryWrapper<PurchaseOrderItem> deleteWrapper = new QueryWrapper<>();
         deleteWrapper.eq("purchase_order_id",purchaseUpdateDto.getId());
-        purchaseOrderDao.delete(deleteWrapper);
+        purchaseOrderItemDao.delete(deleteWrapper);
         for (PurchaseUpdateItemDto item:
                 purchaseUpdateDto.getItems()) {
             PurchaseOrderItem temp = item.toPurchaseUpdateItem();
@@ -80,7 +80,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public void audit(Long id, String stage) {
-        if(PurchaseOrderConstants.STAGE_HAVE_AUDITED.equals(stage)){
+        if(!PurchaseOrderConstants.STAGE_HAVE_AUDITED.equals(stage)){
             throw new BaseException(BaseExceptionEnum.STAGE_ERROR);
         }
         PurchaseOrder order = purchaseOrderDao.selectById(id);
@@ -98,6 +98,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             destStoreItemQueryWrapper.eq("store_id",targetId);
             destStoreItemQueryWrapper.eq("product_id",productId);
             StoreItem destStoreItem = storeItemDao.selectOne(destStoreItemQueryWrapper);
+            if(destStoreItem==null){
+                destStoreItem = new StoreItem();
+                destStoreItem.setStoreId(targetId);
+                destStoreItem.setProductId(productId);
+                destStoreItem.setQuantity(0L);
+            }
             destStoreItem.setQuantity(destStoreItem.getQuantity()+ item.getQuantity());
             storeItemDao.updateById(destStoreItem);
         }

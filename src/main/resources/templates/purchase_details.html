@@ -310,14 +310,16 @@
             if (product.name == name) {
                 var trObj = document.createElement("tr");
                 trObj.id = new Date().getTime();
-                let price = Number.parseFloat(product.sellPrice);
-                let cost = Number.parseFloat(product.purchasePrice);
+                let purchasePrice = Number.parseFloat(product.purchasePrice);
+                let wholesalePrice = Number.parseFloat(product.wholesalePrice);
+                let retailPrice = Number.parseFloat(product.retailPrice);
                 trObj.innerHTML =
                     `<td>${product.id}</td>
                     <td>${product.name}</td>
                     <td>${quantity}</td>
-                    <td>${price}</td>
-                    <td>${cost}</td>
+                    <td>${purchasePrice}</td>
+                    <td>${wholesalePrice}</td>
+                    <td>${retailPrice}</td>
                     <td>
                          <button class="btn btn-info btn-large" onclick=del(this) type="button">删除</button>
                          <button class="btn btn-info btn-large" data-target="#myModal_change" data-toggle="modal"
@@ -325,11 +327,11 @@
                     </td>`;
                 document.getElementById("tb").appendChild(trObj);
                 table1.row.add(trObj).draw();
+                break;
             }
         }
         stageT = "待审核"
     }
-    let purchaseDetails = [[${purchaseDetails}]]
     function save() {
         let stage = purchaseDetails.stage;
         if (stage !== "未编辑" && stage !== "待审核") {
@@ -337,13 +339,14 @@
             return;
         }
         let data = getTableContent("tb");
-        // console.log(data);
+        //console.log(data);
         // console.log(detail);
         let str = "{";
         str += "\"id\":" + purchaseDetails.id + ",";
         str += "\"stage\":\"" + purchaseDetails.stage + "\",";
         str += "\"items\":" + "[";
         for (let i = 1; i < data.length; i++) {
+            if(data[1][0]==="暂无相关数据")break;
             str += "{"
             str += "\"id\":" + data[i][0] + ",";
             str += "\"quantity\":" + data[i][2];
@@ -351,7 +354,7 @@
             if (i !== data.length - 1) str += ",";
         }
         str += "]}";
-        //console.log(str)
+        console.log(str)
         $.ajax({
             url: "/product/purchaseUpdate",
             type: "POST",  /*采用POST方法提交*/
@@ -373,8 +376,8 @@
     }
 
     function audit() {
-        let id = detail.id;
-        let stage = detail.stage;
+        let id = purchaseDetails.id;
+        let stage = purchaseDetails.stage;
         if (stage === "未编辑") {
             alert("请先保存订单");
             return;

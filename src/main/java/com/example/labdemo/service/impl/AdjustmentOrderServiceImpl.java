@@ -85,7 +85,7 @@ public class AdjustmentOrderServiceImpl implements AdjustmentOrderService {
 
     @Override
     public void audit(Long id, String stage) {
-        if(AdjustmentOrderConstants.STAGE_HAVE_AUDITED.equals(stage)){
+        if(!AdjustmentOrderConstants.STAGE_HAVE_AUDITED.equals(stage)){
             throw new BaseException(BaseExceptionEnum.STAGE_ERROR);
         }
         AdjustmentOrder order = adjustmentOrderDao.selectById(id);
@@ -113,6 +113,12 @@ public class AdjustmentOrderServiceImpl implements AdjustmentOrderService {
             destStoreItemQueryWrapper.eq("store_id",targetId);
             destStoreItemQueryWrapper.eq("product_id",productId);
             StoreItem destStoreItem = storeItemDao.selectOne(destStoreItemQueryWrapper);
+            if(destStoreItem==null){
+                destStoreItem = new StoreItem();
+                destStoreItem.setStoreId(targetId);
+                destStoreItem.setProductId(productId);
+                destStoreItem.setQuantity(0L);
+            }
             destStoreItem.setQuantity(destStoreItem.getQuantity()+ item.getQuantity());
             storeItemDao.updateById(destStoreItem);
         }

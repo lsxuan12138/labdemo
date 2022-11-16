@@ -7,7 +7,7 @@ spring:
         name: labdemo
     redis:
         host: 0.0.0.0     ## redis所在的服务器IP
-        port: 49153
+        port: 49154
         password: redispw
         ## 设置最大连接数，0为无限
         pool:

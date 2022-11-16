@@ -88,6 +88,7 @@ public class PurchaseOrderController {
      */
     @PreAuthorize("hasAuthority('purchase:edit')")
     @PostMapping("/product/purchaseUpdate")
+    @ResponseBody
     public ResultResponse update(@RequestBody PurchaseUpdateDto purchaseUpdateDto) {
         purchaseOrderService.update(purchaseUpdateDto);
         return ResultResponse.success();
@@ -102,6 +103,7 @@ public class PurchaseOrderController {
      */
     @PreAuthorize("hasAuthority('purchase:audit')")
     @PostMapping("/product/purchaseAudit")
+    @ResponseBody
     public ResultResponse audit(@RequestParam("id") Long id, @RequestParam("stage") String stage) {
         purchaseOrderService.audit(id, stage);
         return ResultResponse.success();
