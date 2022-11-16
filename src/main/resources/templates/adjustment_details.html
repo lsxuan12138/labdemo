@@ -128,8 +128,8 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">调货单详情</h4>
                                 <p th:text="'调货单编号：'+${adjustmentDetails.id}">调货单编号：</p>
-                                <p th:text="'源仓库：'+${adjustmentDetails.srcStoreHouseId}">源仓库：</p>
-                                <p th:text="'目的仓库：'+${adjustmentDetails.destStoreHouseId}">目的仓库：</p>
+                                <p th:text="'源仓库：'+${adjustmentDetails.srcStoreHouse}">源仓库：</p>
+                                <p th:text="'目的仓库：'+${adjustmentDetails.destStoreHouse}">目的仓库：</p>
                                 <p th:text="'调货单状态：'+${adjustmentDetails.stage}">调货单状态：</p>
                             </div>
                             <div class="panel-body">
@@ -317,7 +317,8 @@
         }
 
         for (const product of productList) {
-            if (product.name == name) {
+            if (product.name === name) {
+                console.log(product)
                 var trObj = document.createElement("tr");
                 trObj.id = new Date().getTime();
                 let purchasePrice = Number.parseFloat(product.purchasePrice);
@@ -343,7 +344,7 @@
     }
 
     function save() {
-        let stage = detail.stage;
+        let stage = adjustmentDetails.stage;
         if (stage !== "未编辑" && stage !== "待审核") {
             alert("已审核，保存无效");
             return;
@@ -356,6 +357,7 @@
         str += "\"stage\":\"" + adjustmentDetails.stage + "\",";
         str += "\"items\":" + "[";
         for (let i = 1; i < data.length; i++) {
+            if(data[1][0]==="暂无相关数据")break;
             str += "{"
             str += "\"id\":" + data[i][0] + ",";
             str += "\"quantity\":" + data[i][2];
@@ -400,7 +402,7 @@
             data: {"id": id, "stage": "已审核"},
             dataType: 'json',
             cache: false,
-            contentType:'application/json;charset=UTF-8',
+            //contentType:'application/json;charset=UTF-8',
             success: function (result) {
                 //alert(JSON.stringify(result.data))
                 if (result.code === "200") {

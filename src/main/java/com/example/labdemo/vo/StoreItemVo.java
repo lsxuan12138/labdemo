@@ -1,5 +1,7 @@
 package com.example.labdemo.vo;
 
+import java.math.BigDecimal;
+
 /**
  * TODO
  *
@@ -12,6 +14,9 @@ public class StoreItemVo {
     private String name;
     private String remark;
     private Long quantity;
+    private BigDecimal purchasePrice;
+    private BigDecimal wholesalePrice;
+    private BigDecimal retailPrice;
 
     public StoreItemVo() {
     }
@@ -51,5 +56,29 @@ public class StoreItemVo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public BigDecimal getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(BigDecimal purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public BigDecimal getWholesalePrice() {
+        return wholesalePrice;
+    }
+
+    public void setWholesalePrice(BigDecimal wholesalePrice) {
+        this.wholesalePrice = wholesalePrice;
+    }
+
+    public BigDecimal getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setRetailPrice(BigDecimal retailPrice) {
+        this.retailPrice = retailPrice;
     }
 }

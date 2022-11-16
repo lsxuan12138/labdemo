@@ -11,10 +11,7 @@ import com.example.labdemo.vo.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.websocket.server.PathParam;
@@ -60,6 +57,7 @@ public class AdjustmentOrderController {
      */
     @PreAuthorize("hasAuthority('adjustment:insert')")
     @PostMapping("/product/addAdjustment")
+    @ResponseBody
     public ResultResponse add(@RequestParam("srcStoreHouseId") Long srcId, @RequestParam("destStoreHouseId") Long destId) {
         return ResultResponse.success(adjustmentOrderService.add(srcId, destId));
     }
@@ -89,6 +87,7 @@ public class AdjustmentOrderController {
      */
     @PreAuthorize("hasAuthority('adjustment:edit')")
     @PostMapping("/product/adjustmentUpdate")
+    @ResponseBody
     public ResultResponse update(@RequestBody AdjustmentUpdateDto adjustmentUpdateDto) {
         adjustmentOrderService.update(adjustmentUpdateDto);
         return ResultResponse.success();
@@ -102,6 +101,7 @@ public class AdjustmentOrderController {
      */
     @PreAuthorize("hasAuthority('adjustment:audit')")
     @PostMapping("/product/adjustmentAudit")
+    @ResponseBody
     public ResultResponse audit(@RequestParam("id") Long id, @RequestParam("stage") String stage) {
         adjustmentOrderService.audit(id, stage);
         return ResultResponse.success();

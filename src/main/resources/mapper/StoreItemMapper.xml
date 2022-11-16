@@ -6,13 +6,19 @@
     <result column="name" jdbcType="VARCHAR" property="name"/>
     <result column="remark" jdbcType="VARCHAR" property="remark"/>
     <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+    <result column="purchasePrice" jdbcType="DECIMAL" property="purchasePrice"/>
+    <result column="wholesalePrice" jdbcType="DECIMAL" property="wholesalePrice"/>
+    <result column="retailPrice" jdbcType="DECIMAL" property="retailPrice"/>
 </resultMap>
     <select id="getAllStoreItem" resultMap="voMap">
         SELECT
             tsi.product_id AS id,
             tp.`name`,
             tp.remark,
-            sum( tsi.quantity ) AS quantity
+            sum( tsi.quantity ) AS quantity,
+            tp.purchase_price AS purchasePrice,
+            tp.wholesale_price AS wholesalePrice,
+            tp.retail_price AS retailPrice
         FROM
             t_store_item AS tsi
                 LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
@@ -24,7 +30,10 @@
             tsi.product_id AS id,
             tp.`name`,
             tp.remark,
-            tsi.quantity
+            tsi.quantity,
+            tp.purchase_price AS purchasePrice,
+            tp.wholesale_price AS wholesalePrice,
+            tp.retail_price AS retailPrice
         FROM
             t_store_item AS tsi
                 LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
