@@ -4,7 +4,7 @@
 <mapper namespace="com.school.dao.SaleNoteDao">
 
     <select id="querySaleNote" resultType="com.school.entity.SaleNote">
-        select  * from t_sale_note owner by id desc
+        select  * from t_sale_note order by id desc
     </select>
 
     <select id="waitList" resultType="com.school.entity.SaleNote">
