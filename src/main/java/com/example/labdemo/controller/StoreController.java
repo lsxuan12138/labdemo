@@ -49,7 +49,7 @@ public class StoreController {
 
     /**
      * 新建仓库
-     * @param owner
+     * @param storeAddDto
      * @return
      */
     @PreAuthorize("hasAuthority('store:insert')")

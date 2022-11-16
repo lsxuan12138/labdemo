@@ -4,12 +4,14 @@
 <resultMap id="voMap" type="com.example.labdemo.vo.StoreItemVo">
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
     <result column="quantity" jdbcType="BIGINT" property="quantity"/>
 </resultMap>
     <select id="getAllStoreItem" resultMap="voMap">
         SELECT
             tsi.product_id AS id,
             tp.`name`,
+            tp.remark,
             sum( tsi.quantity ) AS quantity
         FROM
             t_store_item AS tsi
@@ -21,6 +23,7 @@
         SELECT
             tsi.product_id AS id,
             tp.`name`,
+            tp.remark,
             tsi.quantity
         FROM
             t_store_item AS tsi

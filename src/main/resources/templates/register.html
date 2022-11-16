@@ -44,11 +44,11 @@
                 <p>注册身份</p>
 
                 <select  class="form-control" id="sel2">
-                  <option>管理员</option>
-                  <option>销售员</option>
-                  <option>采购员</option>
-                  <option>送货员</option>
-                  <option>5</option>
+                  <option th:each="role:${roles}" th:value="${role.name}">管理员</option>
+<!--                  <option>销售员</option>-->
+<!--                  <option>采购员</option>-->
+<!--                  <option>送货员</option>-->
+<!--                  <option>5</option>-->
                 </select>
               </div>
               <div class="form-group">
@@ -134,7 +134,7 @@
         flagPass=true;
       }
     })
-
+    let roles = $[[{roles}]]
 
     $("#register-btn").click(function(){
       if(flagName&&flagPas&&flagPass){
@@ -161,12 +161,22 @@
           let sel2 = $("sel2").val();
           let register_Password = $("#register-Password").val();
           let register_Passwords = $("#register-Passwords").val();
-
+          if(register_Passwords!==register_Password){
+            alert("两次输入的密码应该相同")
+          }
+          let roleId;
+          for (const role in roles) {
+            if(role.name===sel2){
+              roleId = role.id;
+              break;
+            }
+          }
           $.ajax({
-            url: "/getRegister/adduser", //这里不知道怎么写
+            url: "/user/adduser", //这里不知道怎么写
             type: "POST",  /*采用POST方法提交*/
-            data: {"register_Username": register_Username, "sel2": sel2, "register_Password": register_Password,"register_Passwords": register_Passwords},  /*提交的数据（json格式），从输入框中获取*/
+            data: JSON.stringify({"username": register_Username, "role": roleId, "password": register_Password}),  /*提交的数据（json格式），从输入框中获取*/
             dataType: 'JSON',
+            contentType: 'application/json;charset=UTF-8',
             cache: false,
             success: function (result) {
               //alert(result)
@@ -174,7 +184,7 @@
                 console.log("请求成功")
                 window.location.reload();
               } else {
-                alert(result.msg)
+                alert(result.message)
               }
             }
           })

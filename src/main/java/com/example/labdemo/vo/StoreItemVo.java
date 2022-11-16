@@ -10,6 +10,7 @@ package com.example.labdemo.vo;
 public class StoreItemVo {
     private Long id;
     private String name;
+    private String remark;
     private Long quantity;
 
     public StoreItemVo() {
@@ -42,5 +43,13 @@ public class StoreItemVo {
     }
     public void setQuantity(String quantity) {
         this.quantity = Long.parseLong(quantity);
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

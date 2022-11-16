@@ -41,9 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 //不通过Session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .formLogin()
-//                .loginPage("/user/login")
+                .and()
+                .formLogin()
+                .loginPage("/user/login")
                 .and()
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
