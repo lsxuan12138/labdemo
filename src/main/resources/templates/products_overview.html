@@ -296,22 +296,21 @@
 
     let popId;
     let popName;
-    let popPrice;
-    let popCost;
-
     function edit(obj) {
         let value = $(obj).parent().parent().find("td");
         let id = Number(value.eq(0).text());
         let name = value.eq(1).text();
-        let cost = Number.parseFloat(value.eq(2).text());
-        let price = Number.parseFloat(value.eq(3).text());
+        let remark = value.eq(2).text();
+        let purchasePrice = Number.parseFloat(value.eq(3).text());
+        let wholesalePrice = Number.parseFloat(value.eq(4).text());
+        let retailPrice = Number.parseFloat(value.eq(5).text());
         popId = id;
         popName = name;
-        popCost = cost;
-        popPrice = price;
         $("#product_change").val(name);
-        $("#cost_change").val(popCost)
-        $("#price_change").val(popPrice);
+        $("#remark_change").val(remark)
+        $("#purchasePrice_change").val(purchasePrice);
+        $("#wholesalePrice_change").val(wholesalePrice);
+        $("#retailPrice_change").val(retailPrice);
     }
 
     $(document).ready(function () {
