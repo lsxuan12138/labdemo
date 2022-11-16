@@ -191,19 +191,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-<!--                                            <td>1</td>-->
-<!--                                            <td>未编辑</td>-->
-<!--                                            <td>仓库1</td>-->
-<!--                                            <td>仓库2</td>-->
-<!--                                            <td>用户1</td>-->
-<!--                                            <td>2022.11.12</td>-->
-<!--                                            <td>-->
-<!--                                                <button class="btn btn-info mr-sm-2" data-toggle="modal"-->
-<!--                                                        onclick=edit(this) type="button">详情-->
-<!--                                                </button>-->
-<!--                                            </td>-->
-                                        </tr>
                                         <tr th:each="adjustment:${adjustments}">
                                             <td th:text="${adjustment.id}"></td>
                                             <td th:text="${adjustment.stage}"></td>
@@ -256,19 +243,8 @@
         var t = $('#tab').DataTable();
         $('#add-row').on('click', function () {
             if ($("#add-row-form").isValid()) {
-                let srcStoreHouse = $("#src_store").val();
-                let destStoreHouse = $("#dest_store").val();
-                let srcStoreHouseId =-1;
-                let destStoreHouseId =-1;
-                for (const storeHouse in storeList) {
-                    if(srcStoreHouse===storeHouse.name){
-                        srcStoreHouseId=storeHouse.id;
-                    }
-                    if(destStoreHouse === storeHouse.name){
-                        destStoreHouseId=storeHouse.id;
-                    }
-                    if(destStoreHouseId!==-1&&srcStoreHouseId!==-1)break;
-                }
+                let srcStoreHouseId = $("#src_store").val();
+                let destStoreHouseId = $("#dest_store").val();
                 if(srcStoreHouseId === destStoreHouseId){
                     alert("源仓库和目的仓库不能相同");
                     return ;
