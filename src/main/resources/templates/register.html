@@ -40,18 +40,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <br>
-                <p>注册身份</p>
-
-                <select  class="form-control" id="sel2">
-                  <option th:each="role:${roles}" th:value="${role.name}">管理员</option>
-<!--                  <option>销售员</option>-->
-<!--                  <option>采购员</option>-->
-<!--                  <option>送货员</option>-->
-<!--                  <option>5</option>-->
-                </select>
-              </div>
-              <div class="form-group">
                 <p>密码</p>
                 <input id="register-Password" class="input-material" type="password" name="registerPassword" placeholder="密码必须在6~10位之间"   >
                 <div class="invalid-feedback">
@@ -66,9 +54,20 @@
                 </div>
               </div>
               <div class="form-group">
+                <br>
+                <p>注册身份</p>
+                <select  class="form-control" id="sel2">
+                  <option th:each="role:${roles}" th:text="${role.remark}"/>
+                  <!--                  <option>销售员</option>-->
+                  <!--                  <option>采购员</option>-->
+                  <!--                  <option>送货员</option>-->
+                  <!--                  <option>5</option>-->
+                </select>
+              </div>
+              <div class="form-group">
                 <button id="register-btn" type="button" name="registerSubmit" class="btn btn-primary">注册</button>
               </div>
-              <small>已有账号?</small><a th:href="@{/getLogin}" class="signup">&nbsp;登录</a>
+              <small>已有账号?</small><a th:href="@{/user/login}" class="signup">&nbsp;登录</a>
             </div>
           </div>
         </div>
@@ -87,7 +86,8 @@
 <script src="../static/datatables/js/jquery.datatables.js"></script>
 <script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="../static/space.min.js"></script>
-<script>
+<script th:inline="javascript">
+  let roles = [[${roles}]]
   $(function(){
     /*错误class  form-control is-invalid
     正确class  form-control is-valid*/
@@ -134,13 +134,13 @@
         flagPass=true;
       }
     })
-    let roles = $[[{roles}]]
+
 
     $("#register-btn").click(function(){
       if(flagName&&flagPas&&flagPass){
         localStorage.setItem("name",name);
         localStorage.setItem("passWord",passWord);
-        location="/getLogin"
+        //location="/user/login";
       }else{
         if(!flagName){
           $("#register-Username").addClass("form-control is-invalid");
@@ -158,18 +158,23 @@
       $("#register-btn").on('click', function () {
         if((flagName&&flagPas&&flagPass)===true) {
           let register_Username = $("#register-Username").val();
-          let sel2 = $("sel2").val();
+          let sel2 = $("#sel2").val();
           let register_Password = $("#register-Password").val();
           let register_Passwords = $("#register-Passwords").val();
           if(register_Passwords!==register_Password){
             alert("两次输入的密码应该相同")
           }
-          let roleId;
-          for (const role in roles) {
-            if(role.name===sel2){
-              roleId = role.id;
-              break;
-            }
+          let roleId=-1;
+          // for (const role in roles) {
+          //   console.log(role)
+
+          // }
+          for (let i = 0; i < roles.length; i++) {
+            //console.log(roles[i])
+              if(roles[i].remark===sel2){
+                roleId = roles[i].id;
+                break;
+              }
           }
           $.ajax({
             url: "/user/adduser", //这里不知道怎么写
@@ -182,7 +187,7 @@
               //alert(result)
               if (result.code === "200") {
                 console.log("请求成功")
-                window.location.reload();
+                window.location.href="/user/login";
               } else {
                 alert(result.message)
               }

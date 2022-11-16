@@ -1,5 +1,8 @@
 package com.example.labdemo.dto;
 
+import com.example.labdemo.domain.User;
+import com.example.labdemo.util.BCPEUtils;
+
 /**
  * TODO
  *
@@ -19,6 +22,14 @@ public class UserAddDto {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+    public User toUser(){
+        User user = new User();
+        user.setName(username);
+        user.setAccount(username);
+        user.setPassword(BCPEUtils.encode(password));
+        user.setRoleId(role);
+        return user;
     }
 
     public String getUsername() {

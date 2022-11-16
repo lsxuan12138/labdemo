@@ -1,7 +1,9 @@
 package com.example.labdemo.service;
 
 import com.example.labdemo.domain.User;
+import com.example.labdemo.dto.UserAddDto;
 import com.example.labdemo.result.ResultResponse;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 import java.util.List;
@@ -21,6 +23,8 @@ public interface UserService {
      * @return
      */
     public ResultResponse login(String username,String password);
+
+    public void adduser(@RequestBody UserAddDto userAddDto);
 
     /**
      * 用户推出登录

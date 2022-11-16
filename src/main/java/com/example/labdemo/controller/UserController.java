@@ -3,6 +3,7 @@ package com.example.labdemo.controller;
 import com.example.labdemo.domain.Role;
 import com.example.labdemo.dto.UserAddDto;
 import com.example.labdemo.result.ResultResponse;
+import com.example.labdemo.service.RoleService;
 import com.example.labdemo.service.UserService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 首页
@@ -64,7 +67,7 @@ public class UserController {
     @GetMapping("/user/register")
     public ModelAndView register(){
         ModelAndView modelAndView = new ModelAndView("register");
-        List<Role> roles = new ArrayList<>();
+        List<Role> roles = roleService.getAll();
         modelAndView.getModelMap().addAttribute("roles",roles);
         return modelAndView;
     }
@@ -77,8 +80,8 @@ public class UserController {
     @PostMapping("/user/adduser")
     @ResponseBody
     public ResultResponse adduser(@RequestBody UserAddDto userAddDto){
-        //System.out.println(userAddDto);
-        return null;
+        userService.adduser(userAddDto);
+        return ResultResponse.success();
     }
 
     /**

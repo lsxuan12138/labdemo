@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.example.labdemo.domain.Role;
 import com.example.labdemo.domain.User;
+import com.example.labdemo.dto.UserAddDto;
 import com.example.labdemo.mapper.RoleDao;
 import com.example.labdemo.mapper.UserDao;
 import com.example.labdemo.result.BaseException;
@@ -59,6 +60,12 @@ public class UserServiceImpl implements UserService {
         map.put("token",jwt);
         return ResultResponse.success(map);
     }
+
+    @Override
+    public void adduser(UserAddDto userAddDto) {
+        userDao.insert(userAddDto.toUser());
+    }
+
     @Override
     public ResultResponse logout() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
