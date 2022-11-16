@@ -31,7 +31,6 @@ public class SpringDataUserDetailsService implements UserDetailsService {
 
         //根据用户的id查询用户的权限
         List<String> permissions = userDao.findPermissionsByUserId(user.getId());
-        LoginUser loginUser = new LoginUser(user, permissions);
-        return loginUser;
+        return new LoginUser(user, permissions);
     }
 }

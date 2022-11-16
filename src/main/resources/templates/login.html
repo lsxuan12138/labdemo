@@ -140,7 +140,7 @@
                     //localStorage.setItem("token",data.result.token)
                     //alert(localStorage.getItem("token"))
 
-                    document.cookie = "token="+data.result.token +"; path=/";
+                    document.cookie = "token="+data.result.token +"; max-age=3600; path=/";
 
                     $("#login-Username").empty();
                     $("#login-Password").empty();
