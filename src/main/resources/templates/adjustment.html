@@ -257,6 +257,9 @@
             if ($("#add-row-form").isValid()) {
                 let srcStoreHouseId = $("#src_store").val();
                 let destStoreHouseId = $("#dest_store").val();
+                if(srcStoreHouseId == destStoreHouseId){
+                    alert("源仓库和目的仓库不能相同");
+                }
                 $.ajax({
                     url: "/product/addAdjustment",
                     type: "POST",  /*采用POST方法提交*/

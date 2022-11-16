@@ -241,7 +241,7 @@
     var table1 = $('#tb').DataTable();
     const productList = [[${productList}]];
     const adjustmentDetails = [[${adjustmentDetails}]]
-    let stageT = detail.stage;
+    let stageT = adjustmentDetails.stage;
     table1.rows().invalidate().draw();
 
     function del(obj) {

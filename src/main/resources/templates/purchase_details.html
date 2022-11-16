@@ -239,8 +239,8 @@
 <script th:inline="javascript">
     var table1 = $('#tb').DataTable();
     const productList = [[${productList}]];
-    const detail = [[${detail}]]
-    let stageT = detail.stage;
+    const purchaseDetails = [[${purchaseDetails}]]
+    let stageT = purchaseDetails.stage;
     table1.rows().invalidate().draw();
 
     function del(obj) {
@@ -282,15 +282,6 @@
             alert("请输入一个整数");
             return;
         }
-        for (const product of productList) {
-            if (product.id === changeProductId) {
-                if (quantity > product.quantity) {
-                    alert("库存只有" + product.quantity + "个");
-                    return;
-                }
-                break;
-            }
-        }
         targetRow.eq(2).html(quantity);
         $('.modal').modal('hide');
     }
@@ -317,10 +308,6 @@
 
         for (const product of productList) {
             if (product.name == name) {
-                if (quantity > product.quantity) {
-                    alert("库存只有" + product.quantity + "个");
-                    return;
-                }
                 var trObj = document.createElement("tr");
                 trObj.id = new Date().getTime();
                 let price = Number.parseFloat(product.sellPrice);
