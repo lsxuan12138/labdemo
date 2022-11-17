@@ -249,9 +249,12 @@
             alert("已审核，禁止编辑");
             return;
         }
-        let tr = obj.parentNode.parentNode //取到了tr对象
-        tr.parentNode.removeChild(tr);
-        table1.row(tr).remove().draw();//避免table1和tb不同步的现象
+        const d=confirm("确定删除该商品吗？");
+        if(d===true) {
+            let tr = obj.parentNode.parentNode //取到了tr对象
+            tr.parentNode.removeChild(tr);
+            table1.row(tr).remove().draw();//避免table1和tb不同步的现象
+        }
     }
 
     let changeProductId;
