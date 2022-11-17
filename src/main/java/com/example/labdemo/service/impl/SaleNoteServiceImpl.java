@@ -74,6 +74,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 
         detailVo.setId(id);
         detailVo.setClientName(saleNoteVo.getClientName());
+        detailVo.setClientType(client==null? ClientConstants.TYPE_RETAILS:client.getType());
         detailVo.setStage(saleNoteVo.getStage());
         detailVo.setCost(saleNote.getCost());
         detailVo.setPrice(saleNote.getPrice());

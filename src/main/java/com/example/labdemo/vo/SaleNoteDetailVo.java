@@ -8,6 +8,7 @@ import java.util.List;
 public class SaleNoteDetailVo {
     private Long id;
     private String clientName;
+    private String clientType;
     private String stage;
     private BigDecimal cost;
     private BigDecimal price;
@@ -33,6 +34,14 @@ public class SaleNoteDetailVo {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
     }
 
     public String getStage() {
