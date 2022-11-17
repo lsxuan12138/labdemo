@@ -204,14 +204,16 @@
                                             <td th:text="${item.wholesalePrice}">5000</td>
                                             <td th:text="${item.retailPrice}">5000</td>
                                             <td>
-                                                <button class="btn btn-info btn-large" onclick=del(this) type="button">
+                                                <div class="btn-group">
+                                                <button class="btn btn-info btn-large" style="width:50%" onclick=del(this) type="button">
                                                     删除
                                                 </button>
-                                                <button class="btn btn-info btn-large" data-target="#myModal_change"
+                                                <button class="btn btn-info btn-large" style="width:50%" data-target="#myModal_change"
                                                         data-toggle="modal"
                                                         onclick=changeQuantity(this)
                                                         type="button">修改
                                                 </button>
+                                                </div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -324,9 +326,11 @@
                     <td>${wholesalePrice}</td>
                     <td>${retailPrice}</td>
                     <td>
-                         <button class="btn btn-info btn-large" onclick=del(this) type="button">删除</button>
-                         <button class="btn btn-info btn-large" data-target="#myModal_change" data-toggle="modal"
+                    <div class="btn-group">
+                         <button class="btn btn-info btn-large" style="width:50%" onclick=del(this) type="button">删除</button>
+                         <button class="btn btn-info btn-large" style="width:50%" data-target="#myModal_change" data-toggle="modal"
                          onclick=changeQuantity(this) type="button">修改</button>
+                    </div>
                     </td>`;
                 document.getElementById("tb").appendChild(trObj);
                 table1.row.add(trObj).draw();
