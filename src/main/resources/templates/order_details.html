@@ -176,8 +176,9 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <p class="form-control" id="changePopId">商品序号</p>
-                                                        <p class="form-control" id="changePopName">商品名称</p>
+                                                        <p id="changePopId">商品序号：</p>
+                                                        <p id="changePopName">商品名称：</p>
+                                                        <label>商品数量：</label>
                                                         <input class="form-control" id="changePopQuantity" type="text"/>
                                                     </div>
                                                 </div>
@@ -309,11 +310,11 @@
 
     function changeQuantity(obj) {
         let stage = stageT;
-        let value = $(obj).parent().parent().find("td");
+        let value = $(obj).parent().parent().parent().find("td");
         targetRow = value;
         let id = Number(value.eq(0).text());
         let name = value.eq(1).text();
-        let quantity = Number(value.eq(2).text());
+        let quantity = Number(value.eq(3).text());
         changeProductId = id;
         $("#changePopId").html("商品编号：" + id);
         $("#changePopName").html("商品名称：" + name);
@@ -332,7 +333,7 @@
             alert("请输入一个整数");
             return;
         }
-        /*for (const product of productList) {
+        for (const product of productList) {
             if (product.id === changeProductId) {
                 if (quantity > product.quantity) {
                     alert("库存只有" + product.quantity + "个");
@@ -340,8 +341,8 @@
                 }
                 break;
             }
-        }*/
-        targetRow.eq(2).html(quantity);
+        }
+        targetRow.eq(3).html(quantity);
         $('.modal').modal('hide');
     }
 
