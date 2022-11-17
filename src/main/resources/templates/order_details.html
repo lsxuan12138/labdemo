@@ -157,7 +157,6 @@
                                     <datalist id="inputProducts" size=10 style="width:100px">
                                         <option th:each="product:${productList}" th:value="${product.name}">临时数据
                                         </option>
-                                        >
                                     </datalist>
                                     <input id="inputQuantity" placeholder="数量" style="width:50px">
                                     <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
@@ -177,11 +176,9 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <p id="changePopId">商品序号：</p>
-                                                        <p id="changePopName">商品名称：</p>
-                                                        <label>商品数量：</label>
-                                                        <input class="form-control" id="changePopQuantity"
-                                                               type="number"/>
+                                                        <p class="form-control" id="changePopId">商品序号</p>
+                                                        <p class="form-control" id="changePopName">商品名称</p>
+                                                        <input class="form-control" id="changePopQuantity" type="text"/>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -329,12 +326,13 @@
             alert("已审核，禁止编辑");
             return;
         }
-        let quantity = $("#changePopQuantity").val();
+        let quantityStr = $("#changePopQuantity").val();
+        let quantity = Number(quantityStr)
         if (!Number.isInteger(quantity)) {
             alert("请输入一个整数");
             return;
         }
-        for (const product of productList) {
+        /*for (const product of productList) {
             if (product.id === changeProductId) {
                 if (quantity > product.quantity) {
                     alert("库存只有" + product.quantity + "个");
@@ -342,7 +340,7 @@
                 }
                 break;
             }
-        }
+        }*/
         targetRow.eq(2).html(quantity);
         $('.modal').modal('hide');
     }
@@ -356,10 +354,6 @@
         let name = $("#inputProduct").val();
         let quantity = Number($("#inputQuantity").val());
         let data = getTableContent("tb");
-        if (isNaN(quantity) || quantity < 0) {
-            alert("请输入一个正整数");
-            return;
-        }
         for (let i = 1; i < data.length; i++) {
             if (data[i][1] == name) {
                 alert("该商品已在订单中");
