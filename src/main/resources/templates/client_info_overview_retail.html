@@ -252,29 +252,32 @@
 <script src="../static/space.min.js"></script>
 <script>
     function del(obj) {
-        let tr = obj.parentNode.parentNode //取到了tr对象
-        let value = $(obj).parent().parent().find("td");
-        let id = Number.parseFloat(value.eq(0).text());
-        console.log(id)
-        if (!isNaN(id)) {
-            $.ajax({
-                url: "/client/delete",
-                type: "POST",  /*采用POST方法提交*/
-                data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
-                dataType: 'JSON',
-                cache: false,
-                //contentType:'application/json;charset=UTF-8',
-                success: function (result) {
-                    //alert(result)
-                    if (result.code === "200") {
-                        console.log("请求成功")
-                        window.location.reload();
-                    } else {
-                        alert(result.message)
-                        console.log("请求失败")
+        const d=confirm("确定删除该客户吗，删除之后无法撤销");
+        if(d===true) {
+            let tr = obj.parentNode.parentNode //取到了tr对象
+            let value = $(obj).parent().parent().find("td");
+            let id = Number.parseFloat(value.eq(0).text());
+            console.log(id)
+            if (!isNaN(id)) {
+                $.ajax({
+                    url: "/client/delete",
+                    type: "POST",  /*采用POST方法提交*/
+                    data: {"id": id},  /*提交的数据（json格式），从输入框中获取*/
+                    dataType: 'JSON',
+                    cache: false,
+                    //contentType:'application/json;charset=UTF-8',
+                    success: function (result) {
+                        //alert(result)
+                        if (result.code === "200") {
+                            console.log("请求成功")
+                            window.location.reload();
+                        } else {
+                            alert(result.message)
+                            console.log("请求失败")
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     }
 
