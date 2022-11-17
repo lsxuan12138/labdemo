@@ -119,7 +119,8 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">销售<a class="btn btn-info m-b-sm" th:href="@{/saleNote/all}" style="float: right" type="button">返回</a></h3>
+                <h3 class="breadcrumb-header">销售<a class="btn btn-info m-b-sm" style="float: right"
+                                                     th:href="@{/saleNote/all}" type="button">返回</a></h3>
             </div>
             <div id="main-wrapper">
                 <div class="row">
@@ -129,6 +130,7 @@
                                 <h4 class="panel-title">订单详情</h4>
                                 <p th:text="'订单编号：'+${detail.id}">订单编号：</p>
                                 <p th:text="'下单顾客：'+${detail.clientName}">下单顾客：</p>
+                                <p th:text="'客户类型：'+${detail.clientType}">客户类型：</p>
                                 <p th:text="'订单状态：'+${detail.stage}">订单状态：</p>
                                 <p th:text="'总成本：'+${detail.cost}">总成本：</p>
                                 <p th:text="'总销售额：'+${detail.price}">总销售额：</p>
@@ -136,7 +138,7 @@
                                 <p th:text="'已收款项：'+${detail.receivedPayment}">已收款项：</p>
                             </div>
                             <div class="panel-body">
-                                <button class="btn btn-info m-b-sm" onclick=audit()  type="button">
+                                <button class="btn btn-info m-b-sm" onclick=audit() type="button">
                                     审核
                                 </button>
                                 <button class="btn btn-info m-b-sm" onclick=collectMoney()
@@ -145,7 +147,7 @@
                                 <button class="btn btn-info m-b-sm" onclick=returnGoods()
                                         type="button">退货
                                 </button>
-                                <button class="btn btn-info m-b-sm" onclick=save()  type="button">
+                                <button class="btn btn-info m-b-sm" onclick=save() type="button">
                                     保存
                                 </button>
                                 <form class="form-inline mb-2" style="float: right">
@@ -153,7 +155,9 @@
                                     <input autocomplete="off" id="inputProduct" list="inputProducts" size=10
                                            style="width:100px">
                                     <datalist id="inputProducts" size=10 style="width:100px">
-                                        <option th:each="product:${productList}" th:value="${product.name}">临时数据</option>>
+                                        <option th:each="product:${productList}" th:value="${product.name}">临时数据
+                                        </option>
+                                        >
                                     </datalist>
                                     <input id="inputQuantity" placeholder="数量" style="width:50px">
                                     <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
@@ -173,10 +177,11 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <p  id="changePopId">商品序号：</p>
-                                                        <p  id="changePopName">商品名称：</p>
+                                                        <p id="changePopId">商品序号：</p>
+                                                        <p id="changePopName">商品名称：</p>
                                                         <label>商品数量：</label>
-                                                        <input class="form-control" id="changePopQuantity" type="number"/>
+                                                        <input class="form-control" id="changePopQuantity"
+                                                               type="number"/>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -184,6 +189,35 @@
                                                             type="button">取消
                                                     </button>
                                                     <button class="btn btn-success" id="change-row" onclick=change()
+                                                            type="submit">确定
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form action="javascript:void(0);" id="collect-row-form">
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                         id="myModal_collect"
+                                         role="dialog" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button aria-label="Close" class="close" data-dismiss="modal"
+                                                            type="button"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel_collect">收银台</h4>
+                                                </div>
+                                                <div class="modal-body" style="text-align: center">
+                                                    <h2>请扫二维码付款</h2>
+                                                    <img alt="image" class="img-fluid mt-5"
+                                                         src="../static/img/collect.webp" style="width: 80%;height: 70%"/>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                            type="button">取消
+                                                    </button>
+                                                    <button class="btn btn-success" id="collect-row"
                                                             type="submit">确定
                                                     </button>
                                                 </div>
@@ -217,14 +251,16 @@
                                             <td th:text="${item.profit}">50</td>
                                             <td>
                                                 <div class="btn-group">
-                                                <button class="btn btn-info btn-large" style="width:50%" onclick=del(this) type="button">
-                                                    删除
-                                                </button>
-                                                <button class="btn btn-info btn-large" style="width:50%" data-target="#myModal_change"
-                                                        data-toggle="modal"
-                                                        onclick=changeQuantity(this)
-                                                        type="button">修改
-                                                </button>
+                                                    <button class="btn btn-info btn-large" onclick=del(this)
+                                                            style="width:50%" type="button">
+                                                        删除
+                                                    </button>
+                                                    <button class="btn btn-info btn-large" data-target="#myModal_change"
+                                                            data-toggle="modal"
+                                                            onclick=changeQuantity(this)
+                                                            style="width:50%"
+                                                            type="button">修改
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -263,8 +299,8 @@
             alert("已审核，禁止编辑");
             return;
         }
-        const d=confirm("确定删除该商品吗？");
-        if(d===true) {
+        const d = confirm("确定删除该商品吗？");
+        if (d === true) {
             let tr = obj.parentNode.parentNode //取到了tr对象
             tr.parentNode.removeChild(tr);
             table1.row(tr).remove().draw();//避免table1和tb不同步的现象
@@ -437,6 +473,7 @@
     }
 
     function collectMoney() {
+
         let id = detail.id;
         let stage = detail.stage;
         if (stage === "未编辑") {
@@ -449,24 +486,49 @@
             alert("已付款，禁止再次付款")
             return;
         }
-        $.ajax({
-            url: "/saleNote/collectMoney",
-            type: "POST",  /*采用POST方法提交*/
-            data: {"id": id, "stage": "已付款"},
-            dataType: 'json',
-            cache: false,
-            //contentType:'application/json;charset=UTF-8',
-            success: function (result) {
-                //alert(JSON.stringify(result.data))
-                if (result.code === "200") {
-                    window.location.reload();
-                } else {
-                    alert(result.message)
-                    console.log("请求失败")
+        if(detail.clientType==="零售客户"){
+            $('#myModal_collect').modal("show");
+            $('#collect-row').on('click', function () {
+                $.ajax({
+                    url: "/saleNote/collectMoney",
+                    type: "POST",  /*采用POST方法提交*/
+                    data: {"id": id, "stage": "已付款"},
+                    dataType: 'json',
+                    cache: false,
+                    //contentType:'application/json;charset=UTF-8',
+                    success: function (result) {
+                        //alert(JSON.stringify(result.data))
+                        if (result.code === "200") {
+                            window.location.reload();
+                        } else {
+                            alert(result.message)
+                            console.log("请求失败")
+                        }
+                    }
+                })
+                $('#myModal_collect').modal("hide");
+            })
+        }
+        else{
+            $.ajax({
+                url: "/saleNote/collectMoney",
+                type: "POST",  /*采用POST方法提交*/
+                data: {"id": id, "stage": "已付款"},
+                dataType: 'json',
+                cache: false,
+                //contentType:'application/json;charset=UTF-8',
+                success: function (result) {
+                    //alert(JSON.stringify(result.data))
+                    if (result.code === "200") {
+                        window.location.reload();
+                    } else {
+                        alert(result.message)
+                        console.log("请求失败")
+                    }
                 }
-            }
+            })
+        }
 
-        })
     }
 
     function returnGoods() {
