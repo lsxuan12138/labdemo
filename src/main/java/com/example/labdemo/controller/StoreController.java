@@ -54,6 +54,7 @@ public class StoreController {
      */
     @PreAuthorize("hasAuthority('store:insert')")
     @PostMapping("product/storeHouseAdd")
+    @ResponseBody
     public ResultResponse addStore(@RequestBody StoreAddDto storeAddDto){
         return ResultResponse.success(storeService.addStore(storeAddDto));
     }
