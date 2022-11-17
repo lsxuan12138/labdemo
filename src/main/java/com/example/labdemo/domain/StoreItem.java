@@ -15,6 +15,12 @@ public class StoreItem {
     public StoreItem() {
     }
 
+    public StoreItem(Long storeId, Long productId, Long quantity) {
+        this.storeId = storeId;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
     public Long getId() {
         return id;
     }

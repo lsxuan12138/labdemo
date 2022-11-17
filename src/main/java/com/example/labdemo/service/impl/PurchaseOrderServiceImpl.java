@@ -99,12 +99,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             destStoreItemQueryWrapper.eq("product_id",productId);
             StoreItem destStoreItem = storeItemDao.selectOne(destStoreItemQueryWrapper);
             if(destStoreItem==null){
-                destStoreItem = new StoreItem();
-                destStoreItem.setStoreId(targetId);
-                destStoreItem.setProductId(productId);
-                destStoreItem.setQuantity(0L);
+                destStoreItem = new StoreItem(targetId,productId, item.getQuantity());
+                storeItemDao.insert(destStoreItem);
+            }else {
+                destStoreItem.setQuantity(destStoreItem.getQuantity()+ item.getQuantity());
+                storeItemDao.updateById(destStoreItem);
             }
-            destStoreItem.setQuantity(destStoreItem.getQuantity()+ item.getQuantity());
             storeItemDao.updateById(destStoreItem);
         }
         order.setStage(PurchaseOrderConstants.STAGE_HAVE_AUDITED);
