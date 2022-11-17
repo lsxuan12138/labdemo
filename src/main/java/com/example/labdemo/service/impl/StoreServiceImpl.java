@@ -45,14 +45,16 @@ public class StoreServiceImpl implements StoreService {
     }
     @Override
     public StoreVo addStore(StoreAddDto storeAddDto) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",storeAddDto.getOwner());
-        User user = userDao.selectOne(queryWrapper);
-        if(user==null)throw new BaseException(BaseExceptionEnum.USER_NO_EXIST);
-        Store store = storeAddDto.toStore(user.getId());
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("name",storeAddDto.getOwner());
+//        User user = userDao.selectOne(queryWrapper);
+//        if(user==null)throw new BaseException(BaseExceptionEnum.USER_NO_EXIST);
+        Store store = storeAddDto.toStore();
         storeDao.insert(store);
         StoreVo vo = new StoreVo(store);
-        vo.setOwner(storeAddDto.getOwner());
+        User user = userDao.selectById(storeAddDto.getOwner());
+        if(user==null)throw new BaseException(BaseExceptionEnum.USER_NO_EXIST);
+        vo.setOwner(user.getName());
         return vo;
     }
     @Override

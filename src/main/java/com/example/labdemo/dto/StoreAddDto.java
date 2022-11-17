@@ -12,15 +12,15 @@ import com.example.labdemo.domain.Store;
 public class StoreAddDto {
     private String name;
     private String remark;
-    private String owner;
+    private Long owner;
 
     public StoreAddDto() {
     }
-    public Store toStore(Long ownerId){
+    public Store toStore(){
         Store store = new Store();
         store.setName(name);
         store.setRemark(remark);
-        store.setOwnerId(ownerId);
+        store.setOwnerId(owner);
         return store;
     }
     public String getName() {
@@ -39,11 +39,11 @@ public class StoreAddDto {
         this.remark = remark;
     }
 
-    public String getOwner() {
+    public Long getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(Long owner) {
         this.owner = owner;
     }
 }
