@@ -1,0 +1,67 @@
+<!--pages/storeop/storeop.wxml-->
+<view class="container">
+
+<rich-text nodes="<h2 style='color: black'>当前库存列表</h2>"> </rich-text>  
+<view class="find">
+    <input bindinput="getStoreId" type="number" placeholder="：输入仓库编号查询" placeholder-style="color:black" ></input>
+    <button bindtap="findbystoreid" plain="false">查询</button>
+    <button bindtap="onShow" plain="false">全部库存情况</button>
+</view>
+
+<view class = "form">
+<view class="widget">
+  <text class="column">序号</text>
+  <text class="column">所在仓库</text>
+  <text class="column">商品编号</text>
+  <text class="column">数量</text>
+  <text class="column">操作</text>
+</view>
+<scroll-view scroll-y="true">
+  <view>
+    <block wx:for="{{list}}">
+      <view class="widget">
+         <text class="column">{{item.id}}</text>
+         <text class="column">{{item.storeId}}</text>
+         <text class="column">{{item.productId}}</text>
+         <text class="column">{{item.quantity}}</text>
+         <view class="link-column">
+            <button class="edit" bindtap="modalinput1" size="mini">出库 </button>
+            <modal hidden="{{hiddenmodalput1}}" title="商品出库" 
+   			confirm-text="确定出库" cancel-text="取消" bindcancel="modalinput1" 
+   			bindconfirm="sub">
+               <view class="row">
+               <text>当前操作ID：</text>
+               <input bindinput="inputId" type="number" placeholder="：输入条目ID以确认"  ></input>
+               </view>
+               <view class="row">
+               <text>欲出库数量：</text>
+               <input type='number'  bindinput='inputNum'  placeholder="输入出库数量" 
+               value="{{num}}"auto-focus/>
+               </view>
+            </modal>
+            
+            <button class="edit" bindtap="modalinput2" size="mini">入库 </button>
+            <modal hidden="{{hiddenmodalput2}}" title="商品入库" 
+   			confirm-text="确定入库" cancel-text="取消" bindcancel="modalinput2" 
+   			bindconfirm="add">
+               <view class="row">
+               <text>当前操作ID：</text>
+               <input bindinput="inputId" type="number" placeholder="：输入条目ID以确认"  ></input>
+               </view>
+               <view class="row">
+               <text>欲入库数量：</text>
+               <input type='number'  bindinput='inputNum'  placeholder="输入入库数量" 
+               value="{{num}}"auto-focus/>
+               </view>
+            </modal>
+
+          </view>
+      </view>
+
+    </block>
+  </view>
+</scroll-view>
+</view>
+
+</view>
+

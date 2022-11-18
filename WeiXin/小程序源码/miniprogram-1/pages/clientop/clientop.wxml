@@ -1,0 +1,39 @@
+<!--pages/userop/userop.wxml-->
+<view class="container">
+
+<rich-text nodes="<h2 style='color: black'>当前客户列表</h2>"> </rich-text>  
+<view class="find">
+    <input bindinput="getName" type="string" placeholder="：输入客户姓名查询" placeholder-style="color:black" ></input>
+    <button bindtap="findbyname" plain="false">查询</button>
+    <button bindtap="addClient" plain="false">新增客户信息</button>
+    <button bindtap="onShow" plain="false">全部客户</button>
+</view>
+
+<view class = "form">
+<view class="widget">
+  <text class="column">序号</text>
+  <text class="column">姓名</text>
+  <text class="column">角色</text>
+  <text class="column">操作</text>
+</view>
+<scroll-view scroll-y="true">
+  <view>
+    <block wx:for="{{list}}">
+      <view class="widget">
+         <text class="column">{{item.id}}</text>
+         <text class="column">{{item.name}}</text>
+         <text class="column">{{item.type}}</text>
+         <view class="link-column">
+            <navigator class="link" url="../changeclient/changeclient?id={{item.id}}">编辑</navigator>|
+            <text class="link" bindtap="deleteClient"  data-name="{{item.name}}" 
+            data-id="{{item.id}}" data-account="{{account}}">删除</text>
+          </view>
+      </view>
+
+    </block>
+  </view>
+</scroll-view>
+</view>
+
+</view>
+

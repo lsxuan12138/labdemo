@@ -15,16 +15,17 @@
         select  * from t_product where  id=#{id}
     </select>
 
-    <insert id="insertProduct" useGeneratedKeys="true" parameterType="com.school.entity.Product">
-        insert into t_product (id,name,quantity,purchase_price,sell_price,create_time)values(#{id},#{name},#{quantity},#{purchasePrice},#{sellPrice},#{createTime})
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.Product">
+        insert into t_product (name,remark,purchase_price,wholesale_price,retail_price,create_time)values(#{name},#{remark},#{purchasePrice},#{wholesalePrice},#{retailPrice},#{createTime})
     </insert>
     <update id="updateProduct" parameterType="com.school.entity.Product">
         update t_product
         <set>
             <if test="name!=null">name=#{name},</if>
-            <if test="quantity!=null">quantity=#{quantity},</if>
+            <if test="remark!=null">remark=#{remark},</if>
             <if test="purchasePrice!=null">purchase_price=#{purchasePrice},</if>
-            <if test="sellPrice!=null">sell_price=#{sellPrice},</if>
+            <if test="wholesalePrice!=null">wholesale_price=#{wholesalePrice},</if>
+            <if test="retailPrice!=null">retail_price=#{retailPrice},</if>
             <if test="createTime!=null">create_time=#{createTime},</if>
         </set>
         where id=#{id}

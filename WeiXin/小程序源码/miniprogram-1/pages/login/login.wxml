@@ -2,7 +2,7 @@
 <view class="container">
     <rich-text nodes="<h2 style='color: #3333FF'>欢迎您登录：</h2"> </rich-text>
 <view class = "in">
-<input bindinput="getUserName" placeholder="：用户名" placeholder-style="color:black" class="userName"></input>
+<input bindinput="getAccount" placeholder="：账号" placeholder-style="color:black" class="userName"></input>
 <input bindinput="getPassword" type="password" placeholder="：请输入密码" placeholder-style="color:black" class="userName"></input>
 </view>
 

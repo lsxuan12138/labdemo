@@ -17,36 +17,45 @@ public class Product {
         this.name = name;
     }
 
-
-    public Integer getQuantity() {
-        return quantity;
+    public String getRemark() {
+        return remark;
     }
-    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Double getPurchasePrice() { return purchasePrice; }
     public void setPurchasePrice(Double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    public Double getSellPrice() {
-        return sellPrice;
+    public Double getWholesalePrice() {
+        return wholesalePrice;
     }
-    public void setSellPrice(Double sellPrice) {
-        this.sellPrice = sellPrice;
+    public void setWholesalePrice(Double wholesalePrice) {
+        this.wholesalePrice = wholesalePrice;
     }
 
-    public Date getCreateTime() {
+    public Double getRetailPrice() {
+        return retailPrice;
+    }
+    public void setRetailPrice(Double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
+    public java.sql.Date getCreateTime() {
         return createTime;
     }
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(java.sql.Date createTime) {
         this.createTime =  createTime;
     }
 
 
     public Integer id;
     public String name;
-    public Integer quantity;
+    public String remark;
     public Double purchasePrice;
-    public Double sellPrice;
-    public Date createTime;
+    public Double wholesalePrice;
+    public Double retailPrice;
+    public java.sql.Date createTime;
 }

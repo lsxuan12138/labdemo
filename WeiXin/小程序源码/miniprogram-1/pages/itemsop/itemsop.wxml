@@ -13,8 +13,8 @@
 <view class="widget">
   <text class="column">序号</text>
   <text class="column">名称</text>
-  <text class="column">库存</text>
-  <text class="column">售价</text>
+  <text class="column">批发价格</text>
+  <text class="column">零售价格</text>
   <text class="column">操作</text>
 </view>
 <scroll-view scroll-y="true">
@@ -23,8 +23,8 @@
       <view class="widget">
          <text class="column">{{item.id}}</text>
          <text class="column">{{item.name}}</text>
-         <text class="column">{{item.quantity}}</text>
-         <text class="column">{{item.sellPrice}}</text>
+         <text class="column">{{item.wholesalePrice}}</text>
+         <text class="column">{{item.retailPrice}}</text>
          <view class="link-column">
             <navigator class="link" url="../changeitem/changeitem?id={{item.id}}">编辑</navigator>|
             <text class="link" bindtap="deleteProduct" data-id="{{item.id}}" data-name="{{item.name}}" data-index="{{index}}">删除</text>

@@ -1,12 +1,12 @@
 // pages/login/login.js
 
 Page({
-    getUserName: function(e) {
+    getAccount: function(e) {
         var value = e.detail.value; //获取输入的内容
         this.setData({
-          username:value,//改变page--data中username的值
+          account:value,//改变page--data中username的值
         })
-        wx.setStorageSync('username', value);//将获取到的username值存入本地缓存空间
+        wx.setStorageSync('account', value);//将获取到的username值存入本地缓存空间
     },
       getPassword:function(e) {
         var value = e.detail.value;
@@ -25,11 +25,11 @@ Page({
           })
         }else {*/
           wx.request({  //向后台发送请求
-            url: 'http://localhost:8081/demo/login/findbyusername',
+            url: 'http://localhost:8081/demo/user/findbyaccount',
             method: "GET",
             header: { 'content-type': 'application/json' },
             data: {
-              username: this.data.username, //this.data.username 代表你data中username的值
+              account: this.data.account, //this.data.username 代表你data中username的值
               //password: this.data.password,
             },
             success: function (res) { //res为后台返回给前端的数据
@@ -48,11 +48,20 @@ Page({
                 })
                 //wx.setStorageSync('userId', res.data.data); //保存userId至本地，以便随时调用
                 console.log(res.data.data);
-                
-                  wx.redirectTo({
-                    url: '../index/index',  //跳转至首页
-                  })
-              }else{
+                if(res.data.user.roleId==1){
+                    wx.redirectTo({
+                        url: '../index1/index1',  //跳转至首页
+                      })
+                }else if(res.data.user.roleId==2){
+                    wx.redirectTo({
+                        url: '../index1/index1',  //跳转至首页
+                      })
+                }else {
+                    wx.redirectTo({
+                        url: '../index/index',  //跳转至首页
+                      })
+                }
+            }else{
                 wx.showToast({
                   icon: 'none',
                   title: '用户名或密码错误',
@@ -67,7 +76,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        username:'',
+        uaccount:'',
         password:'' 
     },
 

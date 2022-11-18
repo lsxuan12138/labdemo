@@ -1,6 +1,5 @@
 package com.school.dao;
 
-import com.school.entity.Area;
 import com.school.entity.SaleNote;
 
 import java.util.List;

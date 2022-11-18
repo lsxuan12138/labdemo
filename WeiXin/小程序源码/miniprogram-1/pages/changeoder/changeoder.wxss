@@ -1,1 +1,60 @@
 /* pages/changeoder/changeoder.wxss */
+
+.container{
+    padding: 1rem;
+    line-height: 2.56rem;
+    }
+.row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    }
+.row text{
+    flex-grow: 1;
+    text-align: right;
+    font-size: 1.7rem;
+    }
+.row input{
+    font-size: 1rem;
+    flex-grow: 3;
+    border: 1px solid #5ab7f5d7;
+    display: inline-block;
+    border-radius: 0.7rem;
+    box-shadow: 0 0 0.15rem #aaa;
+    padding: 0.9rem;
+    }
+.row button{
+      margin-top: 10rpx;
+      color: #111111;
+      background-color: #5ab7f5d7;
+    }
+.widget {
+        position: relative;
+        margin-top: 10rpx;
+        margin-bottom: 5rpx;
+        padding-top: 0rpx;
+        padding-bottom: 0rpx;
+        padding-left: 5rpx;
+        padding-right: 5rpx;
+        border: rgb(177, 175, 175) 1px solid;
+    }
+.widget button{
+    margin-top: 5rpx;
+    color: #111111;
+    background-color: #5ab7f552;
+}
+.column {
+            padding-left: 10rpx;
+            padding-right: 10rpx;
+            width: 4rem;
+            display: table-cell;
+    }
+.link-column {
+        width: 6rem;
+        display: table-cell;
+    }
+.link {        
+        color: blue; 
+        display: inline-table;
+        font-size: 0.9rem;
+    }

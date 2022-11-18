@@ -22,6 +22,7 @@
     box-sizing: border-box;
     padding-top: 10rpx;
     padding-bottom: 10rpx;
+    margin-left: 20rpx;
     text-align: center;
     }
     

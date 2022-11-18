@@ -1,0 +1,30 @@
+<!--pages/changeitem/changeitem.wxml-->
+
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+
+  <view class="row">
+  <text>姓名：</text>
+  <input type="text" name="name" placeholder="请输入员工姓名" value="{{name}}" />
+  </view>
+  <view class="row">
+  <text>账号：</text>
+  <input type="text" name="account" placeholder="请输入账号" value="{{account}}" />
+  </view>
+  <view class="row">
+  <text>密码：</text>
+  <input type="text" name="password" placeholder="请输入密码" value="{{password}}" />
+  </view>
+  <view class="row">
+  <text>角色：</text>
+  <input type="number" name="roleId" placeholder="请输入角色ID" value="{{roleId}}" />
+  </view>
+
+  <view class="row">
+    <button form-type="submit">提交</button>
+    <button form-type="reset">清空</button>
+  </view>
+  
+</form>
+</view>
+

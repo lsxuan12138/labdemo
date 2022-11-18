@@ -1,9 +1,7 @@
 package com.school.web;
 
 
-import com.school.entity.Area;
 import com.school.entity.Product;
-import com.school.service.AreaService;
 import com.school.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,6 +53,8 @@ public class ProductController {
     @RequestMapping(value = "/updateProduct",method = RequestMethod.POST)
     public Map<String,Object>  updateProduct(@RequestBody Product product){
         Map<String,Object> modelMap=new HashMap<>();
+        System.out.println("零售价格"+product.getRetailPrice());
+        System.out.println("批发价格"+product.getWholesalePrice());
         modelMap.put("success",service.updateProduct(product));
         return  modelMap;
     }

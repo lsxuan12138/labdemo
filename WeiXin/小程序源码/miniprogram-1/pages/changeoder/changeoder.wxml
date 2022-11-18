@@ -1,2 +1,65 @@
 <!--pages/changeoder/changeoder.wxml-->
-<text>pages/changeoder/changeoder.wxml</text>
+
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="row">
+  <text>订单序号：</text>
+  <input type="number" name="id" placeholder="请输入订单ID" value="{{id}}" />
+  </view>
+  <view class="row">
+  <text>购买仓库：</text>
+  <input type="number" name="storeId" placeholder="请输入仓库ID" value="{{storeId}}" />
+  </view>
+  <view class="row">
+  <text>下单客户：</text>
+  <input type="number" name="clientId" placeholder="请输入下单客户ID" value="{{clientId}}" />
+  </view>
+
+  <view class="row">
+  <text>总金额：</text>
+  <input type="number" name="price" placeholder="请输入订单总金额" value="{{price}}" />
+  </view>
+
+  <view class="row">
+  <text>下单日期：</text>
+  <input type="date" name="createTime" placeholder="请输入下单日期" value="{{createTime}}" />
+  </view>
+
+  <view class="row">
+    <button form-type="submit">提交订单草稿</button>
+    <button form-type="reset">清空订单草稿</button>
+  </view>
+
+</form>
+
+<view class="widget">
+    <view class="widget">
+    <text class="column">订单ID:</text>
+    <text class="column">{{id}}</text>
+    <button class="column" bindtap="addSaleNoteItem" >新建订单条目</button>
+    </view>  
+<text class="column">编号</text>
+<text class="column">商品</text>
+<text class="column">数量</text>
+<text class="column">金额</text>
+<text class="column">操作</text>
+<scroll-view scroll-y="true">
+<view>
+<block wx:for="{{list}}">
+  <view class="widget">
+    <text class="column">{{item.id}}</text>
+    <text class="column">{{item.productId}}</text>
+    <text class="column">{{item.quantity}}</text>
+    <text class="column">{{item.quantity*2}}</text>
+    <view class="link-column">
+      <navigator class="link" url="../changeoderitem/changeoderitem?id={{item.id}}">编辑</navigator>|
+      <text class="link" bindtap="deleteSaleNoteItem" data-id="{{item.id}}" data-index="{{index}}">删除</text>
+    </view>
+  </view>
+</block>
+</view>
+</scroll-view>
+</view>
+
+</view>
+

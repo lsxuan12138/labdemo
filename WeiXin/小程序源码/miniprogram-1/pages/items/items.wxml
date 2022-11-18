@@ -12,8 +12,8 @@
   <view class="widget">
     <text class="column">序号</text>
     <text class="column">名称</text>
-    <text class="column">库存数量</text>
-    <text class="column">售价</text>
+    <text class="column">批发价格</text>
+    <text class="column">零售价格</text>
   </view>
   <scroll-view scroll-y="true">
     <view>
@@ -21,8 +21,8 @@
         <view class="widget">
            <text class="column">{{item.id}}</text>
            <text class="column">{{item.name}}</text>
-           <text class="column">{{item.quantity}}</text>
-           <text class="column">{{item.sellPrice}}</text>
+           <text class="column">{{item.wholesalePrice}}</text>
+           <text class="column">{{item.retailPrice}}</text>
         </view>
 
       </block>

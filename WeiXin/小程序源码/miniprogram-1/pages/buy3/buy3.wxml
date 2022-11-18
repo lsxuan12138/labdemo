@@ -21,7 +21,7 @@
   <view class="widget">
     <text class="column">{{item.id}}</text>
     <text class="column">{{item.clientId}}</text>
-    <text class="column">{{item.totalPrice}}</text>
+    <text class="column">{{item.price}}</text>
     <text class="column">{{item.stage}}</text>
     <view class="link-column">
         <navigator class="link" bindtap="charge" data-id="{{item.id}}">收款</navigator>|
