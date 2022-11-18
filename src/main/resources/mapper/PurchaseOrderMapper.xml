@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.PurchaseOrderDao">
+    <resultMap id="purchaseVo" type="com.example.labdemo.vo.PurchaseVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="store_name" jdbcType="VARCHAR" property="storeHouseName"/>
+        <result column="stage" jdbcType="VARCHAR" property="stage"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="selectVo">
+        SELECT
+            tpo.id AS id,
+            ts.`name` AS store_name,
+            tpo.stage,
+            tu.`name` AS creator,
+            tpo.create_time
+        FROM
+            t_purchase_order tpo
+                LEFT JOIN t_store ts ON tpo.store_id = ts.id
+                LEFT JOIN t_user tu ON tpo.create_by = tu.id
+    </sql>
+    <select id="getAllVo" resultMap="purchaseVo">
+        <include refid="selectVo"/>
+    </select>
+    <select id="getVoById" resultType="com.example.labdemo.vo.PurchaseVo">
+        <include refid="selectVo"/>
+        WHERE tpo.id = ${id,jdbcType=BIGINT}
+    </select>
+    <resultMap id="detailVo" type="com.example.labdemo.vo.PurchaseDetailVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="store_name" jdbcType="VARCHAR" property="storeHouseName"/>
+        <result column="stage" jdbcType="VARCHAR" property="stage"/>
+    </resultMap>
+
+    <select id="getDetailById" resultMap="detailVo">
+        SELECT
+            tpo.id,
+            ts.`name` AS store_name,
+            tpo.stage
+        FROM
+            t_purchase_order tpo
+                LEFT JOIN t_store ts ON tpo.store_id = ts.id
+        WHERE
+            tpo.id = ${id,jdbcType=BIGINT}
+    </select>
+
+    <resultMap id="itemVo" type="com.example.labdemo.vo.PurchaseItemVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+        <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice"/>
+        <result column="wholesale_price" jdbcType="DECIMAL" property="wholesalePrice"/>
+        <result column="retail_price" jdbcType="DECIMAL" property="retailPrice"/>
+    </resultMap>
+    <select id="getItemVoById" resultMap="itemVo">
+        SELECT
+            tp.id,
+            tp.`name`,
+            tpoi.quantity,
+            tp.purchase_price,
+            tp.wholesale_price,
+            tp.retail_price
+        FROM
+            t_purchase_order_item tpoi
+                LEFT JOIN t_product tp ON tpoi.product_id = tp.id
+        WHERE
+            tpoi.purchase_order_id = ${id,jdbcType=BIGINT}
+    </select>
+
+
+
+</mapper>

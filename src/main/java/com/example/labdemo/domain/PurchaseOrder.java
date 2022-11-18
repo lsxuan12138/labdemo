@@ -1,5 +1,10 @@
 package com.example.labdemo.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.labdemo.constants.PurchaseOrderConstants;
+
 import java.util.Date;
 
 /**
@@ -9,15 +14,24 @@ import java.util.Date;
  * @email: 1146887979@qq.com
  * @create: 2022-10-29 15:12
  */
+@TableName("t_purchase_order")
 public class PurchaseOrder {
+    @TableId(type = IdType.AUTO)
     private Long id;
+
+    private Long storeId;
     private String stage;
-    private String createBy;
+    private Long createBy;
     private Date createTime;
 
     public PurchaseOrder() {
     }
-
+    public PurchaseOrder(Long storeId,Long createBy){
+        this.storeId = storeId;
+        this.stage = PurchaseOrderConstants.STAGE_TO_BE_EDITED;
+        this.createBy = createBy;
+        this.createTime = new Date();
+    }
     public Long getId() {
         return id;
     }
@@ -34,11 +48,19 @@ public class PurchaseOrder {
         this.stage = stage;
     }
 
-    public String getCreateBy() {
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 

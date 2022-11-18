@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.StoreItemDao">
+<resultMap id="voMap" type="com.example.labdemo.vo.StoreItemVo">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+    <result column="purchasePrice" jdbcType="DECIMAL" property="purchasePrice"/>
+    <result column="wholesalePrice" jdbcType="DECIMAL" property="wholesalePrice"/>
+    <result column="retailPrice" jdbcType="DECIMAL" property="retailPrice"/>
+</resultMap>
+    <select id="getAllStoreItem" resultMap="voMap">
+        SELECT
+            tsi.product_id AS id,
+            tp.`name`,
+            tp.remark,
+            sum( tsi.quantity ) AS quantity,
+            tp.purchase_price AS purchasePrice,
+            tp.wholesale_price AS wholesalePrice,
+            tp.retail_price AS retailPrice
+        FROM
+            t_store_item AS tsi
+                LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
+        GROUP BY
+            tsi.product_id;
+    </select>
+    <select id="getStoreVoById" resultMap="voMap">
+        SELECT
+            tsi.product_id AS id,
+            tp.`name`,
+            tp.remark,
+            tsi.quantity,
+            tp.purchase_price AS purchasePrice,
+            tp.wholesale_price AS wholesalePrice,
+            tp.retail_price AS retailPrice
+        FROM
+            t_store_item AS tsi
+                LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
+        WHERE
+            tsi.store_id = ${id,jdbcType=BIGINT};
+    </select>
+    <resultMap id="itemDetailVoMap" type="com.example.labdemo.vo.StoreItemDetailVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="cost" jdbcType="DECIMAL" property="cost"/>
+        <result column="profit" jdbcType="DECIMAL" property="profit"/>
+    </resultMap>
+    <select id="getAllStoreItemDetail" resultMap="itemDetailVoMap">
+        SELECT
+            tsi.product_id AS id,
+            tp.`name`,
+            sum( tsi.quantity ) AS quantity,
+            tp.remark,
+        <choose>
+            <when test='type =="批发客户"'>
+                tp.wholesale_price AS price,
+                tp.purchase_price AS cost,
+                tp.wholesale_price - tp.purchase_price AS profit
+            </when>
+            <when test='type =="零售客户"'>
+                tp.retail_price AS price,
+                tp.purchase_price AS cost,
+                tp.retail_price - tp.purchase_price AS profit
+            </when>
+
+        </choose>
+        FROM
+            t_store_item AS tsi
+                LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
+        GROUP BY
+            tsi.product_id;
+
+    </select>
+
+</mapper>

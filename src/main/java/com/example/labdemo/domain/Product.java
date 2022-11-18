@@ -19,9 +19,10 @@ public class Product {
     @TableId(type = IdType.AUTO)
     private Long id;
     private String name;
-    private Long quantity;
+    private String remark;
     private BigDecimal purchasePrice;
-    private BigDecimal sellPrice;
+    private BigDecimal wholesalePrice;
+    private BigDecimal retailPrice;
     private Date createTime;
 
     public Product() {
@@ -43,12 +44,12 @@ public class Product {
         this.name = name;
     }
 
-    public Long getQuantity() {
-        return quantity;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public BigDecimal getPurchasePrice() {
@@ -59,12 +60,20 @@ public class Product {
         this.purchasePrice = purchasePrice;
     }
 
-    public BigDecimal getSellPrice() {
-        return sellPrice;
+    public BigDecimal getWholesalePrice() {
+        return wholesalePrice;
     }
 
-    public void setSellPrice(BigDecimal sellPrice) {
-        this.sellPrice = sellPrice;
+    public void setWholesalePrice(BigDecimal wholesalePrice) {
+        this.wholesalePrice = wholesalePrice;
+    }
+
+    public BigDecimal getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setRetailPrice(BigDecimal retailPrice) {
+        this.retailPrice = retailPrice;
     }
 
     public Date getCreateTime() {

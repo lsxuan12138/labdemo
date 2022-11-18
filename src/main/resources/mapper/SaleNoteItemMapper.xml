@@ -4,24 +4,37 @@
     <resultMap id="saleNoteItemVoMap" type="com.example.labdemo.vo.SaleNoteItemVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="quantity" jdbcType="BIGINT" property="quantity"/>
-        <result column="purchase_price" jdbcType="DECIMAL" property="price"/>
-        <result column="sell_price" jdbcType="DECIMAL" property="cost"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="cost" jdbcType="DECIMAL" property="cost"/>
+        <result column="profit" jdbcType="DECIMAL" property="profit"/>
     </resultMap>
-    <sql id="SaleNoteVo_List">
-        tp.id,
-        tp.`name`,
-        tsni.quantity,
-        tp.purchase_price,
-        tp.sell_price
-    </sql>
     <select id="getItems" resultMap="saleNoteItemVoMap">
-        SELECT <include refid="SaleNoteVo_List"/>
+        SELECT
+            tp.id,
+            tp.`name`,
+            tsni.quantity,
+            tp.remark,
+        <choose>
+            <when test='type =="批发客户"'>
+                tp.wholesale_price AS price,
+                tp.purchase_price AS cost,
+                tp.wholesale_price - tp.purchase_price AS profit
+            </when>
+            <when test='type =="零售客户"'>
+                tp.retail_price AS price,
+                tp.purchase_price AS cost,
+                tp.retail_price - tp.purchase_price AS profit
+            </when>
+
+        </choose>
         FROM
-        t_sale_note_item AS tsni
-        LEFT JOIN t_product AS tp ON tsni.product_id = tp.id
+            t_sale_note_item tsni
+                LEFT JOIN t_product tp ON tsni.product_id = tp.id
         WHERE
-        tsni.sale_note_id = ${id,jdbcType=BIGINT}
-        ORDER BY tp.id;
+            tsni.sale_note_id = ${id}
+        ORDER BY
+            tp.id;
     </select>
 </mapper>

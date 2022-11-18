@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.UserDao">
+
+    <select id="findPermissionsByUserId" resultType="java.lang.String">
+        SELECT
+            tp.`name`
+        FROM
+            t_role_permission_map AS trpm
+                LEFT JOIN t_permission AS tp ON tp.id = trpm.permission_id
+        WHERE
+            trpm.role_id in (SELECT role_id FROM t_user WHERE id = #{userId,jdbcType=BIGINT});
+
+    </select>
+</mapper>

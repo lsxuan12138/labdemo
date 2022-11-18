@@ -3,30 +3,46 @@
 <mapper namespace="com.example.labdemo.mapper.SaleNoteDao">
     <resultMap id="saleNoteVoMap" type="com.example.labdemo.vo.SaleNoteVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="clientName"/>
+        <result column="store_name" jdbcType="VARCHAR" property="storeName"/>
+        <result column="client_name" jdbcType="VARCHAR" property="clientName"/>
         <result column="stage" jdbcType="VARCHAR" property="stage"/>
+        <result column="cost" jdbcType="DECIMAL" property="cost"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="profit" jdbcType="DECIMAL" property="profit"/>
+        <result column="received_payment" jdbcType="DECIMAL" property="receivedPayment"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
-    <sql id="SaleNoteVo_List">
-        tsn.id,
-        tc.name,
-        tsn.stage
+    <sql id="selectVo">
+        SELECT
+            tsn.id AS id,
+            ts.`name` AS store_name,
+            tc.`name` AS client_name,
+            IFNULL( tsn.stage, '未编辑' ) AS stage,
+            IFNULL( tsn.cost, 0 ) AS cost,
+            IFNULL( tsn.price, 0 ) AS price,
+            IFNULL( tsn.price, 0 )- ifnull( tsn.cost, 0 ) AS profit,
+            IFNULL( tsn.received_payment, 0 ) AS received_payment,
+            tu.`name` AS creator,
+            tsn.create_time
+        FROM
+            t_sale_note AS tsn
+                LEFT JOIN t_store ts ON tsn.store_id = ts.id
+                LEFT JOIN t_client tc ON tsn.client_id = tc.id
+                LEFT JOIN t_user tu ON tu.id = tsn.create_by
     </sql>
     <select id="selectAllSaleNoteVo" resultMap="saleNoteVoMap">
-        SELECT <include refid="SaleNoteVo_List"/>
-        FROM t_sale_note AS tsn
-        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id;
+        <include refid="selectVo"/>
     </select>
-    <select id="find" resultMap="saleNoteVoMap">
-        SELECT <include refid="SaleNoteVo_List"/>
-        FROM t_sale_note AS tsn
-        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id
-        where tc.name like concat('%', #{key}, '%')
-        or tsn.id like concat('%', #{key}, '%')
-    </select>
+<!--    <select id="find" resultMap="saleNoteVoMap">-->
+<!--        SELECT <include refid="SaleNoteVo_List"/>-->
+<!--        FROM t_sale_note AS tsn-->
+<!--        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id-->
+<!--        where tc.name like concat('%', #{key}, '%')-->
+<!--        or tsn.id like concat('%', #{key}, '%')-->
+<!--    </select>-->
     <select id="selectVoById" resultMap="saleNoteVoMap">
-        SELECT <include refid="SaleNoteVo_List"/>
-        FROM t_sale_note AS tsn
-        LEFT JOIN t_client AS tc ON tsn.client_id = tc.id
+        <include refid="selectVo"/>
         where tsn.id = ${id,jdbcType=BIGINT}
     </select>
 </mapper>

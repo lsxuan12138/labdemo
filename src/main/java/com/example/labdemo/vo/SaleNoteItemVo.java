@@ -5,9 +5,11 @@ import java.math.BigDecimal;
 public class SaleNoteItemVo {
     private Long id;
     private String name;
+    private String remark;
     private Long quantity;
     private BigDecimal price;
     private BigDecimal cost;
+    private BigDecimal profit;
 
     public SaleNoteItemVo() {
     }
@@ -32,6 +34,14 @@ public class SaleNoteItemVo {
         return quantity;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
@@ -50,5 +60,13 @@ public class SaleNoteItemVo {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
+    }
+
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
     }
 }

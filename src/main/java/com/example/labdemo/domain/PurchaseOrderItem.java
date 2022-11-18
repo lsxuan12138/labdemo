@@ -1,5 +1,9 @@
 package com.example.labdemo.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * PurchaseOrderItem
  *
@@ -7,8 +11,9 @@ package com.example.labdemo.domain;
  * @email: 1146887979@qq.com
  * @create: 2022-10-29 15:14
  */
+@TableName("t_purchase_order_item")
 public class PurchaseOrderItem {
-
+    @TableId(type = IdType.AUTO)
     private Long id;
     private Long purchaseOrderId;
     private Long productId;
