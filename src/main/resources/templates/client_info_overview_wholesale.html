@@ -201,6 +201,38 @@
                                         </div>
                                     </div>
                                 </form>
+                                <form action="javascript:void(0);" id="delete-row-form">
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                         id="myModal_delete"
+                                         role="dialog" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button aria-label="Close" class="close" data-dismiss="modal"
+                                                            type="button"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel_delete">删除</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <p>确定删除该客户吗？</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-info mr-sm-2" data-target="#myModal_delete"
+                                                            data-toggle="modal"
+                                                            onclick=delModel(this)
+                                                            type="button">
+                                                        删除
+                                                    </button>
+                                                    <button class="btn btn-success" id="delete-row" onclick=del()
+                                                            type="submit">确定
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 <div class="table-responsive">
                                     <table class="display table" data-locale="zh-CN" data-toggle="table" id="tab"
                                            style="width: 100%; cellspacing: 0;">
@@ -218,7 +250,10 @@
                                             <td th:text="${wholesale.name}">孙莹</td>
                                             <td th:text="${wholesale.type}"></td>
                                             <td>
-                                                <button class="btn btn-info mr-sm-2 " onclick=del(this) type="button">
+                                                <button class="btn btn-info mr-sm-2" data-target="#myModal_delete"
+                                                        data-toggle="modal"
+                                                        onclick=delModel(this)
+                                                        type="button">
                                                     删除
                                                 </button>
                                                 <button class="btn btn-info mr-sm-2" data-target="#myModal_change"
@@ -251,11 +286,11 @@
 <script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="../static/space.min.js"></script>
 <script>
-    function del(obj) {
-        const d=confirm("确定删除该客户吗，删除之后无法撤销");
-        if(d===true) {
-            let tr = obj.parentNode.parentNode //取到了tr对象
-            let value = $(obj).parent().parent().find("td");
+    let value;
+    function delModel(obj){
+        value = $(obj).parent().parent().find("td");
+    }
+    function del() {
             let id = Number.parseFloat(value.eq(0).text());
             console.log(id)
             if (!isNaN(id)) {
@@ -277,7 +312,6 @@
                     }
                 })
             }
-        }
     }
 
     let popId;

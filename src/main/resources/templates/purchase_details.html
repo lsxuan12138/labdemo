@@ -181,6 +181,35 @@
                                         </div>
                                     </div>
                                 </form>
+                                <form action="javascript:void(0);" id="delete-row-form">
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                         id="myModal_delete"
+                                         role="dialog" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button aria-label="Close" class="close" data-dismiss="modal"
+                                                            type="button"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel_delete">删除</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <p>确定删除该商品吗？</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                            type="button">取消
+                                                    </button>
+                                                    <button class="btn btn-success" id="delete-row" onclick=del()
+                                                            type="submit">确定
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 <div class="table-responsive">
                                     <table class="display table" data-locale="zh-CN" data-toggle="table" id="tb"
                                            style="width: 100%; cellspacing: 0;">
@@ -205,7 +234,10 @@
                                             <td th:text="${item.retailPrice}">5000</td>
                                             <td>
                                                 <div class="btn-group">
-                                                <button class="btn btn-info btn-large" style="width:50%" onclick=del(this) type="button">
+                                                <button class="btn btn-info btn-large" style="width:50%" data-target="#myModal_delete"
+                                                        data-toggle="modal"
+                                                        onclick=delModel(this)
+                                                        type="button">
                                                     删除
                                                 </button>
                                                 <button class="btn btn-info btn-large" style="width:50%" data-target="#myModal_change"
@@ -244,19 +276,19 @@
     const purchaseDetails = [[${purchaseDetails}]]
     let stageT = purchaseDetails.stage;
     table1.rows().invalidate().draw();
-
-    function del(obj) {
+    let tr;
+    function delModel(obj){
+        tr = obj.parentNode.parentNode //取到了tr对象
+    }
+    function del() {
         let stage = stageT;
         if (stage !== "待审核" && stage !== "未编辑") {
             alert("已审核，禁止编辑");
             return;
         }
-        const d=confirm("确定删除该商品吗？");
-        if(d===true) {
-            let tr = obj.parentNode.parentNode //取到了tr对象
-            tr.parentNode.removeChild(tr);
-            table1.row(tr).remove().draw();//避免table1和tb不同步的现象
-        }
+        tr.parentNode.removeChild(tr);
+        table1.row(tr).remove().draw();//避免table1和tb不同步的现象
+        $('.modal').modal('hide');
     }
 
     let changeProductId;
@@ -327,7 +359,8 @@
                     <td>${retailPrice}</td>
                     <td>
                     <div class="btn-group">
-                         <button class="btn btn-info btn-large" style="width:50%" onclick=del(this) type="button">删除</button>
+                         <button class="btn btn-info btn-large" data-target="#myModal_delete"
+                    data-toggle="modal" onclick=delModel(this) style="width:50%" type="button">删除</button>
                          <button class="btn btn-info btn-large" style="width:50%" data-target="#myModal_change" data-toggle="modal"
                          onclick=changeQuantity(this) type="button">修改</button>
                     </div>
