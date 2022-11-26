@@ -7,9 +7,10 @@ Page({
     data: {
         id:'undefined',
         name:'',
-        quantity:'',
+        remark:'',
         purchasePrice:'',
-        sellPrice:'',
+        wholesalePrice:'',
+        retailPrice:'',
         createTime:'',
         addUrl:'http://localhost:8081/demo/product/addProduct',
         modifyUrl:'http://localhost:8081/demo/product/updateProduct'
@@ -44,9 +45,10 @@ Page({
            that.setData({
              id:product.id,
              name:product.name,
-             quantity:product.quantity,
+             remark:product.remark,
              purchasePrice:product.purchasePrice,
-             sellPrice:product.sellPrice,
+             wholesalePrice:product.wholesalePrice,
+             retailPrice:product.retailPrice,
              createTime:product.createTime
            })
          }
@@ -111,7 +113,7 @@ Page({
         formData.id = that.data.id;
         url = that.data.modifyUrl;
       }
-  
+      console.log(formData);
       wx.request({
         url: url,
         data: JSON.stringify(formData),

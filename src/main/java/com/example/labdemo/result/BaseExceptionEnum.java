@@ -16,20 +16,21 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
     NOT_FOUND("404", "未找到该资源!"),
     INTERNAL_SERVER_ERROR("500", "服务器内部错误!"),
     SERVER_BUSY("503","服务器正忙，请稍后再试!"),
-    NUMBER_FORMAT_ERROR("14000","number format error"),
 
-    CLIENT_NAME_IS_REPEATED("14001","client name is repeated"),
-    CLIENT_INSERT_ERROR("14002","client insert error"),
+    NUMBER_FORMAT_ERROR("14000","数字格式错误"),
 
-    PRODUCT_INSERT_ERROR("14003","product insert error"),
+    CLIENT_NAME_IS_REPEATED("14001","客户名字重复"),
+    CLIENT_INSERT_ERROR("14002","客户增加错误"),
 
-    PRODUCT_DELETE_ERROR("14004","product delete error"),
+    PRODUCT_INSERT_ERROR("14003","商品增加错误"),
 
-    SALE_NOTE_STAGE_ERROR("14005","sale note stage error"),
+    PRODUCT_DELETE_ERROR("14004","商品删除错误"),
 
-    PRODUCT_IS_NOT_ENOUGH("14006","some products is not enough"),
+    SALE_NOTE_STAGE_ERROR("14005","销售单阶段错误"),
 
-    PRODUCT_UPDATE_ERROR("14007","product insert error"),
+    PRODUCT_IS_NOT_ENOUGH("14006","该仓库商品库存不足"),
+
+    PRODUCT_UPDATE_ERROR("14007","商品更新错误"),
 
     LOGIN_ERROR("14008","登录失败"),
 
@@ -39,7 +40,9 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
 
     USER_NO_EXIST("14011","用户不存在"),
 
-    STAGE_ERROR("14012","stage error"),
+    STAGE_ERROR("14012","阶段错误"),
+
+    USER_INSERT_ERROR("14013","改用户名已被占用")
     ;
 
     /**

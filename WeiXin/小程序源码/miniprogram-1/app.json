@@ -1,8 +1,10 @@
 {
-    "entryPagePath": "pages/index/index",
+    "entryPagePath": "pages/index1/index1",
     "pages": [
         "pages/login/login",
         "pages/index/index",
+        "pages/index1/index1",
+        "pages/index2/index2",
         "pages/logs/logs",
         "pages/list/list",
         "pages/operation/operation",
@@ -14,7 +16,15 @@
         "pages/oders/oders",
         "pages/itemsop/itemsop",
         "pages/changeitem/changeitem",
-        "pages/changeoder/changeoder"
+        "pages/changeoder/changeoder",
+        "pages/changeoderitem/changeoderitem",
+        "pages/checkoder/checkoder",
+        "pages/storeop/storeop",
+        "pages/userop/userop",
+        "pages/changeuser/changeuser",
+        "pages/clientop/clientop",
+        "pages/changeclient/changeclient"
+
     ],
     "window": {
         "backgroundTextStyle": "light",

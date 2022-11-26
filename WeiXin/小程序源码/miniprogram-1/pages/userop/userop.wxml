@@ -1,0 +1,41 @@
+<!--pages/userop/userop.wxml-->
+<view class="container">
+
+<rich-text nodes="<h2 style='color: black'>当前员工列表</h2>"> </rich-text>  
+<view class="find">
+    <input bindinput="getName" type="string" placeholder="：输入员工姓名查询" placeholder-style="color:black" ></input>
+    <button bindtap="findbyname" plain="false">查询</button>
+    <button bindtap="addUser" plain="false">新增员工信息</button>
+    <button bindtap="onShow" plain="false">全部员工</button>
+</view>
+
+<view class = "form">
+<view class="widget">
+  <text class="column">姓名</text>
+  <text class="column">账号</text>
+  <text class="column">密码</text>
+  <text class="column">角色</text>
+  <text class="column">操作</text>
+</view>
+<scroll-view scroll-y="true">
+  <view>
+    <block wx:for="{{list}}">
+      <view class="widget">
+         <text class="column">{{item.name}}</text>
+         <text class="column">{{item.account}}</text>
+         <text class="column">{{item.password}}</text>
+         <text class="column">{{item.roleId}}</text>
+         <view class="link-column">
+            <navigator class="link" url="../changeuser/changeuser?id={{item.id}}">编辑</navigator>|
+            <text class="link" bindtap="deleteUser"  data-name="{{item.name}}" 
+            data-id="{{item.id}}" data-account="{{account}}">删除</text>
+          </view>
+      </view>
+
+    </block>
+  </view>
+</scroll-view>
+</view>
+
+</view>
+

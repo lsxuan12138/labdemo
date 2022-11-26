@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.dao.StoreItemDao">
+
+    <select id="queryStoreItem" resultType="com.school.entity.StoreItem">
+        select  * from t_store_item order by store_id asc
+    </select>
+
+    <select id="findById" resultType="com.school.entity.StoreItem">
+        select  * from t_store_item where  id=#{id}
+    </select>
+
+    <select id="findByStoreId" resultType="com.school.entity.StoreItem">
+        select  * from t_store_item where  store_id=#{storeId}
+    </select>
+
+    <insert id="insertStoreItem" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.StoreItem">
+        insert into t_store_item (store_id,product_id,quantity)
+        values(#{storeId},#{productId},#{quantity})
+    </insert>
+
+    <update id="updateStoreItem" parameterType="com.school.entity.StoreItem">
+        update t_store_item
+        <set>
+            <if test="storeId!=null">store_id=#{storeId},</if>
+            <if test="productId!=null">product_id=#{productId},</if>
+            <if test="quantity!=null">quantity=#{quantity},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteStoreItem">
+        delete  from t_store_item where id=#{id}
+    </delete>
+</mapper>

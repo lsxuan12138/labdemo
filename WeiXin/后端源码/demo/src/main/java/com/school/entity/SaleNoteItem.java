@@ -8,15 +8,15 @@ public class SaleNoteItem {
         this.id = id;
     }
 
-    public Integer getSale_note_id() {
-        return sale_note_id;
+    public Integer getSaleNoteId() {
+        return saleNoteId;
     }
-    public void setSale_note_id(Integer sale_note_id) { this.sale_note_id = sale_note_id; }
+    public void setSaleNoteId(Integer saleNoteId) { this.saleNoteId = saleNoteId; }
 
-    public Integer getProduct_id() {
-        return product_id;
+    public Integer getProductId() {
+        return productId;
     }
-    public void setProduct_id(Integer product_id) { this.product_id = product_id; }
+    public void setProductId(Integer productId) { this.productId = productId; }
 
     public Integer getQuantity() {
         return quantity;
@@ -24,7 +24,7 @@ public class SaleNoteItem {
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
 
     public Integer id;
-    public Integer sale_note_id;
-    public Integer product_id;
+    public Integer saleNoteId;
+    public Integer productId;
     public Integer quantity;
 }

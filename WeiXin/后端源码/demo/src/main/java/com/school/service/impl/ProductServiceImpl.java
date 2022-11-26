@@ -1,8 +1,6 @@
 package com.school.service.impl;
 
-import com.school.dao.AreaDao;
 import com.school.dao.ProductDao;
-import com.school.entity.Area;
 import com.school.entity.Product;
 import com.school.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int insertProduct(Product product) {
         if(product.getName()!=null&&!"".equals(product.getName())){
-            product.setCreateTime(new Date());
             try {
                 int result=productDao.insertProduct(product);
                 if (result>0){

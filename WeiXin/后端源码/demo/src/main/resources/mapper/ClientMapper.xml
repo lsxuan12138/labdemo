@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.dao.ClientDao">
+
+
+    <select id="findByName" resultType="com.school.entity.Client">
+        select  * from t_client where  name=#{name}
+    </select>
+
+    <select id="queryClient" resultType="com.school.entity.Client">
+        select  * from t_client order by id asc
+    </select>
+
+    <select id="findById" resultType="com.school.entity.Client">
+        select  * from t_client where  id=#{id}
+    </select>
+
+    <insert id="insertClient" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.Client">
+        insert into t_client (name,type)values(#{name},#{type})
+    </insert>
+    <update id="updateClient" parameterType="com.school.entity.Client">
+        update t_client
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="type!=null">type=#{type},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteClient">
+        delete  from t_client where id=#{id}
+    </delete>
+</mapper>

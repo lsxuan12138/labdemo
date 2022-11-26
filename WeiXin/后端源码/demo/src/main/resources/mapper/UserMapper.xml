@@ -3,8 +3,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.school.dao.UserDao">
 
-    <select id="findByUsername" resultType="com.school.entity.User">
-        select  * from t_user where  username=#{username}
+    <select id="findByName" resultType="com.school.entity.User">
+        select  * from t_user where  name=#{name}
     </select>
+
+    <select id="findByAccount" resultType="com.school.entity.User">
+        select  * from t_user where  account=#{accuont}
+    </select>
+
+    <select id="queryUser" resultType="com.school.entity.User">
+        select  * from t_user order by id asc
+    </select>
+
+    <select id="findById" resultType="com.school.entity.User">
+        select  * from t_user where  id=#{id}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.User">
+        insert into t_user (name,account,password,role_id)values(#{name},#{account},#{password},#{roleId})
+    </insert>
+    <update id="updateUser" parameterType="com.school.entity.User">
+        update t_user
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="account!=null">account=#{account},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="roleId!=null">role_id=#{roleId},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteUser">
+        delete  from t_user where id=#{id}
+    </delete>
 
 </mapper>

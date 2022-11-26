@@ -1,7 +1,5 @@
 package com.school.service.impl;
 
-import com.school.dao.AreaDao;
-import com.school.dao.SaleNoteDao;
 import com.school.entity.SaleNote;
 import com.school.service.SaleNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ import java.util.List;
 public class SaleNoteServiceImpl implements SaleNoteService {
 
     @Autowired
-    private SaleNoteDao saleNoteDao;
+    private com.school.dao.SaleNoteDao saleNoteDao;
 
     @Override
     public List<SaleNote> querySaleNote() {
@@ -75,7 +73,6 @@ public class SaleNoteServiceImpl implements SaleNoteService {
     @Override
     public int insertSaleNote(SaleNote saleNote) {
         if(saleNote.getId()!=null&&!"".equals(saleNote.getId())){
-            saleNote.setCreateTime((java.sql.Date) new Date());
             try {
                 int result=saleNoteDao.insertSaleNote(saleNote);
                 if (result>0){
@@ -86,8 +83,10 @@ public class SaleNoteServiceImpl implements SaleNoteService {
             }catch (Exception e){
                 throw  new RuntimeException("插入取余信息失败失败"+e.getMessage());
             }
+        }else if(saleNote.getId()==null){
+            throw  new RuntimeException("saleNote.getId()!=null插入的值有空的");
         }else {
-            throw  new RuntimeException("插入的值有空的");
+            throw  new RuntimeException("!\"\".equals(saleNote.getId())插入的值有空的");
         }
         /*  return areaDao.insertArea(area);*/
     }

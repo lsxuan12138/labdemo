@@ -32,14 +32,18 @@
     </select>
 
     <insert id="insertSaleNote" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.SaleNote">
-        insert into t_sale_note (client_id,total_price,stage,create_by,creat_time)values(#{clientId},#{totalPrice},#{stage},#{createBy},#{createTime})
+        insert into t_sale_note (id,store_id,client_id,price,stage,create_time)
+        values(#{id},#{storeId},#{clientId},#{price},"待确认",#{createTime})
     </insert>
 
     <update id="updateSaleNote" parameterType="com.school.entity.SaleNote">
         update t_sale_note
         <set>
+            <if test="storeId!=null">store_id=#{storeId},</if>
             <if test="clientId!=null">client_id=#{clientId},</if>
-            <if test="totalPrice!=null">total_price=#{totalPrice},</if>
+            <if test="cost!=null">cost=#{cost},</if>
+            <if test="price!=null">price=#{price},</if>
+            <if test="receivedPayment!=null">received_payment=#{receivedPayment},</if>
             <if test="stage!=null">stage=#{stage}</if>
             <if test="createBy!=null">create_by=#{createBy}</if>
             <if test="createTime!=null">create_time=#{createTime}</if>

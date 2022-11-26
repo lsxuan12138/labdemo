@@ -1,26 +1,27 @@
 <!--pages/changeitem/changeitem.wxml-->
-<text>修改或者编辑</text>
+
 <view class="container">
   <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="row">
-  <text>序号：</text>
-  <input type="number" name="id" placeholder="序号不可重复哦" value="{{id}}" />
-  </view>
+
   <view class="row">
   <text>名称：</text>
   <input type="text" name="name" placeholder="请输入商品名称" value="{{name}}" />
   </view>
   <view class="row">
-  <text>库存：</text>
-  <input type="number" name="quantity" placeholder="请输入库存数量" value="{{quantity}}" />
+  <text>备注：</text>
+  <input type="text" name="remark" placeholder="请输入备注" value="{{remark}}" />
   </view>
   <view class="row">
   <text>进价：</text>
   <input type="number" name="purchasePrice" placeholder="请输入进货价格" value="{{purchasePrice}}" />
   </view>
   <view class="row">
-  <text>出价：</text>
-  <input type="number" name="sellPrice" placeholder="请输入出货价格" value="{{sellPrice}}" />
+  <text>批发价格：</text>
+  <input type="number" name="wholesalePrice" placeholder="请输入批发价格" value="{{wholesalePrice}}" />
+  </view>
+  <view class="row">
+  <text>零售价格：</text>
+  <input type="number" name="retailPrice" placeholder="请输入零售价格" value="{{retailPrice}}" />
   </view>
   <view class="row">
   <text>生产日期：</text>

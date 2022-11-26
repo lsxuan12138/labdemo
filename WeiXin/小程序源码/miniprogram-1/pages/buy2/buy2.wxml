@@ -10,7 +10,6 @@
 <view class="widget">
 <text class="column">ID</text>
 <text class="column">客户</text>
-<text class="column">时间</text>
 <text class="column">总金额</text>
 <text class="column">状态</text>
 <text class="column">操作</text>
@@ -21,7 +20,7 @@
   <view class="widget">
     <text class="column">{{item.id}}</text>
     <text class="column">{{item.clientId}}</text>
-    <text class="column">{{item.totalPrice}}</text>
+    <text class="column">{{item.price}}</text>
     <text class="column">{{item.stage}}</text>
     <view class="link-column">
             <navigator class="link" bindtap="check" data-id="{{item.id}}">审核</navigator>|

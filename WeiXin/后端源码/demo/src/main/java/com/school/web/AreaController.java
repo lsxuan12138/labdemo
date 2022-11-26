@@ -3,8 +3,6 @@ package com.school.web;
 import com.school.entity.Area;
 import com.school.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -30,7 +28,7 @@ public class AreaController {
     @RequestMapping(value = "/findById",method = RequestMethod.GET)
     public Map<String,Object>  findById(Integer areaId){
         Map<String,Object> modelMap=new HashMap<>();
-        Area  area=service.findByAreaId(areaId);
+        Area area=service.findByAreaId(areaId);
         modelMap.put("area",area);
         return  modelMap;
     }

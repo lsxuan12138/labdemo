@@ -20,7 +20,7 @@
     <text class="column">{{item.id}}</text>
     <text class="column">{{item.clientId}}</text>
     <text class="column">{{item.createTime}}</text>
-    <text class="column">{{item.totalPrice}}</text>
+    <text class="column">{{item.price}}</text>
     <text class="column">{{item.stage}}</text>
   </view>
 </block>

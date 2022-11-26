@@ -1,0 +1,78 @@
+/* pages/userop/userop.wxss */
+.widget {
+
+    position: relative;
+    margin-top: 5rpx;
+    margin-bottom: 0rpx;
+    margin-left: 0rpx;
+    margin-right: 10rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    padding-left: 0rpx;
+    padding-right: 10rpx;
+    border: rgb(203, 203, 204) 2px solid;
+    
+    }
+    
+.container {
+    
+    height: 90%;
+    display: table;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+    text-align: center;
+    }
+    
+.column {
+    
+    width: 5rem;
+    display: table-cell;
+    padding-left: 0rpx;  
+    padding-right: 0rpx;
+    }
+
+.find button{
+    width: 600rpx;
+    height: 60rpx;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    padding-top: 10rpx;
+    background-color: #8bd2f3;
+}
+.find text{
+    flex-grow: 1;
+    text-align: right;
+ }
+    
+.find input{ 
+    position: relative;
+    margin-top: 30rpx;
+    margin-left: 40rpx;
+    width: 600rpx;
+    font-size: 0.9rem;
+    flex-grow: 3;
+    border: 1px solid #8bd2f3;
+    display: inline-block;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0.30rem #8bd2f3;
+    padding: 0.3rem;
+    
+    }
+    .link-column {
+        width: 6rem; 
+        display: table-cell;
+        
+        }
+        
+.link {        
+        color: blue; 
+        display: inline-table;
+        }
+    
+    
+    
+  
+    

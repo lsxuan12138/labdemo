@@ -10,6 +10,13 @@ public class SaleNote {
         this.id = id;
     }
 
+    public Integer getStoreId() {
+        return storeId;
+    }
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
     public Integer getClientId() {
         return clientId;
     }
@@ -17,11 +24,25 @@ public class SaleNote {
         this.clientId = clientId;
     }
 
-    public Double getTotalPrice() {
-        return totalPrice;
+    public Double getPrice() {
+        return price;
     }
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
+    public Double getReceivedPayment() {
+        return receivedPayment;
+    }
+    public void setReceivedPayment(Double receivedPayment) {
+        this.receivedPayment = receivedPayment;
     }
 
     public String getStage() {
@@ -38,19 +59,17 @@ public class SaleNote {
         this.createBy = createBy;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+    public java.sql.Date getCreateTime() { return createTime; }
+    public void setCreateTime(java.sql.Date createTime) { this.createTime =  createTime; }
 
     public Integer id;
+    public Integer storeId;
     public Integer clientId;
-    public Double totalPrice;
+    public Double price;
     public String stage;
+    public Double cost;
+    public Double receivedPayment;
     public Integer createBy;
-    public Date createTime;
-
+    public java.sql.Date createTime;
 
 }

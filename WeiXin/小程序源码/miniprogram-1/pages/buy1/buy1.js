@@ -108,8 +108,10 @@ clientId:''
       url: '../changeitem/changeitem'
     })
   },
-
-
+  addSaleNote:function(){
+    wx.navigateTo({
+      url: '../changeoder/changeoder'
+    })},
   submit:function(e){
     var that=this;
     wx.showModal({

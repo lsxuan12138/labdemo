@@ -1,0 +1,54 @@
+/* pages/changeitem/changeitem.wxss */
+.container{
+
+    padding: 1rem;
+    
+    font-size: 1.5rem;
+    
+    line-height: 2.56rem;
+    
+    }
+    
+    .row{
+    
+    display: flex;
+    
+    align-items: center;
+    
+    margin-bottom: 0.8rem;
+    
+    }
+    
+    .row text{
+    
+    flex-grow: 1;
+    
+    text-align: right;
+    
+    }
+    
+    .row input{
+    
+    font-size: 1rem;
+    
+    flex-grow: 3;
+    
+    border: 1px solid #0099CC;
+    
+    display: inline-block;
+    
+    border-radius: 0.7rem;
+    
+    box-shadow: 0 0 0.15rem #aaa;
+    
+    padding: 0.9rem;
+    
+    }
+    
+    .row button{
+      margin-top: 30rpx;
+      margin-bottom: 30rpx;
+      color: #111111;
+      background-color: #5ab7f5;
+    }
+  

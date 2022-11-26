@@ -16,6 +16,7 @@ public class GlobalExceptionHandler {
         Map<String,Object> modelMap=new HashMap<>();
         modelMap.put("success",false);
         modelMap.put("error",e.getMessage());
+        System.out.println(e.getMessage());
         return modelMap;
     }
 }

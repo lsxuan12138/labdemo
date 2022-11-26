@@ -1,0 +1,31 @@
+<!--pages/changeoderitem/changeoderitem.wxml-->
+
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="row">
+  <text>编号：</text>
+  <input type="number" name="id" placeholder="编号不可重复哦" value="{{id}}" />
+  </view>
+  <view class="row">
+  <text>所属订单：</text>
+  <input type="number" name="saleNoteId" placeholder="请输入所属订单ID" value="{{saleNoteId}}" />
+  </view>
+  <view class="row">
+  <text>商品编号：</text>
+  <input type="number" name="productId" placeholder="请输入下单商品ID" value="{{productId}}" />
+  </view>
+  <view class="row">
+  <text>商品数量：</text>
+  <input type="number" name="quantity" placeholder="请输入商品数量" value="{{quantity}}" />
+  </view>
+
+  <view class="row">
+    <button form-type="submit">提交订条目</button>
+    <button form-type="reset">清空</button>
+  </view>
+
+</form>
+
+</view>
+
+

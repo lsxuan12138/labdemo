@@ -30,9 +30,15 @@
     </view>
 
   <view class="btn-area" id="buttonContainer">
-     <button bindtap="areaViewTap" >去区域列表</button>
-     <button bindtap="itemViewTap">商品列表</button>
-     <button bindtap="oderViewTap" >订单列表</button>
-     <button bindtap="buyViewTap" >自助下单</button>
+     <!--<button class="menu" bindtap="areaViewTap" >去区域列表</button>--->
+     <button class="menu" bindtap="itemViewTap">商品列表</button>
+     <button class="menu" bindtap="oderViewTap" >订单列表</button>
+     <button class="menu" bindtap="buyViewTap" >自助下单</button>
   </view>
+  <view class='buttonrow'>
+         <button id="b1" bindtap="to1" size="mini">新建订单</button>
+         <button id="b2" bindtap="to2" size="mini">待审核</button>
+         <button id="b3" bindtap="to3" size="mini">待收款</button>
+         <button id="b4" bindtap="to4" size="mini">已退货</button>
+      </view>
 </view>

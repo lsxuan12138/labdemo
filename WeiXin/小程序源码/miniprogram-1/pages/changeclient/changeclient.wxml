@@ -1,0 +1,22 @@
+<!--pages/changeitem/changeitem.wxml-->
+
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+
+  <view class="row">
+  <text>姓名：</text>
+  <input type="text" name="name" placeholder="请输入客户姓名" value="{{name}}" />
+  </view>
+  <view class="row">
+  <text>类型：</text>
+  <input type="text" name="type" placeholder="请输入客户类型" value="{{type}}" />
+  </view>
+  
+  <view class="row">
+    <button form-type="submit">提交</button>
+    <button form-type="reset">清空</button>
+  </view>
+  
+</form>
+</view>
+

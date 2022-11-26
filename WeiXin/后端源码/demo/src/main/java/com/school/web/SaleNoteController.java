@@ -1,9 +1,7 @@
 package com.school.web;
 
 
-import com.school.entity.Area;
 import com.school.entity.SaleNote;
-import com.school.service.AreaService;
 import com.school.service.SaleNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +29,7 @@ public class SaleNoteController {
     @RequestMapping(value = "/findById",method = RequestMethod.GET)
     public Map<String,Object>  findById(Integer id){
         Map<String,Object> modelMap=new HashMap<>();
-        SaleNote  saleNote=service.findById(id);
+        SaleNote saleNote=service.findById(id);
         modelMap.put("saleNote",saleNote);
         return  modelMap;
     }

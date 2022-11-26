@@ -64,6 +64,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void adduser(UserAddDto userAddDto) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("account",userAddDto.getUsername());
+        if(userDao.selectOne(wrapper)==null)throw new BaseException(BaseExceptionEnum.USER_INSERT_ERROR);
         userDao.insert(userAddDto.toUser());
     }
 

@@ -1,0 +1,44 @@
+<!--index.wxml
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{canIUseOpenData}}">
+      <view class="userinfo-avatar" bindtap="bindViewTap">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <open-data type="userNickName"></open-data>
+    </block>
+    <block wx:elif="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</v-->
+<view class="container">
+  <image src='../UI_pics/hit.jpg'></image>
+    <view class="hello">
+      <rich-text nodes="<h1 style='color: #3333FF'>欢迎您进入：</h1>"> </rich-text>
+      <rich-text nodes="<h1 style='color:#3333FF'>———进销存管理系统</h1>"> </rich-text>
+      <text style="font-family: cursive;font-size:35px;font-weight: bold;color: #0000FF;">\n当前身份：店长</text>
+    </view>
+
+  <view class="btn-area" id="buttonContainer">
+     <!--<button class="menu" bindtap="areaViewTap" >去区域列表</button>--->
+     <button class="menu" bindtap="itemViewTap">商品列表</button>
+     <button class="menu" bindtap="oderViewTap" >订单列表</button>
+     <button class="menu" bindtap="buyViewTap" >自助下单</button>
+  </view>
+  <view class='buttonrow'>
+         <button id="b1" bindtap="to1" size="mini">新建订单</button>
+         <button id="b2" bindtap="to2" size="mini">待审核</button>
+         <button id="b3" bindtap="to3" size="mini">待收款</button>
+         <button id="b4" bindtap="to4" size="mini">已退货</button>
+      </view>
+</view>

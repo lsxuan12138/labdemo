@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.dao.SaleNoteItemDao">
+    <select id="findById" resultType="com.school.entity.SaleNoteItem">
+        select  * from t_sale_note_item where  id=#{id}
+    </select>
+
+    <select id="findBySaleNoteId" resultType="com.school.entity.SaleNoteItem">
+        select  * from t_sale_note_item where  sale_note_id=#{saleNoteId}
+    </select>
+
+    <insert id="insertSaleNoteItem" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.school.entity.SaleNoteItem">
+        insert into t_sale_note_item (sale_note_id,product_id,quantity)
+        values(#{saleNoteId},#{productId},#{quantity})
+    </insert>
+
+    <update id="updateSaleNoteItem" parameterType="com.school.entity.SaleNoteItem">
+        update t_sale_note_item
+        <set>
+            <if test="saleNoteId!=null">sale_note_id=#{saleNoteId},</if>
+            <if test="productId!=null">product_id=#{productId},</if>
+            <if test="quantity!=null">quantity=#{quantity},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteSaleNoteItem">
+        delete  from t_sale_note_item where id=#{id}
+    </delete>
+
+</mapper>
