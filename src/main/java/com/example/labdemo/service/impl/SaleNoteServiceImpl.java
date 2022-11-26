@@ -37,7 +37,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
     @Autowired
     private StoreItemDao storeItemDao;
 
-//    @Override
+    @Override
+    public SaleNote selectById(Long id) {
+        return saleNoteDao.selectById(id);
+    }
+
+    //    @Override
 //    public List<SaleNote> getAll() {
 //        List<SaleNote> saleNotes = null;
 //        saleNotes= saleNoteDao.selectList(null);

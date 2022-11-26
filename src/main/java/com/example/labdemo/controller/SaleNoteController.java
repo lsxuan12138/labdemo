@@ -77,10 +77,10 @@ public class SaleNoteController {
     @PreAuthorize("hasAuthority('saleNote:read')")
     @GetMapping("/detail")
     public ModelAndView getDetail(@RequestParam("id")Long id){
-        List<StoreItemDetailVo>  products = storeService.getAllStoreItemDetail(id);
+        List<StoreItemVo> productList = storeService.getStoreItemById(saleNoteService.selectById(id).getStoreId());
         SaleNoteDetailVo detail = saleNoteService.getDetail(id);
         ModelAndView modelAndView = new ModelAndView("order_details");
-        modelAndView.getModelMap().addAttribute("productList",products);
+        modelAndView.getModelMap().addAttribute("productList",productList);
         modelAndView.getModelMap().addAttribute("detail",detail);
         return modelAndView;
     }

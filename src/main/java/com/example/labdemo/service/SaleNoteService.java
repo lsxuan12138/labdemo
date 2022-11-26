@@ -11,7 +11,7 @@ public interface SaleNoteService {
 
 //    public List<SaleNote> getAll();
 //
-
+    public SaleNote selectById(Long id);
     /**
      * 获取所有销售单基础信息
      * @return
