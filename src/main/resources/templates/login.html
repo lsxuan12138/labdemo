@@ -54,6 +54,35 @@
                                 <!--                                    </div>-->
                                 <!--                                </div>-->
                             </form>
+                            <form action="javascript:void(0);" id="alert-row-form">
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                     id="myModal_alert"
+                                     role="dialog" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button aria-label="Close" class="close" data-dismiss="modal"
+                                                        type="button"><span
+                                                        aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel_alert">提示</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <p id="alert"></p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-default" data-dismiss="modal"
+                                                        type="button">取消
+                                                </button>
+                                                <button class="btn btn-success" id="alert-row" onclick=
+                                                        type="submit">确定
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <br />
                             <small>没有账号?</small><a th:href="@{/user/register}" class="signup">&nbsp;注册</a>
                         </div>
@@ -124,7 +153,15 @@
     //
     //     //提交后端部分
     // })
-
+    function alert(message){
+        $('.modal').modal('hide');
+        $('#myModal_alert').modal("show",);
+        $("#alert").html(message);
+    }
+    $('#alert-row').on('click', function () {
+        $('#myModal_alert').modal("hide");
+        window.location.reload();
+    });
     function validate() {
         clearAllCookie();
         var userName=$("#login-Username").val();
