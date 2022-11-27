@@ -1,7 +1,6 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.example.labdemo.domain.Role;
 import com.example.labdemo.domain.User;
 import com.example.labdemo.dto.UserAddDto;
@@ -66,7 +65,7 @@ public class UserServiceImpl implements UserService {
     public void adduser(UserAddDto userAddDto) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("account",userAddDto.getUsername());
-        if(userDao.selectOne(wrapper)==null)throw new BaseException(BaseExceptionEnum.USER_INSERT_ERROR);
+        if(userDao.selectOne(wrapper)!=null)throw new BaseException(BaseExceptionEnum.USER_INSERT_ERROR);
         userDao.insert(userAddDto.toUser());
     }
 
