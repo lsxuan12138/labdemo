@@ -101,7 +101,7 @@
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a th:href="@{/product/all}">用户激活</a></li>
+                            <li><a th:href="@{/user/control}">用户激活</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -111,6 +111,27 @@
 
     <!-- Page Content -->
     <div class="page-content">
+
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+
+                            <button type="button" class="btn btn-primary btn-md pull-right" >
+                                <a href="login.html" th:href="@{/user/login}">退出登录</a>
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Page Header -->
         <div class="page-header">
             <!-- 导航栏 -->
