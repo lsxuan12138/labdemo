@@ -110,27 +110,6 @@
 
     <!-- Page Content -->
     <div class="page-content">
-
-        <div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
-
-                            <button type="button" class="btn btn-primary btn-md pull-right" >
-                                <a href="login.html" th:href="@{/user/login}">退出登录</a>
-
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Page Header -->
         <div class="page-header">
             <!-- 上方导航栏 -->
@@ -142,6 +121,10 @@
                                     class="fa fa-bars"></i></a></li>
                             <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a>
                             </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a th:href="@{/user/now}">个人中心</a></li>
+                            <li><a th:href="@{/user/login}">退出登录</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
