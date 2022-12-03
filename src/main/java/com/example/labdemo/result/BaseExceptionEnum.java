@@ -42,7 +42,7 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
 
     STAGE_ERROR("14012","阶段错误"),
 
-    USER_INSERT_ERROR("14013","改用户名已被占用")
+    USER_INSERT_ERROR("14013","该用户名已被占用")
     ;
 
     /**
