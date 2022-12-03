@@ -60,9 +60,9 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a th:href="@{/product/store}">全部库存</a></li>
-                            <li><a th:href="@{/product/storeHouse}">仓库</a></li>
-                            <li><a class="active" th:href="@{/product/purchase}">进货</a></li>
-                            <li><a th:href="@{/product/adjust}">调货</a></li>
+                            <li><a th:href="@{/product/storeHouse}">仓库库存统计</a></li>
+                            <li><a th:href="@{/product/purchase}">进货</a></li>
+                            <li><a class="active" th:href="@{/product/adjust}">调货</a></li>
                         </ul>
                     </li>
                     <li>
@@ -82,7 +82,10 @@
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a class="active" th:href="@{/saleNote/all}">销售单</a></li>
+                            <li><a th:href="@{/saleNote/all}">销售单</a></li>
+                            <li><a th:href="@{/saleNote/product}">货品销售统计</a></li>
+                            <li><a th:href="@{/saleNote/client}">客户销售统计</a></li>
+                            <li><a th:href="@{/saleNote/receive}">客户结款情况</a></li>
                         </ul>
                     </li>
                     <li>
@@ -96,11 +99,21 @@
                     </li>
                     <li>
                         <a href="javascript:void(0);">
-                            <i class="menu-icon icon-format_list_bulleted"></i><span>用户</span><i
+                            <i class="menu-icon icon-star"></i><span>用户</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
                             <li><a th:href="@{/user/control}">用户激活</a></li>
+                            <li><a th:href="@{/user/sale}">业绩统计</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="menu-icon icon-show_chart"></i><span>经营状况</span><i
+                                class="accordion-icon fa fa-angle-left"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a th:href="@{/compony}">经营状况统计</a></li>
                         </ul>
                     </li>
                 </ul>
