@@ -185,17 +185,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>test</td>
-                                            <td>店长</td>
-                                            <td>未激活</td>
-                                            <td>
-                                                <button class="btn btn-info mr-sm-2" onclick=active(this) type="button">
-                                                    激活
-                                                </button>
-                                            </td>
-                                        </tr>
                                         <tr th:each="user:${users}">
                                             <td th:text="${user.id}">1</td>
                                             <td th:text="${user.name}">华为手机</td>
