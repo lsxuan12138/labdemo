@@ -137,7 +137,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a th:href="@{/user/now}">个人中心</a></li>
-                            <li><a th:href="@{/user/login}">退出登录</a></li>
+                            <li><a th:href="@{/user/login}" id="quit">退出登录</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -282,6 +282,24 @@
 <script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="../static/space.min.js"></script>
 <script th:inline="javascript">
+    $('#quit').on('click', function () {
+        $.ajax({
+            url: "/user/quit",
+            type: "POST",  /*采用POST方法提交*/
+            dataType: 'JSON',
+            contentType: 'application/json;charset=UTF-8',
+            cache: false,
+            success: function (result) {
+                //alert(result)
+                if (result.code === "200") {
+                    console.log("请求成功")
+                    window.location.href="/user/login";
+                } else {
+                    alert(result.message)
+                }
+            }
+        })
+    });
     const storeList = [[${storeHouses}]];
     function alert(message){
         $('.modal').modal('hide');

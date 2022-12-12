@@ -138,7 +138,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a th:href="@{/user/now}">个人中心</a></li>
-                            <li><a th:href="@{/user/login}">退出登录</a></li>
+                            <li><a th:href="@{/user/login}" id="quit">退出登录</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -195,6 +195,8 @@
                                             <th>商品名</th>
                                             <th>备注</th>
                                             <th>数量</th>
+                                            <th>成本</th>
+                                            <th>积压资金额</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -203,6 +205,8 @@
                                             <td th:text="${product.name}">华为手机</td>
                                             <td th:text="${product.remark}">华为手机</td>
                                             <td th:text="${product.quantity}">50</td>
+                                            <td th:text="${product.purchasePrice}">90.0</td>
+                                            <td th:text="${product.amount}">4500.0</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -228,6 +232,24 @@
 <script src="../static/space.min.js"></script>
 <script>
         let t = $('#tab').DataTable();
+        $('#quit').on('click', function () {
+            $.ajax({
+                url: "/user/quit",
+                type: "POST",  /*采用POST方法提交*/
+                dataType: 'JSON',
+                contentType: 'application/json;charset=UTF-8',
+                cache: false,
+                success: function (result) {
+                    //alert(result)
+                    if (result.code === "200") {
+                        console.log("请求成功")
+                        window.location.href="/user/login";
+                    } else {
+                        alert(result.message)
+                    }
+                }
+            })
+        });
 </script>
 </body>
 
