@@ -2,7 +2,7 @@ package com.example.labdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.labdemo.domain.SaleNoteItem;
-import com.example.labdemo.vo.SaleNoteItemVo;
+import com.example.labdemo.vo.salenote.SaleNoteItemVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

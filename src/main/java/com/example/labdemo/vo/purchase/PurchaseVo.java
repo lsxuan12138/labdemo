@@ -1,4 +1,4 @@
-package com.example.labdemo.vo;
+package com.example.labdemo.vo.purchase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

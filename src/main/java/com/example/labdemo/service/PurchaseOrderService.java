@@ -1,9 +1,8 @@
 package com.example.labdemo.service;
 
 import com.example.labdemo.dto.PurchaseUpdateDto;
-import com.example.labdemo.dto.PurchaseUpdateItemDto;
-import com.example.labdemo.vo.PurchaseDetailVo;
-import com.example.labdemo.vo.PurchaseVo;
+import com.example.labdemo.vo.purchase.PurchaseDetailVo;
+import com.example.labdemo.vo.purchase.PurchaseVo;
 
 import java.util.List;
 

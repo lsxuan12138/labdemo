@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.labdemo.mapper.AdjustmentOrderDao">
-    <resultMap id="adjustmentVo" type="com.example.labdemo.vo.AdjustmentVo">
+    <resultMap id="adjustmentVo" type="com.example.labdemo.vo.adjustment.AdjustmentVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="stage" jdbcType="VARCHAR" property="stage"/>
         <result column="src_name" jdbcType="VARCHAR" property="srcStoreHouse"/>
@@ -31,7 +31,7 @@
         WHERE tao.id = ${id,jdbcType=BIGINT}
     </select>
 
-    <resultMap id="detailVo" type="com.example.labdemo.vo.AdjustmentDetailVo">
+    <resultMap id="detailVo" type="com.example.labdemo.vo.adjustment.AdjustmentDetailVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="stage" jdbcType="VARCHAR" property="stage"/>
         <result column="src_store" jdbcType="VARCHAR" property="srcStoreHouse"/>
@@ -49,7 +49,7 @@
                 LEFT JOIN t_store ts2 ON tao.dest_store_id = ts2.id
         WHERE tao.id = ${id,jdbcType=BIGINT};
     </select>
-    <resultMap id="itemVo" type="com.example.labdemo.vo.AdjustmentItemVo">
+    <resultMap id="itemVo" type="com.example.labdemo.vo.adjustment.AdjustmentItemVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="quantity" jdbcType="BIGINT" property="quantity"/>

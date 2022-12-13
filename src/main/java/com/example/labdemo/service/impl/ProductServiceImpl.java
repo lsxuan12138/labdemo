@@ -1,12 +1,19 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.labdemo.domain.AdjustmentOrderItem;
 import com.example.labdemo.domain.Product;
+import com.example.labdemo.domain.PurchaseOrderItem;
+import com.example.labdemo.domain.SaleNoteItem;
 import com.example.labdemo.dto.ProductAddDto;
 import com.example.labdemo.dto.ProductUpdateDto;
+import com.example.labdemo.mapper.AdjustmentOrderItemDao;
 import com.example.labdemo.mapper.ProductDao;
+import com.example.labdemo.mapper.PurchaseOrderItemDao;
+import com.example.labdemo.mapper.SaleNoteItemDao;
 import com.example.labdemo.result.BaseException;
 import com.example.labdemo.result.BaseExceptionEnum;
+import com.example.labdemo.service.AdjustmentOrderService;
 import com.example.labdemo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +28,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductDao productDao;
-
+    @Autowired
+    SaleNoteItemDao saleNoteItemDao;
+    @Autowired
+    AdjustmentOrderItemDao adjustmentOrderItemDao;
+    @Autowired
+    PurchaseOrderItemDao purchaseOrderItemDao;
 //    @Override
 //    public int purchaseProduct(Long id, Long quantity) {
 //        int ret;
@@ -65,7 +77,24 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public void deleteById(Long id) throws BaseException {
-        if(productDao.deleteById(id)<=0)throw new BaseException();
+        Product product = productDao.selectById(id);
+        if(product==null)throw new BaseException(BaseExceptionEnum.PRODUCT_NOT_EXIST);
+        QueryWrapper<SaleNoteItem> saleNoteItemQueryWrapper = new QueryWrapper<>();
+        saleNoteItemQueryWrapper.eq("product_id",id);
+        List<SaleNoteItem> saleNoteItems = saleNoteItemDao.selectList(saleNoteItemQueryWrapper);
+
+        QueryWrapper<AdjustmentOrderItem> adjustmentOrderItemQueryWrapper = new QueryWrapper<>();
+        adjustmentOrderItemQueryWrapper.eq("product_id",id);
+        List<AdjustmentOrderItem> adjustmentOrderItems = adjustmentOrderItemDao.selectList(adjustmentOrderItemQueryWrapper);
+
+        QueryWrapper<PurchaseOrderItem> purchaseOrderItemQueryWrapper = new QueryWrapper<>();
+        purchaseOrderItemQueryWrapper.eq("product_id",id);
+        List<PurchaseOrderItem> purchaseOrderItems = purchaseOrderItemDao.selectList(purchaseOrderItemQueryWrapper);
+
+        if(!saleNoteItems.isEmpty()||!adjustmentOrderItems.isEmpty()||!purchaseOrderItems.isEmpty()){
+            throw new BaseException(BaseExceptionEnum.PRODUCT_CANT_DELETE);
+        }
+        if(productDao.deleteById(id)<=0)throw new BaseException(BaseExceptionEnum.PRODUCT_DELETE_ERROR);
     }
 
     @Override

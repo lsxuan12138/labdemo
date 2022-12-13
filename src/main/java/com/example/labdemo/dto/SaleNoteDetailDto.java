@@ -1,7 +1,5 @@
 package com.example.labdemo.dto;
 
-import com.example.labdemo.vo.SaleNoteItemVo;
-
 import java.util.List;
 
 public class SaleNoteDetailDto {

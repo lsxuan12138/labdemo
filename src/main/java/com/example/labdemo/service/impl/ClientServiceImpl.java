@@ -3,8 +3,11 @@ package com.example.labdemo.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.labdemo.constants.ClientConstants;
 import com.example.labdemo.domain.Client;
+import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.mapper.ClientDao;
+import com.example.labdemo.mapper.SaleNoteDao;
 import com.example.labdemo.result.BaseException;
+import com.example.labdemo.result.BaseExceptionEnum;
 import com.example.labdemo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ import static com.example.labdemo.constants.ClientConstants.changeType;
 public class ClientServiceImpl implements ClientService {
     @Autowired
     ClientDao clientDao;
+    @Autowired
+    SaleNoteDao saleNoteDao;
     @Override
     public List<Client> getAll() {
         return clientDao.selectList(null);
@@ -27,7 +32,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteById(Long id) {
-        if(clientDao.deleteById(id)<=0) throw new BaseException();
+        Client client = clientDao.selectById(id);
+        if(client==null)throw new BaseException(BaseExceptionEnum.CLIENT_NOT_EXIST);
+        QueryWrapper<SaleNote> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("client_id",id);
+        List<SaleNote> saleNotes = saleNoteDao.selectList(queryWrapper);
+        if(!saleNotes.isEmpty()){
+            throw new BaseException(BaseExceptionEnum.CLIENT_CANT_DELETE);
+        }
+        if(clientDao.deleteById(id)<=0) throw new BaseException(BaseExceptionEnum.CLIENT_DELETE_ERROR);
     }
 
     @Override

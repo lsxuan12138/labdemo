@@ -1,15 +1,16 @@
 package com.example.labdemo.controller;
 
 import com.example.labdemo.domain.Client;
-import com.example.labdemo.domain.Product;
 import com.example.labdemo.dto.SaleNoteDetailDto;
-import com.example.labdemo.mapper.StoreItemDao;
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.ClientService;
 import com.example.labdemo.service.ProductService;
 import com.example.labdemo.service.SaleNoteService;
 import com.example.labdemo.service.StoreService;
-import com.example.labdemo.vo.*;
+import com.example.labdemo.vo.salenote.SaleNoteDetailVo;
+import com.example.labdemo.vo.salenote.SaleNoteVo;
+import com.example.labdemo.vo.store.StoreItemVo;
+import com.example.labdemo.vo.store.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

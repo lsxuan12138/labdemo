@@ -1,4 +1,4 @@
-package com.example.labdemo.vo;
+package com.example.labdemo.vo.purchase;
 
 import java.math.BigDecimal;
 
@@ -7,9 +7,9 @@ import java.math.BigDecimal;
  *
  * @author: lsxuan
  * @email: 1146887979@qq.com
- * @create: 2022-11-14 17:03
+ * @create: 2022-11-14 19:58
  */
-public class AdjustmentItemVo {
+public class PurchaseItemVo {
     private Long id;
     private String name;
     private Long quantity;
@@ -17,7 +17,7 @@ public class AdjustmentItemVo {
     private BigDecimal wholesalePrice;
     private BigDecimal retailPrice;
 
-    public AdjustmentItemVo() {
+    public PurchaseItemVo() {
     }
 
     public Long getId() {

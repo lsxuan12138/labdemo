@@ -3,6 +3,7 @@ package com.example.labdemo.service;
 import com.example.labdemo.domain.User;
 import com.example.labdemo.dto.UserAddDto;
 import com.example.labdemo.result.ResultResponse;
+import com.example.labdemo.vo.UserVo;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -38,4 +39,8 @@ public interface UserService {
      * @return
      */
     List<User> selectByRole(String role);
+
+    List<UserVo> selectAllUserVo();
+
+    void activeUser(Long id);
 }

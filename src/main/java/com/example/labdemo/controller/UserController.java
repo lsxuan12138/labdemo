@@ -5,6 +5,7 @@ import com.example.labdemo.dto.UserAddDto;
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.RoleService;
 import com.example.labdemo.service.UserService;
+import com.example.labdemo.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -84,17 +85,23 @@ public class UserController {
      * 退出登录
      * @return
      */
-    @PostMapping("/user/logout")
+    @PostMapping("/user/quit")
     @ResponseBody
     public ResultResponse logout(){
         return userService.logout();
     }
-//    @PreAuthorize("hasAnyAuthority('client:insert')")
-//    @GetMapping("/hello")
-//    @ResponseBody
-//    public String hello(){
-//        return "hello";
-//    }
 
+    @GetMapping("/user/control")
+    public ModelAndView controlUser(){
+        ModelAndView modelAndView = new ModelAndView("user_active");
+        List<UserVo> users = userService.selectAllUserVo();
+        modelAndView.getModelMap().addAttribute("users",users);
+        return modelAndView;
+    }
 
+    @PostMapping("/user/active")
+    public ResultResponse activeUser(@RequestParam("id") Long id){
+        userService.activeUser(id);
+        return ResultResponse.success();
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.labdemo.mapper.StoreItemDao">
-<resultMap id="voMap" type="com.example.labdemo.vo.StoreItemVo">
+<resultMap id="voMap" type="com.example.labdemo.vo.store.StoreItemVo">
     <id column="id" jdbcType="BIGINT" property="id"/>
     <result column="name" jdbcType="VARCHAR" property="name"/>
     <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -9,6 +9,7 @@
     <result column="purchasePrice" jdbcType="DECIMAL" property="purchasePrice"/>
     <result column="wholesalePrice" jdbcType="DECIMAL" property="wholesalePrice"/>
     <result column="retailPrice" jdbcType="DECIMAL" property="retailPrice"/>
+    <result column="amount" jdbcType="DECIMAL" property="amount"/>
 </resultMap>
     <select id="getAllStoreItem" resultMap="voMap">
         SELECT
@@ -18,7 +19,8 @@
             sum( tsi.quantity ) AS quantity,
             tp.purchase_price AS purchasePrice,
             tp.wholesale_price AS wholesalePrice,
-            tp.retail_price AS retailPrice
+            tp.retail_price AS retailPrice,
+            sum(tsi.quantity)*tp.purchase_price AS amount
         FROM
             t_store_item AS tsi
                 LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
@@ -33,14 +35,15 @@
             tsi.quantity,
             tp.purchase_price AS purchasePrice,
             tp.wholesale_price AS wholesalePrice,
-            tp.retail_price AS retailPrice
+            tp.retail_price AS retailPrice,
+            tsi.quantity*tp.purchase_price AS amount
         FROM
             t_store_item AS tsi
                 LEFT JOIN t_product AS tp ON tp.id = tsi.product_id
         WHERE
             tsi.store_id = ${id,jdbcType=BIGINT};
     </select>
-    <resultMap id="itemDetailVoMap" type="com.example.labdemo.vo.StoreItemDetailVo">
+    <resultMap id="itemDetailVoMap" type="com.example.labdemo.vo.store.StoreItemDetailVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>

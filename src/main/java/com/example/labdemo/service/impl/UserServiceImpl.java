@@ -13,6 +13,7 @@ import com.example.labdemo.security.LoginUser;
 import com.example.labdemo.security.RedisCache;
 import com.example.labdemo.service.UserService;
 import com.example.labdemo.util.JwtUtil;
+import com.example.labdemo.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -88,11 +89,27 @@ public class UserServiceImpl implements UserService {
         }
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.eq("role_id",role.getId());
-        //userQueryWrapper.eq("is_alive","Yes");
+        userQueryWrapper.eq("is_alive",1);
         List<User> users = userDao.selectList(userQueryWrapper);
         if (users == null||users.isEmpty()) {
             throw new BaseException();
         }
         return users;
+    }
+    @Override
+    public List<UserVo> selectAllUserVo(){
+        return userDao.selectAllUserVo();
+    }
+    @Override
+    public void activeUser(Long id){
+        User user = userDao.selectById(id);
+        if(user==null){
+            throw new BaseException(BaseExceptionEnum.USER_NO_EXIST);
+        }
+        if(user.getAlive()){
+            throw new BaseException(BaseExceptionEnum.USER_HAS_ALIVE);
+        }
+        user.setAlive(true);
+        userDao.updateById(user);
     }
 }

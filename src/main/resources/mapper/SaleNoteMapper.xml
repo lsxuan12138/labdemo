@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.labdemo.mapper.SaleNoteDao">
-    <resultMap id="saleNoteVoMap" type="com.example.labdemo.vo.SaleNoteVo">
+    <resultMap id="saleNoteVoMap" type="com.example.labdemo.vo.salenote.SaleNoteVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="store_name" jdbcType="VARCHAR" property="storeName"/>
         <result column="client_name" jdbcType="VARCHAR" property="clientName"/>
@@ -44,5 +44,16 @@
     <select id="selectVoById" resultMap="saleNoteVoMap">
         <include refid="selectVo"/>
         where tsn.id = ${id,jdbcType=BIGINT}
+    </select>
+    <select id="countClientByUserId" resultType="java.lang.Long">
+        SELECT
+            COUNT( DISTINCT tsn.client_id )
+        FROM
+            t_sale_note tsn
+        WHERE
+            tsn.create_by = #{id,jdbcType=BIGINT}
+          AND (
+                    tsn.stage = '待付款'
+                OR tsn.stage = '已付款')
     </select>
 </mapper>

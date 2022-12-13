@@ -2,11 +2,10 @@ package com.example.labdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.labdemo.domain.AdjustmentOrder;
-import com.example.labdemo.vo.AdjustmentDetailVo;
-import com.example.labdemo.vo.AdjustmentItemVo;
-import com.example.labdemo.vo.AdjustmentVo;
+import com.example.labdemo.vo.adjustment.AdjustmentDetailVo;
+import com.example.labdemo.vo.adjustment.AdjustmentItemVo;
+import com.example.labdemo.vo.adjustment.AdjustmentVo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

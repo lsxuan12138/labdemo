@@ -13,6 +13,8 @@ public class User {
     private String password;
     private Long roleId;
 
+    private Boolean isAlive;
+
     public User() {
     }
 
@@ -56,6 +58,14 @@ public class User {
         this.roleId = roleId;
     }
 
+    public Boolean getAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(Boolean alive) {
+        isAlive = alive;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -64,6 +74,7 @@ public class User {
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
                 ", roleId=" + roleId +
+                ", isAlive=" + isAlive +
                 '}';
     }
 }

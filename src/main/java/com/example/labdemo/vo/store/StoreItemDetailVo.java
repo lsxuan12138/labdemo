@@ -1,4 +1,4 @@
-package com.example.labdemo.vo;
+package com.example.labdemo.vo.store;
 
 import java.math.BigDecimal;
 

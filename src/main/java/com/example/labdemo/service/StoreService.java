@@ -1,11 +1,10 @@
 package com.example.labdemo.service;
 
-import com.example.labdemo.domain.Store;
 import com.example.labdemo.dto.StoreAddDto;
-import com.example.labdemo.vo.StoreHouseDetailVo;
-import com.example.labdemo.vo.StoreItemDetailVo;
-import com.example.labdemo.vo.StoreItemVo;
-import com.example.labdemo.vo.StoreVo;
+import com.example.labdemo.vo.store.StoreHouseDetailVo;
+import com.example.labdemo.vo.store.StoreItemDetailVo;
+import com.example.labdemo.vo.store.StoreItemVo;
+import com.example.labdemo.vo.store.StoreVo;
 
 import java.util.List;
 
@@ -55,4 +54,6 @@ public interface StoreService {
      * @return
      */
     public StoreHouseDetailVo selectDetailVo(Long id);
+
+    void deleteStore(Long id);
 }
