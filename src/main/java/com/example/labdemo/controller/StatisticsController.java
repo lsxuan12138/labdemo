@@ -30,6 +30,11 @@ public class StatisticsController {
         modelAndView.getModelMap().addAttribute("clients",statisticsService.selectClientStaticsVo());
         return modelAndView;
     }
-
+    @GetMapping("/saleNote/product")
+    public ModelAndView productStatistic(){
+        ModelAndView modelAndView = new ModelAndView("sale_note_product");
+        modelAndView.getModelMap().addAttribute("products",statisticsService.selectProductStatisticsVo());
+        return modelAndView;
+    }
 
 }

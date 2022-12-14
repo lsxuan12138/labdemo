@@ -1,4 +1,4 @@
-package com.example.labdemo.vo.statics;
+package com.example.labdemo.vo.statistic;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @email: 1146887979@qq.com
  * @create: 2022-12-13 21:08
  */
-public class ClientStaticsVo {
+public class ClientStatisticsVo {
     private Long id;
     private String name;
     private String type;
@@ -17,7 +17,7 @@ public class ClientStaticsVo {
     private Long saleQuantity;
     private BigDecimal amount;
 
-    public ClientStaticsVo() {
+    public ClientStatisticsVo() {
     }
 
     public Long getId() {

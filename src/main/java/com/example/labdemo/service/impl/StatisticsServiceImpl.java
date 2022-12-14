@@ -2,19 +2,18 @@ package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.labdemo.constants.SaleNoteConstants;
+import com.example.labdemo.domain.Client;
+import com.example.labdemo.domain.Product;
 import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.domain.SaleNoteItem;
-import com.example.labdemo.mapper.ClientDao;
-import com.example.labdemo.mapper.SaleNoteDao;
-import com.example.labdemo.mapper.SaleNoteItemDao;
-import com.example.labdemo.mapper.UserDao;
+import com.example.labdemo.mapper.*;
 import com.example.labdemo.service.StatisticsService;
-import com.example.labdemo.vo.statics.ClientStaticsVo;
-import com.example.labdemo.vo.statics.SalesmanStatisticVo;
+import com.example.labdemo.vo.statistic.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,10 +33,12 @@ public class StatisticsServiceImpl implements StatisticsService {
     SaleNoteDao saleNoteDao;
     @Autowired
     SaleNoteItemDao saleNoteItemDao;
+    @Autowired
+    ProductDao productDao;
     @Override
-    public List<SalesmanStatisticVo> selectSalesmanStaticsVo(){
-        List<SalesmanStatisticVo> list = userDao.selectStaticsVo();
-        for (SalesmanStatisticVo vo:
+    public List<SalesmanStatisticsVo> selectSalesmanStaticsVo(){
+        List<SalesmanStatisticsVo> list = userDao.selectStaticsVo();
+        for (SalesmanStatisticsVo vo:
              list) {
             Long userId = vo.getId();
             QueryWrapper<SaleNote> saleNoteQueryWrapper = new QueryWrapper<>();
@@ -62,9 +63,9 @@ public class StatisticsServiceImpl implements StatisticsService {
         return list;
     }
     @Override
-    public List<ClientStaticsVo> selectClientStaticsVo(){
-        List<ClientStaticsVo> list = clientDao.selectStaticsVo();
-        for (ClientStaticsVo vo:
+    public List<ClientStatisticsVo> selectClientStaticsVo(){
+        List<ClientStatisticsVo> list = clientDao.selectStaticsVo();
+        for (ClientStatisticsVo vo:
              list) {
             Long clientId = vo.getId();
             QueryWrapper<SaleNote> saleNoteQueryWrapper = new QueryWrapper<>();
@@ -91,5 +92,56 @@ public class StatisticsServiceImpl implements StatisticsService {
             vo.setProductQuantity(productQuantity);
         }
         return list;
+    }
+    @Override
+    public List<ProductStatisticsVo> selectProductStatisticsVo(){
+        List<ProductStatisticsVo> list = new ArrayList<>();
+        List<Product> products = productDao.selectList(null);
+        for (Product product:
+             products) {
+            ProductStatisticsVo vo = new ProductStatisticsVo();
+            vo.setProperties(product);
+            vo.setBuyQuantity(productDao.countBuyQuantity(product.getId()));
+            vo.setSaleQuantity(productDao.countSaleQuantity(product.getId()));
+            vo.setClientQuantity(productDao.countClientQuantity(product.getId()));
+
+            BigDecimal amount = new BigDecimal(0);
+            List<ProductWithPriceAndQuantityVo> productWithPriceAndQuantityVos = productDao.selectProductWithPriceAndQuantityVo(product.getId());
+            for (ProductWithPriceAndQuantityVo p:
+                    productWithPriceAndQuantityVos) {
+                amount = amount.add(p.getPrice().multiply(new BigDecimal(p.getQuantity())));
+            }
+            vo.setAmount(amount);
+        }
+        return list;
+    }
+    @Override
+    public List<ClientPaymentStatisticsVo> selectClientPaymentStatisticsVos(){
+        List<Client> clients = clientDao.selectList(null);
+        List<ClientPaymentStatisticsVo> list = new ArrayList<>();
+        for (Client client:
+             clients) {
+            ClientPaymentStatisticsVo vo = new ClientPaymentStatisticsVo();
+            vo.setProperties(client);
+
+            QueryWrapper<SaleNote> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("client_id",client.getId());
+            queryWrapper.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID);
+            List<SaleNote> saleNotes = saleNoteDao.selectList(queryWrapper);
+            BigDecimal receivedPayment = new BigDecimal(0);
+            BigDecimal price = new BigDecimal(0);
+            for (SaleNote note:
+                 saleNotes) {
+                price = price.add(note.getPrice());
+                receivedPayment = receivedPayment.add(note.getReceivedPayment());
+            }
+            vo.setReceivedPayment(receivedPayment);
+            vo.setUnreceivedPayment(price.subtract(receivedPayment));
+        }
+        return list;
+    }
+    @Override
+    public List<BigDecimal[]> selectBusinessStatisticsVo(){
+        return null;
     }
 }

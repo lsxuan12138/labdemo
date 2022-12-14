@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labdemo.mapper.ProductDao">
+    <select id="countBuyQuantity" resultType="long">
+        SELECT
+            SUM(tsni.quantity)
+        FROM
+            `t_sale_note_item` tsni
+                LEFT JOIN t_sale_note tsn ON tsni.sale_note_id = tsn.id
+        WHERE
+            tsni.product_id = #{id,jdbcType=BIGINT}
+          AND ( tsn.stage = '待付款' OR tsn.stage = '已付款' )
+          AND tsni.quantity >0
+    </select>
+    <select id="countSaleQuantity" resultType="long">
+        SELECT
+            COUNT(tsni.quantity)
+        FROM
+            `t_sale_note_item` tsni
+                LEFT JOIN t_sale_note tsn ON tsni.sale_note_id = tsn.id
+        WHERE
+            tsni.product_id = #{id,jdbcType=BIGINT}
+          AND ( tsn.stage = '待付款' OR tsn.stage = '已付款' )
+          AND tsni.quantity >0
+    </select>
+    <select id="countClientQuantity" resultType="long">
+        SELECT
+            COUNT(DISTINCT tsn.client_id)
+        FROM
+            `t_sale_note_item` tsni
+                LEFT JOIN t_sale_note tsn ON tsni.sale_note_id = tsn.id
+        WHERE
+            tsni.product_id = #{id,jdbcType=BIGINT}
+          AND ( tsn.stage = '待付款' OR tsn.stage = '已付款' )
+          AND tsni.quantity >0
+    </select>
+    <resultMap id="ProductWithPriceAndQuantityVo" type="com.example.labdemo.vo.statistic.ProductWithPriceAndQuantityVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="quantity" jdbcType="BIGINT" property="quantity"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+    </resultMap>
+    <select id="selectProductWithPriceAndQuantityVo" resultMap="ProductWithPriceAndQuantityVo">
+        SELECT
+            tsni.product_id AS id,
+            tsni.quantity,
+            CASE
+                tc.type
+                WHEN '批发客户' THEN
+                    tp.wholesale_price ELSE tp.retail_price
+                END AS price
+        FROM
+            `t_sale_note_item` tsni
+                LEFT JOIN t_sale_note tsn ON tsni.sale_note_id = tsn.id
+                LEFT JOIN t_product tp ON tsni.product_id = tp.id
+                LEFT JOIN t_client tc ON tsn.client_id = tc.id
+        WHERE
+            tsni.product_id = #{id,jdbcType=BIGINT}
+          AND ( tsn.stage = '待付款' OR tsn.stage = '已付款' )
+          AND tsni.quantity >0
+    </select>
+</mapper>

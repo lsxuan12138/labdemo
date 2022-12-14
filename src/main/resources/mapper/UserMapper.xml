@@ -32,7 +32,7 @@
             t_user tu
                 LEFT JOIN t_role tr ON tu.role_id = tr.id
     </select>
-    <resultMap id="staticsVoMap" type="com.example.labdemo.vo.statics.SalesmanStatisticVo">
+    <resultMap id="staticsVoMap" type="com.example.labdemo.vo.statistic.SalesmanStatisticsVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
     </resultMap>
