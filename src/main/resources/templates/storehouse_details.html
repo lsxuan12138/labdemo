@@ -147,7 +147,14 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">仓库详情<a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" style="float: right" type="button">返回</a></h3>
+                <h3 class="breadcrumb-header">仓库详情
+                    <div class="btn-group" style="float: right">
+                        <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
+                        <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">条形统计图</button>
+                        <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">柱形统计图</button>
+                        <a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" style="float: right" type="button">返回</a>
+                    </div>
+                </h3>
                 <p th:text="'仓库编号：'+${storeHouseDetails.id}" style="display: inline">仓库编号：</p>
                 <p th:text="'仓库名：'+${storeHouseDetails.name}" style="display: inline;position: relative;left: 7%">仓库名：</p>
                 <p th:text="'备注：'+${storeHouseDetails.remark}" style="display: inline;position: relative;left: 14%">备注：</p>
@@ -230,6 +237,15 @@
 <script src="../static/switchery/switchery.min.js"></script>
 <script src="../static/datatables/js/jquery.datatables.js"></script>
 <script src="../static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../static/chartjs/chart.min.js"></script>
+<script src="../static/d3/d3.min.js"></script>
+<script src="../static/nvd3/nv.d3.min.js"></script>
+<script src="../static/flot/jquery.flot.min.js"></script>
+<script src="../static/flot/jquery.flot.time.min.js"></script>
+<script src="../static/flot/jquery.flot.symbol.min.js"></script>
+<script src="../static/flot/jquery.flot.resize.min.js"></script>
+<script src="../static/flot/jquery.flot.tooltip.min.js"></script>
+<script src="../static/flot/jquery.flot.pie.min.js"></script>
 <script src="../static/space.min.js"></script>
 <script>
     $('#quit').on('click', function () {
