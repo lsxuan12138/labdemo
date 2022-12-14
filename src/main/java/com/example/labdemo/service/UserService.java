@@ -2,8 +2,10 @@ package com.example.labdemo.service;
 
 import com.example.labdemo.domain.User;
 import com.example.labdemo.dto.UserAddDto;
+import com.example.labdemo.dto.UserChangeInfoDto;
 import com.example.labdemo.result.ResultResponse;
-import com.example.labdemo.vo.UserVo;
+import com.example.labdemo.vo.UserCtrlVo;
+import com.example.labdemo.vo.UserInfoVo;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -40,7 +42,11 @@ public interface UserService {
      */
     List<User> selectByRole(String role);
 
-    List<UserVo> selectAllUserVo();
+    List<UserCtrlVo> selectAllUserVo();
 
     void activeUser(Long id);
+
+    UserInfoVo getUserInfo();
+
+    void changeUserInfo(UserChangeInfoDto dto);
 }

@@ -2,10 +2,14 @@ package com.example.labdemo.controller;
 
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.StatisticsService;
+import com.example.labdemo.vo.statistic.BusinessStatisticsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.jws.WebParam;
 
 /**
  * TODO
@@ -36,5 +40,21 @@ public class StatisticsController {
         modelAndView.getModelMap().addAttribute("products",statisticsService.selectProductStatisticsVo());
         return modelAndView;
     }
-
+    @GetMapping("/saleNote/receive")
+    public ModelAndView clientPaymentStatistic(){
+        ModelAndView modelAndView = new ModelAndView("sale_note_receive");
+        modelAndView.getModelMap().addAttribute("clients",statisticsService.selectClientPaymentStatisticsVos());
+        return modelAndView;
+    }
+    @GetMapping("/company")
+    public ModelAndView businessStatistics(){
+        ModelAndView modelAndView = new ModelAndView("company");
+        BusinessStatisticsVo vo = statisticsService.selectBusinessStatisticsVo();
+        ModelMap map = modelAndView.getModelMap();
+        map.addAttribute("purchaseAmounts",vo.getPurchaseAmounts());
+        map.addAttribute("saleAmounts",vo.getSaleAmounts());
+        map.addAttribute("profits",vo.getProfits());
+        map.addAttribute("storeAmounts",vo.getStoreAmounts());
+        return modelAndView;
+    }
 }

@@ -38,4 +38,22 @@
             ts.id = ${id,jdbcType=BIGINT};
 
     </select>
+    <select id="computePurchaseAmounts" resultType="java.math.BigDecimal">
+        SELECT
+            SUM(IFNULL(tp.purchase_price,0)*tpoi.quantity)
+        FROM
+            `t_purchase_order_item` tpoi
+                LEFT JOIN t_purchase_order tpo ON tpoi.purchase_order_id=tpo.id
+                LEFT JOIN t_product tp ON tpoi.product_id = tp.id
+        WHERE tpo.stage = '已审核'
+        <if test="beginDate != null">AND tpo.create_time <![CDATA[>=]]> #{beginDate}</if>
+        <if test="endDate != null">AND tpo.create_time <![CDATA[<=]]>#{endDate}</if>
+    </select>
+    <select id="computeStoreAmounts" resultType="java.math.BigDecimal">
+        SELECT
+            IFNULL(SUM(tsi.quantity*IFNULL(tp.purchase_price,0)),0)
+        FROM
+            t_store_item tsi
+                LEFT JOIN t_product tp ON tsi.product_id = tp.id
+    </select>
 </mapper>

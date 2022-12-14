@@ -12,7 +12,7 @@
             trpm.role_id in (SELECT role_id FROM t_user WHERE id = #{userId,jdbcType=BIGINT});
 
     </select>
-    <resultMap id="voMAp" type="com.example.labdemo.vo.UserVo">
+    <resultMap id="voMAp" type="com.example.labdemo.vo.UserCtrlVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="role" jdbcType="VARCHAR" property="role"/>
@@ -38,5 +38,20 @@
     </resultMap>
     <select id="selectStaticsVo" resultMap="staticsVoMap">
         SELECT tu.id,tu.`name` FROM t_user tu
+    </select>
+    <resultMap id="userInfoVo" type="com.example.labdemo.vo.UserInfoVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+    </resultMap>
+    <select id="selectUserInfoById" resultMap="userInfoVo">
+        SELECT
+            tu.id,
+            tu.`name`,
+            tr.remark AS `role`
+        FROM
+            t_user tu
+                LEFT JOIN t_role tr ON tu.role_id = tr.id
+        WHERE tu.id = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

@@ -7,13 +7,13 @@ package com.example.labdemo.vo;
  * @email: 1146887979@qq.com
  * @create: 2022-12-13 13:57
  */
-public class UserVo {
+public class UserCtrlVo {
     private Long id;
     private String name;
     private String role;
     private String state;
 
-    public UserVo() {
+    public UserCtrlVo() {
     }
 
     public Long getId() {

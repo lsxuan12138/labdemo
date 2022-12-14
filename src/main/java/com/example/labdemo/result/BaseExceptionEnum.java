@@ -58,8 +58,11 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
     STORE_NOT_EXIST("14020","仓库不存在"),
 
     STORE_NOT_EMPTY("14021","该仓库不为空"),
-    STORE_CANT_DELETE("14019","该仓库已存在某些销售单/进货单/调货单中，禁止删除"),
+    STORE_CANT_DELETE("14022","该仓库已存在某些销售单/进货单/调货单中，禁止删除"),
 
+    PASSWORD_NOT_MATCH("14023","密码错误"),
+
+    USER_HAS_NOT_ALIVE("14024","该用户未激活"),
     ;
 
     /**

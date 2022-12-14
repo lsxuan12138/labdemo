@@ -2,10 +2,7 @@ package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.labdemo.constants.SaleNoteConstants;
-import com.example.labdemo.domain.Client;
-import com.example.labdemo.domain.Product;
-import com.example.labdemo.domain.SaleNote;
-import com.example.labdemo.domain.SaleNoteItem;
+import com.example.labdemo.domain.*;
 import com.example.labdemo.mapper.*;
 import com.example.labdemo.service.StatisticsService;
 import com.example.labdemo.vo.statistic.*;
@@ -13,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * TODO
@@ -35,6 +33,8 @@ public class StatisticsServiceImpl implements StatisticsService {
     SaleNoteItemDao saleNoteItemDao;
     @Autowired
     ProductDao productDao;
+    @Autowired
+    StoreDao storeDao;
     @Override
     public List<SalesmanStatisticsVo> selectSalesmanStaticsVo(){
         List<SalesmanStatisticsVo> list = userDao.selectStaticsVo();
@@ -141,7 +141,40 @@ public class StatisticsServiceImpl implements StatisticsService {
         return list;
     }
     @Override
-    public List<BigDecimal[]> selectBusinessStatisticsVo(){
-        return null;
+    public BusinessStatisticsVo selectBusinessStatisticsVo(){
+        //进货金额
+        List<BigDecimal> purchaseAmounts = new ArrayList<>();
+        //销售金额
+        List<BigDecimal> saleAmounts = new ArrayList<>();
+        //盈利金额
+        List<BigDecimal> profits = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        StringBuilder beginDateStr = new StringBuilder("2022-");
+        StringBuilder endDateStr = new StringBuilder("2022-");
+        for (int i = 1; i <= 12; i++) {
+            if(i==12){
+                endDateStr = new StringBuilder("2023-1-1");
+                continue;
+            }
+            beginDateStr.append(i).append("-1");
+            endDateStr.append(i+1).append("-1");
+            Date beginDate;
+            Date endDate;
+            try {
+                 beginDate = format.parse(beginDateStr.toString());
+                 endDate = format.parse(endDateStr.toString());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            purchaseAmounts.add(storeDao.computePurchaseAmounts(beginDate,endDate));
+            saleAmounts.add(saleNoteDao.computeSaleAmounts(beginDate,endDate));
+            profits.add(saleAmounts.get(i-1).subtract(saleAmounts.get(i-1)));
+        }
+        BusinessStatisticsVo vo = new BusinessStatisticsVo();
+        vo.setPurchaseAmounts(purchaseAmounts);
+        vo.setSaleAmounts(saleAmounts);
+        vo.setProfits(profits);
+        vo.setStoreAmounts(storeDao.computeStoreAmounts().toString());
+        return vo;
     }
 }

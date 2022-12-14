@@ -2,10 +2,11 @@ package com.example.labdemo.controller;
 
 import com.example.labdemo.domain.Role;
 import com.example.labdemo.dto.UserAddDto;
+import com.example.labdemo.dto.UserChangeInfoDto;
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.RoleService;
 import com.example.labdemo.service.UserService;
-import com.example.labdemo.vo.UserVo;
+import com.example.labdemo.vo.UserCtrlVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,7 +54,6 @@ public class UserController {
     @PostMapping("/user/loginPost")
     @ResponseBody
     public ResultResponse login(@RequestParam("username")String username,@RequestParam("password")String password){
-        //return loginServcie.login(user);
         return userService.login(username,password);
     }
 
@@ -94,7 +94,7 @@ public class UserController {
     @GetMapping("/user/control")
     public ModelAndView controlUser(){
         ModelAndView modelAndView = new ModelAndView("user_active");
-        List<UserVo> users = userService.selectAllUserVo();
+        List<UserCtrlVo> users = userService.selectAllUserVo();
         modelAndView.getModelMap().addAttribute("users",users);
         return modelAndView;
     }
@@ -104,4 +104,16 @@ public class UserController {
         userService.activeUser(id);
         return ResultResponse.success();
     }
+    @GetMapping("/user/now")
+    public ModelAndView userInfo(){
+        ModelAndView modelAndView = new ModelAndView("user_now");
+        modelAndView.getModelMap().addAttribute("user",userService.getUserInfo());
+        return modelAndView;
+    }
+    @PostMapping("/user/changeUser")
+    public ResultResponse changeUserInfo(@RequestBody UserChangeInfoDto dto){
+        userService.changeUserInfo(dto);
+        return ResultResponse.success();
+    }
+
 }

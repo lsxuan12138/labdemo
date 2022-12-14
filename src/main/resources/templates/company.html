@@ -189,7 +189,7 @@
 <script src="../static/flot/jquery.flot.pie.min.js"></script>
 <script src="../static/space.min.js"></script>
 
-<script>
+<script th:inline="javascript">
     let a=[[${purchaseAmounts}]];
     let b=[[${saleAmounts}]];
     let c=[[${profits}]];

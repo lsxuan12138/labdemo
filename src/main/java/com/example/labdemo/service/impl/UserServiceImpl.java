@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.labdemo.domain.Role;
 import com.example.labdemo.domain.User;
 import com.example.labdemo.dto.UserAddDto;
+import com.example.labdemo.dto.UserChangeInfoDto;
 import com.example.labdemo.mapper.RoleDao;
 import com.example.labdemo.mapper.UserDao;
 import com.example.labdemo.result.BaseException;
@@ -12,8 +13,10 @@ import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.security.LoginUser;
 import com.example.labdemo.security.RedisCache;
 import com.example.labdemo.service.UserService;
+import com.example.labdemo.util.BCPEUtils;
 import com.example.labdemo.util.JwtUtil;
-import com.example.labdemo.vo.UserVo;
+import com.example.labdemo.vo.UserCtrlVo;
+import com.example.labdemo.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,6 +56,9 @@ public class UserServiceImpl implements UserService {
         //使用userid生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
+        if(!loginUser.getUser().getAlive()){
+            throw new BaseException(BaseExceptionEnum.USER_HAS_NOT_ALIVE);
+        }
         String jwt = JwtUtil.createJWT(userId);
         //authenticate存入redis
         redisCache.setCacheObject("login:"+userId,loginUser,1, TimeUnit.HOURS);
@@ -97,7 +103,7 @@ public class UserServiceImpl implements UserService {
         return users;
     }
     @Override
-    public List<UserVo> selectAllUserVo(){
+    public List<UserCtrlVo> selectAllUserVo(){
         return userDao.selectAllUserVo();
     }
     @Override
@@ -111,5 +117,27 @@ public class UserServiceImpl implements UserService {
         }
         user.setAlive(true);
         userDao.updateById(user);
+    }
+    @Override
+    public UserInfoVo getUserInfo(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userid = loginUser.getUser().getId();
+        return userDao.selectUserInfoById(userid);
+    }
+
+    @Override
+    public void changeUserInfo(UserChangeInfoDto dto){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userid = loginUser.getUser().getId();
+        User user = userDao.selectById(userid);
+        if(!BCPEUtils.matches(dto.getOldPassword(),user.getPassword())){
+            throw new BaseException(BaseExceptionEnum.PASSWORD_NOT_MATCH);
+        }
+        user.setName(dto.getUsername());
+        user.setPassword(BCPEUtils.encode(dto.getPassword()));
+        userDao.updateById(user);
+        redisCache.deleteObject("login:"+userid);
     }
 }
