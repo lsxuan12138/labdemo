@@ -146,15 +146,21 @@
         </div><!-- /Page Header -->
         <!-- Page Inner -->
         <div class="page-inner">
-            <div class="page-title">
+            <!--<div class="page-title">
                 <h3 class="breadcrumb-header">货品</h3>
-            </div>
+            </div>-->
             <div id="main-wrapper">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-white" id="tables">
                             <div class="panel-heading">
-                                <h4 class="panel-title">货品<button class="btn btn-info m-b-sm" type="button" style="float: right" onclick="changeChart()">切换统计图</button></h4>
+                                <h4 class="panel-title">货品
+                                    <div class="btn-group" style="float: right">
+                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">条形统计图</button>
+                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">柱形统计图</button>
+                                    </div>
+
+                                </h4>
                             </div>
                             <div class="panel-body">
                                 <button class="btn btn-info m-b-sm" data-target="#myModal" data-toggle="modal"
@@ -339,9 +345,25 @@
                         </div>
                         <div class="panel panel-white" style="display: none" id="charts">
                             <div class="panel-heading">
-                                <h4 class="panel-title">货品<button class="btn btn-info m-b-sm" type="button" style="float: right" onclick="changeTable()">切换统计表</button></h4>
+                                <h4 class="panel-title">货品
+                                    <div class="btn-group" style="float: right">
+                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
+                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">柱形统计图</button>
+                                    </div>
+                                </h4>
                             </div>
                             <canvas id="chart1"></canvas>
+                        </div>
+                        <div class="panel panel-white" style="display: none" id="bar">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">货品
+                                    <div class="btn-group" style="float: right">
+                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
+                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">条形统计图</button>
+                                    </div>
+                                </h4>
+                            </div>
+                            <canvas id="chart2"></canvas>
                         </div>
                     </div>
                 </div><!-- Row -->
@@ -386,13 +408,25 @@
                 {"label":"批发价","data":wholesalePrice,"fill":false,"borderColor":"rgb(236, 94, 105)","lineTension":0.1},
                 {"label":"零售价","data":retailPrice,"fill":false,"borderColor":"rgb(0, 112, 224)","lineTension":0.1}
             ]},"options":{}});
+    new Chart(document.getElementById("chart2"),{"type":"bar","data":{"labels":name,
+            "datasets":[{"label":"进货价","data":purchasePrice,"fill":false,"backgroundColor":"rgb(99, 203, 137)","borderColor":"rgb(99, 203, 137)","lineTension":0.1},
+                {"label":"批发价","data":wholesalePrice,"fill":false,"backgroundColor":"rgb(236, 94, 105)","borderColor":"rgb(236, 94, 105)","lineTension":0.1},
+                {"label":"零售价","data":retailPrice,"fill":false,"backgroundColor":"rgb(0, 112, 224)","borderColor":"rgb(0, 112, 224)","lineTension":0.1}
+            ]},"options":{}});
     function changeChart(){
         document.getElementById('charts').style.display = 'block';
         document.getElementById('tables').style.display = 'none';
+        document.getElementById('bar').style.display = 'none';
+    }
+    function changeBar(){
+        document.getElementById('charts').style.display = 'none';
+        document.getElementById('tables').style.display = 'none';
+        document.getElementById('bar').style.display = 'block';
     }
     function changeTable(){
         document.getElementById('charts').style.display = 'none';
         document.getElementById('tables').style.display = 'block';
+        document.getElementById('bar').style.display = 'none';
     }
     $('#quit').on('click', function () {
         $.ajax({
