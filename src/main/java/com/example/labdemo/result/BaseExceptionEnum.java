@@ -42,7 +42,24 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
 
     STAGE_ERROR("14012","阶段错误"),
 
-    USER_INSERT_ERROR("14013","该用户名已被占用")
+    USER_INSERT_ERROR("14013","该用户名已被占用"),
+
+    USER_HAS_ALIVE("14014","该用户已激活"),
+
+    CLIENT_NOT_EXIST("14015","客户不存在"),
+
+    CLIENT_CANT_DELETE("14016","该客户名下已有订单，禁止删除"),
+    CLIENT_DELETE_ERROR("14017","客户删除失败"),
+
+    PRODUCT_NOT_EXIST("14018","产品不存在"),
+
+    PRODUCT_CANT_DELETE("14019","该产品已存在某些销售单/进货单/调货单中，禁止删除"),
+
+    STORE_NOT_EXIST("14020","仓库不存在"),
+
+    STORE_NOT_EMPTY("14021","该仓库不为空"),
+    STORE_CANT_DELETE("14019","该仓库已存在某些销售单/进货单/调货单中，禁止删除"),
+
     ;
 
     /**

@@ -1,23 +1,22 @@
-package com.example.labdemo.vo;
-
-import com.example.labdemo.domain.SaleNoteItem;
+package com.example.labdemo.vo.salenote;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class SaleNoteDetailVo {
+public class SaleNoteVo {
     private Long id;
+    private String storeName;
     private String clientName;
-    private String clientType;
     private String stage;
     private BigDecimal cost;
     private BigDecimal price;
     private BigDecimal profit;
-
     private BigDecimal receivedPayment;
-    private List<SaleNoteItemVo> items;
+    private String creator;
+    private Date createTime;
 
-    public SaleNoteDetailVo() {
+    public SaleNoteVo() {
     }
 
     public Long getId() {
@@ -28,20 +27,22 @@ public class SaleNoteDetailVo {
         this.id = id;
     }
 
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public String getStoreHouseName(){return storeName;}
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     public String getClientName() {
         return clientName;
     }
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-    }
-
-    public String getClientType() {
-        return clientType;
-    }
-
-    public void setClientType(String clientType) {
-        this.clientType = clientType;
     }
 
     public String getStage() {
@@ -84,11 +85,24 @@ public class SaleNoteDetailVo {
         this.receivedPayment = receivedPayment;
     }
 
-    public List<SaleNoteItemVo> getItems() {
-        return items;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setItems(List<SaleNoteItemVo> items) {
-        this.items = items;
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+//    //public Date getCreateTime() {
+//        return createTime;
+//    }
+
+    public String getCreateTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(createTime);
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

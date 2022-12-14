@@ -2,8 +2,8 @@ package com.example.labdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.labdemo.domain.StoreItem;
-import com.example.labdemo.vo.StoreItemDetailVo;
-import com.example.labdemo.vo.StoreItemVo;
+import com.example.labdemo.vo.store.StoreItemDetailVo;
+import com.example.labdemo.vo.store.StoreItemVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

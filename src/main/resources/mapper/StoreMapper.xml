@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.labdemo.mapper.StoreDao">
-    <resultMap id="voMap" type="com.example.labdemo.vo.StoreVo">
+    <resultMap id="voMap" type="com.example.labdemo.vo.store.StoreVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -19,7 +19,7 @@
 
     </select>
 
-    <resultMap id="detailVo" type="com.example.labdemo.vo.StoreHouseDetailVo">
+    <resultMap id="detailVo" type="com.example.labdemo.vo.store.StoreHouseDetailVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.labdemo.mapper.PurchaseOrderDao">
-    <resultMap id="purchaseVo" type="com.example.labdemo.vo.PurchaseVo">
+    <resultMap id="purchaseVo" type="com.example.labdemo.vo.purchase.PurchaseVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="store_name" jdbcType="VARCHAR" property="storeHouseName"/>
         <result column="stage" jdbcType="VARCHAR" property="stage"/>
@@ -23,11 +23,11 @@
     <select id="getAllVo" resultMap="purchaseVo">
         <include refid="selectVo"/>
     </select>
-    <select id="getVoById" resultType="com.example.labdemo.vo.PurchaseVo">
+    <select id="getVoById" resultType="com.example.labdemo.vo.purchase.PurchaseVo">
         <include refid="selectVo"/>
         WHERE tpo.id = ${id,jdbcType=BIGINT}
     </select>
-    <resultMap id="detailVo" type="com.example.labdemo.vo.PurchaseDetailVo">
+    <resultMap id="detailVo" type="com.example.labdemo.vo.purchase.PurchaseDetailVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="store_name" jdbcType="VARCHAR" property="storeHouseName"/>
         <result column="stage" jdbcType="VARCHAR" property="stage"/>
@@ -45,7 +45,7 @@
             tpo.id = ${id,jdbcType=BIGINT}
     </select>
 
-    <resultMap id="itemVo" type="com.example.labdemo.vo.PurchaseItemVo">
+    <resultMap id="itemVo" type="com.example.labdemo.vo.purchase.PurchaseItemVo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="quantity" jdbcType="BIGINT" property="quantity"/>

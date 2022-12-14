@@ -2,9 +2,8 @@ package com.example.labdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.labdemo.domain.SaleNote;
-import com.example.labdemo.vo.SaleNoteVo;
+import com.example.labdemo.vo.salenote.SaleNoteVo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +15,6 @@ public interface SaleNoteDao extends BaseMapper<SaleNote> {
 //    public List<SaleNoteVo> find(@Param("key")String key);
 
     public SaleNoteVo selectVoById(Long id);
+
+    long countClientByUserId(Long id);
 }

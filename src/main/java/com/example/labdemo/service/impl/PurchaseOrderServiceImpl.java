@@ -1,10 +1,8 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.labdemo.constants.AdjustmentOrderConstants;
 import com.example.labdemo.constants.PurchaseOrderConstants;
 import com.example.labdemo.domain.*;
-import com.example.labdemo.dto.AdjustmentUpdateItemDto;
 import com.example.labdemo.dto.PurchaseUpdateDto;
 import com.example.labdemo.dto.PurchaseUpdateItemDto;
 import com.example.labdemo.mapper.PurchaseOrderDao;
@@ -14,8 +12,8 @@ import com.example.labdemo.result.BaseException;
 import com.example.labdemo.result.BaseExceptionEnum;
 import com.example.labdemo.security.LoginUser;
 import com.example.labdemo.service.PurchaseOrderService;
-import com.example.labdemo.vo.PurchaseDetailVo;
-import com.example.labdemo.vo.PurchaseVo;
+import com.example.labdemo.vo.purchase.PurchaseDetailVo;
+import com.example.labdemo.vo.purchase.PurchaseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

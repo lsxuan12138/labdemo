@@ -2,8 +2,8 @@ package com.example.labdemo.service;
 
 import com.example.labdemo.domain.SaleNote;
 import com.example.labdemo.dto.SaleNoteDetailDto;
-import com.example.labdemo.vo.SaleNoteDetailVo;
-import com.example.labdemo.vo.SaleNoteVo;
+import com.example.labdemo.vo.salenote.SaleNoteDetailVo;
+import com.example.labdemo.vo.salenote.SaleNoteVo;
 
 import java.util.List;
 

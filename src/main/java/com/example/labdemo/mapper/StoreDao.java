@@ -2,10 +2,9 @@ package com.example.labdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.labdemo.domain.Store;
-import com.example.labdemo.vo.StoreHouseDetailVo;
-import com.example.labdemo.vo.StoreVo;
+import com.example.labdemo.vo.store.StoreHouseDetailVo;
+import com.example.labdemo.vo.store.StoreVo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

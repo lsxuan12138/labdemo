@@ -1,24 +1,21 @@
-package com.example.labdemo.vo;
+package com.example.labdemo.vo.adjustment;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 /**
  * TODO
  *
  * @author: lsxuan
  * @email: 1146887979@qq.com
- * @create: 2022-11-14 15:44
+ * @create: 2022-11-14 17:06
  */
-public class AdjustmentVo {
+public class AdjustmentDetailVo {
     private Long id;
     private String stage;
     private String srcStoreHouse;
     private String destStoreHouse;
-    private String creator;
-    private Date createTime;
-
-    public AdjustmentVo() {
+    private List<AdjustmentItemVo> items;
+    public AdjustmentDetailVo() {
     }
 
     public Long getId() {
@@ -53,20 +50,11 @@ public class AdjustmentVo {
         this.destStoreHouse = destStoreHouse;
     }
 
-    public String getCreator() {
-        return creator;
+    public List<AdjustmentItemVo> getItems() {
+        return items;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public String getCreateTime() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.format(createTime);
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setItems(List<AdjustmentItemVo> items) {
+        this.items = items;
     }
 }

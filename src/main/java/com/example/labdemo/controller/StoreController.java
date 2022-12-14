@@ -6,7 +6,7 @@ import com.example.labdemo.dto.StoreAddDto;
 import com.example.labdemo.result.ResultResponse;
 import com.example.labdemo.service.StoreService;
 import com.example.labdemo.service.UserService;
-import com.example.labdemo.vo.StoreVo;
+import com.example.labdemo.vo.store.StoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -83,5 +83,11 @@ public class StoreController {
         ModelAndView modelAndView = new ModelAndView("storehouse_details");
         modelAndView.getModelMap().addAttribute("storeHouseDetails",storeService.selectDetailVo(id));
         return modelAndView;
+    }
+
+    @PostMapping("/product/storeHouseDelete")
+    public ResultResponse storeDelete(@RequestParam Long id){
+        storeService.deleteStore(id);
+        return ResultResponse.success();
     }
 }

@@ -1,27 +1,22 @@
-package com.example.labdemo.vo;
+package com.example.labdemo.vo.store;
 
-import com.example.labdemo.domain.Store;
+import java.util.List;
 
 /**
  * TODO
  *
  * @author: lsxuan
  * @email: 1146887979@qq.com
- * @create: 2022-11-13 20:20
+ * @create: 2022-11-13 21:46
  */
-public class StoreVo {
+public class StoreHouseDetailVo {
     private Long id;
     private String name;
     private String remark;
     private String owner;
+    private List<StoreItemVo> items;
 
-    public StoreVo() {
-    }
-
-    public StoreVo(Store store) {
-        this.id = store.getId();
-        this.name = store.getName();
-        this.remark=store.getRemark();
+    public StoreHouseDetailVo() {
     }
 
     public Long getId() {
@@ -56,5 +51,13 @@ public class StoreVo {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public List<StoreItemVo> getItems() {
+        return items;
+    }
+
+    public void setItems(List<StoreItemVo> items) {
+        this.items = items;
     }
 }

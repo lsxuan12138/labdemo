@@ -1,4 +1,4 @@
-package com.example.labdemo.vo;
+package com.example.labdemo.vo.adjustment;
 
 import java.math.BigDecimal;
 
@@ -7,18 +7,17 @@ import java.math.BigDecimal;
  *
  * @author: lsxuan
  * @email: 1146887979@qq.com
- * @create: 2022-11-13 21:02
+ * @create: 2022-11-14 17:03
  */
-public class StoreItemVo {
+public class AdjustmentItemVo {
     private Long id;
     private String name;
-    private String remark;
     private Long quantity;
     private BigDecimal purchasePrice;
     private BigDecimal wholesalePrice;
     private BigDecimal retailPrice;
 
-    public StoreItemVo() {
+    public AdjustmentItemVo() {
     }
 
     public Long getId() {
@@ -28,9 +27,7 @@ public class StoreItemVo {
     public void setId(Long id) {
         this.id = id;
     }
-    public void setId(String id) {
-        this.id = Long.parseLong(id);
-    }
+
     public String getName() {
         return name;
     }
@@ -45,17 +42,6 @@ public class StoreItemVo {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
-    }
-    public void setQuantity(String quantity) {
-        this.quantity = Long.parseLong(quantity);
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 
     public BigDecimal getPurchasePrice() {
