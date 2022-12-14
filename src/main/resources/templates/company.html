@@ -190,12 +190,12 @@
 <script src="../static/space.min.js"></script>
 
 <script>
-    /*let a=[[${purchaseAmounts}]];
+    let a=[[${purchaseAmounts}]];
     let b=[[${saleAmounts}]];
-    let c=[[${profits}]];*/
-    let a=[65,59,80,81,56,55,40,68,98,57,58,36];
+    let c=[[${profits}]];
+    /*let a=[65,59,80,81,56,55,40,68,98,57,58,36];
     let b=[81,56,55,40,31,65,67,94,36,59,78,36];
-    let c=[31,65,67,89,33,66,58,39,85,26,79,36];
+    let c=[31,65,67,89,33,66,58,39,85,26,79,36];*/
     new Chart(document.getElementById("chart1"),{"type":"line","data":{"labels":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
             "datasets":[{"label":"进货金额","data":a,"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.1},
                 {"label":"销售金额","data":b,"fill":false,"borderColor":"rgb(236, 94, 105)","lineTension":0.1},
