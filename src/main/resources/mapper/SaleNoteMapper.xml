@@ -52,8 +52,17 @@
             t_sale_note tsn
         WHERE
             tsn.create_by = #{id,jdbcType=BIGINT}
-          AND (
-                    tsn.stage = '待付款'
-                OR tsn.stage = '已付款')
+          AND (tsn.stage = '待付款' OR tsn.stage = '已付款')
+    </select>
+
+    <select id="computeSaleAmounts" resultType="java.math.BigDecimal">
+        SELECT
+            IFNULL(SUM(tsn.price),0)
+        FROM
+            t_sale_note tsn
+        WHERE
+            (tsn.stage = '待付款' OR tsn.stage = '已付款')
+        <if test="beginDate != null">AND tsn.create_time <![CDATA[>=]]> #{beginDate}</if>
+        <if test="endDate != null ">AND tsn.create_time <![CDATA[<=]]>#{endDate}</if>
     </select>
 </mapper>

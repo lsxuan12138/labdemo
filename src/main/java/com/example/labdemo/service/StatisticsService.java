@@ -1,11 +1,8 @@
 package com.example.labdemo.service;
 
-import com.example.labdemo.vo.statistic.ClientPaymentStatisticsVo;
-import com.example.labdemo.vo.statistic.ClientStatisticsVo;
-import com.example.labdemo.vo.statistic.ProductStatisticsVo;
-import com.example.labdemo.vo.statistic.SalesmanStatisticsVo;
+import com.example.labdemo.vo.statistic.*;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,5 +21,5 @@ public interface StatisticsService {
 
     List<ClientPaymentStatisticsVo> selectClientPaymentStatisticsVos();
 
-    List<BigDecimal[]> selectBusinessStatisticsVo();
+    BusinessStatisticsVo selectBusinessStatisticsVo();
 }

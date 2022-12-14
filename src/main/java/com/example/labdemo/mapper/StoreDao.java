@@ -5,7 +5,10 @@ import com.example.labdemo.domain.Store;
 import com.example.labdemo.vo.store.StoreHouseDetailVo;
 import com.example.labdemo.vo.store.StoreVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +22,8 @@ import java.util.List;
 public interface StoreDao extends BaseMapper<Store> {
     public List<StoreVo> selectAllVo();
     public StoreHouseDetailVo selectDetailVo( Long id);
+
+    BigDecimal computePurchaseAmounts(@Param("beginDate") Date beginDate,@Param("endDate") Date endDate);
+
+    BigDecimal computeStoreAmounts();
 }
