@@ -147,18 +147,18 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">库存<a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" style="float: right" type="button">返回</a></h3>
+                <h3 class="breadcrumb-header">仓库详情<a class="btn btn-info m-b-sm" th:href="@{/product/storeHouse}" style="float: right" type="button">返回</a></h3>
+                <p th:text="'仓库编号：'+${storeHouseDetails.id}" style="display: inline">仓库编号：</p>
+                <p th:text="'仓库名：'+${storeHouseDetails.name}" style="display: inline;position: relative;left: 7%">仓库名：</p>
+                <p th:text="'备注：'+${storeHouseDetails.remark}" style="display: inline;position: relative;left: 14%">备注：</p>
+                <p th:text="'店长：'+${storeHouseDetails.owner}" style="display: inline;position: relative;left: 21%">店长：</p>
             </div>
             <div id="main-wrapper">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                <h4 class="panel-title">仓库详情</h4>
-                                <p th:text="'仓库编号：'+${storeHouseDetails.id}">仓库编号：</p>
-                                <p th:text="'仓库名：'+${storeHouseDetails.name}">仓库名：</p>
-                                <p th:text="'备注：'+${storeHouseDetails.remark}">备注：</p>
-                                <p th:text="'店长：'+${storeHouseDetails.owner}">店长：</p>
+                                <h4 class="panel-title"></h4>
                             </div>
                             <div class="panel-body">
 

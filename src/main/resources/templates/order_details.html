@@ -145,48 +145,53 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">销售<a class="btn btn-info m-b-sm" style="float: right"
-                                                     th:href="@{/saleNote/all}" type="button">返回</a></h3>
+                <h3 class="breadcrumb-header">订单详情
+                    <div class="btn-group" style="float: right">
+                        <button class="btn btn-info m-b-sm" onclick=save() type="button">
+                            保存
+                        </button>
+                        <button class="btn btn-info m-b-sm" onclick=audit() type="button">
+                            审核
+                        </button>
+                        <button class="btn btn-info m-b-sm" onclick=collectMoney() type="button">
+                            收款
+                        </button>
+                        <button class="btn btn-info m-b-sm" onclick=returnGoods() type="button">
+                            退货
+                        </button>
+
+                    <a class="btn btn-info m-b-sm" style="float: right" th:href="@{/saleNote/all}" type="button">返回</a>
+                    </div>
+                </h3>
+                <form class="form-inline mb-2">
+                    <div>
+                    <p th:text="'订单编号：'+${detail.id}" style="display: inline">订单编号：</p>
+                    <p th:text="'下单顾客：'+${detail.clientName}" style="display: inline;position: absolute;left: 15%">下单顾客：</p>
+                    <p th:text="'客户类型：'+${detail.clientType}" style="display: inline;position: absolute;left: 30%">客户类型：</p>
+                    <p th:text="'订单状态：'+${detail.stage}" style="display: inline;position: absolute;left: 45%">订单状态：</p>
+                    </div>
+                    <p th:text="'总成本：'+${detail.cost}" style="display: inline">总成本：</p>
+                    <p th:text="'总销售额：'+${detail.price}" style="display: inline;position: absolute;left: 15%">总销售额：</p>
+                    <p th:text="'毛利润：'+${detail.profit}" style="display: inline;position: absolute;left: 30%">毛利润：</p>
+                    <p th:text="'已收款项：'+${detail.receivedPayment}" style="display: inline;position: absolute;left: 45%">已收款项：</p>
+                    <div style="float: right">
+                    <label for="inputProducts">商品名称：</label>
+                    <input autocomplete="off" id="inputProduct" list="inputProducts" size=10
+                           style="width:100px">
+                    <datalist id="inputProducts" size=10 style="width:100px">
+                        <option th:each="product:${productList}" th:value="${product.name}">临时数据
+                        </option>
+                    </datalist>
+                    <input id="inputQuantity" placeholder="数量" style="width:50px">
+                    <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
+                    </div>
+                </form>
             </div>
             <div id="main-wrapper">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-white">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">订单详情</h4>
-                                <p th:text="'订单编号：'+${detail.id}">订单编号：</p>
-                                <p th:text="'下单顾客：'+${detail.clientName}">下单顾客：</p>
-                                <p th:text="'客户类型：'+${detail.clientType}">客户类型：</p>
-                                <p th:text="'订单状态：'+${detail.stage}">订单状态：</p>
-                                <p th:text="'总成本：'+${detail.cost}">总成本：</p>
-                                <p th:text="'总销售额：'+${detail.price}">总销售额：</p>
-                                <p th:text="'毛利润：'+${detail.profit}">毛利润：</p>
-                                <p th:text="'已收款项：'+${detail.receivedPayment}">已收款项：</p>
-                            </div>
                             <div class="panel-body">
-                                <button class="btn btn-info m-b-sm" onclick=audit() type="button">
-                                    审核
-                                </button>
-                                <button class="btn btn-info m-b-sm" onclick=collectMoney()
-                                        type="button">收款
-                                </button>
-                                <button class="btn btn-info m-b-sm" onclick=returnGoods()
-                                        type="button">退货
-                                </button>
-                                <button class="btn btn-info m-b-sm" onclick=save() type="button">
-                                    保存
-                                </button>
-                                <form class="form-inline mb-2" style="float: right">
-                                    <label for="inputProducts">商品名称：</label>
-                                    <input autocomplete="off" id="inputProduct" list="inputProducts" size=10
-                                           style="width:100px">
-                                    <datalist id="inputProducts" size=10 style="width:100px">
-                                        <option th:each="product:${productList}" th:value="${product.name}">临时数据
-                                        </option>
-                                    </datalist>
-                                    <input id="inputQuantity" placeholder="数量" style="width:50px">
-                                    <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
-                                </form>
                                 <!-- Modal -->
                                 <form action="javascript:void(0);" id="change-row-form">
                                     <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"

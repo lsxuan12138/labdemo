@@ -145,35 +145,38 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">进货<a class="btn btn-info m-b-sm" th:href="@{/product/purchase}" style="float: right" type="button">返回</a></h3>
+                <h3 class="breadcrumb-header">进货单详情
+                    <div class="btn-group" style="float: right">
+                    <button class="btn btn-info m-b-sm" onclick=audit()  type="button">
+                        审核
+                    </button>
+                    <button class="btn btn-info m-b-sm" onclick=save()  type="button">
+                        保存
+                    </button>
+                    <a class="btn btn-info m-b-sm" th:href="@{/product/purchase}" style="float: right" type="button">返回</a>
+                    </div>
+                </h3>
+                <form class="form-inline mb-2">
+                    <p th:text="'进货单编号：'+${purchaseDetails.id}" style="display: inline">进货单编号：</p>
+                    <p th:text="'进货仓库：'+${purchaseDetails.storeHouseName}" style="display: inline;position: relative;left: 7%">进货仓库：</p>
+                    <p th:text="'订单状态：'+${purchaseDetails.stage}" style="display: inline;position: relative;left: 14%">订单状态：</p>
+                    <div style="float: right">
+                    <label for="inputProducts">商品名称：</label>
+                    <input autocomplete="off" id="inputProduct" list="inputProducts" size=10
+                           style="width:100px">
+                    <datalist id="inputProducts" size=10 style="width:100px">
+                        <option th:each="product:${productList}" th:value="${product.name}"/>
+                    </datalist>
+                    <input id="inputQuantity" placeholder="数量" style="width:50px">
+                    <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
+                    </div>
+                </form>
             </div>
             <div id="main-wrapper">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-white">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">进货单详情</h4>
-                                <p th:text="'进货单编号：'+${purchaseDetails.id}">进货单编号：</p>
-                                <p th:text="'进货仓库：'+${purchaseDetails.storeHouseName}">进货仓库：</p>
-                                <p th:text="'订单状态：'+${purchaseDetails.stage}">订单状态：</p>
-                            </div>
                             <div class="panel-body">
-                                <button class="btn btn-info m-b-sm" onclick=audit()  type="button">
-                                    审核
-                                </button>
-                                <button class="btn btn-info m-b-sm" onclick=save()  type="button">
-                                    保存
-                                </button>
-                                <form class="form-inline mb-2" style="float: right">
-                                    <label for="inputProducts">商品名称：</label>
-                                    <input autocomplete="off" id="inputProduct" list="inputProducts" size=10
-                                           style="width:100px">
-                                    <datalist id="inputProducts" size=10 style="width:100px">
-                                        <option th:each="product:${productList}" th:value="${product.name}"/>
-                                    </datalist>
-                                    <input id="inputQuantity" placeholder="数量" style="width:50px">
-                                    <button class="btn btn-primary mr-sm-2" onclick=add() type="button">添加</button>
-                                </form>
                                 <!-- Modal -->
                                 <form action="javascript:void(0);" id="change-row-form">
                                     <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"

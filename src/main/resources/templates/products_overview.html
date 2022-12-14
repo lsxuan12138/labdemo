@@ -146,163 +146,160 @@
         </div><!-- /Page Header -->
         <!-- Page Inner -->
         <div class="page-inner">
-            <!--<div class="page-title">
-                <h3 class="breadcrumb-header">货品</h3>
-            </div>-->
+            <div class="page-title">
+                <h3 class="breadcrumb-header">货品
+                    <div class="btn-group" style="float: right">
+                    <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
+                    <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">条形统计图</button>
+                    <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">柱形统计图</button>
+                    <button class="btn btn-info m-b-sm" data-target="#myModal" data-toggle="modal"
+                            type="button">添加新的货品
+                    </button>
+                    </div>
+                </h3>
+            </div>
             <div id="main-wrapper">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-white" id="tables">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">货品
-                                    <div class="btn-group" style="float: right">
-                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">条形统计图</button>
-                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">柱形统计图</button>
+                        <!-- Modal -->
+                        <form action="javascript:void(0);" id="add-row-form">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                 id="myModal"
+                                 role="dialog" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                                    type="button"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">添加</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input class="form-control" id="product" placeholder="名称"
+                                                       required type="text">
+                                                <input class="form-control" id="remark" placeholder="备注"
+                                                       required type="text">
+                                                <input class="form-control" id="purchasePrice" placeholder="进货价"
+                                                       required step="0.01" type="number">
+                                                <input class="form-control" id="wholesalePrice" placeholder="批发价"
+                                                       required step="0.01" type="number">
+                                                <input class="form-control" id="retailPrice" placeholder="零售价"
+                                                       required step="0.01" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal"
+                                                    type="button">取消
+                                            </button>
+                                            <button class="btn btn-success" id="add-row"
+                                                    type="submit">确定
+                                            </button>
+                                        </div>
                                     </div>
-
-                                </h4>
+                                </div>
                             </div>
+                        </form>
+                        <form action="javascript:void(0);" id="change-row-form">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                 id="myModal_change"
+                                 role="dialog" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                                    type="button"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel_edit">修改</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input class="form-control" id="product_change"
+                                                       placeholder="名称"
+                                                       required type="text">
+                                                <input class="form-control" id="remark_change"
+                                                       placeholder="备注"
+                                                       required type="text">
+                                                <input class="form-control" id="purchasePrice_change" placeholder="进货价"
+                                                       required step="0.01" type="number">
+                                                <input class="form-control" id="wholesalePrice_change" placeholder="批发价"
+                                                       required step="0.01" type="number">
+                                                <input class="form-control" id="retailPrice_change" placeholder="零售价"
+                                                       required step="0.01" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal"
+                                                    type="button">取消
+                                            </button>
+                                            <button class="btn btn-success" id="change-row"
+                                                    type="submit">确定
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="javascript:void(0);" id="delete-row-form">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                 id="myModal_delete"
+                                 role="dialog" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                                    type="button"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel_delete">删除</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <p>确定删除该商品吗？</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal"
+                                                    type="button">取消
+                                            </button>
+                                            <button class="btn btn-success" id="delete-row" onclick=del()
+                                                    type="submit">确定
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="javascript:void(0);" id="alert-row-form">
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
+                                 id="myModal_alert"
+                                 role="dialog" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                                    type="button"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel_alert">提示</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <p id="alert"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal"
+                                                    type="button">取消
+                                            </button>
+                                            <button class="btn btn-success" id="alert-row"
+                                                    type="submit">确定
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="panel panel-white" id="tables">
                             <div class="panel-body">
-                                <button class="btn btn-info m-b-sm" data-target="#myModal" data-toggle="modal"
-                                        type="button">添加新的货品
-                                </button>
-                                <!-- Modal -->
-                                <form action="javascript:void(0);" id="add-row-form">
-                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
-                                         id="myModal"
-                                         role="dialog" tabindex="-1">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button aria-label="Close" class="close" data-dismiss="modal"
-                                                            type="button"><span
-                                                            aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel">添加</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="product" placeholder="名称"
-                                                               required type="text">
-                                                        <input class="form-control" id="remark" placeholder="备注"
-                                                               required type="text">
-                                                        <input class="form-control" id="purchasePrice" placeholder="进货价"
-                                                               required step="0.01" type="number">
-                                                        <input class="form-control" id="wholesalePrice" placeholder="批发价"
-                                                               required step="0.01" type="number">
-                                                        <input class="form-control" id="retailPrice" placeholder="零售价"
-                                                               required step="0.01" type="number">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal"
-                                                            type="button">取消
-                                                    </button>
-                                                    <button class="btn btn-success" id="add-row"
-                                                            type="submit">确定
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form action="javascript:void(0);" id="change-row-form">
-                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
-                                         id="myModal_change"
-                                         role="dialog" tabindex="-1">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button aria-label="Close" class="close" data-dismiss="modal"
-                                                            type="button"><span
-                                                            aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel_edit">修改</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="product_change"
-                                                               placeholder="名称"
-                                                               required type="text">
-                                                        <input class="form-control" id="remark_change"
-                                                               placeholder="备注"
-                                                               required type="text">
-                                                        <input class="form-control" id="purchasePrice_change" placeholder="进货价"
-                                                               required step="0.01" type="number">
-                                                        <input class="form-control" id="wholesalePrice_change" placeholder="批发价"
-                                                               required step="0.01" type="number">
-                                                        <input class="form-control" id="retailPrice_change" placeholder="零售价"
-                                                               required step="0.01" type="number">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal"
-                                                            type="button">取消
-                                                    </button>
-                                                    <button class="btn btn-success" id="change-row"
-                                                            type="submit">确定
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form action="javascript:void(0);" id="delete-row-form">
-                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
-                                         id="myModal_delete"
-                                         role="dialog" tabindex="-1">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button aria-label="Close" class="close" data-dismiss="modal"
-                                                            type="button"><span
-                                                            aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel_delete">删除</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <p>确定删除该商品吗？</p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal"
-                                                            type="button">取消
-                                                    </button>
-                                                    <button class="btn btn-success" id="delete-row" onclick=del()
-                                                            type="submit">确定
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form action="javascript:void(0);" id="alert-row-form">
-                                    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade"
-                                         id="myModal_alert"
-                                         role="dialog" tabindex="-1">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button aria-label="Close" class="close" data-dismiss="modal"
-                                                            type="button"><span
-                                                            aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel_alert">提示</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <p id="alert"></p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal"
-                                                            type="button">取消
-                                                    </button>
-                                                    <button class="btn btn-success" id="alert-row"
-                                                            type="submit">确定
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
                                 <div class="table-responsive">
                                     <table class="display table" id="tab" style="width: 100%; cellspacing: 0;">
                                         <thead>
@@ -344,25 +341,9 @@
                             </div>
                         </div>
                         <div class="panel panel-white" style="display: none" id="charts">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">货品
-                                    <div class="btn-group" style="float: right">
-                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
-                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">柱形统计图</button>
-                                    </div>
-                                </h4>
-                            </div>
                             <canvas id="chart1"></canvas>
                         </div>
                         <div class="panel panel-white" style="display: none" id="bar">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">货品
-                                    <div class="btn-group" style="float: right">
-                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
-                                        <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">条形统计图</button>
-                                    </div>
-                                </h4>
-                            </div>
                             <canvas id="chart2"></canvas>
                         </div>
                     </div>
