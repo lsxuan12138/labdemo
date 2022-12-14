@@ -221,6 +221,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="panel panel-white" style="display: none" id="charts">
+                            <canvas id="chart1"></canvas>
+                        </div>
+                        <div class="panel panel-white" style="display: none" id="bar">
+                            <canvas id="chart2"></canvas>
+                        </div>
                     </div>
                 </div><!-- Row -->
             </div><!-- Main Wrapper -->
@@ -248,6 +254,55 @@
 <script src="../static/flot/jquery.flot.pie.min.js"></script>
 <script src="../static/space.min.js"></script>
 <script>
+    let data = getTableContent("tab");
+    let name=[];
+    let a=[];
+    let b=[];
+    let c=[];
+    for(let i=1;i<data.length;i++){
+        name.push(data[i][1]);
+        a.push(Number(data[i][3]));
+        b.push(Number(data[i][4]));
+        c.push(Number(data[i][5]));
+    }
+    new Chart(document.getElementById("chart1"),{"type":"line","data":{"labels":name,
+            "datasets":[{"label":"数量","data":a,"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.1},
+                {"label":"成本","data":b,"fill":false,"borderColor":"rgb(236, 94, 105)","lineTension":0.1},
+                {"label":"积压资金额","data":c,"fill":false,"borderColor":"rgb(0, 112, 224)","lineTension":0.1}
+            ]},"options":{}});
+    new Chart(document.getElementById("chart2"),{"type":"bar","data":{"labels":name,
+            "datasets":[{"label":"数量","data":a,"fill":false,"backgroundColor":"rgb(99, 203, 137)","borderColor":"rgb(99, 203, 137)","lineTension":0.1},
+                {"label":"成本","data":b,"fill":false,"backgroundColor":"rgb(236, 94, 105)","borderColor":"rgb(236, 94, 105)","lineTension":0.1},
+                {"label":"积压资金额","data":c,"fill":false,"backgroundColor":"rgb(0, 112, 224)","borderColor":"rgb(0, 112, 224)","lineTension":0.1}
+            ]},"options":{}});
+    function changeChart(){
+        document.getElementById('charts').style.display = 'block';
+        document.getElementById('tables').style.display = 'none';
+        document.getElementById('bar').style.display = 'none';
+    }
+    function changeBar(){
+        document.getElementById('charts').style.display = 'none';
+        document.getElementById('tables').style.display = 'none';
+        document.getElementById('bar').style.display = 'block';
+    }
+    function changeTable(){
+        document.getElementById('charts').style.display = 'none';
+        document.getElementById('tables').style.display = 'block';
+        document.getElementById('bar').style.display = 'none';
+    }
+    function getTableContent(id) {
+        var mytable = document.getElementById(id);
+        var data = [];
+        for (var i = 0, rows = mytable.rows.length; i < rows; i++) {
+            for (var j = 0, cells = mytable.rows[i].cells.length; j < cells; j++) {
+                if (!data[i]) {
+                    data[i] = new Array();
+                }
+                data[i][j] = mytable.rows[i].cells[j].innerHTML;
+            }
+        }
+        return data;
+    }
     $('#quit').on('click', function () {
         $.ajax({
             url: "/user/quit",
