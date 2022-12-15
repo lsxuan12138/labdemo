@@ -495,9 +495,15 @@
                 }
                 var trObj = document.createElement("tr");
                 trObj.id = new Date().getTime();
-                let price = Number.parseFloat(product.price);
-                let cost = Number.parseFloat(product.cost);
-                let profit = Number.parseFloat(product.profit);
+                let cost = Number.parseFloat(product.purchasePrice).toFixed(2);
+                let price;
+                if(detail.clientType==="批发客户"){
+                    price=Number.parseFloat(product.wholesalePrice).toFixed(2);
+                }
+                else{
+                    price=Number.parseFloat(product.retailPrice).toFixed(2);
+                }
+                let profit = (price-cost).toFixed(2);
                 trObj.innerHTML =
                     `<td>${product.id}</td>
                     <td>${product.name}</td>
