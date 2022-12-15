@@ -404,6 +404,10 @@
             alert("请输入一个整数");
             return;
         }
+        if (isNaN(quantity) || quantity < 0) {
+            alert("请输入一个正整数");
+            return;
+        }
         targetRow.eq(2).html(quantity);
         $('.modal').modal('hide');
     }

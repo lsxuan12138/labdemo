@@ -497,6 +497,10 @@
                 let purchasePrice = $("#purchasePrice_change").val();
                 let wholesalePrice = $("#wholesalePrice_change").val();
                 let retailPrice=$("#retailPrice_change").val();
+                if (isNaN(purchasePrice) || purchasePrice < 0 || isNaN(wholesalePrice) || wholesalePrice < 0 ||isNaN(wholesalePrice) || wholesalePrice < 0) {
+                    alert("请输入一个正整数");
+                    return;
+                }
                 console.log(id + "-" + productName + "-" + remark + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
                 if (Number.parseFloat(purchasePrice) > Number.parseFloat(retailPrice)) {
                     alert("成本应低于售价");
@@ -539,6 +543,10 @@
                 let purchasePrice = $("#purchasePrice").val();
                 let wholesalePrice = $("#wholesalePrice").val();
                 let retailPrice=$("#retailPrice").val();
+                if (isNaN(purchasePrice) || purchasePrice < 0 || isNaN(wholesalePrice) || wholesalePrice < 0 ||isNaN(wholesalePrice) || wholesalePrice < 0) {
+                    alert("请输入一个正整数");
+                    return;
+                }
                 //alert(productName + "-" + purchasePrice + "-" + wholesalePrice + "-" +retailPrice);
                 if (Number.parseFloat(purchasePrice) > Number.parseFloat(retailPrice)) {
                     alert("成本应低于售价");

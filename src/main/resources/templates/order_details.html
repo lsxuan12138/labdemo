@@ -450,6 +450,10 @@
             alert("请输入一个整数");
             return;
         }
+        if (isNaN(quantity) || quantity < 0) {
+            alert("请输入一个正整数");
+            return;
+        }
         for (const product of productList) {
             if (product.id === changeProductId) {
                 if (quantity > product.quantity) {
@@ -472,6 +476,10 @@
         let name = $("#inputProduct").val();
         let quantity = Number($("#inputQuantity").val());
         let data = getTableContent("tb");
+        if (isNaN(quantity) || quantity < 0) {
+            alert("请输入一个正整数");
+            return;
+        }
         for (let i = 1; i < data.length; i++) {
             if (data[i][1] == name) {
                 alert("该商品已在订单中");
