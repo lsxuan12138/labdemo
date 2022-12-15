@@ -155,7 +155,8 @@
                 }
             },
             error: function () {
-
+                console.log("请求失败")
+                alert("用户名或密码错误，请重新输入")
             }
         });
     }
@@ -169,7 +170,6 @@
                 document.cookie = keys[i] + '=0;path=/;domain=kevis.com;expires=' + new Date(0).toUTCString();//清除一级域名下的或指定的，例如 .kevis.com
             }
         }
-        console.log('已清除');
     }
 
 </script>

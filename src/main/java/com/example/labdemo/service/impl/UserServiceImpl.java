@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         //使用userid生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
-        if(!loginUser.getUser().getAlive()){
+        if(Boolean.FALSE.equals(loginUser.getUser().getAlive())){
             throw new BaseException(BaseExceptionEnum.USER_HAS_NOT_ALIVE);
         }
         String jwt = JwtUtil.createJWT(userId);
