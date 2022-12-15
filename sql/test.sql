@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 15/11/2022 17:02:41
+ Date: 15/12/2022 16:29:41
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `t_adjustment_order`  (
   `create_by` bigint NULL DEFAULT NULL COMMENT '创建者id',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_adjustment_order
@@ -45,7 +45,7 @@ CREATE TABLE `t_adjustment_order_item`  (
   `product_id` bigint NULL DEFAULT NULL COMMENT '产品id',
   `quantity` bigint NULL DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_adjustment_order_item
@@ -60,15 +60,11 @@ CREATE TABLE `t_client`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '名字',
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '客户类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_client
 -- ----------------------------
-INSERT INTO `t_client` VALUES (11, '测试数据2', '批发客户');
-INSERT INTO `t_client` VALUES (13, '测试数据3', '零售客户');
-INSERT INTO `t_client` VALUES (15, '大赛宝宝', '零售客户');
-INSERT INTO `t_client` VALUES (16, '而王菲菲', '批发客户');
 
 -- ----------------------------
 -- Table structure for t_permission
@@ -79,7 +75,7 @@ CREATE TABLE `t_permission`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '名字',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_permission
@@ -112,6 +108,8 @@ INSERT INTO `t_permission` VALUES (25, 'purchase:return', NULL);
 INSERT INTO `t_permission` VALUES (26, 'adjustment:read', NULL);
 INSERT INTO `t_permission` VALUES (27, 'purchase:read', NULL);
 INSERT INTO `t_permission` VALUES (28, 'saleNote:read', NULL);
+INSERT INTO `t_permission` VALUES (29, 'user:edit', NULL);
+INSERT INTO `t_permission` VALUES (30, 'statistics:read', NULL);
 
 -- ----------------------------
 -- Table structure for t_product
@@ -126,13 +124,11 @@ CREATE TABLE `t_product`  (
   `retail_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '零售价',
   `create_time` datetime NULL DEFAULT NULL COMMENT '货品创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_product
 -- ----------------------------
-INSERT INTO `t_product` VALUES (5, 'test1', '测试数据', 13.00, 16.00, 20.00, '2022-11-15 16:48:06');
-INSERT INTO `t_product` VALUES (6, '123', NULL, 12.00, 15.00, 17.00, '2022-11-06 08:36:44');
 
 -- ----------------------------
 -- Table structure for t_purchase_order
@@ -145,12 +141,11 @@ CREATE TABLE `t_purchase_order`  (
   `create_by` bigint NULL DEFAULT NULL COMMENT '创建者',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_purchase_order
 -- ----------------------------
-INSERT INTO `t_purchase_order` VALUES (1, 1, '未编辑', 1, '2022-11-15 08:16:12');
 
 -- ----------------------------
 -- Table structure for t_purchase_order_item
@@ -162,7 +157,7 @@ CREATE TABLE `t_purchase_order_item`  (
   `product_id` bigint NULL DEFAULT NULL COMMENT '产品id',
   `quantity` bigint UNSIGNED NULL DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_purchase_order_item
@@ -197,7 +192,7 @@ CREATE TABLE `t_role_permission_map`  (
   `role_id` bigint NULL DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint NULL DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_role_permission_map
@@ -267,6 +262,12 @@ INSERT INTO `t_role_permission_map` VALUES (62, 5, 17);
 INSERT INTO `t_role_permission_map` VALUES (63, 1, 26);
 INSERT INTO `t_role_permission_map` VALUES (64, 1, 27);
 INSERT INTO `t_role_permission_map` VALUES (65, 1, 28);
+INSERT INTO `t_role_permission_map` VALUES (66, 2, 26);
+INSERT INTO `t_role_permission_map` VALUES (67, 2, 27);
+INSERT INTO `t_role_permission_map` VALUES (68, 2, 28);
+INSERT INTO `t_role_permission_map` VALUES (69, 1, 29);
+INSERT INTO `t_role_permission_map` VALUES (70, 1, 30);
+INSERT INTO `t_role_permission_map` VALUES (71, 2, 30);
 
 -- ----------------------------
 -- Table structure for t_sale_note
@@ -283,18 +284,11 @@ CREATE TABLE `t_sale_note`  (
   `create_by` bigint NULL DEFAULT NULL COMMENT '创建者id',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_sale_note
 -- ----------------------------
-INSERT INTO `t_sale_note` VALUES (1, 1, 9, '已退款', NULL, NULL, NULL, 1, '2022-11-04 14:29:08');
-INSERT INTO `t_sale_note` VALUES (3, 2, 11, '待付款', NULL, NULL, NULL, 1, '2022-11-04 08:54:07');
-INSERT INTO `t_sale_note` VALUES (4, 1, 9, '未编辑', NULL, NULL, NULL, 1, '2022-11-04 09:06:30');
-INSERT INTO `t_sale_note` VALUES (5, 2, 9, '已付款', NULL, NULL, NULL, 1, '2022-11-04 09:08:36');
-INSERT INTO `t_sale_note` VALUES (6, 1, 9, '已退款', NULL, NULL, NULL, 1, '2022-11-04 09:10:20');
-INSERT INTO `t_sale_note` VALUES (7, 2, 16, '已退款', NULL, NULL, NULL, 1, '2022-11-06 08:39:19');
-INSERT INTO `t_sale_note` VALUES (8, 1, 11, '未编辑', 0.00, 0.00, 0.00, 1, '2022-11-15 08:52:36');
 
 -- ----------------------------
 -- Table structure for t_sale_note_item
@@ -306,18 +300,11 @@ CREATE TABLE `t_sale_note_item`  (
   `product_id` bigint NULL DEFAULT NULL COMMENT '产品id',
   `quantity` bigint NULL DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_sale_note_item
 -- ----------------------------
-INSERT INTO `t_sale_note_item` VALUES (3, 1, 5, 4);
-INSERT INTO `t_sale_note_item` VALUES (4, 1, 2, 3);
-INSERT INTO `t_sale_note_item` VALUES (5, 3, 2, 2);
-INSERT INTO `t_sale_note_item` VALUES (6, 3, 1, 2);
-INSERT INTO `t_sale_note_item` VALUES (7, 6, 2, 7);
-INSERT INTO `t_sale_note_item` VALUES (8, 5, 2, 3);
-INSERT INTO `t_sale_note_item` VALUES (9, 7, 2, 12);
 
 -- ----------------------------
 -- Table structure for t_store
@@ -329,13 +316,11 @@ CREATE TABLE `t_store`  (
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   `owner_id` bigint NULL DEFAULT NULL COMMENT '拥有者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_store
 -- ----------------------------
-INSERT INTO `t_store` VALUES (1, '测试仓库1', '测试仓库1', 1);
-INSERT INTO `t_store` VALUES (2, '测试仓库2', '测试仓库2', 1);
 
 -- ----------------------------
 -- Table structure for t_store_item
@@ -347,16 +332,11 @@ CREATE TABLE `t_store_item`  (
   `product_id` bigint NULL DEFAULT NULL COMMENT '产品id',
   `quantity` bigint NULL DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_store_item
 -- ----------------------------
-INSERT INTO `t_store_item` VALUES (1, 1, 2, 10);
-INSERT INTO `t_store_item` VALUES (2, 2, 2, 30);
-INSERT INTO `t_store_item` VALUES (3, 1, 5, 40);
-INSERT INTO `t_store_item` VALUES (4, 2, 6, 10);
-INSERT INTO `t_store_item` VALUES (5, 2, 5, 10);
 
 -- ----------------------------
 -- Table structure for t_user
@@ -368,13 +348,13 @@ CREATE TABLE `t_user`  (
   `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '账号',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
   `role_id` bigint NULL DEFAULT NULL COMMENT '角色id',
+  `is_alive` tinyint NULL DEFAULT 0 COMMENT '是否激活(0否1是)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, 'test', 'test', '$2a$10$3lHPuFihiPpJRzE015uip.oPX.f.KrBX3nKzsyZi.lxRozs55ZLnG', 1);
-INSERT INTO `t_user` VALUES (2, 'ceshi', 'ceshi', 'ceshi', 2);
+INSERT INTO `t_user` VALUES (26, 'test', 'test', '$2a$10$TRI5uOxfZrQieg1Q25/IaO7uqy1JkwaR5aXok92qis.vN8nadPiu2', 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
