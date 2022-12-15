@@ -78,21 +78,6 @@ public class ClientController {
     public ResultResponse add(@RequestParam("name")String name,@RequestParam("type")String type){
         return ResultResponse.success(clientService.add(name,type));
     }
-//    @PostMapping("/find")
-//    public ModelAndView find(@ModelAttribute("searchInfo") SearchDto searchDto) {
-//        ModelAndView modelAndView = new ModelAndView("client_info_overview");
-//        List<Client> clients = null;
-//        try {
-//            clients = clientService.find(searchDto.getKey());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        ModelMap modelMap = modelAndView.getModelMap();
-//        modelMap.addAttribute("searchInfo",new SearchDto(""));
-//        modelMap.addAttribute("clientList",clients);
-//        modelAndView.getModelMap().addAttribute("keyword",searchDto.getKey());
-//        return modelAndView;
-//    }
 
     /**
      * 更新客户信息

@@ -8,6 +8,7 @@ import com.example.labdemo.service.RoleService;
 import com.example.labdemo.service.UserService;
 import com.example.labdemo.vo.UserCtrlVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -90,7 +91,7 @@ public class UserController {
     public ResultResponse logout(){
         return userService.logout();
     }
-
+    @PreAuthorize("hasAuthority('user:edit')")
     @GetMapping("/user/control")
     public ModelAndView controlUser(){
         ModelAndView modelAndView = new ModelAndView("user_active");
@@ -98,7 +99,7 @@ public class UserController {
         modelAndView.getModelMap().addAttribute("users",users);
         return modelAndView;
     }
-
+    @PreAuthorize("hasAuthority('user:edit')")
     @PostMapping("/user/active")
     public ResultResponse activeUser(@RequestParam("id") Long id){
         userService.activeUser(id);
@@ -111,6 +112,7 @@ public class UserController {
         return modelAndView;
     }
     @PostMapping("/user/changeUser")
+    @ResponseBody
     public ResultResponse changeUserInfo(@RequestBody UserChangeInfoDto dto){
         userService.changeUserInfo(dto);
         return ResultResponse.success();

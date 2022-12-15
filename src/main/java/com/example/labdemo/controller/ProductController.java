@@ -33,53 +33,6 @@ public class ProductController {
         modelMap.addAttribute("products", products);
         return modelAndView;
     }
-//    @PostMapping("/purchase")
-//    @ResponseBody
-//    public ResultResponse purchaseProduct(@RequestParam("id") String idStr, @RequestParam("quantity") String quantityStr) {
-//        int ret = 0;
-//        try {
-//            Long id = Long.parseLong(idStr);
-//            Long quantity = Long.parseLong(quantityStr);
-//            ret = productService.purchaseProduct(id, quantity);
-//
-//        } catch (NumberFormatException e) {
-//            return new Result(ResultEnum.NUMBER_FORMAT_ERROR);
-//        } catch (Exception e) {
-//            return new Result(ResultEnum.SEVER_INTERVAL_ERROR);
-//        }
-//        return new Result(ret);
-//    }
-//
-//    @PostMapping("/findInStore")
-//    public ModelAndView findInStore(@ModelAttribute("searchInfo") SearchDto searchDto) {
-//        ModelAndView modelAndView = new ModelAndView("store_manage");
-//        List<Product> products = null;
-//        try {
-//            products = productService.find(searchDto.getKey());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        ModelMap modelMap = modelAndView.getModelMap();
-//        modelMap.addAttribute("searchInfo",new SearchDto(""));
-//        modelMap.addAttribute("products", products);
-//        modelAndView.getModelMap().addAttribute("keyword",searchDto.getKey());
-//        return modelAndView;
-//    }
-//    @PostMapping("/find")
-//    public ModelAndView find(@ModelAttribute("searchInfo") SearchDto searchDto) {
-//        ModelAndView modelAndView = new ModelAndView("products_overview");
-//        List<Product> products = null;
-//        try {
-//            products = productService.find(searchDto.getKey());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        ModelMap modelMap = modelAndView.getModelMap();
-//        modelMap.addAttribute("searchInfo",new SearchDto(""));
-//        modelMap.addAttribute("products", products);
-//        modelAndView.getModelMap().addAttribute("keyword",searchDto.getKey());
-//        return modelAndView;
-//    }
 
     /**
      * 添加product
