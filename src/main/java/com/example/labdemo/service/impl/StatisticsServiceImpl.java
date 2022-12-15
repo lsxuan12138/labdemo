@@ -42,10 +42,8 @@ public class StatisticsServiceImpl implements StatisticsService {
              list) {
             Long userId = vo.getId();
             QueryWrapper<SaleNote> saleNoteQueryWrapper = new QueryWrapper<>();
-            saleNoteQueryWrapper.eq("create_by",userId);
-            saleNoteQueryWrapper.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID);
+            saleNoteQueryWrapper.eq("create_by", userId).and(i -> i.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID));
             List<SaleNote> saleNotes = saleNoteDao.selectList(saleNoteQueryWrapper);
-
             BigDecimal saleAmount = new BigDecimal(0);
             for (SaleNote saleNote:
                  saleNotes) {
@@ -69,8 +67,7 @@ public class StatisticsServiceImpl implements StatisticsService {
              list) {
             Long clientId = vo.getId();
             QueryWrapper<SaleNote> saleNoteQueryWrapper = new QueryWrapper<>();
-            saleNoteQueryWrapper.eq("client_id",clientId);
-            saleNoteQueryWrapper.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID);
+            saleNoteQueryWrapper.eq("client_id",clientId).and(i -> i.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID));
             List<SaleNote> saleNotes = saleNoteDao.selectList(saleNoteQueryWrapper);
 
             vo.setSaleQuantity((long) saleNotes.size());
@@ -112,6 +109,7 @@ public class StatisticsServiceImpl implements StatisticsService {
                 amount = amount.add(p.getPrice().multiply(new BigDecimal(p.getQuantity())));
             }
             vo.setAmount(amount);
+            list.add(vo);
         }
         return list;
     }
@@ -125,8 +123,8 @@ public class StatisticsServiceImpl implements StatisticsService {
             vo.setProperties(client);
 
             QueryWrapper<SaleNote> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("client_id",client.getId());
-            queryWrapper.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID);
+            queryWrapper.eq("client_id",client.getId()).and(i -> i.eq("stage", SaleNoteConstants.STAGE_TO_BE_PAID).or().eq("stage",SaleNoteConstants.STAGE_HAVE_PAID));
+
             List<SaleNote> saleNotes = saleNoteDao.selectList(queryWrapper);
             BigDecimal receivedPayment = new BigDecimal(0);
             BigDecimal price = new BigDecimal(0);
@@ -137,6 +135,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             }
             vo.setReceivedPayment(receivedPayment);
             vo.setUnreceivedPayment(price.subtract(receivedPayment));
+            list.add(vo);
         }
         return list;
     }
@@ -149,15 +148,17 @@ public class StatisticsServiceImpl implements StatisticsService {
         //盈利金额
         List<BigDecimal> profits = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        StringBuilder beginDateStr = new StringBuilder("2022-");
-        StringBuilder endDateStr = new StringBuilder("2022-");
+
         for (int i = 1; i <= 12; i++) {
+            StringBuilder beginDateStr = new StringBuilder("2022-");
+            beginDateStr.append(i).append("-1");
+            StringBuilder endDateStr;
             if(i==12){
                 endDateStr = new StringBuilder("2023-1-1");
-                continue;
+            }else{
+                endDateStr = new StringBuilder("2022-");
+                endDateStr.append(i+1).append("-1");
             }
-            beginDateStr.append(i).append("-1");
-            endDateStr.append(i+1).append("-1");
             Date beginDate;
             Date endDate;
             try {
@@ -166,9 +167,11 @@ public class StatisticsServiceImpl implements StatisticsService {
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-            purchaseAmounts.add(storeDao.computePurchaseAmounts(beginDate,endDate));
-            saleAmounts.add(saleNoteDao.computeSaleAmounts(beginDate,endDate));
-            profits.add(saleAmounts.get(i-1).subtract(saleAmounts.get(i-1)));
+            BigDecimal purchaseAmountsTemp = storeDao.computePurchaseAmounts(beginDate,endDate);
+            BigDecimal saleAmountsTemp = saleNoteDao.computeSaleAmounts(beginDate,endDate);
+            purchaseAmounts.add(purchaseAmountsTemp);
+            saleAmounts.add(saleAmountsTemp);
+            profits.add(saleAmountsTemp.subtract(purchaseAmountsTemp));
         }
         BusinessStatisticsVo vo = new BusinessStatisticsVo();
         vo.setPurchaseAmounts(purchaseAmounts);

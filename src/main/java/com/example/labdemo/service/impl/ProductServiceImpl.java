@@ -1,16 +1,10 @@
 package com.example.labdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.labdemo.domain.AdjustmentOrderItem;
-import com.example.labdemo.domain.Product;
-import com.example.labdemo.domain.PurchaseOrderItem;
-import com.example.labdemo.domain.SaleNoteItem;
+import com.example.labdemo.domain.*;
 import com.example.labdemo.dto.ProductAddDto;
 import com.example.labdemo.dto.ProductUpdateDto;
-import com.example.labdemo.mapper.AdjustmentOrderItemDao;
-import com.example.labdemo.mapper.ProductDao;
-import com.example.labdemo.mapper.PurchaseOrderItemDao;
-import com.example.labdemo.mapper.SaleNoteItemDao;
+import com.example.labdemo.mapper.*;
 import com.example.labdemo.result.BaseException;
 import com.example.labdemo.result.BaseExceptionEnum;
 import com.example.labdemo.service.AdjustmentOrderService;
@@ -30,6 +24,8 @@ public class ProductServiceImpl implements ProductService {
     ProductDao productDao;
     @Autowired
     SaleNoteItemDao saleNoteItemDao;
+    @Autowired
+    StoreItemDao storeItemDao;
     @Autowired
     AdjustmentOrderItemDao adjustmentOrderItemDao;
     @Autowired
@@ -79,6 +75,14 @@ public class ProductServiceImpl implements ProductService {
     public void deleteById(Long id) throws BaseException {
         Product product = productDao.selectById(id);
         if(product==null)throw new BaseException(BaseExceptionEnum.PRODUCT_NOT_EXIST);
+
+        QueryWrapper<StoreItem> storeItemQueryWrapper = new QueryWrapper<>();
+        storeItemQueryWrapper.eq("product_id",id);
+        storeItemQueryWrapper.gt("quantity",0);
+        List<StoreItem> storeItems = storeItemDao.selectList(storeItemQueryWrapper);
+        if(!storeItems.isEmpty()){
+            throw new BaseException(BaseExceptionEnum.PRODUCT_CANT_DELETE_TWO);
+        }
         QueryWrapper<SaleNoteItem> saleNoteItemQueryWrapper = new QueryWrapper<>();
         saleNoteItemQueryWrapper.eq("product_id",id);
         List<SaleNoteItem> saleNoteItems = saleNoteItemDao.selectList(saleNoteItemQueryWrapper);

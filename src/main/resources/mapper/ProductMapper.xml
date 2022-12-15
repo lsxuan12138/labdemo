@@ -3,7 +3,7 @@
 <mapper namespace="com.example.labdemo.mapper.ProductDao">
     <select id="countBuyQuantity" resultType="long">
         SELECT
-            SUM(tsni.quantity)
+            IFNULL(SUM(tsni.quantity),0)
         FROM
             `t_sale_note_item` tsni
                 LEFT JOIN t_sale_note tsn ON tsni.sale_note_id = tsn.id

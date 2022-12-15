@@ -40,7 +40,7 @@
     </select>
     <select id="computePurchaseAmounts" resultType="java.math.BigDecimal">
         SELECT
-            SUM(IFNULL(tp.purchase_price,0)*tpoi.quantity)
+            IFNULL(SUM(IFNULL(tp.purchase_price,0)*tpoi.quantity),0)
         FROM
             `t_purchase_order_item` tpoi
                 LEFT JOIN t_purchase_order tpo ON tpoi.purchase_order_id=tpo.id

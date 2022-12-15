@@ -313,6 +313,7 @@
                 //alert(result)
                 if (result.code === "200") {
                     console.log("请求成功")
+                    document.cookie = "token=0; max-age=0; path=/";
                     window.location.href="/user/login";
                 } else {
                     alert(result.message)

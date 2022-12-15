@@ -63,6 +63,7 @@ public enum BaseExceptionEnum implements BaseErrorInfoInterface{
     PASSWORD_NOT_MATCH("14023","密码错误"),
 
     USER_HAS_NOT_ALIVE("14024","该用户未激活"),
+    PRODUCT_CANT_DELETE_TWO("14025","禁止删除该商品，请先清空库存"),
     ;
 
     /**
