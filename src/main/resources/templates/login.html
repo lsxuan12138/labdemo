@@ -150,10 +150,12 @@
                     $("#login-Username").empty();
                     $("#login-Password").empty();
                     window.location.href="/index"
+                }else {
+                    alert(data.message)
                 }
             },
             error: function () {
-                alert("用户名或密码错误，请重新输入")
+
             }
         });
     }

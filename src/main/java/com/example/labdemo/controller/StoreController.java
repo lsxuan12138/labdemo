@@ -85,7 +85,9 @@ public class StoreController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAuthority('store:delete')")
     @PostMapping("/product/storeHouseDelete")
+    @ResponseBody
     public ResultResponse storeDelete(@RequestParam Long id){
         storeService.deleteStore(id);
         return ResultResponse.success();

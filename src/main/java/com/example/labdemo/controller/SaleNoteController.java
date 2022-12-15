@@ -48,15 +48,6 @@ public class SaleNoteController {
         modelAndView.getModelMap().addAttribute("saleNotes", saleNotes);
         return modelAndView;
     }
-//    @PostMapping("/find")
-//    @ResponseBody
-//    public Result find(@RequestParam("keyword") String keyword){
-//        System.out.println("-------请求-------");
-//        List<SaleNoteVo> saleNoteVos = saleNoteService.find(keyword);
-//        System.out.println(saleNoteVos);
-//        return new Result(saleNoteVos);
-//    }
-
     /**
      * 增加销售单
      * @param clientId 客户id
