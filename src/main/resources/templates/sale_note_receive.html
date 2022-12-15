@@ -150,7 +150,7 @@
                 <h3 class="breadcrumb-header" style="display: inline">客户结款情况</h3>
                 <div class="btn-group" style="float: right">
                     <button class="btn btn-info m-b-sm" type="button" onclick="changeTable()">统计表</button>
-                    <!--<button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">折线统计图</button>-->
+                    <button class="btn btn-info m-b-sm" type="button" onclick="changeChart()">扇形统计图</button>
                     <button class="btn btn-info m-b-sm" type="button" onclick="changeBar()">条形统计图</button>
                 </div>
             </div>
@@ -212,8 +212,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-white" style="display: none" id="charts">
-                            <canvas id="chart1"></canvas>
+                        <div style="display: none" id="charts">
+                            <div class="col-md-6">
+                                <div class="panel panel-white">
+                                    <div class="panel-body">
+                                        <div class="panel-heading clearfix">
+                                            <h4 class="panel-title">已收款</h4>
+                                        </div>
+                                        <canvas id="chart11"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-white">
+                                    <div class="panel-body">
+                                        <div class="panel-heading clearfix">
+                                            <h4 class="panel-title">未收款</h4>
+                                        </div>
+                                        <canvas id="chart12"></canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="panel panel-white" style="display: none" id="bar">
                             <canvas id="chart2"></canvas>
@@ -249,15 +268,25 @@
     let name=[];
     let a=[];
     let b=[];
+    let color=[];
+    let r1,g1,b1;
+    let thisColor;
     for(let i=1;i<data.length;i++){
         name.push(data[i][1]);
         a.push(Number(data[i][3]));
         b.push(Number(data[i][4]));
+        r1 = Math.floor(Math.random()*255);
+        g1 = Math.floor(Math.random()*255);
+        b1 = Math.floor(Math.random()*255);
+        thisColor = 'rgba('+ r1 +','+ g1 +','+ b1 +',0.8)';
+        color.push(thisColor);
     }
-    new Chart(document.getElementById("chart1"),{"type":"line","data":{"labels":name,
-            "datasets":[{"label":"已收款","data":a,"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.1},
-                {"label":"未收款","data":b,"fill":false,"borderColor":"rgb(236, 94, 105)","lineTension":0.1}
-            ]},"options":{}});
+    new Chart(document.getElementById("chart11"),{"type":"pie","data":{"labels":name,
+            "datasets":[{"label":"My First Dataset","data":a,
+                "backgroundColor":color}]}});
+    new Chart(document.getElementById("chart12"),{"type":"pie","data":{"labels":name,
+            "datasets":[{"label":"My First Dataset","data":b,
+                "backgroundColor":color}]}});
     new Chart(document.getElementById("chart2"),{"type":"bar","data":{"labels":name,
             "datasets":[{"label":"已收款","data":a,"fill":false,"backgroundColor":"rgb(99, 203, 137)","borderColor":"rgb(99, 203, 137)","lineTension":0.1},
                 {"label":"未收款","data":b,"fill":false,"backgroundColor":"rgb(236, 94, 105)","borderColor":"rgb(236, 94, 105)","lineTension":0.1}
