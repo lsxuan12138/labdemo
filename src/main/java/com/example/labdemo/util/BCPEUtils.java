@@ -30,7 +30,7 @@ public class BCPEUtils {
         return result;
     }
     public static void main(String[] args) {
-        String password="test";
+        String password="testtest";
         String rePassword=BCPEUtils.encode(password);
         System.out.println(rePassword);
         System.out.println("----------------------");

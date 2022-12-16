@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 15/12/2022 16:29:41
+ Date: 16/12/2022 13:14:45
 */
 
 SET NAMES utf8mb4;
@@ -192,7 +192,7 @@ CREATE TABLE `t_role_permission_map`  (
   `role_id` bigint NULL DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint NULL DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 85 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_role_permission_map
@@ -222,52 +222,65 @@ INSERT INTO `t_role_permission_map` VALUES (22, 1, 22);
 INSERT INTO `t_role_permission_map` VALUES (23, 1, 23);
 INSERT INTO `t_role_permission_map` VALUES (24, 1, 24);
 INSERT INTO `t_role_permission_map` VALUES (25, 1, 25);
-INSERT INTO `t_role_permission_map` VALUES (26, 2, 1);
-INSERT INTO `t_role_permission_map` VALUES (27, 2, 2);
-INSERT INTO `t_role_permission_map` VALUES (28, 2, 3);
-INSERT INTO `t_role_permission_map` VALUES (29, 2, 4);
-INSERT INTO `t_role_permission_map` VALUES (30, 2, 5);
-INSERT INTO `t_role_permission_map` VALUES (31, 2, 6);
-INSERT INTO `t_role_permission_map` VALUES (32, 2, 7);
-INSERT INTO `t_role_permission_map` VALUES (33, 2, 8);
-INSERT INTO `t_role_permission_map` VALUES (34, 2, 9);
-INSERT INTO `t_role_permission_map` VALUES (35, 2, 10);
-INSERT INTO `t_role_permission_map` VALUES (36, 2, 11);
-INSERT INTO `t_role_permission_map` VALUES (37, 2, 12);
-INSERT INTO `t_role_permission_map` VALUES (38, 2, 13);
-INSERT INTO `t_role_permission_map` VALUES (39, 2, 14);
-INSERT INTO `t_role_permission_map` VALUES (40, 2, 15);
-INSERT INTO `t_role_permission_map` VALUES (41, 2, 16);
-INSERT INTO `t_role_permission_map` VALUES (42, 2, 17);
-INSERT INTO `t_role_permission_map` VALUES (43, 2, 18);
-INSERT INTO `t_role_permission_map` VALUES (44, 2, 19);
-INSERT INTO `t_role_permission_map` VALUES (45, 2, 20);
-INSERT INTO `t_role_permission_map` VALUES (46, 2, 21);
-INSERT INTO `t_role_permission_map` VALUES (47, 2, 22);
-INSERT INTO `t_role_permission_map` VALUES (48, 2, 23);
-INSERT INTO `t_role_permission_map` VALUES (49, 2, 24);
-INSERT INTO `t_role_permission_map` VALUES (50, 2, 25);
-INSERT INTO `t_role_permission_map` VALUES (51, 3, 22);
-INSERT INTO `t_role_permission_map` VALUES (52, 3, 23);
-INSERT INTO `t_role_permission_map` VALUES (53, 3, 5);
-INSERT INTO `t_role_permission_map` VALUES (54, 4, 18);
-INSERT INTO `t_role_permission_map` VALUES (55, 4, 19);
-INSERT INTO `t_role_permission_map` VALUES (56, 4, 20);
-INSERT INTO `t_role_permission_map` VALUES (57, 4, 21);
-INSERT INTO `t_role_permission_map` VALUES (58, 5, 13);
-INSERT INTO `t_role_permission_map` VALUES (59, 5, 14);
-INSERT INTO `t_role_permission_map` VALUES (60, 5, 15);
-INSERT INTO `t_role_permission_map` VALUES (61, 5, 16);
-INSERT INTO `t_role_permission_map` VALUES (62, 5, 17);
-INSERT INTO `t_role_permission_map` VALUES (63, 1, 26);
-INSERT INTO `t_role_permission_map` VALUES (64, 1, 27);
-INSERT INTO `t_role_permission_map` VALUES (65, 1, 28);
-INSERT INTO `t_role_permission_map` VALUES (66, 2, 26);
-INSERT INTO `t_role_permission_map` VALUES (67, 2, 27);
-INSERT INTO `t_role_permission_map` VALUES (68, 2, 28);
-INSERT INTO `t_role_permission_map` VALUES (69, 1, 29);
-INSERT INTO `t_role_permission_map` VALUES (70, 1, 30);
-INSERT INTO `t_role_permission_map` VALUES (71, 2, 30);
+INSERT INTO `t_role_permission_map` VALUES (26, 1, 26);
+INSERT INTO `t_role_permission_map` VALUES (27, 1, 27);
+INSERT INTO `t_role_permission_map` VALUES (28, 1, 28);
+INSERT INTO `t_role_permission_map` VALUES (29, 1, 30);
+INSERT INTO `t_role_permission_map` VALUES (30, 1, 1);
+INSERT INTO `t_role_permission_map` VALUES (31, 2, 2);
+INSERT INTO `t_role_permission_map` VALUES (32, 2, 3);
+INSERT INTO `t_role_permission_map` VALUES (33, 2, 4);
+INSERT INTO `t_role_permission_map` VALUES (34, 2, 5);
+INSERT INTO `t_role_permission_map` VALUES (35, 2, 6);
+INSERT INTO `t_role_permission_map` VALUES (36, 2, 7);
+INSERT INTO `t_role_permission_map` VALUES (37, 2, 8);
+INSERT INTO `t_role_permission_map` VALUES (38, 2, 9);
+INSERT INTO `t_role_permission_map` VALUES (39, 2, 10);
+INSERT INTO `t_role_permission_map` VALUES (40, 2, 11);
+INSERT INTO `t_role_permission_map` VALUES (41, 2, 12);
+INSERT INTO `t_role_permission_map` VALUES (42, 2, 13);
+INSERT INTO `t_role_permission_map` VALUES (43, 2, 14);
+INSERT INTO `t_role_permission_map` VALUES (44, 2, 15);
+INSERT INTO `t_role_permission_map` VALUES (45, 2, 16);
+INSERT INTO `t_role_permission_map` VALUES (46, 2, 17);
+INSERT INTO `t_role_permission_map` VALUES (47, 2, 18);
+INSERT INTO `t_role_permission_map` VALUES (48, 2, 19);
+INSERT INTO `t_role_permission_map` VALUES (49, 2, 20);
+INSERT INTO `t_role_permission_map` VALUES (50, 2, 21);
+INSERT INTO `t_role_permission_map` VALUES (51, 2, 22);
+INSERT INTO `t_role_permission_map` VALUES (52, 2, 23);
+INSERT INTO `t_role_permission_map` VALUES (53, 2, 24);
+INSERT INTO `t_role_permission_map` VALUES (54, 2, 25);
+INSERT INTO `t_role_permission_map` VALUES (55, 2, 26);
+INSERT INTO `t_role_permission_map` VALUES (56, 2, 27);
+INSERT INTO `t_role_permission_map` VALUES (57, 2, 28);
+INSERT INTO `t_role_permission_map` VALUES (58, 2, 29);
+INSERT INTO `t_role_permission_map` VALUES (59, 2, 30);
+INSERT INTO `t_role_permission_map` VALUES (60, 3, 22);
+INSERT INTO `t_role_permission_map` VALUES (61, 3, 23);
+INSERT INTO `t_role_permission_map` VALUES (62, 3, 24);
+INSERT INTO `t_role_permission_map` VALUES (63, 3, 25);
+INSERT INTO `t_role_permission_map` VALUES (64, 3, 27);
+INSERT INTO `t_role_permission_map` VALUES (65, 3, 12);
+INSERT INTO `t_role_permission_map` VALUES (66, 3, 8);
+INSERT INTO `t_role_permission_map` VALUES (67, 4, 12);
+INSERT INTO `t_role_permission_map` VALUES (68, 4, 18);
+INSERT INTO `t_role_permission_map` VALUES (69, 4, 19);
+INSERT INTO `t_role_permission_map` VALUES (70, 4, 20);
+INSERT INTO `t_role_permission_map` VALUES (71, 4, 21);
+INSERT INTO `t_role_permission_map` VALUES (72, 4, 26);
+INSERT INTO `t_role_permission_map` VALUES (73, 4, 24);
+INSERT INTO `t_role_permission_map` VALUES (74, 4, 25);
+INSERT INTO `t_role_permission_map` VALUES (75, 4, 27);
+INSERT INTO `t_role_permission_map` VALUES (76, 4, 8);
+INSERT INTO `t_role_permission_map` VALUES (77, 5, 4);
+INSERT INTO `t_role_permission_map` VALUES (78, 5, 8);
+INSERT INTO `t_role_permission_map` VALUES (79, 5, 13);
+INSERT INTO `t_role_permission_map` VALUES (80, 5, 14);
+INSERT INTO `t_role_permission_map` VALUES (81, 5, 15);
+INSERT INTO `t_role_permission_map` VALUES (82, 5, 16);
+INSERT INTO `t_role_permission_map` VALUES (83, 5, 17);
+INSERT INTO `t_role_permission_map` VALUES (84, 5, 28);
 
 -- ----------------------------
 -- Table structure for t_sale_note
@@ -350,11 +363,11 @@ CREATE TABLE `t_user`  (
   `role_id` bigint NULL DEFAULT NULL COMMENT '角色id',
   `is_alive` tinyint NULL DEFAULT 0 COMMENT '是否激活(0否1是)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (26, 'test', 'test', '$2a$10$TRI5uOxfZrQieg1Q25/IaO7uqy1JkwaR5aXok92qis.vN8nadPiu2', 1, 1);
+INSERT INTO `t_user` VALUES (26, 'dianzhang', 'test', '$2a$10$x68Ur/xFuGltbuybwBKdbe1YdXScfMmdDA6i4eEmJi2cyFb5fKJZu', 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
